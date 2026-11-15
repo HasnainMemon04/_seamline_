@@ -1,0 +1,42 @@
+{
+  "what": "Local terrain tiles for the map's 3D surface and hillshade (display only; no analysis uses them)",
+  "scheme": "XYZ, Web Mercator (EPSG:3857), 256 px",
+  "encoding": "terrarium: metres = R*256 + G + B/256 - 32768",
+  "zooms": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "bounds_wsen": [
+    58.0,
+    21.0,
+    84.0,
+    40.0
+  ],
+  "tiles": 128,
+  "bytes": 12376800,
+  "sha256_of_all_tiles_in_order": "cc89c08a55446c8a25145a3352da2be08179c65418600f8b6ff28b822b1b8972",
+  "source": "NOAA National Centers for Environmental Information (NCEI), DEM Global Mosaic image service (a mosaic of NOAA-hosted elevation models; over land at this scale it is ETOPO 2022)",
+  "source_url": "https://gis.ngdc.noaa.gov/arcgis/rest/services/DEM_mosaics/DEM_global_mosaic/ImageServer/exportImage?bbox=58.0,21.0,84.0,40.0&bboxSR=4326&imageSR=4326&size=1040,760&format=tiff&pixelType=F32&interpolation=RSP_BilinearInterpolation&noDataInterpretation=esriNoDataMatchAny&f=image",
+  "source_licence": "US Government work (NOAA NCEI), public domain; attribution requested",
+  "retrieved_utc": "2026-11-11T19:05:35Z",
+  "raw_file": "data/raw/terrain/dem_noaa_58-84E_21-40N_1040x760_f32.tif",
+  "raw_sha256": "ff76bdb028dc694ea9dfdd6f803aa33bbc8d60f2956bb2ebc4637b3f8da16153",
+  "crs_of_source": "EPSG:4326",
+  "vertical_units": "metres above the source datum",
+  "vertical_exaggeration": "set in c08/web/map3d.js (TERRAIN_EXAGGERATION) and shown in the map legend",
+  "spot_checks_m": {
+    "Lahore 31.55N 74.34E": 216,
+    "Karachi 24.86N 67.00E": 8,
+    "Quetta 30.18N 66.98E": 1660,
+    "Islamabad 33.69N 73.05E": 537,
+    "Delhi 28.61N 77.21E": 214,
+    "Kabul 34.53N 69.17E": 1800,
+    "K2 cell 35.88N 76.51E (a 2.8 km cell, below the 8611 m summit)": 7453
+  },
+  "source_cell_degrees": 0.025,
+  "resampling": "bilinear; outside the source box and below 0 m stored as 0",
+  "prepared_utc": "2026-11-11T19:06:48+00:00",
+  "prepared_by": "scripts/prepare_terrain_tiles.py"
+}

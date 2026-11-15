@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Seamline">
+  <title>Seamline</title>
+  <style>.a{stroke:#13181a}.b{stroke:#0e6b6f}@media (prefers-color-scheme:dark){.a{stroke:#eaf0f0}.b{stroke:#58bdb8}}</style>
+  <path class="a" d="M4 22h6l3.2-8H16" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="b" d="M16 14h2.8l3.200-5H28" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="a" d="M16 8.500v11" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="1.2 2.6"/>
+</svg>

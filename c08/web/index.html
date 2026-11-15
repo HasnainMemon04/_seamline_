@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seamline: compare burning activity across changing satellites</title>
+<meta name="application-name" content="Seamline">
+<meta name="description" content="Seamline puts MODIS and VIIRS satellite detections of burning activity over Pakistan on one scale, so years can be compared fairly. A local research prototype.">
+<meta name="theme-color" content="#0e6b6f">
+<link rel="icon" type="image/svg+xml" href="/static/assets/seamline-mark.svg">
+<link rel="manifest" href="/static/manifest.webmanifest">
+<script>
+/* Set the saved theme and motion before the first paint, so the page never flashes the wrong theme. */
+(function () {
+  try {
+    var t = localStorage.getItem("seamline-theme") || localStorage.getItem("firebridge-theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+    var m = localStorage.getItem("seamline-motion");
+    if (m === "reduced" || m === "off" || m === "full") document.documentElement.dataset.motion = m;
+  } catch (e) { /* storage blocked: defaults apply */ }
+})();
+</script>
+<link rel="stylesheet" href="/static/vendor/maplibre/maplibre-gl.css">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/satellite-intro.css">
+<link rel="stylesheet" href="/static/showcase.css">
+</head>
+<body>
+<section class="satellite-intro" id="satellite-intro" aria-label="Loading Seamline">
+  <div class="intro-content">
+    <div class="intro-kicker">Earth observation / Pakistan</div>
+    <div id="intro-model" aria-hidden="true"><div class="intro-orbit"></div></div>
+    <h1>One Earth. Changing satellites.</h1>
+    <p>Seamline brings the observation record into view.</p>
+    <p id="intro-status" role="status">Preparing your local workspace…</p>
+    <button id="intro-skip" type="button">Open workspace</button>
+  </div>
+</section>
+<script src="/static/intro.js"></script>
+<noscript><style>.satellite-intro{display:none}</style></noscript>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-mark" viewBox="0 0 32 32"><path class="m-a" d="M4 22h6l3.2-8H16" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path class="m-b" d="M16 14h2.8l3.2-5H28" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path class="m-s" d="M16 8.5v11" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="1.2 2.6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 20 20"><path d="M6.5 4.5v11l9-5.5z" fill="currentColor"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 20 20"><path d="M6 4.5h3v11H6zM11 4.5h3v11h-3z" fill="currentColor"/></symbol>
+  <symbol id="i-link" viewBox="0 0 20 20"><path d="M8.5 11.5a3 3 0 0 0 4.2 0l2.6-2.6a3 3 0 0 0-4.2-4.2l-.9.9M11.5 8.5a3 3 0 0 0-4.2 0l-2.6 2.6a3 3 0 0 0 4.2 4.2l.9-.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-down" viewBox="0 0 20 20"><path d="M10 3.5v9m0 0-3.5-3.5M10 12.500l3.5-3.5M4 16.500h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-print" viewBox="0 0 20 20"><path d="M6 7V3.500h8V7M6 14H4.500a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H14M6 11.500h8v5H6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-theme" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 3.500a6.500 6.500 0 0 1 0 13z" fill="currentColor"/></symbol>
+  <symbol id="i-motion" viewBox="0 0 20 20"><path d="M3 10c2-5 4-5 5 0s3 5 5 0 3-3 4 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 20 20"><path d="M10 4.500v11M4.500 10h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 20 20"><path d="M4.500 10h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-north" viewBox="0 0 20 20"><path d="M10 2.500 14 16l-4-2.500L6 16z" fill="currentColor"/></symbol>
+  <symbol id="i-fit" viewBox="0 0 20 20"><path d="M3.500 7V3.500H7M13 3.500h3.500V7M16.500 13v3.500H13M7 16.500H3.500V13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="10" r="2" fill="currentColor"/></symbol>
+  <symbol id="i-reset" viewBox="0 0 20 20"><path d="M4.500 10a5.500 5.500 0 1 0 1.700-4M4 3.500V7h3.500" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-rotl" viewBox="0 0 20 20"><path d="M15.500 13.500A6 6 0 1 0 5 8M3.500 4.500V8.500h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-rotr" viewBox="0 0 20 20"><path d="M4.500 13.500A6 6 0 1 1 15 8M16.500 4.500V8.500h-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-up" viewBox="0 0 20 20"><path d="m5 12 5-5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-dn" viewBox="0 0 20 20"><path d="m5 8 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-left" viewBox="0 0 20 20"><path d="m12 5-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-right" viewBox="0 0 20 20"><path d="m8 5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 20 20"><path d="m5 5 10 10M15 5 5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 20 20"><path d="m4.500 10.500 3.500 3.500 7.500-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 20 20"><path d="m5.500 5.500 9 9M14.500 5.500l-9 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-dash" viewBox="0 0 20 20"><path d="M5 10h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="2.500 3"/></symbol>
+  <symbol id="i-rect" viewBox="0 0 20 20"><rect x="3.500" y="5" width="13" height="10" rx="1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 2"/></symbol>
+  <symbol id="i-compare" viewBox="0 0 20 20"><rect x="3" y="4" width="6" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="4" width="6" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 20 20"><path d="M4 6h7M15 6h1M4 14h1M9 14h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="13" cy="6" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="14" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="i-orbit" viewBox="0 0 20 20"><ellipse cx="10" cy="10" rx="8" ry="3.8" transform="rotate(-28 10 10)" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="15.8" cy="6.8" r="1.7" fill="currentColor"/></symbol>
+  <symbol id="i-psf" viewBox="0 0 20 20"><path d="M2.5 14L10 4.5 17.5 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 14h10M10 4.5v9.5" stroke="currentColor" stroke-width="1.2" stroke-dasharray="1.5 1.5"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to the workspace</a>
+
+<header class="top" id="top">
+  <a class="brand" href="/" aria-label="Seamline, start page">
+    <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-mark"/></svg>
+    <span class="wordmark">Seam<b>line</b></span>
+  </a>
+  <p class="tagline">Compare burning activity across changing satellites.</p>
+  <nav class="ws-nav" id="ws-nav" aria-label="Workspaces">
+    <button type="button" data-ws="overview" aria-current="page">Overview</button>
+    <button type="button" data-ws="explore">Explore</button>
+    <button type="button" data-ws="calendar">Calendar</button>
+    <button type="button" data-ws="evidence">Evidence</button>
+    <span class="ws-ink" aria-hidden="true"></span>
+  </nav>
+  <div class="utils" id="utils">
+    <button type="button" id="tour-btn" class="btn-quiet" aria-haspopup="dialog"><svg class="ic"><use href="#i-play"/></svg><span>Tour</span></button>
+    <button type="button" id="copy-link" class="btn-quiet"><svg class="ic"><use href="#i-link"/></svg><span>Copy link</span></button>
+    <button type="button" id="export-btn" class="btn-quiet" aria-haspopup="true" aria-expanded="false" aria-controls="export-menu"><svg class="ic"><use href="#i-down"/></svg><span>Export</span></button>
+    <button type="button" id="print-btn" class="btn-quiet"><svg class="ic"><use href="#i-print"/></svg><span>Print summary</span></button>
+    <button type="button" id="theme-btn" class="btn-quiet"><svg class="ic"><use href="#i-theme"/></svg><span id="theme-label">Theme: automatic</span></button>
+    <button type="button" id="motion-btn" class="btn-quiet"><svg class="ic"><use href="#i-motion"/></svg><span id="motion-label">Motion: full</span></button>
+  </div>
+</header>
+
+<div class="menu" id="export-menu" role="group" aria-label="Export this selection" hidden>
+  <p class="menu-h" id="export-what">Exports use the selection on screen.</p>
+  <button type="button" data-export="monthly.csv">Monthly values (CSV)</button>
+  <button type="button" data-export="detections.csv">Detections, one row each (CSV)</button>
+  <button type="button" data-export="provenance.json">Method and provenance (JSON)</button>
+  <button type="button" data-act="svg">Record chart (SVG)</button>
+  <button type="button" data-act="daily-csv">Day-by-day month on screen (CSV)</button>
+  <button type="button" data-act="map-png">Map view as shown (PNG)</button>
+</div>
+
+<div class="context" id="context">
+  <div class="ctx-chips">
+    <button type="button" class="chip-btn" id="ctx-open" aria-haspopup="dialog" aria-expanded="false" aria-controls="controls">
+      <svg class="ic"><use href="#i-sliders"/></svg><span class="chip-k">Selection</span>
+    </button>
+    <button type="button" class="chip-btn" data-open="area"><span class="chip-k">Area</span> <b id="ctx-area">Punjab</b></button>
+    <button type="button" class="chip-btn" data-open="years"><span class="chip-k">Years</span> <b id="ctx-years">2003–2025</b></button>
+    <button type="button" class="chip-btn" data-open="month"><span class="chip-k">Compare month</span> <b id="ctx-month">November 2025</b></button>
+    <button type="button" class="chip-btn" data-open="model"><span class="chip-k">Model</span> <b id="ctx-model">M2</b></button>
+  </div>
+  <section class="ctx-summary" id="summary-card" aria-labelledby="summary-title">
+    <h2 id="summary-title" class="sr">Selection</h2>
+    <div id="summary"><p>Loading the selection…</p></div>
+  </section>
+  <p class="chip" id="status-chip">Local research prototype</p>
+</div>
+<p id="form-msg" class="toast" role="status" aria-live="polite"></p>
+<p id="share-msg" class="toast toast-b" role="status" aria-live="polite"></p>
+
+<!-- Shared selection controls: one form for every workspace. Opens as a sheet from the left. -->
+<div class="sheet-shade" id="sheet-shade" hidden></div>
+<form id="controls" class="sheet" aria-label="Choose area, years, month and model" hidden>
+  <div class="sheet-head">
+    <h2>Selection</h2>
+    <button type="button" class="icon-btn" id="controls-close" aria-label="Close the selection panel"><svg class="ic"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="sheet-body">
+    <label data-field="area">Area
+      <select id="region" name="region"></select>
+    </label>
+    <div class="area-list" id="area-list" role="group" aria-label="Areas"></div>
+    <details id="box-details" data-field="box">
+      <summary>Or use a rectangle (degrees)</summary>
+      <div class="box-grid">
+        <label>West <input id="bw" inputmode="decimal" placeholder="73.5" autocomplete="off"></label>
+        <label>South <input id="bs" inputmode="decimal" placeholder="30.5" autocomplete="off"></label>
+        <label>East <input id="be" inputmode="decimal" placeholder="74.5" autocomplete="off"></label>
+        <label>North <input id="bn" inputmode="decimal" placeholder="31.5" autocomplete="off"></label>
+      </div>
+      <label class="inline"><input type="checkbox" id="use-box"> Use this rectangle instead of the area above</label>
+      <p class="note" id="box-msg">Supported extent: 60.0–78.5°E, 23.0–37.5°N; the data are Pakistan's files only. West must be less than east, south less than north. You can also draw a rectangle on the 2D map in Explore.</p>
+    </details>
+    <div class="row" data-field="years">
+      <label>From <select id="y0"></select></label>
+      <label>To <select id="y1"></select></label>
+    </div>
+    <div class="row" data-field="month">
+      <label>Compare month <select id="cm"></select></label>
+      <label>of year <select id="cy"></select></label>
+    </div>
+    <fieldset class="model" data-field="model">
+      <legend>Harmonisation model</legend>
+      <label class="inline"><input type="radio" name="model" value="M2" checked> M2 monthly ratio (selected in cross-validation)</label>
+      <label class="inline"><input type="radio" name="model" value="M1"> M1 single ratio (did better on the 2012–13 test)</label>
+    </fieldset>
+  </div>
+  <div class="sheet-foot">
+    <button type="submit" id="go" class="btn-primary">Show results</button>
+    <button type="button" id="reset-btn" class="btn">Reset selection</button>
+  </div>
+</form>
+
+<div id="tour" class="tour" hidden>
+  <div class="tour-panel" role="dialog" aria-modal="false" aria-labelledby="tour-title" aria-describedby="tour-text">
+    <p class="tour-step" id="tour-step"></p>
+    <div class="tour-copy">
+      <h2 id="tour-title" tabindex="-1"></h2>
+      <p id="tour-text"></p>
+    </div>
+    <p id="tour-live" class="sr" aria-live="polite"></p>
+    <div class="tour-nav">
+      <button type="button" id="tour-back" class="btn">Back</button>
+      <button type="button" id="tour-next" class="btn-primary">Next</button>
+      <button type="button" id="tour-close" class="btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<main id="main" tabindex="-1" aria-busy="false">
+
+  <!-- ===================== OVERVIEW ===================== -->
+  <section class="ws ws-overview" id="ws-overview" data-ws="overview" aria-labelledby="ws-overview-h">
+    <h1 class="sr" id="ws-overview-h">Overview</h1>
+    <div class="ov-grid">
+      <div class="stage" id="stage-overview" aria-label="Map of observed detections"></div>
+      <div class="ov-side">
+        <div class="story-tabs" id="story-tabs" role="tablist" aria-label="Stories">
+          <button type="button" role="tab" data-story="record" id="tab-record" aria-controls="insight-card" aria-selected="true">Record</button>
+          <button type="button" role="tab" data-story="headline" id="tab-headline" aria-controls="headline-card" aria-selected="false" tabindex="-1">Headline</button>
+          <button type="button" role="tab" data-story="seam" id="tab-seam" aria-controls="seam-card" aria-selected="false" tabindex="-1">Handover</button>
+          <button type="button" role="tab" data-story="clock" id="tab-clock" aria-controls="clock-card" aria-selected="false" tabindex="-1">Clock</button>
+          <button type="button" role="tab" data-story="days" id="tab-days" aria-controls="days-card" aria-selected="false" tabindex="-1">Day by day</button>
+          <button type="button" role="tab" data-story="season" id="tab-season" aria-controls="season-card" aria-selected="false" tabindex="-1">Seasons</button>
+        </div>
+        <div class="story-stack" id="story-stack">
+          <!-- Story cards (showcase.js, from /api/showcase): saved results only, the same for every area. -->
+          <section class="story sc-card" id="headline-card" role="tabpanel" aria-labelledby="tab-headline" hidden>
+            <p class="eyebrow">Pakistani Punjab · 1–29 October 2026 · saved test P04 G04</p>
+            <h2 id="headline-title">This October's headline, taken apart</h2>
+            <div id="headline-body" class="sc-body" aria-busy="true"><p class="muted">Loading the saved results…</p></div>
+          </section>
+          <section class="story sc-card" id="seam-card" role="tabpanel" aria-labelledby="tab-seam" hidden>
+            <p class="eyebrow">Punjab · January–October 2026 · saved test P04 G03</p>
+            <h2 id="seam-title">S-NPP stopped on 2 Nov 2026; can NOAA-20 carry the record?</h2>
+            <p class="story-actions"><button type="button" class="btn" data-go="evidence:replay"><svg class="ic"><use href="#i-play"/></svg>Open the handover replay</button></p>
+            <div id="seam-body" class="sc-body" aria-busy="true"><p class="muted">Loading the saved results…</p></div>
+          </section>
+          <section class="story sc-card" id="clock-card" role="tabpanel" aria-labelledby="tab-clock" hidden>
+            <p class="eyebrow">Punjab, with Sindh and Khyber Pakhtunkhwa tested · saved tests P02 and P04 G01</p>
+            <h2 id="clock-title">Morning and afternoon passes see different shares</h2>
+            <div id="clock-body" class="sc-body" aria-busy="true"><p class="muted">Loading the saved results…</p></div>
+          </section>
+          <section class="story" id="days-card" role="tabpanel" aria-labelledby="tab-days" hidden>
+            <p class="eyebrow" id="days-eyebrow">Day by day</p>
+            <h2>Every day, one row per satellite</h2>
+            <p class="lede">Missing days are marked, never shown as zero. No detection does not mean no burning: cloud and smoke hide it.</p>
+            <div id="days-preview" class="days-preview"></div>
+            <p class="story-actions">
+              <button type="button" class="btn-primary" data-go="calendar:days">Open day by day</button>
+              <button type="button" class="btn" data-go="explore">See these detections on the map</button>
+            </p>
+          </section>
+          <section class="story sc-card" id="season-card" role="tabpanel" aria-labelledby="tab-season" hidden>
+            <p class="eyebrow">Season timing · Punjab is the development area · saved test P04 G02</p>
+            <h2 id="season-title">The season's middle and end dates</h2>
+            <p class="story-actions"><button type="button" class="btn" data-go="evidence:seasons">Open the province × season outcomes</button></p>
+            <div id="season-body" class="sc-body" aria-busy="true"><p class="muted">Loading the saved results…</p></div>
+          </section>
+          <section class="story story-record" id="insight-card" role="tabpanel" aria-labelledby="tab-record">
+            <p class="eyebrow" id="insight-eyebrow">Loading…</p>
+            <h2 id="insight-q">Does the rise in burning activity survive on one scale?</h2>
+            <div class="contrast" id="insight" aria-live="polite"></div>
+            <div class="mini" id="insight-mini"></div>
+            <p class="note" id="insight-note"></p>
+            <p class="story-actions"><button type="button" class="btn" id="explainer-btn" aria-haspopup="dialog">Why the sensors differ (10-second explainer)</button></p>
+          </section>
+        </div>
+        <div class="ov-actions" role="group" aria-label="Go deeper">
+          <button type="button" class="btn-primary" data-go="explore">Explore the map</button>
+          <button type="button" class="btn" data-go="calendar">Calendar</button>
+          <button type="button" class="btn" data-go="evidence">Evidence</button>
+          <button type="button" class="btn" id="tour-btn-2">Start the tour</button>
+          <button type="button" class="btn-quiet" id="roles-btn">By role</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EXPLORE ===================== -->
+  <section class="ws ws-explore" id="ws-explore" data-ws="explore" aria-labelledby="ws-explore-h" hidden>
+    <h1 class="sr" id="ws-explore-h">Explore: the map of observed detections</h1>
+    <div class="ex-grid">
+      <div class="stage" id="stage-explore"></div>
+      <aside class="ex-side" id="ex-side" aria-label="Map filters and inspection">
+        <div class="ex-block">
+          <h2>Observed detections</h2>
+          <p class="note" id="map-what">Point detections for one month. Each point is one fire pixel on one satellite pass.</p>
+          <div class="monthnav">
+            <button type="button" class="icon-btn" id="map-prev" aria-label="Previous month"><svg class="ic"><use href="#i-left"/></svg></button>
+            <label><span class="sr">Month</span><select id="map-month"></select></label>
+            <label><span class="sr">Year</span><select id="map-year"></select></label>
+            <button type="button" class="icon-btn" id="map-next" aria-label="Next month"><svg class="ic"><use href="#i-right"/></svg></button>
+          </div>
+        </div>
+        <div class="ex-block">
+          <h3>Satellites <span class="note">(each counted on its own, never added)</span></h3>
+          <div id="map-plats" class="plat-list" role="group" aria-label="Satellites shown"></div>
+          <div class="seg" role="group" aria-label="Passes shown" id="map-dn">
+            <button type="button" data-dn="DN" aria-pressed="true">Day and night</button>
+            <button type="button" data-dn="D" aria-pressed="false">Day</button>
+            <button type="button" data-dn="N" aria-pressed="false">Night</button>
+          </div>
+          <p class="filter-sum" id="filter-sum"></p>
+          <button type="button" class="btn" id="map-reset-filters">Reset filters</button>
+        </div>
+        <div class="ex-block">
+          <h3>Area tools</h3>
+          <div class="btn-row">
+            <button type="button" class="btn" id="draw-rect" aria-pressed="false"><svg class="ic"><use href="#i-rect"/></svg>Draw a rectangle</button>
+            <button type="button" class="btn" id="compare-open"><svg class="ic"><use href="#i-compare"/></svg>Compare</button>
+          </div>
+          <p class="note">Moving the camera never changes the analysis area. Only a province, the typed rectangle or a drawn rectangle does.</p>
+        </div>
+        <div class="ex-block" id="coverage-block">
+          <h3>Was this area actually observed?</h3>
+          <div id="coverage-ui"><p class="note">Loading…</p></div>
+        </div>
+        <div class="ex-block" id="inspector-block">
+          <h3 id="inspector-h">Inspect a detection</h3>
+          <div id="inspector" class="inspector" tabindex="-1"><p class="note">Click a point on the map, or pick a row from the list below.</p></div>
+          <details id="point-list-wrap">
+            <summary>List of detections on screen (keyboard alternative)</summary>
+            <div id="point-list" class="table-wrap point-list"></div>
+          </details>
+        </div>
+        <p class="note" id="map-vs-chart">The map shows observed points for one satellite and month. The calendar and charts show monthly totals, raw or converted to the S-NPP-equivalent scale. These are different quantities and need not match.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===================== CALENDAR ===================== -->
+  <section class="ws ws-calendar" id="ws-calendar" data-ws="calendar" aria-labelledby="ws-calendar-h" hidden>
+    <h1 class="sr" id="ws-calendar-h">Calendar: historical patterns and daily inspection</h1>
+    <div class="subnav" id="cal-subnav" role="tablist" aria-label="Calendar views">
+      <button type="button" role="tab" data-sub="months" id="sub-months" aria-controls="pane-months" aria-selected="true">Calendar and record</button>
+      <button type="button" role="tab" data-sub="days" id="sub-days" aria-controls="pane-days" aria-selected="false" tabindex="-1">Day by day</button>
+      <button type="button" role="tab" data-sub="normal" id="sub-normal" aria-controls="pane-normal" aria-selected="false" tabindex="-1">Month and latest days</button>
+      <button type="button" role="tab" data-sub="compare" id="sub-compare" aria-controls="pane-compare" aria-selected="false" tabindex="-1">Compare</button>
+      <button type="button" role="tab" data-sub="outlook" id="sub-outlook" aria-controls="pane-outlook" aria-selected="false" tabindex="-1">Experimental outlook</button>
+    </div>
+
+    <div class="pane" id="pane-months" role="tabpanel" aria-labelledby="sub-months">
+      <div class="cal-grid">
+        <section class="panel" id="calendar-card">
+          <div class="card-head">
+            <h2>Seasonal calendar</h2>
+            <label>Series <select id="cal-src">
+              <option value="H">Harmonised (S-NPP-equivalent)</option>
+              <option value="aqua">Aqua MODIS only</option>
+              <option value="naive">Naive stitch</option>
+            </select></label>
+            <div class="seg" id="cal-mode-seg" role="group" aria-label="Calendar view">
+              <button type="button" data-cal-mode="heatmap" aria-pressed="true">Heatmap</button>
+              <button type="button" data-cal-mode="profile" aria-pressed="false">Seasonal profile</button>
+            </div>
+            <button type="button" class="btn" id="cal-table-btn" aria-expanded="false" aria-controls="cal-table">Show as table</button>
+          </div>
+          <div class="cal-legend" id="cal-legend"></div>
+          <div class="chart" id="calendar"></div>
+          <div id="cal-detail-month" class="cal-detail" aria-live="polite"></div>
+          <div id="cal-table" class="table-wrap" hidden></div>
+          <div id="cal-profile" hidden></div>
+          <p class="note">▲ above, ▼ below: more than 1.5 times, or less than two-thirds of, the median of the same month in the other years shown (+1 so empty months count). Hatched: the satellite's record is partial or the provider reports missing days that month. Provider files being available for Pakistan does not show that every place was seen through clear sky.</p>
+        </section>
+        <section class="panel" id="series-card">
+          <div class="card-head">
+            <h2>Record over time</h2>
+            <label>View <select id="view">
+              <option value="OctNov">Oct–Nov season totals</option>
+              <option value="AprMay">Apr–May season totals</option>
+              <option value="year">Annual totals</option>
+              <option value="month">Monthly</option>
+            </select></label>
+            <div class="seg" role="group" aria-label="Vertical scale" id="scale-seg">
+              <button type="button" data-scale="log" aria-pressed="true">Log</button>
+              <button type="button" data-scale="lin" aria-pressed="false">Linear</button>
+            </div>
+          </div>
+          <div class="legend" id="series-legend"></div>
+          <div class="chart" id="series"></div>
+          <p class="note" id="series-note">Grey band: rough range for modelled years (before Feb 2012), too narrow in testing. Shaded area: VIIRS era. Dashed line: NOAA-20 joins the naive stitch. The record ends in December 2025.</p>
+        </section>
+      </div>
+    </div>
+
+    <div class="pane" id="pane-days" role="tabpanel" aria-labelledby="sub-days" hidden>
+      <section class="panel" id="daily-card" aria-labelledby="daily-title">
+        <div class="card-head">
+          <h2 id="daily-title">Day by day</h2>
+          <div class="daily-nav">
+            <button type="button" class="icon-btn" id="daily-prev" aria-label="Previous month"><svg class="ic"><use href="#i-left"/></svg></button>
+            <label><span class="lbl">Month</span> <select id="daily-month"></select></label>
+            <label><span class="lbl">Year</span> <select id="daily-year"></select></label>
+            <button type="button" class="icon-btn" id="daily-next" aria-label="Next month"><svg class="ic"><use href="#i-right"/></svg></button>
+            <button type="button" class="btn" id="daily-map" data-go="explore">Show this month on the map</button>
+          </div>
+        </div>
+        <p id="daily-msg" class="msg" role="status" aria-live="polite"></p>
+        <div id="daily" class="table-wrap" aria-busy="false"></div>
+        <div id="daily-notes"></div>
+      </section>
+      <section class="panel" id="cov-detail-card" style="margin-top:var(--s3)" aria-labelledby="cov-detail-h">
+        <h2 id="cov-detail-h">Was this area actually observed? Example days</h2>
+        <div id="cov-detail"><p class="note">Loading…</p></div>
+      </section>
+    </div>
+
+    <div class="pane" id="pane-normal" role="tabpanel" aria-labelledby="sub-normal" hidden>
+      <div class="two">
+        <section class="panel" id="compare-card">
+          <h2 id="compare-title">Selected month versus normal</h2>
+          <div id="compare"></div>
+        </section>
+        <section class="panel" id="latest-card">
+          <h2>Latest complete days (near-real-time)</h2>
+          <div id="latest"></div>
+        </section>
+      </div>
+    </div>
+
+    <div class="pane" id="pane-compare" role="tabpanel" aria-labelledby="sub-compare" hidden>
+      <section class="panel" id="studio" aria-labelledby="studio-h">
+        <h2 id="studio-h">Comparison Studio</h2>
+        <div id="studio-body"><p class="note">Loading…</p></div>
+      </section>
+    </div>
+
+    <div class="pane" id="pane-outlook" role="tabpanel" aria-labelledby="sub-outlook" hidden>
+      <section class="panel" id="outlook" aria-labelledby="outlook-h">
+        <h2 id="outlook-h">Experimental outlook</h2>
+        <div id="outlook-body"><p class="note">Loading…</p></div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ===================== EVIDENCE ===================== -->
+  <section class="ws ws-evidence" id="ws-evidence" data-ws="evidence" aria-labelledby="ws-evidence-h" hidden>
+    <h1 class="sr" id="ws-evidence-h">Evidence: trust, methods and exports</h1>
+    <div class="ev-grid">
+      <div class="ev-nav" id="ev-nav" role="tablist" aria-label="Evidence sections" aria-orientation="vertical">
+        <button type="button" role="tab" data-ev="method" id="ev-method" aria-controls="cal-detail" aria-selected="true">Method in this area</button>
+        <button type="button" role="tab" data-ev="experiments" id="ev-experiments" aria-controls="evidence-card" aria-selected="false" tabindex="-1">Frozen experiments</button>
+        <button type="button" role="tab" data-ev="seasons" id="ev-seasons" aria-controls="seasons-card" aria-selected="false" tabindex="-1">Season outcomes</button>
+        <button type="button" role="tab" data-ev="replay" id="ev-replay" aria-controls="replay-card" aria-selected="false" tabindex="-1">Handover replay</button>
+        <button type="button" role="tab" data-ev="log" id="ev-log" aria-controls="log-card" aria-selected="false" tabindex="-1">Verification log</button>
+        <button type="button" role="tab" data-ev="limits" id="ev-limits" aria-controls="limits-card" aria-selected="false" tabindex="-1">Limits</button>
+        <button type="button" role="tab" data-ev="science" id="ev-science" aria-controls="science-card" aria-selected="false" tabindex="-1">Science &amp; role guides</button>
+        <button type="button" role="tab" data-ev="downloads" id="ev-downloads" aria-controls="export-card" aria-selected="false" tabindex="-1">Downloads and sources</button>
+      </div>
+      <div class="ev-body">
+        <section class="panel" id="cal-detail" role="tabpanel" aria-labelledby="ev-method">
+          <h2>How well the method works here</h2>
+          <div id="calibration"></div>
+        </section>
+        <section class="panel" id="evidence-card" role="tabpanel" aria-labelledby="ev-experiments" hidden>
+          <h2>Evidence from the frozen experiments (Punjab)</h2>
+          <div id="evidence"></div>
+        </section>
+        <section class="panel" id="seasons-card" role="tabpanel" aria-labelledby="ev-seasons" hidden>
+          <h2>Season dates: province × season outcomes</h2>
+          <div id="seasons-body"><p class="note">Loading the saved results…</p></div>
+        </section>
+        <section class="panel" id="replay-card" role="tabpanel" aria-labelledby="ev-replay" hidden>
+          <h2>Satellite Handover Simulator</h2>
+          <div id="replay-body"><p class="note">Loading…</p></div>
+        </section>
+        <section class="panel sc-card" id="log-card" role="tabpanel" aria-labelledby="ev-log" hidden>
+          <h2 id="log-title">Mistakes we caught, and facts with the date we read them</h2>
+          <div id="log-body" class="sc-body" aria-busy="true"><p class="muted">Loading the saved results…</p></div>
+        </section>
+        <section class="panel" id="limits-card" role="tabpanel" aria-labelledby="ev-limits" hidden>
+          <h2>Read before using these numbers</h2>
+          <ul id="warnings"></ul>
+        </section>
+        <section class="panel" id="export-card" role="tabpanel" aria-labelledby="ev-downloads" hidden>
+          <h2>Downloads and sources</h2>
+          <div class="exports">
+            <button type="button" class="btn" data-export="monthly.csv">Monthly values (CSV)</button>
+            <button type="button" class="btn" data-export="detections.csv">Detections, one row each (CSV)</button>
+            <button type="button" class="btn" data-export="provenance.json">Method and provenance (JSON)</button>
+            <button type="button" class="btn" id="svg-export">Record chart (SVG)</button>
+          </div>
+          <p class="note">Monthly values are derived estimates; the detections file holds the observations they come from. Both name the satellite of every number.</p>
+          <p class="note" id="export-held" hidden></p>
+          <h3>Sources</h3>
+          <p>Satellite views use schematic spacecraft. Earlier Aqua model credit: <a href="https://sketchfab.com/3d-models/aqua-satellite-wWmEeEeS71I2eX4PS281MUMK3B5">NASA / Sketchfab</a>, <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.</p>
+          <p>Data: <a href="https://www.earthdata.nasa.gov/data/tools/firms" target="_blank" rel="noopener">NASA FIRMS</a> (<a href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noopener">firms.modaps.eosdis.nasa.gov</a>): MODIS 1 km pixel-centre active fire products (standard <a href="https://www.earthdata.nasa.gov/s3fs-public/2023-09/MODIS_C6_C6.1_Fire_User_Guide_1.0.pdf" target="_blank" rel="noopener">MCD14ML</a> and NRT MCD14DL, Collection 6.1 calibration lineage, file versions 6.2, 6.03, 61.03 and 6.1NRT) and <a href="https://www.earthdata.nasa.gov/data/instruments/viirs/viirs-i-band-375-m-active-fire-data" target="_blank" rel="noopener">VIIRS 375 m</a> pixel-centre active fire products (Collection 2 S-NPP VNP14IMG/VNP14IMGTDL_NRT, NOAA-20 VJ114IMG/VJ114IMGTDL_NRT and NOAA-21 VJ214IMGTDL_NRT; <a href="https://www.earthdata.nasa.gov/data/tools/firms/active-fire-data-attributes-modis-viirs" target="_blank" rel="noopener">data attributes</a>). Boundaries: geoBoundaries gbOpen PAK ADM1, 2019 (Runfola et al. 2020). Elevation for the 3D map surface (display only): NOAA NCEI DEM Global Mosaic.</p>
+          <p><b>Acknowledgments and disclaimer:</b> We acknowledge the use of data and/or imagery from NASA's Fire Information for Resource Management System (<a href="https://www.earthdata.nasa.gov/data/tools/firms" target="_blank" rel="noopener">FIRMS</a>), part of NASA's Land, Atmosphere Near real-time Capability for Earth observations (<a href="https://www.earthdata.nasa.gov/data/projects/lance" target="_blank" rel="noopener">LANCE</a>) and NASA's Earth Science Data and Information System (ESDIS). FIRMS is operated by the ESDIS project. Information presented through LANCE, GIBS, Worldview, and FIRMS is provided "as is" and users bear all responsibility and liability for their use of data (<a href="https://www.earthdata.nasa.gov/data/projects/lance/disclaimer" target="_blank" rel="noopener">full LANCE disclaimer</a>); their use for tactical decision-making or informing about conditions at a local scale is not advised. Seamline is an analytical observation record, not for tactical fire management or safety-of-life decisions.</p>
+          <p id="foot-meta"></p>
+          <p><a href="/report" target="_blank" rel="noopener">Methods and evidence report</a> · Code licence: Apache-2.0 · External NASA links and each date's NASA Worldview link need internet; everything else here works offline.</p>
+        </section>
+        <section class="panel" id="science-card" hidden aria-labelledby="ev-science">
+          <div class="card-head">
+            <h2>Sensor physics, FIRMS literature &amp; role guides</h2>
+            <button type="button" class="btn" id="science-roles-btn">Open role guides</button>
+          </div>
+          <div id="science-body"><p class="note">Loading sensor specifications and NASA FIRMS references…</p></div>
+          <p class="note">External primary links (require internet): <a href="https://doi.org/10.1016/j.rse.2016.02.054" target="_blank" rel="noopener">Giglio et al. (2016)</a> · <a href="https://doi.org/10.1016/j.rse.2013.12.008" target="_blank" rel="noopener">Schroeder et al. (2014)</a> · <a href="https://doi.org/10.1029/2005JD006318" target="_blank" rel="noopener">Wooster et al. (2005)</a> · <a href="https://www.earthdata.nasa.gov/data/tools/firms" target="_blank" rel="noopener">NASA Earthdata FIRMS</a> · <a href="https://www.spaceappschallenge.org/2026/challenges/modis-and-viirs-hot-spots/" target="_blank" rel="noopener">NASA Space Apps C08 Brief</a>.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p><b>Seamline</b> · <span id="foot-status">Local research prototype. Pre-event work with true dates. Cross-sensor agreement only; no independent ground-truth validation.</span> · <span id="foot-team" class="foot-team">Made by: Muhammad Hasnain Memon (Leader), Akbar Hussain, Mughees Khan</span></p>
+  <p class="print-only" id="print-link"></p>
+</footer>
+
+<div id="dialog-shade" class="sheet-shade" hidden></div>
+<div id="dialog" class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" hidden>
+  <div class="sheet-head"><h2 id="dialog-title" tabindex="-1"></h2><button type="button" class="icon-btn" id="dialog-close" aria-label="Close"><svg class="ic"><use href="#i-close"/></svg></button></div>
+  <div id="dialog-body" class="dialog-body"></div>
+</div>
+
+<div id="tip" class="tip" role="tooltip" hidden></div>
+<script src="/static/app.js"></script>
+<script src="/static/showcase.js"></script>
+<script src="/static/vendor/maplibre/maplibre-gl.js"></script>
+<script src="/static/satellite-era.js"></script>
+
+<script src="/static/fx3d.js"></script>
+<script src="/static/map3d.js"></script>
+<script src="/static/explore.js"></script>
+<script src="/static/features.js"></script>
+<script src="/static/layers.js"></script>
+<script src="/static/science.js"></script>
+</body>
+</html>
