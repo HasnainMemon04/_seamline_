@@ -38,7 +38,7 @@ Open http://127.0.0.1:8766 after startup. Cached data is included; ordinary app 
 
 ## Deploy on Vercel
 
-Import this repository into a Vercel project. Use the repository root, the Flask framework preset and `main` as the production branch. Leave the install and build settings at the repository defaults and keep Fluid Compute enabled. The configuration selects Python 3.13, builds the static files from `c08/web/`, and runs `wsgi.py`. It opts into Vercel's Large Functions beta for the scientific Python bundle. The cached demo needs no API keys.
+Import this repository into a Vercel project. Use the repository root, the Flask framework preset and `main` as the production branch. Leave the install and build settings at the repository defaults and keep Fluid Compute enabled. The configuration selects Python 3.13 and runs `wsgi.py`. It includes the browser assets from `c08/web/` in the function so Flask can serve `/static/` on the hosted app. It opts into Vercel's Large Functions beta for the scientific Python bundle. The cached demo needs no API keys.
 
 After the first deployment, open `/healthz` on the generated URL and confirm it reports `ready`. Then load the map, change the selected region and date, and try a detections download. A local Flask check does not verify Vercel's hosted build or runtime.
 

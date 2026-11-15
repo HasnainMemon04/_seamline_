@@ -10,7 +10,8 @@
   },
   "functions": {
     "wsgi.py": {
-      "excludeFiles": "{public/**,c08/web/assets/**,c08/web/fonts/**,c08/web/terrain/**,c08/web/vendor/**,c08/web/*.{css,js,webmanifest}}"
+      "includeFiles": "c08/web/**",
+      "excludeFiles": "public/**"
     }
   }
 }
