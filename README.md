@@ -73,7 +73,7 @@ Local application routes, WSGI readiness and 288 monthly API/CSV rows were verif
 
 ## Contributing
 
-Start from current `main`. Use separate branches such as `akbar/frontend`, `mughees/backend` and `hasnain/deployment`; review and merge actual changes. Do not overwrite newer teammate work with unchanged snapshot ZIPs. Use commit subjects describing behavior, such as `fix: preserve keyboard focus after loading` or `docs: explain deployment configuration`.
+All contributors worked directly on `main`. Fetch before pushing to avoid overwriting teammates' work. Changes pushed to any other branch will not appear in the Vercel deployment.
 
 ## Provenance and licensing
 
