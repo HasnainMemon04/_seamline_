@@ -24,34 +24,44 @@ Explore detections on a map, compare regions and periods, inspect saved scientif
 
 ## Run locally
 
-Use Python 3.13 and a project-local virtual environment:
+Use **Python 3.11–3.13** and a project-local virtual environment. Python 3.14+ is not yet supported — `numpy` and other compiled dependencies have no pre-built wheels for it and will fail to install.
 
-```sh
+Create the virtual environment:
+
+```bash
 python -m venv .venv
-# Windows PowerShell: .\.venv\Scripts\Activate.ps1
-# macOS/Linux: source .venv/bin/activate
+```
+
+Activate it — this step is required before installing:
+
+```bash
+# Windows PowerShell:
+.\.venv\Scripts\Activate.ps1
+
+# macOS / Linux:
+source .venv/bin/activate
+```
+
+Your prompt should show `(.venv)` once active. Then install dependencies and start the app:
+
+```bash
 python -m pip install -r requirements.lock.txt
 python -m c08.app
 ```
 
-Open http://127.0.0.1:8766 after startup. Cached data is included; ordinary app startup requires no NASA API credentials. This Flask development command is for local use.
+Open http://127.0.0.1:8766 after startup. Cached data is included; ordinary app startup requires no NASA API credentials. This Flask development server is for local use only.
 
-## Deploy on Vercel
-
-Import this repository into a Vercel project. Use the repository root, the Flask framework preset and `main` as the production branch. Leave the install and build settings at the repository defaults and keep Fluid Compute enabled. The configuration selects Python 3.13 and runs `wsgi.py`. It includes the browser assets from `c08/web/` in the function so Flask can serve `/static/` on the hosted app. It opts into Vercel's Large Functions beta for the scientific Python bundle. The cached demo needs no API keys.
-
-After the first deployment, open `/healthz` on the generated URL and confirm it reports `ready`. Then load the map, change the selected region and date, and try a detections download. A local Flask check does not verify Vercel's hosted build or runtime.
 
 ## Container deployment
 
-```sh
+```bash
 docker build -t seamline .
 docker run --rm -p 8080:8080 seamline
 ```
 
 The container runs Gunicorn as a non-root user, binds to `PORT` (default `8080`), and exposes `/healthz` after the dataset and default analysis load. Begin with one worker and measure memory and cold-start time on the selected host. Data are file-backed Parquet/CSV inputs; no SQL service is required. A static-only website host cannot serve the Python APIs.
 
-Local application routes, WSGI readiness and 288 monthly API/CSV rows were verified during packaging. **The Linux image build and hosted deployment are not yet verified.** Deployment configuration alone does not establish a live service.
+Local application routes, WSGI readiness and 288 monthly API/CSV rows were verified during packaging. The Linux image build and hosted deployment are not yet verified. Deployment configuration alone does not establish a live service.
 
 ## Scientific constraints
 
