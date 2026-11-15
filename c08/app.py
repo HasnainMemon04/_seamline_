@@ -246,11 +246,11 @@ def export(kind):
                     if p["years"][1] >= continuity.FIRST_YEAR
                     else "observation: one fire pixel on one satellite pass (quality-filtered, type 0)")
         chunks = analysis.detections_csv_chunks(
-            q, passes, extra={"row_kind": row_kind, "data_identity": analysis.data_identity()})
+            q, passes, extra={"row_kind": row_kind, "data_identity": analysis.data_identity()}, chunk=10_000)
         base = f"seamline_{name}_{p['years'][0]}-{p['years'][1]}_detections_csv_{stamp}"
         if len(q) <= analysis.EXPORT_PLAIN_MAX:
-            return send_file(io.BytesIO(b"".join(chunks)), mimetype="text/csv", as_attachment=True,
-                             download_name=base + ".csv")
+            headers = {"Content-Disposition": f'attachment; filename="{base}.csv"'}
+            return Response(chunks, mimetype="text/csv", headers=headers)
         # Large selections (Punjab 2003-2025 is about 0.9 million rows) go out as a streamed ZIP.
         headers = {"Content-Disposition": f'attachment; filename="{base}.zip"'}
         if not q.attrs.get("rows_held_out"):  # no count while P04 rows are held out (it would leak them)

@@ -1,6 +1,6 @@
 # Seamline
 
-> Assembly status: this initial commit contains deployment, data and integration files. The frontend (`c08/web/`) and backend (`c08/*.py`) will arrive through separate teammate branches. Run the commands below only after all three components are merged. This is a staged import of the existing project; source history and AI disclosures remain in the provenance files.
+> The public deployment snapshot includes the frontend, Flask backend, cached data and saved evidence. It imports an existing prototype.
 
 A research application for comparing MODIS and VIIRS active-fire observations over Pakistan using NASA FIRMS data.
 
@@ -22,8 +22,6 @@ Explore detections on a map, compare regions and periods, inspect saved scientif
 | `wsgi.py`, `Dockerfile` | Server startup, readiness and Linux container configuration. |
 | `requirements*.txt` | Pinned application and deployment dependencies. |
 
-[Complete descriptions of every file](FILE_MAP.md).
-
 ## Run locally
 
 Use Python 3.13 and a project-local virtual environment:
@@ -37,6 +35,12 @@ python -m c08.app
 ```
 
 Open http://127.0.0.1:8766 after startup. Cached data is included; ordinary app startup requires no NASA API credentials. This Flask development command is for local use.
+
+## Deploy on Vercel
+
+Import this repository into a Vercel project. Use the repository root, the Flask framework preset and `main` as the production branch. Leave the install and build settings at the repository defaults and keep Fluid Compute enabled. The configuration selects Python 3.13, builds the static files from `c08/web/`, and runs `wsgi.py`. It opts into Vercel's Large Functions beta for the scientific Python bundle. The cached demo needs no API keys.
+
+After the first deployment, open `/healthz` on the generated URL and confirm it reports `ready`. Then load the map, change the selected region and date, and try a detections download. A local Flask check does not verify Vercel's hosted build or runtime.
 
 ## Container deployment
 
@@ -63,6 +67,6 @@ Start from current `main`. Use separate branches such as `akbar/frontend`, `mugh
 
 ## Provenance and licensing
 
-This repository imports an existing prototype whose development and scientific evidence predate the public snapshot. Import and packaging dates do not establish the start of development. See [PROVENANCE.json](PROVENANCE.json), [AI_USAGE.json](AI_USAGE.json) and [RESOURCES.json](RESOURCES.json) for source history, AI assistance and resources. These records do not certify hackathon eligibility.
+This repository imports an existing prototype whose development and scientific evidence predate the public snapshot. See the [source provenance recorded in Git history](https://github.com/HasnainMemon04/_seamline_/blob/d1c4bc2bcd3a594b497e799607f2c12fa0f70db8/PROVENANCE.json), [AI_USAGE.json](AI_USAGE.json) and [RESOURCES.json](RESOURCES.json) for source history, AI assistance and resources.
 
 Original source is licensed under [Apache 2.0](LICENSE). Data, fonts and vendor assets retain their own terms; see [NOTICE](NOTICE) and accompanying licenses. [NASA FIRMS](https://www.earthdata.nasa.gov/data/tools/firms) is the principal active-fire data source.

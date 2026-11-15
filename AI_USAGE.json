@@ -236,5 +236,13 @@
       "assistance": "OpenAI Codex drafted the deployment guide and file catalog from repository code, module docstrings and file paths; verified complete catalog coverage and local file links.",
       "scope": "Documentation only; no application, data or scientific-baseline changes."
     }
+  ],
+  "deployment_updates": [
+    {
+      "review_date": "2026-11-15",
+      "files": [".python-version", "requirements.txt", "vercel.json", "scripts/prepare_vercel_assets.py", "c08/app.py", ".gitignore", ".dockerignore", "README.md"],
+      "assistance": "OpenAI Codex prepared the Vercel build, adjusted detection downloads to stream, and documented deployment checks.",
+      "scope": "Deployment and response handling. Scientific inputs and saved results are unchanged."
+    }
   ]
 }
