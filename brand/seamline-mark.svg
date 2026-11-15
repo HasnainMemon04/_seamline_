@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Seamline">
+  <title>Seamline</title>
+  <style>
+    .ring{stroke:#0e6b6f;opacity:.38}
+    .orbit{stroke:#9a6a12}
+    .seam{stroke:#13181a}
+    .modis{stroke:#c27b1a}
+    .viirs{stroke:#0e6b6f}
+    .node{fill:#f3f2ee;stroke:#13181a}
+    .dot{fill:#9a6a12}
+    @media (prefers-color-scheme:dark){
+      .ring{stroke:#58bdb8;opacity:.45}
+      .orbit{stroke:#ecbe62}
+      .seam{stroke:#eaf0f0}
+      .modis{stroke:#ecbe62}
+      .viirs{stroke:#58bdb8}
+      .node{fill:#0e1721;stroke:#faf9f6}
+      .dot{fill:#ecbe62}
+    }
+  </style>
+  <circle class="ring" cx="16" cy="16" r="11.5" fill="none" stroke-width="1.3"/>
+  <path class="orbit" d="M 3.2 21.5 A 14.5 4.4 -24 0 0 28.8 10.5" fill="none" stroke-width="1.4" stroke-linecap="round"/>
+  <line class="seam" x1="16" y1="6.5" x2="16" y2="25.5" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="1.5 2.4"/>
+  <path class="modis" d="M 6.5 20.5 H 10 L 12.6 15.5 H 16" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="viirs" d="M 16 15.5 H 19.4 L 22 10.5 H 25.5" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle class="node" cx="16" cy="15.5" r="2.2" stroke-width="1.3"/>
+  <circle class="dot" cx="27.5" cy="11" r="1.7"/>
+</svg>

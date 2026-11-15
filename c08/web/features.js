@@ -243,7 +243,18 @@
       }
       svgEl("line", { x1: L, x2: W - Rm, y1: H - Bm, y2: H - Bm, stroke: css("--axis") }, svg);
       const step = Math.max(1, Math.ceil(ys.length / (W < 560 ? 6 : 12)));
-      ys.forEach((yr, i) => { if (i % step === 0) svgEl("text", { x: x(yr), y: H - Bm + 17, "text-anchor": "middle" }, svg).textContent = yr; });
+      const minGapPx = 44;
+      const tickIdxs = [];
+      ys.forEach((yr, i) => {
+        if (i % step !== 0 && i !== ys.length - 1) return;
+        const tx = x(yr);
+        if (!tickIdxs.length) { tickIdxs.push(i); return; }
+        const prevIdx = tickIdxs[tickIdxs.length - 1];
+        const prevX = x(ys[prevIdx]);
+        if (tx - prevX >= minGapPx) tickIdxs.push(i);
+        else if (i === ys.length - 1) tickIdxs[tickIdxs.length - 1] = i;
+      });
+      tickIdxs.forEach((i) => { const yr = ys[i]; svgEl("text", { x: x(yr), y: H - Bm + 17, "text-anchor": "middle" }, svg).textContent = yr; });
       for (const [k, pts] of [["a", A], ["b", B]]) {
         let d = "", pen = false;
         for (const p of pts) { if (p.v == null) { pen = false; continue; } d += `${pen ? "L" : "M"}${x(p.y)},${y(p.v)}`; pen = true; }
@@ -358,6 +369,7 @@
     $("replay-body").innerHTML = `<p class="lede">What if S-NPP's feed had been cut off earlier? This replays the saved 2026 test day by day: S-NPP is withheld, the record continues on converted NOAA-20, and the withheld S-NPP counts can then be shown beside it.</p>
       <dl class="facts facts-2"><dt>Simulation</dt><dd>${esc(d.simulation)}</dd><dt>Actual platform status</dt><dd>${esc(d.platform_status || "")}</dd>
         <dt>Test dates</dt><dd>${esc(d.test_window[0])} to ${esc(d.test_window[1])}, ${esc(d.area)} only</dd><dt>Calibration dates</dt><dd>${esc(d.calibration_window)}</dd></dl>
+      <div class="replay-strip" id="rp-strip" role="region" aria-label="Spacecraft handover state at replay playhead"></div>
       <div class="replay-grid"><div>
         <div class="replay-ctrl"><button type="button" class="btn-primary" id="rp-play" aria-pressed="false">Play</button>
           <input type="range" id="rp-range" min="0" max="${d.days.length - 1}" step="1" value="${RP.i}" aria-label="Replay date">
@@ -429,6 +441,11 @@
       `<span><i class="rel-key rel-gap" style="background:repeating-linear-gradient(45deg,var(--muted) 0 1px,var(--nodata) 1px 5px)"></i>left out by the test: a gap, not zero</span>`;
     // readout
     const dd = d.days[RP.i], st = replayStats(RP.i), end = RP.i === n - 1, s = d.saved;
+    if ($("rp-strip")) {
+      $("rp-strip").innerHTML = `<div class="replay-sat"><span class="dot" style="background:var(--aqua)"></span><div><b>Aqua MODIS (early record)</b><span>2003–2011 comparison period · bridge calibrated 2012–2017</span></div></div>
+        <div class="replay-sat ${RP.reveal ? "is-active" : "is-ended"}"><span class="dot" style="background:var(--snpp)"></span><div><b>S-NPP VIIRS (Reference · ended 2 Nov 2026)</b><span>Withheld on ${esc(dd.date)}: ${RP.reveal ? (dd.matched ? fmt(dd.snpp) + " detections" : "unmatched gap") : "check Reveal to compare"}</span></div></div>
+        <div class="replay-sat is-active"><span class="dot" style="background:var(--n20)"></span><div><b>NOAA-20 VIIRS (Saved test P04 G03 · ${pct(s.wape)} WAPE)</b><span>Active bridge on ${esc(dd.date)}: ${dd.matched ? fmt(dd.converted, 1) + " S-NPP-eq (" + fmt(dd.noaa20) + " raw)" : "unmatched gap day"}</span></div></div>`;
+    }
     const day = dd.matched ? `<div class="kv"><span>Converted NOAA-20</span><b>${fmt(dd.converted, 1)}</b></div><div class="kv"><span>NOAA-20 as counted</span><b>${fmt(dd.noaa20)}</b></div><div class="kv"><span>S-NPP (reference)</span><b>${RP.reveal ? fmt(dd.snpp) : "withheld"}</b></div>`
       : `<p class="warnbox">This day was left out by the test: ${esc(dd.why_not)}. No count is shown for it.</p>`;
     let err;

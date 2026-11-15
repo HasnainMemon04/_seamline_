@@ -507,7 +507,7 @@
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       data = await r.json();
     } catch (e) {
-      for (const k of KEYS) put(k, `<p class="sc-error" role="alert">The saved results could not be loaded (${esc(e.message)}). Start the local server with: python -m c08.app</p>`);
+      for (const k of KEYS) put(k, `<p class="sc-error" role="alert">The saved results could not be loaded (${esc(e.message)}). Check your connection and reload the page.</p>`);
       return;
     }
     charts.clear();

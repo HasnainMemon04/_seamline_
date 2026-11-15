@@ -5,5 +5,29 @@
   "saved_scientific_methods_and_results": "experiments/",
   "acknowledgments_and_licenses": "NOTICE",
   "reference_detail": "Product DOIs and sources remain in the original manifest and app Evidence view.",
-  "event_timing_guidance": "https://github.com/nasa/spaceapps/discussions/1813"
+  "event_timing_guidance": "https://github.com/nasa/spaceapps/discussions/1813",
+  "frontend_reference_imagery": {
+    "provider": "NASA GIBS",
+    "product": "BlueMarble_ShadedRelief_Bathymetry",
+    "reference_time": "2004-08-01",
+    "access_date_asia_karachi": "2026-11-15",
+    "use": "Static reference basemap, independent of detection dates and calculations.",
+    "manifest": "c08/web/imagery/MANIFEST.json",
+    "documentation": "https://nasa-gibs.github.io/gibs-api-docs/map-library-usage/"
+  },
+  "event_branding": {
+    "name": "NASA Space Apps Challenge",
+    "asset": "c08/web/assets/space-apps-challenge.png",
+    "source": "Unmodified logo supplied by project owner on 15 November 2026",
+    "sha256": "0bb54710a1a6c8fbfce040dbb83a1ef65bfcd06ab4225bbc84fe87b47ff5e52b",
+    "guidelines": "https://www.spaceappschallenge.org/brand/",
+    "brand_guide": "https://assets.spaceappschallenge.org/media/documents/Space_Apps_Brand_Guide_-_23_May_2025.pdf",
+    "review_date_asia_karachi": "2026-11-15",
+    "scope": "Event identification for an independent participant project; official NASA insignia is not used as application branding."
+  },
+  "motion_diagnostics": {
+    "asset": "c08/web/assets/motion-diagnostics.json",
+    "source": "experiments/E02_evaluation/result.json",
+    "scope": "Saved Punjab annual drift WAPE, 2018–2025. Display-only extraction; no training or evaluation rerun."
+  }
 }

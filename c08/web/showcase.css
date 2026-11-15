@@ -12,19 +12,19 @@
 .sc-cause { display: block; color: var(--muted); font-size: var(--fs-s); }
 .sc-verdict { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-weight: 550; margin: var(--s2) 0 var(--s3); }
 
-/* badges: word and shape carry the outcome; a failure is as heavy as a pass */
+/* badges: word and shape carry the outcome; a failure is as heavy as a pass and distinct from selected controls */
 .sc-badge { display: inline-flex; align-items: center; gap: 5px; padding: 2px 10px; border-radius: var(--r-pill); font: 650 var(--fs-s)/1.45 var(--font); border: 1.5px solid var(--ink); white-space: nowrap; }
 .sc-badge::before { font-size: 12px; line-height: 1; }
-.sc-badge-pass { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
-.sc-badge-fail { background: var(--ink); border-color: var(--ink); color: var(--page); }
+.sc-badge-pass { background: var(--pass-bg, var(--accent)); border-color: var(--pass-line, var(--accent)); color: var(--on-accent); }
+.sc-badge-fail { background: var(--fail-bg, #8f2f1f); border-color: var(--fail-line, #8f2f1f); color: var(--fail-on, #ffffff); }
 .sc-badge-fail::before { content: "✕"; }
-.sc-badge-wait { background: transparent; border-style: dashed; color: var(--ink); }
+.sc-badge-wait { background: var(--unavail-bg, transparent); border-color: var(--unavail-line, var(--line2)); border-style: dashed; color: var(--ink); }
 .sc-badge-dev { background: var(--sunken); border-style: dotted; color: var(--ink); }
-.sc-badge-mixed { background: var(--raised); color: var(--ink); }
-.sc-outcome { display: inline-block; padding: 0 8px; border-radius: var(--r-pill); border: 1.5px solid var(--ink); font-size: var(--fs-s); }
-.sc-out-holds { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
-.sc-out-fails { background: var(--ink); color: var(--page); }
-.sc-out-not_testable { border-style: dashed; }
+.sc-badge-mixed { background: var(--warn-bg); border-color: var(--warn-line); color: var(--ink); }
+.sc-outcome { display: inline-block; padding: 0 8px; border-radius: var(--r-pill); border: 1.5px solid var(--ink); font-size: var(--fs-s); font-weight: 600; }
+.sc-out-holds { background: var(--pass-bg, var(--accent)); border-color: var(--pass-line, var(--accent)); color: var(--on-accent); }
+.sc-out-fails { background: var(--fail-bg, #8f2f1f); border-color: var(--fail-line, #8f2f1f); color: var(--fail-on, #ffffff); }
+.sc-out-not_testable { background: var(--unavail-bg, transparent); border-color: var(--unavail-line, var(--line2)); border-style: dashed; }
 
 /* key numbers */
 .sc-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--s3); margin: var(--s2) 0; }

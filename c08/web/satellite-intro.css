@@ -1,14 +1,38 @@
-.satellite-intro { position: fixed; inset: 0; z-index: 9000; background: #0e1721; color: #e6edf1; display: grid; place-items: center; padding: 24px; }
-.satellite-intro[hidden] { display: none; }
+.satellite-intro { position: fixed; inset: 0; z-index: 9000; background: var(--stage-bg, #07111B); color: var(--stage-ink, #F1F5F7); display: grid; place-items: center; padding: 24px; }
+.satellite-intro[hidden] { display: none !important; }
 .intro-content { width: min(520px, 100%); text-align: center; }
-.intro-kicker { color: #91bfc3; font: 500 12px/1.5 var(--font); letter-spacing: .22em; text-transform: uppercase; }
+.intro-kicker { color: var(--stage-accent, #5EDAD0); font: 600 12px/1.5 var(--font); letter-spacing: .22em; text-transform: uppercase; }
 .intro-content h1 { font-size: clamp(28px, 6vw, 42px); letter-spacing: -.04em; margin: 8px 0 12px; }
 .intro-content p { max-width: 38ch; margin: 12px auto; line-height: 1.5; }
 #intro-model { width: 100%; height: clamp(180px, 32vh, 280px); position: relative; }
 #intro-model canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.intro-orbit { position: absolute; width: 72%; height: 42%; border: 1px solid #527781; border-radius: 50%; top: 30%; left: 14%; transform: rotate(-24deg); }
-.intro-orbit::after { content: ''; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #ecbe62; top: 12%; left: 10%; box-shadow: 0 0 18px #ecbe6280; }
-#intro-status { color: #b8cbd0; font-size: 13px; }
-#intro-skip { margin-top: 12px; color: #e6edf1; background: transparent; border: 1px solid #72929d; border-radius: 6px; padding: 12px 20px; min-height: 44px; cursor: pointer; }
-#intro-skip:focus-visible { outline: 3px solid #ecbe62; outline-offset: 4px; }
-@media print { .satellite-intro { display: none; } }
+.intro-orbit { position: absolute; width: 72%; height: 42%; border: 1px solid rgba(148, 184, 209, 0.36); border-radius: 50%; top: 30%; left: 14%; transform: rotate(-24deg); }
+.intro-orbit::after { content: ''; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--stage-warn, #F3C77A); top: 12%; left: 10%; box-shadow: 0 0 18px rgba(243, 199, 122, 0.55); }
+#intro-status { color: var(--stage-muted, #A8BBC8); font-size: 13px; }
+#intro-skip { margin-top: 12px; color: var(--stage-ink, #F1F5F7); background: var(--stage-surface, #101E2C); border: 1px solid rgba(148, 184, 209, 0.34); border-radius: var(--r2, 8px); padding: 10px 20px; min-height: 44px; cursor: pointer; font-weight: 600; }
+#intro-skip:hover { border-color: var(--stage-accent, #5EDAD0); }
+#intro-skip:focus-visible { outline: 3px solid var(--stage-accent, #5EDAD0); outline-offset: 4px; }
+@media print { .satellite-intro { display: none !important; } }
+.satellite-intro { background: #07111b; }
+.intro-content { width: min(620px,100%); }
+.intro-content h1 { font-size: clamp(32px,5vw,54px); line-height: 1.04; font-weight: 500; letter-spacing: -.055em; }
+.intro-content > p:not(#intro-status) { color: #a8bbc8; font-size: 14px; }
+.intro-orbit { border-color: rgba(94,218,208,.22); width: 78%; height: 55%; top: 20%; left: 11%; }
+.intro-orbit::after { background: #5edad0; box-shadow: none; }
+#intro-model { height: clamp(140px,28vh,240px); }
+#intro-status { font-size: 11px; letter-spacing: .02em; }
+#intro-skip { background: transparent; color: #a8bbc8; border-radius: 4px; min-height: 44px; padding: 8px 18px; font-size: 12px; }
+.intro-cinematic { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #03090e; display: none; }
+.satellite-intro.is-leaving { opacity: 0; transition: opacity 220ms ease-out; pointer-events: none; }
+.satellite-intro.is-cinematic .intro-cinematic { display: block; }
+.satellite-intro.is-cinematic .intro-content { position: absolute; inset: auto 24px 28px; width: auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 16px; border: 1px solid rgba(148,184,209,.25); border-radius: 6px; background: rgba(7,17,27,.88); text-align: left; }
+.satellite-intro.is-cinematic .intro-kicker, .satellite-intro.is-cinematic #intro-model, .satellite-intro.is-cinematic .intro-content h1, .satellite-intro.is-cinematic .intro-content > p:not(#intro-status) { display: none; }
+.satellite-intro.is-cinematic #intro-status { margin: 0; max-width: none; font-size: 12px; }
+.satellite-intro.is-cinematic #intro-skip { margin: 0; color: #f1f5f7; white-space: nowrap; background: #101e2c; }
+.intro-scene-credit { position: absolute; top: 18px; right: 24px; z-index: 1; margin: 0; padding: 5px 8px; border-radius: 3px; background: rgba(7,17,27,.85); color: #a8bbc8; font-size: 10px; letter-spacing: .025em; }
+@media (max-width: 760px) {
+  .satellite-intro.is-cinematic .intro-content { left: 16px; right: 16px; bottom: 22px; padding: 10px; gap: 8px; }
+  .satellite-intro.is-cinematic #intro-status { font-size: 10px; }
+  .satellite-intro.is-cinematic #intro-skip { font-size: 11px; padding: 8px 10px; }
+  .intro-scene-credit { top: 16px; right: 16px; font-size: 9px; }
+}

@@ -25,3 +25,15 @@ Third-party data and materials used or stored here:
 - Python packages listed in requirements.lock.txt: their own licences.
 
 Deployment snapshot: includes required cached NASA inputs and scientific evidence. The original notice above describes the source repository. This derivative uses schematic satellites; supplied GLBs and Three/Draco are excluded pending redistribution review. Third-party font and MapLibre license files remain with their assets.
+
+15 Nov 2026 local frontend update: c08/web/satellite-models.js supplies original, procedural schematic spacecraft geometry under the project Apache-2.0 license. These meshes are illustrations, not official engineering models. No third-party GLB is added by this update.
+
+NASA Blue Marble shaded-relief and bathymetry reference imagery from NASA GIBS, reference time 2004-08-01, accessed 15 Nov 2026. Credit: NASA Blue Marble / NASA GIBS. This static basemap is not imagery acquired on the selected fire-observation date and is never used in any metric. Source and tile SHA-256 records: c08/web/imagery/MANIFEST.json. Documentation: https://nasa-gibs.github.io/gibs-api-docs/map-library-usage/
+
+Historical local experiment, superseded by the native opening (unused media excluded from this publication): the project owner supplied the AI-generated reference video gemini_generated_video_1c81a64f.mp4. A muted first-three-second segment and its first-frame poster are included for an illustrative entrance. Original frame and any embedded branding are retained. This supplied media is distinct from original Apache-2.0 project source; see c08/web/assets/intro-media.json for provenance.
+
+15 Nov 2026 native frontend: the opening, spacecraft motion, scan reveal and instrument transitions are application-rendered illustrations, assisted by OpenAI Codex. The user-supplied Gemini reference video informed the motion direction but is not played or requested by the application. Glow samples only existing detections; scan timing is illustrative and is not observed ignition timing. AI assistance and actual project provenance remain disclosed in AI_USAGE.json.
+
+The unmodified NASA Space Apps Challenge event logo in c08/web/assets/space-apps-challenge.png was supplied by the project owner on 15 Nov 2026. The mark remains subject to its owner's branding rules and is not licensed by this project's Apache-2.0 licence. Brand guidelines: https://www.spaceappschallenge.org/brand/ (reviewed 15 Nov 2026). Seamline is an independent participant project and is not endorsed by NASA. The standalone NASA insignia is not used as application branding.
+
+Motion diagnostic display: c08/web/assets/motion-diagnostics.json extracts saved Punjab annual drift WAPE (2018–2025) from experiments/E02_evaluation/result.json, whose source SHA-256 is retained in the extraction. It does not add new scientific evaluation or modify the saved experiment.

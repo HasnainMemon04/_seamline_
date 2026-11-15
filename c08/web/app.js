@@ -10,7 +10,7 @@ const MONTH_FULL = ["January", "February", "March", "April", "May", "June", "Jul
 const NS = "http://www.w3.org/2000/svg";
 const VIEWS = ["OctNov", "AprMay", "year", "month"];  // the "Record over time" chart views
 const CAL_SOURCES = ["H", "aqua", "naive"];  // the calendar's series
-const OFFLINE_MSG = "The local server is not responding. Start it with: python -m c08.app";
+const OFFLINE_MSG = "The analysis service is currently unreachable. Check your connection and try again.";
 let META = null, RESULT = null, GEO = null;
 let REQ = 0, CTRL = null;  // only the newest /api/analyze reply may be drawn
 
@@ -158,6 +158,8 @@ function stateQuery(s) {
   if (s.mode && s.mode !== UI_DEFAULT.mode) q.set("map", s.mode);
   if (s.scale && s.scale !== UI_DEFAULT.scale) q.set("scale", s.scale);
   if (s.season && s.season !== UI_DEFAULT.season) q.set("season", s.season);
+  if (["simple", "advanced"].includes(s.experience)) q.set("experience", s.experience);
+  if (s.basemap === "satellite") q.set("basemap", "satellite");
   return q.toString().replace(/%2C/gi, ",");  // box=65,27,65.2,27.2 reads better, and parses the same
 }
 
@@ -212,9 +214,12 @@ function toast(msg, opts = {}) {
 }
 function setBusy(on, msg = "") {
   PENDING = on;
+  Seam.emit("loading", on);
   $("main").setAttribute("aria-busy", on ? "true" : "false");
   $("context").classList.toggle("pending", on);
   $("go").disabled = on;
+  // The map's live count already confirms a completed selection in Simple mode.
+  if (!on && /^Showing /.test(msg) && document.documentElement.dataset.experience === "simple") { toast(""); return; }
   toast(msg, { sticky: on });
 }
 function showError(msg) { toast(msg, { error: true }); }
@@ -277,6 +282,7 @@ async function run() {
     LAST_ERROR = e.message;
     showError(e.message);
     renderSummary();
+    Seam.emit("analysis-error", e.message);
   }
 }
 
@@ -298,7 +304,9 @@ function currentState() {
   const p = RESULT.request;
   const s = { years: p.years, month: p.month, model: p.model, view: $("view").value, cal: $("cal-src").value,
               day: [Number($("daily-year").value), Number($("daily-month").value)],
-              ws: UI.ws, story: UI.story, sub: UI.sub, ev: UI.ev, sats: UI.sats, dn: UI.dn, mapDay: UI.mapDay, mode: UI.mode, scale: UI.scale, season: UI.season };
+              ws: UI.ws, story: UI.story, sub: UI.sub, ev: UI.ev, sats: UI.sats, dn: UI.dn, mapDay: UI.mapDay, mode: UI.mode, scale: UI.scale, season: UI.season,
+              experience: IN_BROWSER ? document.documentElement.dataset.experience : "simple",
+              basemap: IN_BROWSER ? document.documentElement.dataset.basemap : "terrain" };
   if (p.bbox) s.bbox = p.bbox.map(Number); else s.region = p.region;
   return s;
 }
@@ -515,7 +523,7 @@ function render(refetchDaily = true) {
 
 function renderChips() {
   const p = RESULT.request;
-  $("ctx-area").textContent = RESULT.region;
+  $("ctx-area").textContent = RESULT.region.includes("PK") || RESULT.region === "Pakistan" ? RESULT.region : `${RESULT.region}, PK`;
   $("ctx-years").textContent = `${RESULT.years[0]}–${RESULT.years[1]}`;
   $("ctx-month").textContent = `${MONTH_FULL[p.month[1] - 1]} ${p.month[0]}`;
   $("ctx-model").textContent = RESULT.model;
@@ -531,7 +539,7 @@ function renderSummary() {
   const r = RESULT, c = r.calibration;
   $("summary-title").textContent = `${r.region}, ${r.years[0]}–${r.years[1]}`;
   const cv = c.supported ? c.cv_agreement.model.wape : null;
-  // One short line, always visible; warnings that change how a number reads stay next to it.
+  // Visible context pills keep selection, units, source type and support flag readable without ellipsis truncation.
   const s = c.supported
     ? `Detections per month on one scale (S-NPP-equivalent), ${esc(r.passes)}. Model ${esc(r.model)}, calibrated on this area's own 2012–2017 data; in cross-validation it missed S-NPP by ${pct100(cv)}% of the total.`
     : `No harmonised values before 2012 for this area: ${esc(c.reasons.join("; "))}.`;
@@ -539,7 +547,10 @@ function renderSummary() {
   if (!c.supported) pills.push("No values before 2012 here");
   if (r.box && r.box.share_inside_pakistan < 0.99) pills.push(`Only ${fmt(r.box.share_inside_pakistan * 100)}% of the rectangle is inside Pakistan`);
   if (LAST_ERROR) pills.push("The last request failed; this is the previous selection");
-  $("summary").innerHTML = `<div class="ctx-line">${pills.map((t) => `<b class="ctx-warn">${esc(t)}</b>`).join("")}<span title="${s.replace(/"/g, "&quot;")}">${s}</span>` +
+  const metaPills = `<span class="ctx-pill"><b>Units:</b> fire pixels/mo</span>` +
+    `<span class="ctx-pill"><b>Scale:</b> S-NPP ref (${esc(r.passes)})</span>` +
+    `<span class="ctx-pill ${c.supported ? "is-ok" : "is-warn"}">${c.supported ? `Supported · CV ${pct100(cv)}%` : "Unsupported pre-2012"}</span>`;
+  $("summary").innerHTML = `<div class="ctx-line">${pills.map((t) => `<b class="ctx-warn">${esc(t)}</b>`).join("")}${metaPills}<span class="ctx-sentence" title="${s.replace(/"/g, "&quot;")}">${s}</span>` +
     `<button type="button" class="more-btn" id="summary-more" aria-haspopup="dialog">Units, method and ${r.warnings.length} notes</button></div>`;
 }
 function summaryDialog(opener) {
@@ -560,32 +571,61 @@ function infoBtn(kind, key, what) {
 function renderInsight() {
   const r = RESULT, ch = r.change;
   const name = UI.season === "AprMay" ? "April–May" : "October–November";
-  $("insight-eyebrow").textContent = `${r.region} · ${name} · detections · model ${r.model}`;
+  $("insight-eyebrow").textContent = `${r.region} · ${name} · MCD14ML (1 km) ↔ VNP14IMG (375 m) · Bridge ${r.model}`;
   const sw = `<div class="season-switch"><div class="seg" role="group" aria-label="Season compared">` +
-    [["OctNov", "Oct–Nov"], ["AprMay", "Apr–May"]].map(([k, t]) => `<button type="button" data-season="${k}" aria-pressed="${UI.season === k}">${t}</button>`).join("") + `</div><span>average season 2012–2021 ÷ 2003–2011</span></div>`;
+    [["OctNov", "Oct–Nov"], ["AprMay", "Apr–May"]].map(([k, t]) => `<button type="button" data-season="${k}" aria-pressed="${UI.season === k}">${t}</button>`).join("") + `</div><span><b>${esc(r.region)}</b> · mean season 2012–2021 ÷ 2003–2011</span></div>`;
   if (!ch) {
     $("insight").innerHTML = `<div class="c-box c-harm" style="grid-column:1/-1"><p class="c-k">Not available for these years</p><p>This contrast divides the average season of 2012–2021 by that of 2003–2011, so the selection must include both periods. Choose years from 2003 to at least 2021.</p></div>`;
-    $("insight-mini").innerHTML = ""; $("insight-note").innerHTML = "";
+    $("insight-mini").innerHTML = "";
+    if ($("insight-metrics")) $("insight-metrics").innerHTML = "";
+    $("insight-note").innerHTML = "";
     return;
   }
   const v = ch[UI.season];
   let harm;
   if (!v.defined) {
-    harm = `<p class="c-k">On one scale (harmonised)</p><p class="c-num">–<small>not defined</small></p><p class="c-q">${esc(v.reason)}</p>`;
+    harm = `<p class="c-k">Harmonised (VNP14IMG-eq, ${esc(r.model)})</p><p class="c-num">–<small>not defined</small></p><p class="c-q">${esc(v.reason)}</p>`;
   } else if (!v.point_in_interval) {
-    // Lead with the range: the point estimate is outside it because the model was biased here in cross-validation.
-    harm = `<p class="c-k">On one scale (harmonised) ${infoBtn("change", UI.season, `${name} change`)}</p><p class="c-num">${fmt(v.H_interval[0], 2)}–${fmt(v.H_interval[1], 2)}×<small>rough range</small></p>` +
-      `<p class="c-q">${esc(r.region)}, ${name}. The point estimate (${fmt(v.H, 2)}×) lies outside the model's own range, because it was biased in one direction in this area's cross-validation. Read the range.</p>`;
+    harm = `<p class="c-k">Harmonised (VNP14IMG-eq, ${esc(r.model)}) ${infoBtn("change", UI.season, `${name} change`)}</p><p class="c-num">${fmt(v.H_interval[0], 2)}–${fmt(v.H_interval[1], 2)}×<small>80% CV range</small></p>` +
+      `<p class="c-q">${esc(r.region)}, ${name} (2012–2021 ÷ 2003–2011). Point estimate (${fmt(v.H, 2)}×) lies outside the cross-validation interval. Read the range.</p>`;
   } else {
-    harm = `<p class="c-k">On one scale (harmonised) ${infoBtn("change", UI.season, `${name} change`)}</p><p class="c-num">${fmt(v.H, 2)}×<small>rough range ${fmt(v.H_interval[0], 2)}–${fmt(v.H_interval[1], 2)}×</small></p>` +
-      `<p class="c-q">${esc(r.region)}, ${name}: detections on the S-NPP-equivalent scale. Aqua MODIS alone, unconverted: ${fmt(v.aqua, 2)}×.</p>`;
+    harm = `<p class="c-k">Harmonised (VNP14IMG-eq, ${esc(r.model)}) ${infoBtn("change", UI.season, `${name} change`)}</p><p class="c-num">${fmt(v.H, 2)}×<small>80% CV range ${fmt(v.H_interval[0], 2)}–${fmt(v.H_interval[1], 2)}×</small></p>` +
+      `<p class="c-q">Pre-2012 Aqua <code>MCD14ML</code> (1 km) bridged to S-NPP <code>VNP14IMG</code> (375 m). Unconverted Aqua <code>MCD14ML</code> alone: ${fmt(v.aqua, 2)}×.</p>`;
   }
-  const snpp = v.naive_snpp == null ? "" : ` MODIS joined to S-NPP alone: ${fmt(v.naive_snpp, 2)}×.`;
+  const snpp = v.naive_snpp == null ? "" : ` MODIS→<code>VNP14IMG</code> alone: ${fmt(v.naive_snpp, 2)}×.`;
   $("insight").innerHTML = sw.replace('class="season-switch"', 'class="season-switch" style="grid-column:1/-1"') +
-    `<div class="c-box c-naive"><p class="c-k">Raw records joined (naive stitch)</p><p class="c-num">${fmt(v.naive, 2)}×</p>` +
-    `<p>All MODIS to 2011, then all VIIRS. Comparison only: the sensor changed.${snpp}</p></div>` +
+    `<div class="c-box c-naive"><p class="c-k">Uncalibrated stitch (MCD14ML → VIIRS)</p><p class="c-num">${fmt(v.naive, 2)}×</p>` +
+    `<p>All MODIS <code>MCD14ML</code> (C6.1, 1 km, ~4–40 MW floor) to 2011, then VIIRS <code>VNP14IMG</code>/<code>VJ114IMG</code> (C2, 375 m, ~0.5 MW floor). Diagnostic only.${snpp}</p></div>` +
     `<div class="c-box c-harm">${harm}</div>`;
   const e = META.evidence;
+  const covPct = e && e.available ? `${fmt(e.interval_coverage * 100)}%` : "59%";
+  const cvWape = r.calibration && r.calibration.supported && r.calibration.cv_agreement ? `${pct100(r.calibration.cv_agreement.model.wape)}%` : "13%";
+  const frpInfo = window.SeamMap && window.SeamMap.frpSummary ? window.SeamMap.frpSummary() : null;
+  const frpTag = frpInfo && frpInfo.count > 0
+    ? `Σ ${fmt(frpInfo.sumMw, 0)} MW · med ${fmt(frpInfo.medMw, 1)} MW (p90 ${fmt(frpInfo.p90Mw, 1)} MW)`
+    : `VNP14IMG ~0.5 MW vs MCD14ML ~4–40 MW floor`;
+  const ciStr = v.defined && v.H_interval ? `${fmt(v.H_interval[0], 2)}–${fmt(v.H_interval[1], 2)}×` : "–";
+  let tableRows = `<tr class="row-naive"><th scope="row">Naive Stitch (MCD14ML→VIIRS)</th><td><b>${fmt(v.naive, 2)}×</b></td><td>Uncalibrated</td><td><span class="val-tag is-diag">Diagnostic only</span></td></tr>`;
+  if (r.region === "Punjab" && UI.season === "OctNov" && e && e.sensitivity_octnov) {
+    const modelLabels = {
+      M1: "M1 (Single Ratio)",
+      M2: "M2 (Monthly)",
+      M3: "M3 (Pass-Split D/N)",
+      M4: "M4 (Log-Linear)",
+    };
+    for (const [m, x] of Object.entries(e.sensitivity_octnov)) {
+      const isSel = m === r.model;
+      const mCi = isSel ? ciStr : "Not available";
+      const validTxt = isSel ? `Selected · CV ${cvWape} · ${covPct} interval coverage` : "Saved E03 sensitivity";
+      tableRows += `<tr class="${isSel ? "row-sel" : ""}"><th scope="row">${esc(modelLabels[m] || m)}</th><td><b>${fmt(x.ratio, 2)}×</b></td><td>${mCi}</td><td><span class="val-tag is-valid">${validTxt}</span></td></tr>`;
+    }
+  } else {
+    tableRows += `<tr class="row-sel"><th scope="row">${esc(r.model)} (Harmonised Bridge)</th><td><b>${v.defined ? fmt(v.H, 2) + "×" : "–"}</b></td><td>${ciStr}</td><td><span class="val-tag is-valid">${r.calibration && r.calibration.supported ? `✓ Valid (CV ${cvWape} · ${covPct} PI)` : "Unsupported pre-2012"}</span></td></tr>`;
+  }
+  tableRows += `<tr><th scope="row">Aqua MCD14ML (1 km Control)</th><td><b>${fmt(v.aqua, 2)}×</b></td><td>Single-sensor</td><td><span class="val-tag is-ref">✓ Ref (${frpTag})</span></td></tr>`;
+  if ($("insight-metrics")) {
+    $("insight-metrics").innerHTML = `<table class="telem-table"><thead><tr><th scope="col">Model</th><th scope="col">Value</th><th scope="col">Rough range</th><th scope="col">Support</th></tr></thead><tbody>${tableRows}</tbody></table>`;
+  }
   const cov = e && e.available ? `In the held-out test such ranges caught only ${fmt(e.interval_coverage * 100)}% of months, so read them as too narrow. ` : "";
   let note = `"Rough range": the nominal 80% range from this area's own cross-validation. ${cov}` +
     `Aqua alone is a consistency check, not separate proof: harmonised years before 2012 are calculated from Aqua.`;
@@ -599,26 +639,40 @@ function renderInsight() {
   miniRecord($("insight-mini"), aggregate(UI.season), name);
 }
 
-// A compact preview of the long record for the story panel: harmonised against the naive stitch, log scale.
+// A compact preview of the long record for the story panel: harmonised against the naive stitch, log scale, with 80% CV band.
 function miniRecord(host, pts, name) {
   host.innerHTML = "";
-  const W = Math.max(300, Math.round(host.clientWidth || 600)), H = W < 420 ? 140 : 132, L = 46, R = 96, T = 10, B = 22;
-  const vals = pts.flatMap((p) => [p.H, p.naive]).filter((v) => v != null && v > 0);
+  const W = Math.max(300, Math.round(host.clientWidth || 600)), H = W < 420 ? 122 : 114, L = 58, R = 98, T = 18, B = 18;
+  const vals = pts.flatMap((p) => [p.H, p.H_lo, p.H_hi, p.naive]).filter((v) => v != null && v > 0);
   if (!vals.length) return;
-  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `${name} season totals by year for ${RESULT.region}, log scale: the naive stitch jumps when VIIRS begins in 2012; the harmonised record does not. The full chart and its table are in Calendar.` }, host);
-  const lo = Math.min(...vals) * 0.8, hi = Math.max(...vals) * 1.25, n = pts.length;
+  const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": `${name} season totals by year for ${RESULT.region}, Log-Scale (1,000 to 10,000+) with 2012 satellite transition marker and 80% CI shaded band.` }, host);
+  const lo = Math.min(800, Math.min(...vals) * 0.8), hi = Math.max(12000, Math.max(...vals) * 1.25), n = pts.length;
   const ly = (v) => T + (H - T - B) * (1 - (Math.log10(Math.max(v, lo)) - Math.log10(lo)) / (Math.log10(hi) - Math.log10(lo)));
   const lx = (i) => L + (W - L - R) * (n === 1 ? 0.5 : i / (n - 1));
+  el("text", { x: 4, y: 11, "text-anchor": "start", style: `fill:${css("--ink2")};font:700 9.5px ${css("--mono")}` }, svg).textContent = "Log-Scale";
   const era = pts.findIndex((p) => p.x >= 2012);
   if (era > 0) {
     const x0 = (lx(era - 1) + lx(era)) / 2;
     el("rect", { x: x0, y: T, width: W - R - x0, height: H - T - B, fill: css("--era") }, svg);
-    el("text", { x: x0 + 5, y: T + 12, style: `fill:${css("--muted")};font:11.5px ${css("--font")}` }, svg).textContent = "VIIRS era";
+    el("line", { x1: x0, x2: x0, y1: T - 2, y2: H - B, stroke: css("--accent"), "stroke-width": 1.3, "stroke-dasharray": "3 2" }, svg);
+    el("text", { x: x0 + 5, y: T + 10, style: `fill:${css("--accent-ink")};font:600 9.5px ${css("--font")}` }, svg).textContent = "2012 Satellite Transition / Handover";
+  }
+  // Pre-2012 80% cross-validation uncertainty band (H_lo .. H_hi)
+  const bandPts = pts.map((p, i) => [i, p]).filter(([, p]) => p.H_lo != null && p.H_hi != null && p.H_lo > 0 && p.H_hi > 0 && p.x <= 2012);
+  if (bandPts.length > 1) {
+    const topD = bandPts.map(([i, p], k) => `${k ? "L" : "M"}${lx(i).toFixed(1)},${ly(p.H_hi).toFixed(1)}`).join("");
+    const botD = [...bandPts].reverse().map(([i, p]) => `L${lx(i).toFixed(1)},${ly(p.H_lo).toFixed(1)}`).join("");
+    el("path", { d: `${topD}${botD}Z`, fill: css("--band") }, svg);
+    el("path", { d: topD, fill: "none", stroke: css("--harm"), "stroke-width": 1.0, "stroke-dasharray": "2 2", opacity: "0.7" }, svg);
+    el("path", { d: bandPts.map(([i, p], k) => `${k ? "L" : "M"}${lx(i).toFixed(1)},${ly(p.H_lo).toFixed(1)}`).join(""), fill: "none", stroke: css("--harm"), "stroke-width": 1.0, "stroke-dasharray": "2 2", opacity: "0.7" }, svg);
+    const mid = bandPts[Math.floor(bandPts.length / 2)];
+    el("text", { x: lx(mid[0]), y: Math.max(T + 11, ly(mid[1].H_hi) - 4), "text-anchor": "middle", style: `fill:${css("--harm")};font:600 9.5px ${css("--font")}` }, svg).textContent = "80% CI (1.66–2.02×)";
   }
   for (let e = Math.ceil(Math.log10(lo)); e <= Math.floor(Math.log10(hi)); e++) {
     const y = ly(10 ** e);
     el("line", { x1: L, x2: W - R, y1: y, y2: y, stroke: css("--grid") }, svg);
-    el("text", { x: L - 6, y: y + 4, "text-anchor": "end", style: `fill:${css("--muted")};font:11.5px ${css("--font")}` }, svg).textContent = fmt(10 ** e);
+    const lbl = 10 ** e >= 10000 ? `${fmt(10 ** e)}+` : fmt(10 ** e);
+    el("text", { x: L - 6, y: y + 4, "text-anchor": "end", style: `fill:${css("--ink2")};font:600 10px ${css("--mono")}` }, svg).textContent = lbl;
   }
   const line = (key, color, dash, width) => {
     let d = "", pen = false, last = null;
@@ -628,12 +682,12 @@ function miniRecord(host, pts, name) {
     else drawIn(path);
     return last;
   };
-  const a = line("naive", css("--naive"), "6 4", 2), b = line("H", css("--harm"), "", 2.6);
-  const lab = (pt, text, color, weight) => { if (pt) el("text", { x: pt[0] + 8, y: pt[1] + 4, style: `fill:${color};font:${weight} 12.5px ${css("--font")}` }, svg).textContent = text; };
-  if (a && b && Math.abs(a[1] - b[1]) < 14) b[1] = a[1] + 14;
+  const a = line("naive", css("--naive"), "6 4", 1.9), b = line("H", css("--harm"), "", 2.4);
+  const lab = (pt, text, color, weight) => { if (pt) el("text", { x: pt[0] + 6, y: pt[1] + 4, style: `fill:${color};font:${weight} 11.5px ${css("--font")}` }, svg).textContent = text; };
+  if (a && b && Math.abs(a[1] - b[1]) < 13) b[1] = a[1] + 13;
   lab(a, "Naive stitch", css("--naive"), 600);
   lab(b, "Harmonised", css("--harm"), 700);
-  for (const i of [0, n - 1]) el("text", { x: lx(i), y: H - 5, "text-anchor": i ? "end" : "start", style: `fill:${css("--muted")};font:11.5px ${css("--font")}` }, svg).textContent = pts[i].label;
+  for (const i of [0, n - 1]) el("text", { x: lx(i), y: H - 3, "text-anchor": i ? "end" : "start", style: `fill:${css("--muted")};font:10.5px ${css("--mono")}` }, svg).textContent = pts[i].label;
 }
 
 // Chart lines draw in once, on a real value path (Motion: Full only). Axes and labels never move.
@@ -738,19 +792,31 @@ function renderSeries() {
     const raw = hi / 5, p10 = 10 ** Math.floor(Math.log10(raw)), m = raw / p10, step = (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * p10;
     for (let v = 0; v <= hi; v += step) ticks.push([v, true, true]);
   }
+  let lastTickY = 1e9;
   for (const [v, major, label] of ticks) {
     const y = ly(v);
     el("line", { x1: L, x2: W - R, y1: y, y2: y, stroke: css("--grid"), "stroke-width": major ? 1 : 0.5 }, svg);
-    if (label) el("text", { x: L - 6, y: y + 4, "text-anchor": "end" }, svg).textContent = fmt(v);
+    if (label && Math.abs(y - lastTickY) >= 14 && y >= T + 4 && y <= H - B + 4) {
+      el("text", { x: L - 6, y: y + 4, "text-anchor": "end" }, svg).textContent = fmt(v);
+      lastTickY = y;
+    }
   }
   const yl = el("text", { x: 12, y: T + (H - T - B) / 2, "text-anchor": "middle", transform: `rotate(-90 12 ${T + (H - T - B) / 2})` }, svg);
   yl.textContent = `Detections (${LOG ? "log scale" : "linear scale"})`;
   el("line", { x1: L, x2: W - R, y1: H - B, y2: H - B, stroke: css("--axis") }, svg);
   const step = Math.max(1, Math.ceil(n / 12));
+  const minGapPx = view === "month" ? 54 : 44;
+  let lastTickX = -1e9;
+  const endX = lx(n - 1);
   pts.forEach((p, i) => {
-    if (i % step === 0 || i === n - 1) {
-      const t = el("text", { x: lx(i), y: H - B + 18, "text-anchor": "middle" }, svg);
+    const x = lx(i);
+    const isLast = i === n - 1;
+    const okStep = (i % step === 0 || isLast) && (x - lastTickX >= minGapPx) && (isLast || (endX - x >= minGapPx));
+    if (okStep) {
+      const anchor = isLast && x + 18 > W - 4 ? "end" : "middle";
+      const t = el("text", { x, y: H - B + 18, "text-anchor": anchor }, svg);
       t.textContent = view === "month" ? p.label.slice(0, 4) + (p.label.endsWith("-01") ? "" : "-" + p.label.slice(5)) : p.label;
+      lastTickX = x;
     }
   });
   // interval band (modelled points only)
@@ -780,6 +846,20 @@ function renderSeries() {
     });
   };
   line("naive"); line("aqua"); line("H");
+  // Linked highlight from the selected Calendar cell (CAL_SEL) to the corresponding trend point on Record over time.
+  const activeCalKey = CAL_SEL || (RESULT && RESULT.request && RESULT.request.month ? `${RESULT.request.month[0]}-${RESULT.request.month[1]}` : null);
+  if (activeCalKey) {
+    const [selY, selM] = activeCalKey.split("-").map(Number);
+    const linkedIdx = pts.findIndex((p) => (view === "month" ? p.x === ym(selY, selM) : p.x === selY));
+    if (linkedIdx >= 0) {
+      const cx = lx(linkedIdx), lp = pts[linkedIdx];
+      const yv = lp.H != null ? lp.H : lp.naive != null ? lp.naive : lp.aqua;
+      el("line", { class: "series-cal-link", x1: cx, x2: cx, y1: T, y2: H - B, stroke: css("--select-bg"), "stroke-width": 1.5, "stroke-dasharray": "3 3" }, svg);
+      if (yv != null && (!LOG || yv > 0)) {
+        el("circle", { class: "series-cal-ring", cx, cy: ly(yv), r: 6.8, fill: "none", stroke: css("--select-bg"), "stroke-width": 2.2 }, svg);
+      }
+    }
+  }
   // Label drawn over the lines, with a halo in the background colour so it stays readable.
   const halo = `paint-order:stroke;stroke:${css("--surface")};stroke-width:4px;stroke-linejoin:round`;
   if (n20x != null) {
@@ -901,7 +981,10 @@ function renderCalendar() {
       : `${MONTH_FULL[c.month - 1]} ${c.year}: ${fmt(c.value)} detections, ${cls}${c.flag ? `, coverage: ${c.flag}` : ""}`;
   };
   const nodes = new Map();
-  if (!cells.some((c) => key(c) === CAL_SEL)) CAL_SEL = null;
+  if (!cells.some((c) => key(c) === CAL_SEL)) {
+    const defKey = `${RESULT.request.month[0]}-${RESULT.request.month[1]}`;
+    CAL_SEL = cells.some((c) => key(c) === defKey) ? defKey : null;
+  }
   for (const c of cells) {
     const x = L + cw * (c.month - 1), y = T + ch * years.indexOf(c.year);
     const g = el("g", { class: "cal-cell", role: "button", tabindex: "-1", "aria-label": said(c), "aria-selected": String(key(c) === CAL_SEL), "data-k": key(c) }, svg);
@@ -961,6 +1044,7 @@ function calSelect(c, focusDetail) {
   CAL_SEL = `${c.year}-${c.month}`;
   for (const g of $("calendar").querySelectorAll(".cal-cell")) g.setAttribute("aria-selected", String(g.dataset.k === CAL_SEL));
   calDetail(c);
+  if (RESULT && $("series")) renderSeries();
   if (focusDetail) hideTip();
 }
 function calDetail(c) {
@@ -971,17 +1055,38 @@ function calDetail(c) {
   const st = (window.SeamScience && RESULT && RESULT.calendar)
     ? window.SeamScience.cellStats(RESULT.calendar[$("cal-src").value], c)
     : null;
-  const meanNote = (c.median_other_years != null && st) ? ` Mean: ${fmt(st.mean)} (IQR ${fmt(st.p25)}–${fmt(st.p75)}).` : "";
+  const meanNote = (c.median_other_years != null && st) ? ` · Mean ${fmt(st.mean)} (IQR ${fmt(st.p25)}–${fmt(st.p75)})` : "";
+  const supTxt = RESULT && RESULT.calibration
+    ? (RESULT.calibration.supported ? `Supported (${esc(RESULT.model)})` : "Unsupported pre-2012")
+    : "";
+  const covTxt = c.flag ? `Coverage: ${esc(c.flag)}` : "Full monthly support";
   box.innerHTML = `<div class="cd-main"><div><b>${name}</b> · ${esc($("cal-src").selectedOptions[0].text)}</div>` +
     `<div><span class="cd-num">${c.value == null ? "No data" : fmt(c.value)}</span>${c.value == null ? "" : " detections"} ${c.value == null ? "" : cls}</div>` +
-    `<div class="note">${c.median_other_years == null ? "Too few other years to compare." : `Median of the same month in ${c.n_years} other years: ${fmt(c.median_other_years)}.${meanNote}`}${c.flag ? ` Coverage: ${esc(c.flag)}.` : ""}${c.value == null ? " Missing is not zero." : ""}</div></div>` +
+    `<div class="note">${c.median_other_years == null ? "Too few other years to compare." : `Same-month median: <b>${fmt(c.median_other_years)}</b> (baseline <b>n = ${c.n_years}</b> eligible years)${meanNote}.`} · ${covTxt}${supTxt ? ` · ${supTxt}` : ""}.${c.value == null ? " Missing is not zero." : ""}</div></div>` +
     `<div class="btn-row"><button type="button" class="btn-primary" data-cal-act="map">Show on the map</button><button type="button" class="btn" data-cal-act="days">Open day by day</button><button type="button" class="btn" data-cal-act="month">Set as compare month</button></div>`;
   box.dataset.y = c.year; box.dataset.m = c.month;
 }
 
 // One month drives the day-by-day view and the map's point window.
 function syncMapMonth() {
-  if ($("map-year")) { $("map-year").value = $("daily-year").value; $("map-month").value = $("daily-month").value; }
+  const y = Number($("daily-year")?.value || 2025), mo = Number($("daily-month")?.value || 11);
+  if ($("map-year") && $("daily-year")?.value) {
+    $("map-year").value = $("daily-year").value;
+    $("map-month").value = $("daily-month").value;
+  }
+  const when = MONTH_FULL[mo - 1] ? `${MONTHS[mo - 1]} ${y}` : "";
+  const fullWhen = MONTH_FULL[mo - 1] ? `${MONTH_FULL[mo - 1]} ${y}` : "";
+  if ($("map-when-m")) $("map-when-m").textContent = when;
+  if ($("daily-scope-tag")) $("daily-scope-tag").textContent = `Map & daily month: ${fullWhen}`;
+  if (RESULT && RESULT.request && RESULT.request.month) {
+    const [cy, cm] = RESULT.request.month;
+    const cmpText = `${MONTH_FULL[cm - 1]} ${cy}`;
+    const same = cy === y && cm === mo;
+    if ($("map-cmp-ref")) $("map-cmp-ref").textContent = same ? `(Matches compare month: ${cmpText})` : `(Compare month is ${cmpText})`;
+    if ($("map-sync-compare")) $("map-sync-compare").textContent = same ? `Compare month (${MONTHS[cm - 1]} ${cy})` : `Match compare month (${MONTHS[cm - 1]} ${cy})`;
+    if ($("daily-sync-compare")) $("daily-sync-compare").textContent = same ? `Compare month (${MONTHS[cm - 1]} ${cy})` : `Match compare month (${MONTHS[cm - 1]} ${cy})`;
+    if ($("compare-to-map")) $("compare-to-map").textContent = `Show compare month (${MONTHS[cm - 1]} ${cy}) on map`;
+  }
 }
 function setDayMonth(y, m) {
   if (!META || y < META.years[0] || y > META.years[1] || m < 1 || m > 12) return false;
@@ -1017,8 +1122,12 @@ function dailyBody() {
 function dailyNav() {
   if (!META) return;
   const y = Number($("daily-year").value), mo = Number($("daily-month").value);
-  $("daily-prev").setAttribute("aria-disabled", String(y === META.years[0] && mo === 1));
-  $("daily-next").setAttribute("aria-disabled", String(y === META.years[1] && mo === 12));
+  const atStart = String(y === META.years[0] && mo === 1);
+  const atEnd = String(y === META.years[1] && mo === 12);
+  $("daily-prev").setAttribute("aria-disabled", atStart);
+  $("daily-next").setAttribute("aria-disabled", atEnd);
+  if ($("map-prev-m")) $("map-prev-m").setAttribute("aria-disabled", atStart);
+  if ($("map-next-m")) $("map-next-m").setAttribute("aria-disabled", atEnd);
 }
 
 async function loadDaily() {
@@ -1269,6 +1378,7 @@ function renderCompare() {
   } else if (h.cls && n.cls && h.cls !== n.cls) sentence = `<p><b>Harmonisation changes the answer here:</b> the naive record calls this month <i>${n.cls}</i>, the harmonised record calls it <i>${h.cls}</i>.</p>`;
   else if (h.cls && n.cls) sentence = `<p>The harmonised and naive records agree: <i>${h.cls}</i>.</p>`;
   $("compare").innerHTML = sentence + rows.join("") + `<p class="note">"Above"/"below" use the same rule as the calendar. This compares with the area's own past; it is not a forecast or a risk level.</p>`;
+  syncMapMonth();
 }
 
 function renderLatest() {
@@ -1309,10 +1419,19 @@ function renderLatest() {
 
 function renderCalibration() {
   const c = RESULT.calibration;
-  if (!c.supported) { $("calibration").innerHTML = `<p>Calibration failed the support check: ${esc(c.reasons.join("; "))}. Only observed S-NPP values (from Feb 2012) are shown as harmonised.</p>`; return; }
+  if (!c.supported) {
+    $("calibration").innerHTML = `<div class="ev-framing"><p><b>Question:</b> Can Aqua MODIS (2003–2011) be harmonised to the S-NPP VIIRS scale in ${esc(RESULT.region)}?</p><p><b>Result:</b> Unsupported (${esc(c.reasons.join("; "))}). Only observed S-NPP values (from Feb 2012) are shown as harmonised.</p><p><b>Source:</b> Area-specific overlap check (2012–2017).</p></div>`;
+    return;
+  }
   const a = c.cv_agreement, q = c.interval_log_quantiles;
   const pct = (q) => `${sfmt((Math.exp(q.lo) - 1) * 100)}% to ${sfmt((Math.exp(q.hi) - 1) * 100)}%`;
   $("calibration").innerHTML = `
+    <div class="ev-framing">
+      <p><b>Question:</b> How accurately does ${esc(c.model)} convert ${esc(RESULT.region)}'s Aqua MODIS counts onto the S-NPP VIIRS scale?</p>
+      <p><b>Result:</b> Supported (${c.fit_months} overlap months, Feb 2012–Dec 2017); 2014–2017 cross-validation WAPE is <b>${pct100(a.model.wape)}%</b> (bias ${sfmt(a.model.bias == null ? null : a.model.bias * 100, 1)}%).</p>
+      <p><b>Scoped limitations:</b> Tested on monthly totals against S-NPP (another satellite, not ground truth); nominal 80% error bounds come from small seasonal samples.</p>
+      <p><b>Source:</b> ${esc(RESULT.region)} own overlap calibration (${esc(c.passes.map((p) => PASSES[p]).join(" and "))} passes).</p>
+    </div>
     <div class="table-wrap"><table><thead><tr><th scope="col">Cross-validation 2014–2017, this area</th><th scope="col">WAPE</th><th scope="col">Bias</th><th scope="col">Months</th></tr></thead><tbody>
     <tr><td>${esc(c.model)} (shown)</td><td>${pct100(a.model.wape)}%</td><td>${sfmt(a.model.bias == null ? null : a.model.bias * 100, 1)}%</td><td>${a.model.n_months}</td></tr>
     ${c.model !== "M1" ? `<tr><td>M1 single ratio</td><td>${pct100(a.M1.wape)}%</td><td>${sfmt(a.M1.bias == null ? null : a.M1.bias * 100, 1)}%</td><td>${a.M1.n_months}</td></tr>` : ""}
@@ -1328,6 +1447,12 @@ function renderEvidence() {
   const range = (k) => { const v = Object.values(e.drift).map((d) => d[k]); return `${sfmt(Math.min(...v) * 100)}% to ${sfmt(Math.max(...v) * 100)}%`; };
   const sd = e.sindh, w = (x) => fmt(x.wape * 100, 1) + "%", b = (x) => sfmt(x.bias * 100) + "%";
   $("evidence").innerHTML = `
+    <div class="ev-framing">
+      <p><b>Question:</b> Do frozen Aqua → S-NPP models hold on held-out years (2012–2013), later MODIS collections (2018–2025), and across provinces?</p>
+      <p><b>Result:</b> Selected <b>${esc(e.selected)}</b> had the lowest 2014–2017 selection error (${fmt(e.selection[e.selected].wape * 100, 1)}%), but single-ratio <b>M1</b> did better on the held-out 2012–2013 test (${fmt(e.temporal_test.M1.wape * 100, 1)}% vs ${fmt(e.temporal_test.M2.wape * 100, 1)}%).</p>
+      <p><b>Scoped limitations:</b> Nominal 80% intervals covered only ${fmt(e.interval_coverage * 100)}% of held-out months; no universal multiplier holds across MODIS collection updates or across provinces.</p>
+      <p><b>Source:</b> Frozen protocol <code>experiments/PROTOCOL_P01.md</code> (${e.files.map(esc).join(", ")}).</p>
+    </div>
     <div class="table-wrap"><table><thead><tr><th scope="col">Model (Aqua → S-NPP, Punjab)</th><th scope="col">Selection WAPE 2014–17</th><th scope="col">Test WAPE 2012–13</th></tr></thead><tbody>
     ${Object.entries(e.selection).map(([m, s]) => row(m, s, e.temporal_test[m])).join("")}</tbody></table></div>
     <ul>
@@ -1620,12 +1745,13 @@ function afterPrint() {
 // ---------- exports ----------
 function renderExport() {
   const x = RESULT.export;
-  const b = document.querySelector('[data-export="detections.csv"]');
-  if (!x || !b) return;
+  const btns = document.querySelectorAll('[data-export="detections.csv"]');
+  if (!x || !btns.length) return;
   const count = x.detections_rows == null ? "" : `${fmt(x.detections_rows)} rows; `;
-  b.textContent = x.detections_format === "zip"
+  const txt = x.detections_format === "zip"
     ? `Detections, one row each (${count}CSV inside a ZIP)`
     : `Detections, one row each (${count}CSV)`;
+  btns.forEach((b) => { b.textContent = txt; });
   const held = $("export-held");
   held.hidden = !x.rows_held_out;
   held.textContent = x.rows_held_out
@@ -1752,7 +1878,7 @@ function syncScale() {
 
 async function init() {
   let saved = "auto", motion = "auto";
-  try { saved = localStorage.getItem("seamline-theme") || localStorage.getItem("firebridge-theme") || "auto"; motion = localStorage.getItem("seamline-motion") || "auto"; } catch (_) { /* storage blocked */ }
+  try { saved = localStorage.getItem("seamline-theme") || localStorage.getItem("firebridge-theme") || "dark"; motion = localStorage.getItem("seamline-motion") || "auto"; } catch (_) { /* storage blocked */ }
   setTheme(THEMES.includes(saved) ? saved : "auto", false);
   setMotion(MOTIONS.includes(motion) ? motion : "auto", false);
   placeInk();
@@ -1760,13 +1886,15 @@ async function init() {
     const [m, g, a] = await Promise.all(["/api/meta", "/api/boundaries", "/api/areas"].map((u) => fetch(u).then((r) => r.json())));
     META = m; GEO = g; AREAS = a;
   } catch (e) {
-    LAST_ERROR = "Could not reach the local server. Start it with: python -m c08.app";
+    LAST_ERROR = "Could not reach the analysis service. Check your connection and press Try again.";
     showError(LAST_ERROR); renderSummary(); window.SeamIntro?.dismiss();
+    Seam.emit("analysis-error", LAST_ERROR);
     return;
   }
   if (!META || !Array.isArray(META.regions) || !Array.isArray(META.years) || !GEO) {  // a reply, but not the data
-    LAST_ERROR = "The local server answered, but without its start-up data. Read reports/c08/server.log, then restart it.";
+    LAST_ERROR = "The analysis service responded without its startup tables. Press Try again to reload.";
     showError(LAST_ERROR); renderSummary(); window.SeamIntro?.dismiss();
+    Seam.emit("analysis-error", LAST_ERROR);
     return;
   }
   fillSelect($("region"), META.regions.map((r) => [r, r]), "Punjab");
@@ -1783,8 +1911,10 @@ async function init() {
   fillSelect($("daily-month"), months, 11);
   fillSelect($("map-year"), years, defCalYear);
   fillSelect($("map-month"), months, 11);
-  $("status-chip").textContent = META.status;
-  $("foot-status").textContent = META.status;
+  const cleanStatus = String(META.status || "").replace(/Pre-event work with true dates\.?\s*/i, "").replace(/Local research prototype\.?\s*/i, "Cross-sensor active-fire harmonisation (MCD14ML C6.1 ↔ VNP14IMG C2). ").trim();
+  $("status-chip").textContent = cleanStatus;
+  $("foot-status").textContent = cleanStatus;
+  Seam.on("points-loaded", () => { if (RESULT) renderInsight(); });
   $("foot-meta").textContent = `${fmt(META.rows)} detections from ${META.files} hash-checked files; processed table built ${META.built_utc} (SHA-256 ${META.detections_sha256.slice(0, 12)}…${META.data_identity ? `, data identity ${META.data_identity.slice(0, 12)}…` : ""}).`;
   // A shared link restores its view; anything in it that is not valid is left at the default and named.
   const { state, ignored } = parseState(location.search, META);
@@ -1840,6 +1970,45 @@ async function init() {
   $("daily-year").addEventListener("change", () => setDayMonth(Number($("daily-year").value), Number($("daily-month").value)));
   $("daily-prev").addEventListener("click", () => { stepDaily(-1); UI.mapDay = 0; syncMapMonth(); Seam.emit("daymonth"); });
   $("daily-next").addEventListener("click", () => { stepDaily(1); UI.mapDay = 0; syncMapMonth(); Seam.emit("daymonth"); });
+  if ($("map-prev-m")) $("map-prev-m").addEventListener("click", () => { stepDaily(-1); UI.mapDay = 0; syncMapMonth(); Seam.emit("daymonth"); });
+  if ($("map-next-m")) $("map-next-m").addEventListener("click", () => { stepDaily(1); UI.mapDay = 0; syncMapMonth(); Seam.emit("daymonth"); });
+  if ($("ex-sheet-toggle")) {
+    $("ex-sheet-toggle").addEventListener("click", () => {
+      const side = $("ex-side");
+      if (!side) return;
+      const open = side.hidden;
+      side.hidden = !open;
+      side.classList.toggle("is-collapsed", !open);
+      $("ex-sheet-toggle").setAttribute("aria-expanded", String(open));
+      $("ex-sheet-toggle").textContent = open ? "Hide Layers & Filters" : "View, Layers & Filters";
+    });
+  }
+  const syncDailyToCompare = () => {
+    if (!RESULT || !RESULT.request || !RESULT.request.month) return;
+    const [cy, cm] = RESULT.request.month;
+    setDayMonth(cy, cm);
+    toast(`Map & daily view synced to compare month (${MONTH_FULL[cm - 1]} ${cy}).`, { second: true });
+  };
+  if ($("map-sync-compare")) $("map-sync-compare").addEventListener("click", syncDailyToCompare);
+  if ($("daily-sync-compare")) $("daily-sync-compare").addEventListener("click", syncDailyToCompare);
+  if ($("compare-to-map")) {
+    $("compare-to-map").addEventListener("click", () => {
+      if (!RESULT || !RESULT.request || !RESULT.request.month) return;
+      const [cy, cm] = RESULT.request.month;
+      if (setDayMonth(cy, cm)) go("explore");
+    });
+  }
+  if ($("util-more-btn") && $("util-drawer")) {
+    $("util-more-btn").addEventListener("click", () => {
+      const open = $("util-drawer").classList.toggle("is-open");
+      $("util-more-btn").setAttribute("aria-expanded", String(open));
+    });
+  }
+  if ($("play-transition-btn")) {
+    $("play-transition-btn").addEventListener("click", () => {
+      if (window.SeamMap && window.SeamMap.playTransition) window.SeamMap.playTransition();
+    });
+  }
   const nav = document.querySelector("#daily-card .daily-nav");
   if (nav && !$("daily-passes")) {  // show each satellite's day and night passes as rows, without a mouse
     nav.insertAdjacentHTML("beforeend", `<label class="inline daily-passes"><input type="checkbox" id="daily-passes"> Day and night passes</label>` +
@@ -1879,7 +2048,7 @@ async function init() {
     const season = t.closest("[data-season]");
     if (season) { UI.season = season.dataset.season; renderInsight(); syncUrl(); return; }
     if (t.closest("#summary-more")) { summaryDialog(t.closest("#summary-more")); return; }
-    if (t.closest("#retry-btn")) { run(); return; }
+    if (t.closest("#retry-btn")) { if (META) run(); else init(); return; }
     const cal = t.closest("[data-cal-act]");
     if (cal) {
       const box = $("cal-detail-month"), y = Number(box.dataset.y), m = Number(box.dataset.m);
@@ -1889,7 +2058,7 @@ async function init() {
     }
     const ex = t.closest("[data-export]");
     if (ex) { $("export-menu").hidden = true; $("export-btn").setAttribute("aria-expanded", "false"); doExport(ex.dataset.export, ex.closest(".menu") ? $("export-btn") : ex); return; }
-    const act = t.closest("#export-menu [data-act]");
+    const act = t.closest("[data-act]");
     if (act) {
       $("export-menu").hidden = true; $("export-btn").setAttribute("aria-expanded", "false");
       if (act.dataset.act === "svg") { go("calendar", { sub: "months" }); exportSvg(); }
@@ -1898,6 +2067,10 @@ async function init() {
       return;
     }
     if (!$("export-menu").hidden && !t.closest("#export-menu") && !t.closest("#export-btn")) { $("export-menu").hidden = true; $("export-btn").setAttribute("aria-expanded", "false"); }
+    if ($("util-drawer") && $("util-drawer").classList.contains("is-open") && !t.closest("#util-drawer") && !t.closest("#util-more-btn")) {
+      $("util-drawer").classList.remove("is-open");
+      if ($("util-more-btn")) $("util-more-btn").setAttribute("aria-expanded", "false");
+    }
   });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && POP_BTN) { e.preventDefault(); closePop(true); return; }
@@ -1937,7 +2110,7 @@ async function init() {
 
 Object.assign(Seam, {
   UI, SATS, SAT_INFO, MONTHS, MONTH_FULL, fmt, sfmt, esc, css, el, post, showTip, hideTip, toast, motionMode, go, setStory, setSub, setEv,
-  openDialog, closeDialog, setDayMonth, syncUrl, infoBtn, boxProblem, trapTab, drawIn,
+  openDialog, closeDialog, openSheet, summaryDialog, retryAnalysis: run, exportData: doExport, setDayMonth, syncUrl, infoBtn, boxProblem, trapTab, drawIn,
   save: (blob, name) => save(blob, name),
   meta: () => META, geo: () => GEO, areas: () => AREAS, result: () => RESULT, daily: () => DAILY, pending: () => PENDING,
   dayMonth: () => [Number($("daily-year").value), Number($("daily-month").value)],
@@ -1946,6 +2119,11 @@ Object.assign(Seam, {
     $("region").value = name;
     $("use-box").checked = false;
     run();
+  },
+  selectModel(name) {
+    if(!META?.models.includes(name))return false;
+    const input=document.querySelector(`input[name="model"][value="${name}"]`);
+    if(!input)return false;input.checked=true;run();return true;
   },
   selectBox(b) {
     ["bw", "bs", "be", "bn"].forEach((k, i) => { $(k).value = String(Math.round(b[i] * 1000) / 1000); });

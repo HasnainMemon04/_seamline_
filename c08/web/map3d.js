@@ -5,7 +5,7 @@
 // carry explicit scientific legends and never alter statistical totals.
 (function () {
   "use strict";
-  const TERRAIN_EXAGGERATION = 10;   // shown in the legend; the relief is real elevation, stretched vertically
+  const TERRAIN_EXAGGERATION = 5;    // shown in the legend; the relief is real elevation, stretched vertically
   const PITCH_3D = 52, PITCH_GLOBE = 24, DEM_BOUNDS = [58.0, 21.0, 84.0, 40.0];
   const PAK_BOUNDS = [[48, 15], [94, 44]];
   const TILES = "/static/terrain/{z}/{x}/{y}.png";
@@ -55,12 +55,18 @@
 
   const EMPTY_FC = { type: "FeatureCollection", features: [] };
   const colorOf = (c) => ["match", ["get", "p"], 0, c.terra, 1, c.aqua, 2, c.snpp, 3, c.n20, 4, c.n21, c.ink];
-  const radius = ["interpolate", ["linear"], ["zoom"], 3, 2.2, 5, 3.0, 7, 4.0, 10, 6.2];
+  const radius = ["interpolate", ["linear"], ["zoom"], 3, 2.0, 5, 2.8, 7, 3.8, 10, 5.8];
+  const viirsRadius = ["interpolate", ["linear"], ["zoom"],
+    3, 1.3,
+    5, ["interpolate", ["linear"], ["coalesce", ["get", "frp"], 4], 0.5, 1.5, 10, 2.3, 45, 3.6],
+    7, ["interpolate", ["linear"], ["coalesce", ["get", "frp"], 4], 0.5, 2.4, 10, 3.5, 45, 5.2],
+    10, ["interpolate", ["linear"], ["coalesce", ["get", "frp"], 4], 0.5, 3.8, 10, 5.4, 45, 7.6]];
+  const viirsOpacity = ["interpolate", ["linear"], ["coalesce", ["get", "frp"], 4], 0.5, 0.46, 8, 0.74, 35, 0.94];
 
   function dotPaint(c) {
     return {
-      "circle-radius": radius, "circle-color": colorOf(c), "circle-opacity": 0.92,
-      "circle-stroke-color": c.halo, "circle-stroke-width": 0.9,
+      "circle-radius": viirsRadius, "circle-color": colorOf(c), "circle-opacity": viirsOpacity,
+      "circle-stroke-color": c.halo, "circle-stroke-width": 0.45,
       "circle-pitch-alignment": "viewport", "circle-pitch-scale": "viewport",
     };
   }
@@ -80,19 +86,17 @@
     };
   }
   function heatPaint(c) {
-    const ramp = c.dark
-      ? ["interpolate", ["linear"], ["heatmap-density"],
-          0, "rgba(0,0,0,0)",
-          0.18, "rgba(14,107,111,0.52)",
-          0.42, "rgba(88,189,184,0.75)",
-          0.70, "rgba(217,165,67,0.86)",
-          0.95, "rgba(244,230,145,0.95)"]
-      : ["interpolate", ["linear"], ["heatmap-density"],
-          0, "rgba(255,255,255,0)",
-          0.18, "rgba(14,107,111,0.45)",
-          0.42, "rgba(43,104,173,0.68)",
-          0.70, "rgba(154,106,18,0.82)",
-          0.95, "rgba(19,24,26,0.92)"];
+    const h0 = c.dark ? "rgba(0,0,0,0)" : "rgba(255,255,255,0)";
+    const h1 = c.heat1 || (c.dark ? "rgba(14,107,111,0.52)" : "rgba(14,107,111,0.45)");
+    const h2 = c.heat2 || (c.dark ? "rgba(94,218,208,0.75)" : "rgba(43,104,173,0.68)");
+    const h3 = c.heat3 || (c.dark ? "rgba(243,199,122,0.86)" : "rgba(138,93,11,0.82)");
+    const h4 = c.heat4 || (c.dark ? "rgba(244,230,145,0.95)" : "rgba(19,24,26,0.92)");
+    const ramp = ["interpolate", ["linear"], ["heatmap-density"],
+      0, h0,
+      0.18, h1,
+      0.42, h2,
+      0.70, h3,
+      0.95, h4];
     return {
       "heatmap-weight": ["interpolate", ["linear"], ["coalesce", ["get", "frp"], 8], 1, 0.35, 30, 0.7, 150, 1.0],
       "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 3, 0.85, 7, 1.65],
@@ -128,9 +132,9 @@
         { id: "hills", type: "hillshade", source: "dem-hs", layout: { visibility: mode === "globe" ? "none" : "visible" }, paint: hillPaint(c, mode, dn) },
         { id: "prov-fill", type: "fill", source: "prov", paint: { "fill-color": c.land, "fill-opacity": fillOp } },
         { id: "world-rivers", type: "line", source: "world-rivers", paint: { "line-color": c.river, "line-width": ["interpolate", ["linear"], ["zoom"], 3, 0.85, 6, 1.5, 9, 2.5], "line-opacity": 0.72 }, layout: { "line-cap": "round", "line-join": "round" } },
-        { id: "prov-line", type: "line", source: "prov", paint: { "line-color": c.line, "line-width": 1.15, "line-opacity": 0.88 }, layout: { "line-join": "round" } },
-        { id: "prov-sel-glow", type: "line", source: "prov", filter: ["==", ["get", "shapeName"], ""], paint: { "line-color": c.lineSel, "line-width": 5, "line-opacity": 0.22 }, layout: { "line-join": "round", "line-cap": "round" } },
-        { id: "prov-sel", type: "line", source: "prov", filter: ["==", ["get", "shapeName"], ""], paint: { "line-color": c.lineSel, "line-width": 3 }, layout: { "line-join": "round", "line-cap": "round" } },
+        { id: "prov-line", type: "line", source: "prov", paint: { "line-color": c.line, "line-width": 1.0, "line-opacity": 0.82 }, layout: { "line-join": "round" } },
+        { id: "prov-sel-glow", type: "line", source: "prov", filter: ["==", ["get", "shapeName"], ""], paint: { "line-color": c.lineSel, "line-width": 2.6, "line-opacity": 0.12 }, layout: { "line-join": "round", "line-cap": "round" } },
+        { id: "prov-sel", type: "line", source: "prov", filter: ["==", ["get", "shapeName"], ""], paint: { "line-color": c.lineSel, "line-width": 1.65 }, layout: { "line-join": "round", "line-cap": "round" } },
         { id: "box-fill", type: "fill", source: "box", paint: { "fill-color": c.sel, "fill-opacity": 0.32 } },
         { id: "box-line", type: "line", source: "box", paint: { "line-color": c.lineSel, "line-width": 2.5, "line-dasharray": [2, 1.5] } },
         // Macro density exploration layer (optional layer mode)
@@ -369,16 +373,21 @@
       const wantFp = vmode === "footprints";
       if (!wantTowers && !wantFp) {
         shownPtsMeta = { total: rawPoints ? rawPoints.lon.length : 0, shown: 0, limited: false };
+        if (opts.onPolyMeta) opts.onPolyMeta(shownPtsMeta);
         return;
       }
       const key = `${vmode}|${psfOn ? 1 : 0}|${activeFilter.sats.join(",")}|${activeFilter.dn}|${activeFilter.day}|${rawPoints ? rawPoints.lon.length : 0}`;
-      if (!force && key === polyCacheKey) return;
+      if (!force && key === polyCacheKey) {
+        if (opts.onPolyMeta) opts.onPolyMeta(shownPtsMeta);
+        return;
+      }
       polyCacheKey = key;
 
       if (!rawPoints || !rawPoints.lon.length) {
         map.getSource("pts-poly").setData(EMPTY_FC);
         map.getSource("pts-psf").setData(EMPTY_FC);
         shownPtsMeta = { total: 0, shown: 0, limited: false };
+        if (opts.onPolyMeta) opts.onPolyMeta(shownPtsMeta);
         return;
       }
 
@@ -406,6 +415,7 @@
         sample = [...chosen];
       }
       shownPtsMeta = { total, shown: sample.length, limited };
+      if (opts.onPolyMeta) opts.onPolyMeta(shownPtsMeta);
 
       const feats = [];
       const psfFeats = [];
@@ -457,7 +467,7 @@
         map.setPaintProperty("pts-viirs", "circle-opacity", zFade);
         map.setPaintProperty("pts-modis", "circle-opacity", zFade);
       } else {
-        map.setPaintProperty("pts-viirs", "circle-opacity", 0.92);
+        map.setPaintProperty("pts-viirs", "circle-opacity", viirsOpacity);
         map.setPaintProperty("pts-modis", "circle-opacity", 0.55);
       }
       if (vmode === "towers" || vmode === "footprints") rebuildPolySources(false);
@@ -500,7 +510,7 @@
         raf = 0;
         if (lost || moving) return;
         const now = performance.now();
-        if (now - lastPickAt < 48) return;
+        if (now - lastPickAt < 24) return;
         lastPickAt = now;
         const i = nearest(e.point);
         const curC = i != null ? "pointer" : "";
@@ -646,7 +656,7 @@
         whenLoaded(() => map.setFilter("pts-sel", ["==", ["get", "i"], i == null ? -1 : i]));
       },
       fit(b, animate) {
-        const pad = { top: 88, bottom: 44, left: 40, right: 70 };
+        const pad = { top: 58, bottom: 32, left: 36, right: 56 };
         const p = mode === "globe" ? PITCH_GLOBE : mode === "3d" ? PITCH_3D : 0;
         const br = mode === "2d" ? 0 : map.getBearing();
         const o = { padding: pad, pitch: p, bearing: br, maxZoom: 9.5, duration: animate ? dur() : 0, essential: true };

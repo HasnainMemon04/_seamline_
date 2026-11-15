@@ -1,0 +1,17 @@
+{
+  "source": "User-supplied AI-generated video reference",
+  "source_filename": "gemini_generated_video_1c81a64f.mp4",
+  "source_sha256": "57e957a04e5bcc4e44dea4f5831279e755b0a55d1f31d0d2957fcf47242b527f",
+  "source_duration_seconds": 10.026667,
+  "used_interval_seconds": [
+    0,
+    3
+  ],
+  "derived_asset": "c08/web/assets/seamline-orbit-intro.mp4",
+  "asset_sha256": "cad172c97449d0afd06274d77f49163e1ac8d07321ece6737bf70ee2383fe412",
+  "asset_bytes": 1264296,
+  "changes": "Trimmed opening only; audio omitted; H.264 compressed; full original frame retained. No synthetic dashboard or generated result values are used in application data.",
+  "role": "Illustrative cinematic entrance followed by the live Seamline map",
+  "date_asia_karachi": "2026-11-15",
+  "attribution": "Reference clip supplied by project owner; this media is not relicensed as original project source."
+}

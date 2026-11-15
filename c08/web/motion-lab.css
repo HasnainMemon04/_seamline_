@@ -1,0 +1,92 @@
+/* Native orbital boot and restrained instrument motion. No prerecorded interface. */
+.satellite-intro.is-native { background: #07111b; overflow: hidden; }
+.satellite-intro.is-native.has-live-earth { background: transparent; }
+.satellite-intro.is-native.has-live-earth::before { content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(3,9,15,.35),transparent 55%,rgba(3,9,15,.72)); pointer-events:none; }
+.is-native .intro-content { position:absolute; left:50%; bottom:7%; transform:translateX(-50%); width:min(560px,calc(100% - 40px)); padding:18px 24px; border:1px solid rgba(141,209,216,.35); border-radius:8px; background:rgba(7,17,27,.84); z-index:3; }
+.is-native .intro-content h1 { font-size:28px; margin:3px 0 8px; }
+.is-native .intro-kicker { font-size:9px; letter-spacing:.19em; }
+.is-native .intro-content >p:not(#intro-status) { font-size:12px; margin:4px auto; }
+.is-native #intro-status { margin:10px auto; }
+.is-native #intro-model { position:fixed; width:min(540px,48vw); height:270px; left:-30%; bottom:40vh; transform:rotate(-14deg); }
+.is-native .intro-orbit { display:none; }
+.native-hud { position:absolute; width:236px; height:236px; top:25%; left:50%; transform:translateX(-50%); display:grid; place-items:center; z-index:2; }
+.native-arc { position:absolute; inset:0; border-radius:50%; border:7px solid transparent; }
+.native-arc.cyan { border-top-color:#5edad0; border-left-color:#5edad0; animation:telemetry-spin 5s linear infinite; filter:drop-shadow(0 0 5px #5edad044); }
+.native-arc.amber { inset:11px; border-width:3px; border-right-color:#e9b86a; border-bottom-color:#e9b86a; animation:telemetry-spin 7s linear infinite reverse; }
+.native-ticks { position:absolute; inset:23px; border-radius:50%; border:1px dashed #8cc9cc88; }
+.native-hud-centre { font:550 18px var(--display); color:#f1f5f7; letter-spacing:.12em; text-align:center; }
+.native-hud-centre small { display:block; font:500 7px var(--font); letter-spacing:.22em; color:#a8bbc8; margin-top:10px; }
+@keyframes telemetry-spin { to { transform:rotate(360deg); } }
+:root[data-native-boot="on"] #top,:root[data-native-boot="on"] .shell-map-ui,:root[data-native-boot="on"] .map-top-wrap,:root[data-native-boot="on"] .map-tools,:root[data-native-boot="on"] .map-scrub,:root[data-native-boot="on"] .map-legend,:root[data-native-boot="on"] .motion-layer-dock { opacity:0; pointer-events:none; }
+.instrument-dock #top { animation:dock-top 420ms var(--ease-out) both; }
+.instrument-dock .shell-selection-row { animation:dock-side 430ms 80ms var(--ease-out) both; }
+.instrument-dock .ov-side,.instrument-dock .ex-side { animation:dock-side 450ms 130ms var(--ease-out) both; }
+.instrument-dock .map-scrub { animation:dock-bottom 450ms 190ms var(--ease-out) both; }
+@keyframes dock-top { from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none} }
+@keyframes dock-side { from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none} }
+@keyframes dock-bottom { from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none} }
+.motion-layer-dock { position:absolute; left:var(--shell-gap); bottom:var(--motion-dock-bottom,190px); z-index:14; width:222px; background:var(--glass); color:var(--ink2); border:1px solid var(--line2); border-radius:7px; padding:10px 12px; font-size:11px; box-shadow:var(--e1); }
+.motion-layer-dock summary { cursor:pointer; font-weight:600; color:var(--ink); padding:3px 0; }
+.motion-layer-dock label { display:flex; flex-direction:row; align-items:center; gap:9px; min-height:32px; font-size:11px; }
+.motion-layer-dock input { width:15px; height:15px; }
+.motion-layer-dock .note { font-size:10px; line-height:1.5; margin-top:8px; }
+.motion-layer-dock button { width:100%; margin-top:8px; min-height:34px; font-size:11px; }
+.motion-scan-note { position:absolute; left:50%; bottom:var(--motion-dock-bottom,190px); transform:translateX(-50%); z-index:20; padding:7px 12px; border:1px solid var(--warn-line); background:var(--surface); border-radius:5px; color:var(--ink2); font-size:10px; max-width:calc(100% - 40px); }
+.motion-quick { position:relative; }
+.motion-quick > button { margin-top:11px; }
+.motion-quick-panel { position:absolute; top:94px; left:var(--shell-gap); width:250px; padding:16px; background:var(--surface); border:1px solid var(--line2); border-radius:7px; box-shadow:var(--e3); z-index:25; pointer-events:auto; }
+.motion-quick-panel .note { font-size:10px; line-height:1.6; margin-top:12px; }
+.motion-quick-panel > button { width:100%; font-size:11px; }
+.map:has(.motion-layer-dock[open]) .map-legend { left:auto; right:64px; max-width:230px; }
+:root[data-native-boot="on"] .motion-lat-label { opacity:0; }
+.motion-quick-panel label { margin-bottom:12px; font-size:11px; animation:quick-cascade var(--t-panel) var(--ease-out) both; }
+.motion-quick-panel label:nth-child(2){animation-delay:35ms}
+.motion-quick-panel label:nth-child(3){animation-delay:70ms}
+.motion-quick-panel select { width:100%; min-height:36px; font-size:12px; }
+@keyframes quick-cascade { from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none} }
+.motion-diagnostic { width:min(980px,calc(100vw - 40px)); max-width:none; }
+.motion-diag-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0; }
+.motion-diag-grid figure { margin:0; min-width:0; padding:12px; border:1px solid var(--line); border-radius:5px; background:var(--page); }
+.motion-diag-grid figcaption { font-size:12px; font-weight:600; margin-bottom:7px; }
+.motion-diag-grid svg { width:100%; height:auto; display:block; }
+.motion-diag-grid .note { font-size:10px; margin:8px 0 0; }
+.motion-diag-map { height:160px; position:relative; }
+.motion-diag-map canvas { width:100%; height:100%; }
+.motion-diag-trigger { margin:10px 0; font-size:12px; }
+.is-metric-tweening { color:transparent !important; position:relative; }
+.is-metric-tweening::after { content:attr(data-display-value); color:var(--motion-metric-ink,var(--accent-ink)); position:absolute; left:0; top:0; white-space:nowrap; }
+.motion-model-table { width:100%; border-collapse:collapse; margin:18px 0; font-size:11px; }
+.motion-model-table th,.motion-model-table td { padding:8px 10px; border-bottom:1px solid var(--line); text-align:left; }
+.motion-model-table tr.is-selected { background:var(--accent-soft); }
+.motion-model-table button { border:0; padding:4px 0; background:transparent; color:var(--link); font-weight:600; }
+.motion-model-detail { font-size:11px; color:var(--muted); min-height:34px; line-height:1.6; }
+.motion-playhead { position:absolute; top:0; bottom:10px; width:2px; background:var(--accent); box-shadow:0 0 9px var(--accent); pointer-events:none; transform:translateX(-1px); }
+.motion-lat-label { position:absolute; right:58px; top:50%; z-index:10; padding:3px 6px; background:var(--glass); color:var(--muted); border-radius:3px; font:10px var(--mono); pointer-events:none; }
+@media(max-width:760px){
+ .native-hud{width:164px;height:164px;top:19%}.native-hud-centre{font-size:13px}.native-hud-centre small{font-size:6px}
+ .is-native #intro-model{left:-15%;width:240px;height:130px;bottom:35vh}
+ .is-native .intro-content{bottom:6%;padding:14px}.is-native .intro-content h1{font-size:24px}
+ .motion-layer-dock{left:16px;bottom:var(--motion-dock-bottom,225px);width:190px;padding:8px 10px}.motion-scan-note{bottom:var(--motion-dock-bottom,225px);font-size:9px;width:max-content}
+ .motion-quick > button{margin-top:7px}.motion-quick-panel{top:78px;left:16px;right:auto;width:min(250px,calc(100vw - 32px))}.motion-quick > button span{display:none}
+ .map:has(.motion-layer-dock[open]) .map-legend{opacity:0;pointer-events:none}
+ .motion-diag-grid{grid-template-columns:1fr}.motion-diagnostic{width:calc(100vw - 20px)}
+}
+:root[data-motion="off"] .native-arc,:root[data-motion="reduced"] .native-arc { animation:none; }
+@media(prefers-reduced-motion:reduce){:root:not([data-motion="full"]) .native-arc{animation:none}}
+@media print{.motion-layer-dock,.motion-quick,.motion-scan-note,.motion-playhead,.motion-lat-label{display:none!important}}
+
+/* Event identity is separate from the product wordmark. Supplied mark stays unmodified. */
+.brand-title { display:flex; flex-direction:column; align-items:center; gap:2px; }
+.brand-title small { font:600 7px/1.2 var(--font); letter-spacing:.16em; color:var(--muted); }
+.event-intro-mark { position:absolute; top:24px; right:28px; width:190px; padding:16px; border-radius:6px; background:#07173f; z-index:4; }
+.event-intro-mark img,.event-drawer-mark img { display:block; width:100%; height:auto; object-fit:contain; }
+.event-intro-mark span { display:block; color:#c3cede; font:9px/1.6 var(--font); margin-top:12px; text-align:center; }
+.event-drawer-mark { margin:22px 0; padding:24px; background:#07173f; border-radius:6px; }
+.event-drawer-mark img { width:190px; max-width:100%; }
+.event-drawer-mark p { color:#c3cede; font:11px/1.7 var(--font); margin:18px 0 0; }
+#insight-metrics tr.is-motion-selected { background:var(--accent-soft); }
+@media(max-width:760px){
+ .brand-title small { display:none; }
+ .event-intro-mark { top:16px; right:16px; width:144px; padding:12px; }
+ .event-intro-mark span { font-size:8px; margin-top:8px; }
+}

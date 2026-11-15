@@ -207,6 +207,7 @@
     const startTime = performance.now();
     let animPhaseDeg = 0, lastFrameTime = startTime; // elapsed animation seconds, never wrapped
     let activeView = true;
+    let drawTracks=true,drawSwaths=true,scanReveal=false,scanProgress=0,scanBounds=[0,1];
     const modelBuffers = new Map();
     const modelsReady = () => { lastOrbitKey = ""; if (map) map.triggerRepaint(); };
 
@@ -245,6 +246,7 @@
       // Adapt cadence to actual frame cost so animations stay smooth on fast GPUs
       // without queuing or starving input on slower software/integrated GPUs.
       const cost = Number.isFinite(frameMs) ? frameMs : lastRenderMs;
+      if(cost<8){map.triggerRepaint();return;}
       const delay = Math.max(16, Math.min(100, Math.round(cost * 1.2)));
       repaintTimer = setTimeout(() => {
         repaintTimer = 0;
@@ -410,6 +412,8 @@
         uniform float u_time;
         uniform float u_active_day;
         uniform float u_is_playing;
+        uniform float u_scan_progress;
+        uniform vec2 u_scan_bounds;
         in vec2 a_center;
         in vec2 a_corner;
         in float a_elev;
@@ -422,7 +426,7 @@
         out float v_phase;
         out float v_mode;
         void main() {
-          float rad = u_scale_m * (a_age_mode < 0.5 ? 1.35 : (a_day == u_active_day ? 1.15 : 0.62));
+          float rad = u_scale_m * (a_age_mode > 1.5 ? 1.8 : (a_age_mode < 0.5 ? 1.35 : (a_day == u_active_day ? 1.15 : 0.62)));
           float latGuess = clamp((0.5 - a_center.y) * 3.14159, -1.2, 1.2);
           float dxMerc = (a_corner.x * rad) / 40075017.0;
           float dyMerc = (a_corner.y * rad) / (40075017.0 * max(0.3, cos(latGuess)));
@@ -436,7 +440,12 @@
           v_uv = a_corner;
           v_col = a_color;
           v_mode = a_age_mode;
-          if (a_age_mode < 0.5) {
+          if(a_age_mode>1.5){
+            float along=(a_center.x-u_scan_bounds.x)/max(0.000001,u_scan_bounds.y-u_scan_bounds.x);
+            float age=u_scan_progress-along;
+            v_phase=clamp(age*5.0,0.0,1.0);
+            v_alpha=smoothstep(-0.025,0.015,age)*(1.0-v_phase*0.25)*vis;
+          } else if (a_age_mode < 0.5) {
             v_phase = fract(u_time * 0.65);
             v_alpha = 0.92 * vis;
           } else {
@@ -470,6 +479,7 @@
           float a = clamp(ring * v_alpha, 0.0, 1.0);
           if (a < 0.01) discard;
           vec3 hot = mix(v_col, vec3(1.0, 0.96, 0.82), ring * 0.42);
+          if(v_mode>1.5)hot=mix(vec3(1.0,0.14,0.025),mix(vec3(1.0,0.62,0.05),vec3(1.0,0.97,0.80),v_phase),smoothstep(0.0,0.65,v_phase));
           fragColor = vec4(hot, a);
         }`;
       return (programs[key] = linkProgram(gl, vs, fs));
@@ -486,11 +496,11 @@
       if (movingNow && lastOrbitKey) return false;
       const curMode = modeFn();
       const zoom = map ? map.getZoom() : 4.4;
-      const zBucket = Math.round(zoom * 6);
+      const zBucket = Math.round(zoom * 20);
       const motion = motionFn();
       const phaseKey = Math.round(animPhaseDeg * 4);
       const oscKey = animateNow ? Math.round((nowMs - startTime) * 0.015) : -1;
-      const oKey = `${curMode}|${zBucket}|${phaseKey}|${oscKey}|${orbitOn ? 1 : 0}|${seamOn ? 1 : 0}|${monthStr}|${playDay}|${isDark ? 1 : 0}|${filterKey}`;
+      const oKey = `${curMode}|${zBucket}|${phaseKey}|${oscKey}|${orbitOn ? 1 : 0}|${seamOn ? 1 : 0}|${monthStr}|${playDay}|${isDark ? 1 : 0}|${filterKey}|${drawTracks}|${drawSwaths}`;
       if (oKey === lastOrbitKey) return false;
       lastOrbitKey = oKey;
 
@@ -500,8 +510,10 @@
       cachedBadges = [];
 
       const globe = curMode === "globe";
-      // Scale altitude and craft proportions seamlessly for clear framing in Globe vs regional 3D view.
-      const altScale = globe ? (zoom < 3.6 ? 1.0 : zoom < 5.5 ? 0.55 : 0.25) : Math.max(0.14, 0.34 - (zoom - 4.0) * 0.045);
+      // Smooth continuous interpolation across zoom 2.4..6.2 so orbital tracks and spacecraft never jump at 3.6 or 5.5.
+      const tZ = Math.max(0, Math.min(1, (zoom - 2.4) / 3.8));
+      const smoothZ = tZ * tZ * (3 - 2 * tZ);
+      const altScale = globe ? (1.0 - smoothZ * 0.76) : Math.max(0.14, 0.34 - (zoom - 4.0) * 0.045);
       const craftScale = globe ? Math.max(0.32, Math.min(1.5, 2.5 / Math.max(1.2, zoom))) : Math.max(0.18, 0.85 / Math.max(2.2, zoom - 1.5));
 
       const date = window.SeamSatelliteEra.dateFor(monthStr, playDay);
@@ -528,7 +540,7 @@
         const step = globe ? 3 : 2;
         const trackBase = !active ? 0.26 : isSnppDim ? 0.28 : 0.68;
         let hasPrevTrack = false, pTx = 0, pTy = 0, pTa = 0;
-        for (let d = -span; d <= span; d += step) {
+        if(drawTracks)for (let d = -span; d <= span; d += step) {
           orbitPoint(sat, phaseNow + d, opScratch);
           const tx = mercX(opScratch.lon), ty = mercY(opScratch.lat);
           const alpha = trackBase * (0.24 + 0.76 * (1 - Math.abs(d) / span));
@@ -540,7 +552,7 @@
         }
 
         // 2. Ground swath footprint ribbon (streamed directly, zero intermediate object arrays)
-        if (active) {
+        if (active&&drawSwaths) {
           const swathSteps = 5, swathHalfDeg = 11;
           const swAlpha = isSnppDim ? 0.055 : isN20Hi ? 0.145 : 0.10;
           const edgeAlpha = isSnppDim ? 0.25 : 0.58;
@@ -592,21 +604,29 @@
         const model = window.SeamSatelliteModels?.models.get(sat.key);
         if (!model) {
           window.SeamSatelliteModels?.load(sat.key);
-        pushBoxW(solidW, curScratch, altM, sc, 0, 0, 0, busBase * 1.45 * sc, busBase * 0.92 * sc, busBase * 0.82 * sc, busGold, 1, m0, m1, m2, m3, m4, m5, m6, m7);
-        pushBoxW(solidW, curScratch, altM, sc, busBase * 0.18 * sc, 0, -busBase * 0.54 * sc, busBase * 0.70 * sc, busBase * 0.65 * sc, busBase * 0.46 * sc, bayTint, 1, m0, m1, m2, m3, m4, m5, m6, m7);
-        pushBoxW(solidW, curScratch, altM, sc, -busBase * 0.12 * sc, busBase * 1.75 * sc, 0, busBase * 0.90 * sc, busBase * 2.15 * sc, busBase * 0.08 * sc, panelBlue, 1, m0, m1, m2, m3, m4, m5, m6, m7);
-        pushBoxW(solidW, curScratch, altM, sc, -busBase * 0.12 * sc, -busBase * 1.75 * sc, 0, busBase * 0.90 * sc, busBase * 2.15 * sc, busBase * 0.08 * sc, panelBlue, 1, m0, m1, m2, m3, m4, m5, m6, m7);
-        pushBoxW(solidW, curScratch, altM, sc, -busBase * 0.12 * sc, 0, 0, busBase * 0.14 * sc, busBase * 5.8 * sc, busBase * 0.12 * sc, yokeMetal, 1, m0, m1, m2, m3, m4, m5, m6, m7);
+          if (sat.kind === "MODIS") {
+            // EOS Terra MODIS silhouette: elongated bus + nadir scan cavity + single starboard solar array
+            pushBoxW(solidW, curScratch, altM, sc, 0, 0, 0, busBase * 1.65 * sc, busBase * 0.95 * sc, busBase * 0.88 * sc, busGold, 1, m0, m1, m2, m3, m4, m5, m6, m7);
+            pushBoxW(solidW, curScratch, altM, sc, busBase * 0.32 * sc, 0, -busBase * 0.58 * sc, busBase * 0.78 * sc, busBase * 0.72 * sc, busBase * 0.50 * sc, bayTint, 1, m0, m1, m2, m3, m4, m5, m6, m7);
+            pushBoxW(solidW, curScratch, altM, sc, -busBase * 0.10 * sc, busBase * 2.25 * sc, 0, busBase * 1.05 * sc, busBase * 3.10 * sc, busBase * 0.08 * sc, panelBlue, 1, m0, m1, m2, m3, m4, m5, m6, m7);
+            pushBoxW(solidW, curScratch, altM, sc, -busBase * 0.10 * sc, busBase * 0.85 * sc, 0, busBase * 0.16 * sc, busBase * 1.80 * sc, busBase * 0.12 * sc, yokeMetal, 1, m0, m1, m2, m3, m4, m5, m6, m7);
+          } else {
+            // JPSS / S-NPP VIIRS silhouette: compact octagonal bus + nadir VIIRS/CrIS instrument deck + aft solar array wing
+            pushBoxW(solidW, curScratch, altM, sc, 0, 0, 0, busBase * 1.35 * sc, busBase * 0.88 * sc, busBase * 0.82 * sc, busGold, 1, m0, m1, m2, m3, m4, m5, m6, m7);
+            pushBoxW(solidW, curScratch, altM, sc, busBase * 0.24 * sc, 0, -busBase * 0.54 * sc, busBase * 0.76 * sc, busBase * 0.68 * sc, busBase * 0.48 * sc, bayTint, 1, m0, m1, m2, m3, m4, m5, m6, m7);
+            pushBoxW(solidW, curScratch, altM, sc, -busBase * 0.22 * sc, -busBase * 2.05 * sc, busBase * 0.12 * sc, busBase * 0.92 * sc, busBase * 2.65 * sc, busBase * 0.08 * sc, panelBlue, 1, m0, m1, m2, m3, m4, m5, m6, m7);
+            pushBoxW(solidW, curScratch, altM, sc, -busBase * 0.22 * sc, -busBase * 0.75 * sc, busBase * 0.06 * sc, busBase * 0.15 * sc, busBase * 1.60 * sc, busBase * 0.12 * sc, yokeMetal, 1, m0, m1, m2, m3, m4, m5, m6, m7);
+          }
         }
 
 
-        if (active) {
+        if (active&&drawSwaths) {
           const coneSpanF = 160000 * altScale;
           enuOffsetToMerc(curScratch.lon, curScratch.lat, curScratch.rightE * halfSwathM + curScratch.fwdE * coneSpanF, curScratch.rightN * halfSwathM + curScratch.fwdN * coneSpanF, gA);
           enuOffsetToMerc(curScratch.lon, curScratch.lat, -curScratch.rightE * halfSwathM + curScratch.fwdE * coneSpanF, -curScratch.rightN * halfSwathM + curScratch.fwdN * coneSpanF, gB);
           enuOffsetToMerc(curScratch.lon, curScratch.lat, -curScratch.rightE * halfSwathM - curScratch.fwdE * coneSpanF, -curScratch.rightN * halfSwathM - curScratch.fwdN * coneSpanF, gC);
           enuOffsetToMerc(curScratch.lon, curScratch.lat, curScratch.rightE * halfSwathM - curScratch.fwdE * coneSpanF, curScratch.rightN * halfSwathM - curScratch.fwdN * coneSpanF, gD);
-          const fanAlpha = isSnppDim ? 0.05 : 0.14;
+          const fanAlpha = isSnppDim ? 0.05 : 0.20;
           pushTriW(transW, sMx, sMy, altM, gA[0], gA[1], 120, gB[0], gB[1], 120, rgb[0], rgb[1], rgb[2], fanAlpha, 0, 0, 1, 0);
           pushTriW(transW, sMx, sMy, altM, gB[0], gB[1], 120, gC[0], gC[1], 120, rgb[0], rgb[1], rgb[2], fanAlpha, 0, 0, 1, 0);
           pushTriW(transW, sMx, sMy, altM, gC[0], gC[1], 120, gD[0], gD[1], 120, rgb[0], rgb[1], rgb[2], fanAlpha, 0, 0, 1, 0);
@@ -649,7 +669,7 @@
     // Build GPU quad attributes for temporal sonar pulses (cached per filter/day/picked/elev change!)
     function ensurePulseGeometry() {
       const motion = motionFn();
-      const pKey = `${pointsVer}|${elevVer}|${playDay}|${pickedIdx == null ? -1 : pickedIdx}|${filterKey}|${motion}`;
+      const pKey = `${pointsVer}|${elevVer}|${playDay}|${pickedIdx == null ? -1 : pickedIdx}|${filterKey}|${motion}|${scanReveal}`;
       if (pKey === lastPulseKey) return false;
       lastPulseKey = pKey;
       pulseW.reset();
@@ -662,6 +682,14 @@
 
       if (pointsData && pickedIdx != null && pickedIdx < pointsData.lon.length) {
         addQuad(pointsData.mx[pickedIdx], pointsData.my[pickedIdx], pointElev(pickedIdx), pointsData.day[pickedIdx], 0.0, satColorRgb(pointsData.p[pickedIdx]));
+      }
+      if(pointsData&&scanReveal){
+        const n=pointsData.lon.length,stride=Math.max(1,Math.ceil(n/1000));
+        for(let i=0;i<n;i+=stride){
+          if(!satFilter.includes(pointsData.p[i])||(dnFilter!=='DN'&&(dnFilter==='N')!==(pointsData.dn[i]===1)))continue;
+          if(playDay&&pointsData.day[i]!==playDay)continue;
+          addQuad(pointsData.mx[i],pointsData.my[i],pointElev(i),pointsData.day[i],2.0,[1,.32,.04]);
+        }
       }
       if (pointsData && playDay > 0 && motion === "full") {
         const minD = Math.max(1, playDay - 2), nightOnly = dnFilter === "N", allDn = dnFilter === "DN";
@@ -751,7 +779,7 @@
         if (motion === "full" && orbitOn && !movingNow) animPhaseDeg += dt;
 
         const needOrbit = orbitOn || seamOn;
-        const needPulse = (playDay > 0 && motion === "full") || pickedIdx != null;
+        const needPulse = (playDay > 0 && motion === "full") || pickedIdx != null || scanReveal;
         if (!needOrbit && !needPulse) {
           clearRepaintTimer();
           if (hadBadges) {
@@ -851,6 +879,8 @@
             glCtx.uniform1f(uLoc(glCtx, pProg, "u_time"), motion === "full" && animateNow ? (now - startTime) * 0.001 : 0.28);
             glCtx.uniform1f(uLoc(glCtx, pProg, "u_active_day"), playDay);
             glCtx.uniform1f(uLoc(glCtx, pProg, "u_is_playing"), isPlaying ? 1.0 : 0.0);
+            glCtx.uniform1f(uLoc(glCtx,pProg,"u_scan_progress"),scanProgress);
+            glCtx.uniform2f(uLoc(glCtx,pProg,"u_scan_bounds"),scanBounds[0],scanBounds[1]);
 
             glCtx.bindBuffer(glCtx.ARRAY_BUFFER, vboPulse);
             if (pulseDirty) glCtx.bufferData(glCtx.ARRAY_BUFFER, pulseW.view(), glCtx.DYNAMIC_DRAW);
@@ -900,6 +930,7 @@
           my[i] = mercY(P.lat[i]);
         }
         pointsData = { lon: P.lon, lat: P.lat, mx, my, elev, p: P.p, dn: P.dn, day: P.day };
+        let minX=Infinity,maxX=-Infinity;for(let i=0;i<n;i++){minX=Math.min(minX,mx[i]);maxX=Math.max(maxX,mx[i]);}scanBounds=n?[minX,maxX]:[0,1];
         monthStr = P.month || "2025-11";
         pointsVer++;
         lastOrbitKey = "";
@@ -935,6 +966,10 @@
       },
       select(i) { pickedIdx = i == null ? null : i; lastPulseKey = ""; if (map) map.triggerRepaint(); },
       badges: () => satScreenBadges.slice(),
+      setScan(progress,on=true){const changed=scanReveal!==on;scanReveal=on;scanProgress=Math.max(0,Math.min(1,progress));if(changed)lastPulseKey="";if(map)map.triggerRepaint();},
+      setTracks(on){drawTracks=!!on;lastOrbitKey="";if(map)map.triggerRepaint();},
+      setSwaths(on){drawSwaths=!!on;lastOrbitKey="";if(map)map.triggerRepaint();},
+      layerState:()=>({tracks:drawTracks,swaths:drawSwaths,scan:scanReveal}),
       orbitActive: () => orbitOn,
       seamActive: () => seamOn,
       resetOrbitPhase() { animPhaseDeg = 0; lastOrbitKey = ""; },

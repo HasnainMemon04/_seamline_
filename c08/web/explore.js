@@ -19,6 +19,7 @@
     return { sky: css("--map-sky"), ocean: css("--map-ocean") || css("--map-sky"), river: css("--map-river") || css("--accent"),
              land: css("--map-land"), landDim: css("--map-land-dim") || css("--map-land"), sel: css("--map-sel"), line: css("--map-line"), lineSel: css("--map-line-sel"),
              terra: css("--terra"), aqua: css("--aqua"), snpp: css("--snpp"), n20: css("--n20"), n21: css("--n21"), ink: css("--ink"), halo: css("--surface"), muted: css("--muted"),
+             heat1: css("--heat-1"), heat2: css("--heat-2"), heat3: css("--heat-3"), heat4: css("--heat-4"),
              shadow: dark ? "#000000" : "#4d5357", highlight: dark ? "#42555b" : "#ffffff", font: css("--font"), dark };
   }
   const SAT_COLOR = (c, p) => [c.terra, c.aqua, c.snpp, c.n20, c.n21][p];
@@ -225,7 +226,12 @@
       camera(act) { if (act === "zoom-in") zoomAt(1.5, W / 2, H / 2); else if (act === "zoom-out") zoomAt(1 / 1.5, W / 2, H / 2); },
       setMode() {}, mode: () => "2d",
       setViewMode(vm) { vmode = vm || "points"; invalidate(); }, viewMode: () => vmode,
-      viewMeta: () => ({ total: 0, shown: 0, limited: false }),
+      viewMeta: () => {
+        if (!P) return { total: 0, shown: 0, limited: false };
+        let n = 0;
+        for (let i = 0; i < P.lon.length; i++) if (shown(i)) n++;
+        return { total: n, shown: n, limited: false };
+      },
       setPsf(on) { psfOn = !!on; invalidate(); }, setOrbit() {}, setSeam() {}, setPlayback() {},
       satBadges: () => [], flyPose() {},
       whenIdle(cb) { draw(); cb && cb(); },
@@ -272,8 +278,9 @@
             <button type="button" data-vmode="footprints" aria-pressed="false" title="Oriented along-scan x along-track sensor footprints">scan×track</button>
             <button type="button" data-vmode="density" aria-pressed="false" title="Macro detection concentration (fades to pixels on zoom)">Density</button>
           </div>
-          <button type="button" class="map-chip-btn" id="orbit-btn" aria-pressed="false" title="Toggle schematic sun-synchronous orbital tracks and scan swaths">${ic("orbit")}<span>Orbits</span></button>
+          <button type="button" class="map-chip-btn" id="orbit-btn" aria-pressed="false" title="Toggle illustrative sun-synchronous orbital tracks and scan swaths">${ic("orbit")}<span>Orbits</span></button>
           <button type="button" class="map-chip-btn" id="psf-btn" aria-pressed="false" hidden title="Toggle MODIS 2x1 km triangular PSF kernel halo (25/50/25%)">${ic("psf")}<span>PSF 2×1</span></button>
+          <span class="map-render-pill" id="map-render-pill" hidden role="status" aria-live="polite"></span>
         </div>
       </div>
       <div class="map-banner" id="map-banner" role="status"></div>
@@ -333,6 +340,40 @@
       return;
     }
     if (wrap.hidden) wrap.hidden = false;
+    const viewEl = $("map-view") || wrap;
+    const W = Math.max(240, viewEl.clientWidth || 640);
+    const H = Math.max(220, viewEl.clientHeight || 420);
+    const PIN_W = 116, PIN_H = 24;
+    const minX = 8, maxX = Math.max(minX, W - PIN_W - 44);
+    const minY = 88, maxY = Math.max(minY, H - 76);
+    const placed = [];
+    const ordered = badges.slice().sort((a, b) => (Number(!!b.selected) - Number(!!a.selected)) || ((a.sy || 0) - (b.sy || 0)));
+    const placedCoords = new Map();
+    for (const b of ordered) {
+      if (!b.visible) continue;
+      const rawX = Math.round(b.sx) + 8;
+      const rawY = Math.round(b.sy);
+      const baseX = Math.max(minX, Math.min(maxX, rawX));
+      const baseY = Math.max(minY, Math.min(maxY, rawY));
+      const leftX = Math.max(minX, Math.min(maxX, Math.round(b.sx) - PIN_W - 8));
+      const candidates = [
+        [baseX, baseY],
+        [baseX, Math.max(minY, Math.min(maxY, baseY + 26))],
+        [baseX, Math.max(minY, Math.min(maxY, baseY - 26))],
+        [leftX, baseY],
+        [baseX, Math.max(minY, Math.min(maxY, baseY + 52))],
+        [baseX, Math.max(minY, Math.min(maxY, baseY - 52))],
+        [leftX, Math.max(minY, Math.min(maxY, baseY + 26))],
+        [leftX, Math.max(minY, Math.min(maxY, baseY - 26))],
+      ];
+      let chosen = candidates[0];
+      for (const [cx, cy] of candidates) {
+        const collides = placed.some((p) => Math.abs(cx - p.x) < PIN_W && Math.abs(cy - p.y) < PIN_H);
+        if (!collides) { chosen = [cx, cy]; break; }
+      }
+      placed.push({ x: chosen[0], y: chosen[1] });
+      placedCoords.set(b.key, chosen);
+    }
     const alive = new Set();
     for (const b of badges) {
       alive.add(b.key);
@@ -358,11 +399,11 @@
       if (!b.visible) {
         if (st.vis !== false) { el.hidden = true; st.vis = false; }
       } else {
-        const sx = Math.round(b.sx), sy = Math.round(b.sy);
+        const [px, py] = placedCoords.get(b.key) || [Math.round(b.sx) + 8, Math.round(b.sy)];
         if (st.vis !== true) { el.hidden = false; st.vis = true; }
-        if (st.sx !== sx || st.sy !== sy) {
-          st.sx = sx; st.sy = sy;
-          el.style.transform = `translate3d(${sx + 8}px, ${sy}px, 0) translateY(-50%)`;
+        if (st.sx !== px || st.sy !== py) {
+          st.sx = px; st.sy = py;
+          el.style.transform = `translate3d(${px}px, ${py}px, 0) translateY(-50%)`;
         }
       }
     }
@@ -410,6 +451,7 @@
       onPick: pick, onArea: (name) => { const s = selection(); if (!drawing && s && (s.bbox || s.region !== name)) S.selectArea(name); },
       onHover: hover, onUser: () => stopPlay("You moved the map"), onBearing: (b) => { $("north-btn").firstElementChild.style.transform = `rotate(${-b}deg)`; },
       onSatTick: renderSatPins,
+      onPolyMeta: () => { updateRenderPill(); legend(); },
       onLost: () => { glProblem = "The 3D view lost its graphics context."; lowPower = false; fallback(); },
       onReady: () => { const s = selection(); if (s) fitNow(false); },
     };
@@ -460,7 +502,25 @@
     const rotatable = gl && UI.mode !== "2d";
     for (const b of host.querySelectorAll('[data-cam="rot-l"],[data-cam="rot-r"],[data-cam="tilt-up"],[data-cam="tilt-dn"],[data-cam="north"]')) b.hidden = !rotatable;
     if (!orbitOn && UI.story !== "seam" && $("sat-pins")) $("sat-pins").hidden = true;
+    updateRenderPill();
     legend();
+  }
+  function updateRenderPill() {
+    const pill = $("map-render-pill");
+    if (!pill) return;
+    if (vmode !== "towers" && vmode !== "footprints") {
+      pill.hidden = true;
+      pill.textContent = "";
+      pill.classList.remove("is-sampled");
+      return;
+    }
+    const vmMeta = engine && engine.viewMeta ? engine.viewMeta() : { total: 0, shown: 0, limited: false };
+    pill.hidden = false;
+    pill.classList.toggle("is-sampled", !!vmMeta.limited);
+    pill.textContent = `Rendered ${fmt(vmMeta.shown)} of ${fmt(vmMeta.total)}`;
+    pill.title = vmMeta.limited
+      ? `3D geometry is capped at ${fmt(vmMeta.shown)} detections (top FRP + uniform spatial sample) out of ${fmt(vmMeta.total)} matching detections. Full counts and exports remain exact.`
+      : `All ${fmt(vmMeta.total)} matching detections are rendered as 3D geometry.`;
   }
 
   // ---------- data ----------
@@ -508,6 +568,7 @@
       applyFilter();
       inspect(null);
       pointsPending = false;
+      S.emit("points-loaded");
     } catch (e) {
       if (id !== PREQ || e.name === "AbortError") return;
       PERR = e.message;
@@ -545,6 +606,7 @@
     if (!engine) return;
     engine.setFilter({ sats: UI.sats.map((s) => SATS.indexOf(s)), dn: UI.dn, day: UI.mapDay });
     $("scrub").value = String(UI.mapDay);
+    updateRenderPill();
     title(); legend(); platList(); drawScrub(); pointList();
     for (const b of $("map-dn").querySelectorAll("button")) b.setAttribute("aria-pressed", String(b.dataset.dn === UI.dn));
     const empty = POINTS && UI.sats.every((s) => !shownCount(SATS.indexOf(s), UI.mapDay));
@@ -556,6 +618,37 @@
         : empty ? `No detections from ${UI.sats.map((s) => SAT_INFO[s].short).join(", ")} here ${UI.mapDay ? "on this day" : "in this month"}. No detection is not no burning.` : "";
     }
   }
+  const EOSDIS_SPEC = {
+    Terra: "MCD14ML C6.1 (1 km · ~4–40 MW floor)",
+    Aqua: "MCD14ML C6.1 (1 km · ~4–40 MW floor)",
+    SNPP: "VNP14IMG C2 (375 m I-band vs VNP14 750 m · ~0.5 MW)",
+    NOAA20: "VJ114IMG C2 (375 m I-band · ~0.5 MW)",
+    NOAA21: "VJ214IMGTDL_NRT C2 (375 m I-band · ~0.5 MW)",
+  };
+  function frpSummary() {
+    if (!POINTS || !POINTS.frp || !UI.sats.length) return null;
+    const satIdxs = UI.sats.map((k) => SATS.indexOf(k));
+    const vals = [];
+    let sumMw = 0;
+    for (let i = 0; i < POINTS.lon.length; i++) {
+      if (!satIdxs.includes(POINTS.p[i])) continue;
+      if (UI.dn !== "DN" && (UI.dn === "N") !== (POINTS.dn[i] === 1)) continue;
+      if (UI.mapDay && POINTS.day[i] !== UI.mapDay) continue;
+      const v = POINTS.frp[i];
+      if (v != null && v > 0) { vals.push(v); sumMw += v; }
+    }
+    if (!vals.length) return { count: 0, sumMw: 0, medMw: 0, p90Mw: 0, label: `${UI.sats.map((k) => SAT_INFO[k].short).join("+")} · ${when()}` };
+    vals.sort((a, b) => a - b);
+    const medMw = vals[Math.floor(vals.length * 0.5)];
+    const p90Mw = vals[Math.floor(vals.length * 0.9)];
+    return {
+      count: vals.length,
+      sumMw,
+      medMw,
+      p90Mw,
+      label: `${UI.sats.map((k) => SAT_INFO[k].short).join("+")} · ${when()}`,
+    };
+  }
   function when() {
     const [y, m] = POINTS ? POINTS.month.split("-").map(Number) : S.dayMonth();
     return UI.mapDay ? `${UI.mapDay} ${MONTH_FULL[m - 1]} ${y}` : `${MONTH_FULL[m - 1]} ${y}`;
@@ -563,7 +656,8 @@
   function title(loading) {
     const s = selection();
     const sats = UI.sats.map((k) => SAT_INFO[k].short).join(" · ") || "No satellite";
-    $("map-title").innerHTML = `<b>${esc(sats)}</b> observed detections · ${esc(s ? s.region : "")} · ${esc(when())}${loading ? " · loading…" : ""}` +
+    const prodCodes = UI.sats.map((k) => (POINTS && POINTS.products && POINTS.products[k]) || (k === "SNPP" ? "VNP14IMG" : k === "NOAA20" ? "VJ114IMG" : k === "NOAA21" ? "VJ214IMG" : "MCD14ML")).join("/");
+    $("map-title").innerHTML = `<b>${esc(sats)}</b> (<code>${esc(prodCodes)}</code>) · ${esc(s ? s.region : "")} · ${esc(when())}${loading ? " · loading…" : ""}` +
       `<span class="note">Each satellite separately; ${UI.dn === "DN" ? "day and night passes" : UI.dn === "D" ? "day passes" : "night passes"}; UTC dates</span>`;
     const fs = $("filter-sum");
     if (fs) fs.textContent = `Showing: ${sats}; ${UI.dn === "DN" ? "day and night passes" : UI.dn === "D" ? "day passes only" : "night passes only"}; ${UI.mapDay ? when() : "the whole month"}.`;
@@ -575,6 +669,13 @@
       const val = !inRecord(k) ? (POINTS.record[k].status === "unavailable" ? "no usable data" : "no record") : n == null ? "…" : fmt(n);
       return `<div class="lg-row"><span class="mk ${info.cls}${info.round ? " round" : " ring"}"></span>${esc(info.label)}<b>${val}</b></div>`;
     }).join("");
+    const frp = frpSummary();
+    const specLine = UI.sats.map((k) => EOSDIS_SPEC[k] || k).join(" · ");
+    const telemHtml = POINTS && UI.sats.length
+      ? `<div class="lg-telem"><div><b>EOSDIS:</b> <code>${esc(specLine)}</code></div>` +
+        (frp && frp.count > 0 ? `<div><b>FRP:</b> Σ ${fmt(frp.sumMw, 0)} MW · med ${fmt(frp.medMw, 1)} MW · p90 ${fmt(frp.p90Mw, 1)} MW</div>` : "") +
+        `</div>`
+      : "";
     const gl = engine && engine.kind === "gl";
     const surface = gl && UI.mode === "globe"
       ? "3D globe projection with South Asia rivers and NOAA elevation."
@@ -582,26 +683,29 @@
         ? `Surface: NOAA elevation, heights stretched ×${engine.exaggeration}.`
         : gl ? "Flat top-down view; shading from NOAA elevation." : "Flat top-down view.";
     const vmMeta = engine && engine.viewMeta ? engine.viewMeta() : { total: 0, shown: 0, limited: false };
+    const c = colors();
     let extra = "";
     if (vmode === "towers") {
-      extra = `Tower height ∝ √FRP (MW, capped ~54 km); shows radiative power per detection, never burned area.${vmMeta.limited ? ` Showing ${fmt(vmMeta.shown)} of ${fmt(vmMeta.total)} peaks/sample.` : ""}`;
+      extra = `<b>Rendered ${fmt(vmMeta.shown)} of ${fmt(vmMeta.total)}</b>${vmMeta.limited ? " (sampled: top FRP + uniform grid)" : ""}. Tower height ∝ √FRP (MW, capped ~54 km); shows radiative power per detection, never burned area.`;
     } else if (vmode === "footprints") {
-      extra = `Oriented scan × track ground footprints (MODIS bowtie off-nadir vs 3:1→1:1 VIIRS).${psfOn ? " Faint outer box: MODIS 2×1 km PSF kernel (25/50/25%)." : ""}${vmMeta.limited ? ` Showing ${fmt(vmMeta.shown)} of ${fmt(vmMeta.total)}.` : ""}`;
+      extra = `<b>Rendered ${fmt(vmMeta.shown)} of ${fmt(vmMeta.total)}</b>${vmMeta.limited ? " (sampled: top FRP + uniform grid)" : ""}. Oriented scan × track ground footprints (MODIS bowtie off-nadir vs 3:1→1:1 VIIRS).${psfOn ? " Faint outer box: MODIS 2×1 km PSF kernel (25/50/25%)." : ""}`;
     } else if (vmode === "density") {
-      extra = `<div class="lg-ramp"></div><span>Macro density weighted by FRP (fades to raw detections on zoom). Cross-sensor aid only; detections are never added across sensors.</span>`;
+      const rampBg = `linear-gradient(90deg, ${c.heat1}, ${c.heat2}, ${c.heat3}, ${c.heat4})`;
+      extra = `<div class="lg-ramp-row"><span class="lg-ramp-lbl">Low</span><div class="lg-ramp" style="background:${rampBg}"></div><span class="lg-ramp-lbl">High</span></div><span>Macro density weighted by FRP (fades to raw detections on zoom). Cross-sensor aid only; detections are never added across sensors.</span>`;
     }
     if (orbitOn || UI.story === "seam") {
       extra += (extra ? "<br>" : "") + (UI.story === "seam"
-        ? "S-NPP data delivery ended 2 Nov 2026; bridge eligibility is defined by the selected data, not by these orbits."
-        : "Launch-date filtered • 20× illustrative orbits, enlarged spacecraft. Not live tracking or measured coverage. Click a satellite for details.");
+        ? "Illustrative orbits: S-NPP data delivery ended 2 Nov 2026; bridge eligibility is defined by the selected data, not by these orbits."
+        : "Illustrative orbits & swaths (launch-date filtered, 20× altitude scale, enlarged spacecraft). Not live tracking or measured coverage. Click a satellite for details.");
     }
     const open = $("lg-more") && $("lg-more").open;
     $("map-legend").innerHTML = (rows || `<div class="lg-row">No satellite selected</div>`) +
+      telemHtml +
       `<div class="lg-note">Detections ${UI.mapDay ? "on this UTC day" : "this month"}, per satellite, never added together.</div>` +
       (extra ? `<div class="lg-extra">${extra}</div>` : "") +
       (POINTS ? `<div class="lg-note">${esc(POINTS.source_summary || "NASA FIRMS standard archive; quality rule; type 0.")}</div>` : "") +
       `<details id="lg-more"${open ? " open" : ""}><summary>Legend and map options</summary>` +
-      `<div class="lg-note"><span class="mk snpp round"></span> filled dot: VIIRS (375 m) · <span class="mk ring aqua"></span> ring: MODIS (1 km). Marker size is fixed; it shows no size, strength or area.</div>` +
+      `<div class="lg-note"><span class="mk snpp round"></span> filled dot: VIIRS (375 m, opacity/radius ∝ FRP MW) · <span class="mk ring aqua"></span> ring: MODIS (1 km).</div>` +
       `<div class="lg-note">A point is one fire pixel on one pass at its reported centre, not a fire or a burned area. ${surface} City names are for orientation.</div>` +
       (POINTS ? UI.sats.map((s) => POINTS.record[s] && POINTS.record[s].support ? `<div class="lg-note">${esc(SAT_INFO[s].short)}: ${esc(recordNote(s))}</div>` : "").join("") : "") +
       `<label class="inline lg-low"><input type="checkbox" id="low-power"${lowPower ? " checked" : ""}> Low-power 2D map (no WebGL)</label></details>`;
@@ -655,7 +759,7 @@
           g.fillStyle = css("--nodata"); g.fillRect(x0 + j * w, base - 12, w - 0.5, 12);
           g.strokeStyle = c.muted; g.lineWidth = 1; g.beginPath(); g.moveTo(x0 + j * w, base); g.lineTo(x0 + j * w + w - 0.5, base - 12); g.stroke();
         } else if (COUNTS) {
-          const v = shownCount(p, d), h = v ? Math.max(1.5, (v / max) * (base - 3)) : 0;
+          const v = shownCount(p, d), h = v ? Math.max(2.6, Math.sqrt(v / max) * (base - 2)) : 0;
           g.fillStyle = SAT_COLOR(c, p); g.fillRect(x0 + j * w, base - h, Math.max(1, w - 0.5), h);
         }
       });
@@ -664,7 +768,7 @@
     g.strokeStyle = c.ink; g.lineWidth = 2; g.strokeRect(sx + 1, 1, col - 2, H - 2);
     const lab = $("scrub-date");
     if (!POINTS) { lab.innerHTML = ""; return; }
-    let small = play ? "Historical playback · past observations" : "Past observations";
+    let small = play ? "Historical playback · past observations" : "Past observations · √-scale daily bars (hatched = provider gap)";
     if (UI.mapDay) {
       const gaps = UI.sats.map((k) => [k, dayStatus(k, UI.mapDay)]).filter(([, st]) => st && !["ok", "modelled"].includes(st));
       if (gaps.length) small = gaps.map(([k]) => `${SAT_INFO[k].short}: no usable data this day`).join("; ");
@@ -693,7 +797,33 @@
     if (engine && engine.setPlayback) engine.setPlayback(UI.mapDay || 1, true);
     tick();
   }
+  let transTimer = 0;
+  function stopTransition() {
+    if (transTimer) { clearTimeout(transTimer); transTimer = 0; }
+    const btn = $("play-transition-btn");
+    if (btn) btn.setAttribute("aria-pressed", "false");
+  }
+  function playTransition() {
+    stopTransition();
+    if (!engine) return;
+    const btn = $("play-transition-btn");
+    if (engine.kind !== "gl" || S.motionMode() !== "full") {
+      if (engine.kind === "gl") { setMapMode("3d", false); setOrbit(true); }
+      fitNow(false);
+      S.toast(engine.kind === "gl" ? "Motion is reduced: jumped straight to the regional view." : "2D map: fitted the selected region.");
+      return;
+    }
+    if (btn) btn.setAttribute("aria-pressed", "true");
+    flyPose({ mode: "globe", orbit: true, center: [69.5, 28.5], zoom: 2.35, pitch: 24, bearing: -10 });
+    transTimer = setTimeout(() => {
+      transTimer = 0;
+      setMapMode("3d", true);
+      fitNow(true);
+      if (btn) btn.setAttribute("aria-pressed", "false");
+    }, 1500);
+  }
   function stopPlay() {
+    stopTransition();
     if (!play) return;
     clearInterval(play); play = null;
     $("play-btn").setAttribute("aria-pressed", "false");
@@ -757,7 +887,8 @@
   function hover(i, evt) {
     if (i == null || !POINTS || !evt) { S.hideTip(); return; }
     const sat = SATS[POINTS.p[i]];
-    S.showTip(`<b>${esc(SAT_INFO[sat].label)}</b><br>${timeOf(i)} UTC · ${POINTS.dn[i] ? "night" : "day"} pass<br>${POINTS.frp[i] == null ? "FRP unavailable" : `FRP ${fmt(POINTS.frp[i], 1)} MW`}<br><span style="opacity:.8">Click for details</span>`, evt);
+    const confidence=POINTS.p[i]<2?`${esc(POINTS.conf[i])}/100 product score`:({n:'nominal',h:'high',l:'low'}[POINTS.conf[i]]||esc(POINTS.conf[i]));
+    S.showTip(`<b>${esc(SAT_INFO[sat].label)}</b><br>${timeOf(i)} UTC · ${POINTS.dn[i] ? "night" : "day"} pass<br>${POINTS.frp[i] == null ? "FRP unavailable" : `FRP: ${fmt(POINTS.frp[i], 1)} MW`}<br>Confidence: ${confidence}<br>Sensor product: ${esc(POINTS.products[sat])}<br><span style="opacity:.8">Click for details</span>`, evt);
   }
   function pointList() {
     const box = $("point-list");
@@ -901,6 +1032,7 @@
     UI.mode = ["globe", "3d", "2d"].includes(m) ? m : "3d";
     if (engine && engine.kind === "gl") engine.setMode(UI.mode, animate !== false);
     syncMode();
+    S.emit("map-mode",UI.mode);
   }
   function setViewMode(vm) {
     const gl = engine && engine.kind === "gl";
@@ -1007,7 +1139,7 @@
     });
     window.addEventListener("resize", () => { if (engine) engine.resize(); drawScrub(); });
 
-    S.on("selection", () => { const s = selection(); engine.setSelection(s); fitNow(true); inspect(null); loadPoints(); });
+    S.on("selection", () => { const s = selection(); engine.setSelection(s); if(!window.SeamIntro?.isOpen?.())fitNow(true); inspect(null); loadPoints(); });
     S.on("daymonth", () => { inspect(null); loadPoints(); });
     S.on("daily", drawScrub);
     S.on("ws", () => { stopPlay(); if (drawing) endDraw(); mount(); if (picked != null) inspect(picked); if (UI.ws !== "overview" && UI.ws !== "explore" && $("sat-card")) $("sat-card").hidden = true; });
@@ -1029,6 +1161,20 @@
     if (S.result()) { engine.setSelection(selection()); fitNow(false); loadPoints(); }
     title(); legend(); platList();
   }
-  window.SeamMap = { engine: () => engine, points: () => POINTS, bounds: selBounds, colors, start, setMode: setMapMode, setViewMode, setOrbit, setSeam, flyPose };
+  function entrance(options={}) {
+    if (!engine || engine.kind !== "gl" || S.motionMode() !== "full") return;
+    const map = engine.map;
+    const enter = () => {
+      if (UI.ws !== "overview") return;
+      // A single, restrained descent; manual movement immediately wins.
+      flyPose({ mode: "globe", orbit: false, center: [69.5, 28.5], zoom: options.cinematic?2.45:1.8, pitch: 0, bearing: 0 });
+      transTimer = setTimeout(() => { transTimer=0; setMapMode("3d",true); fitNow(true); S.syncUrl(); }, options.cinematic?700:1000);
+      const cancel = () => stopTransition();
+      document.addEventListener("pointerdown", cancel, {once:true,capture:true});
+      $("map-view").addEventListener("wheel", cancel, {once:true,passive:true});
+    };
+    if (map && !map.loaded()) map.once("load", enter); else enter();
+  }
+  window.SeamMap = { engine: () => engine, points: () => POINTS, bounds: selBounds, colors, start, setMode: setMapMode, setViewMode, setOrbit, setSeam, flyPose, playTransition, entrance, frpSummary };
   if (S.meta() && S.geo()) start(); else S.on("ready", start);
 })();

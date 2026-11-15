@@ -240,9 +240,81 @@
   "deployment_updates": [
     {
       "review_date": "2026-11-15",
-      "files": [".python-version", "requirements.txt", "vercel.json", "scripts/prepare_vercel_assets.py", "c08/app.py", ".gitignore", ".dockerignore", "README.md"],
+      "files": [
+        ".python-version",
+        "requirements.txt",
+        "vercel.json",
+        "scripts/prepare_vercel_assets.py",
+        "c08/app.py",
+        ".gitignore",
+        ".dockerignore",
+        "README.md"
+      ],
       "assistance": "OpenAI Codex prepared the Vercel build, adjusted detection downloads to stream, and documented deployment checks.",
       "scope": "Deployment and response handling. Scientific inputs and saved results are unchanged."
+    }
+  ],
+  "local_development_updates": [
+    {
+      "date_asia_karachi": "2026-11-15",
+      "tool": "OpenAI Codex",
+      "status": "local review; not pushed or deployed",
+      "scope": "Map-first frontend shell: Simple and Advanced modes, centered header, accessible navigation and results drawers, guided comparison, original schematic spacecraft meshes, first-visit motion, error recovery, and browser verification. Scientific Python, experiments and data remain unchanged. Default results layout refined to 60/40 with a pointer/keyboard divider. Added a separate bundled NASA Blue Marble reference-imagery basemap; offline runtime.",
+      "files": [
+        "c08/web/workspace-shell.js",
+        "c08/web/workspace-shell.css",
+        "c08/web/satellite-models.js",
+        "c08/web/index.html",
+        "c08/web/app.js",
+        "c08/web/explore.js",
+        "c08/web/features.js",
+        "c08/web/intro.js",
+        "c08/web/satellite-intro.css",
+        "c08/web/basemap.js",
+        "c08/web/imagery/MANIFEST.json",
+        "c08/web/imagery/**/*.jpeg"
+      ],
+      "assets": "Spacecraft meshes are original procedural schematic geometry under the project Apache-2.0 license; no third-party GLB was added."
+    },
+    {
+      "date_asia_karachi": "2026-11-15",
+      "tool": "OpenAI Codex",
+      "status": "local only; not pushed or deployed",
+      "scope": "Reviewed user-supplied 10-second Gemini reference across its full visual timeline. Integrated its first 3 seconds as a clearly illustrative, muted, skippable cinematic; coordinated the transition to the interactive globe and satellite basemap. Retained reduced-motion and media-failure fallbacks.",
+      "files": [
+        "c08/web/index.html",
+        "c08/web/intro.js",
+        "c08/web/satellite-intro.css",
+        "c08/web/workspace-shell.js",
+        "c08/web/explore.js",
+        "c08/web/assets/seamline-orbit-intro.mp4",
+        "c08/web/assets/seamline-orbit-poster.jpg",
+        "c08/web/assets/intro-media.json"
+      ],
+      "media_provenance": "c08/web/assets/intro-media.json"
+    },
+    {
+      "date_asia_karachi": "2026-11-15",
+      "tool": "OpenAI Codex",
+      "status": "Verified local frontend; owner authorized GitHub publication on 15 November 2026",
+      "scope": "Completed native orbital opening, illustrative scan cones and sampled detection glow, instrument docking, independent layer controls, data-backed diagnostics, real-model metric/chart transitions, and playback playhead. Added unmodified supplied Space Apps event logo and event name. Corrected unsupported synthetic ranges in the older sensitivity table. Retained reduced-motion, WebGL fallback, scientific qualifications, and original AI provenance.",
+      "files": [
+        "c08/web/intro.js",
+        "c08/web/motion-lab.js",
+        "c08/web/motion-lab.css",
+        "c08/web/assets/motion-diagnostics.json",
+        "c08/web/assets/space-apps-challenge.png",
+        "c08/web/index.html",
+        "c08/web/fx3d.js",
+        "c08/web/app.js",
+        "c08/web/explore.js",
+        "c08/web/map3d.js",
+        "c08/web/workspace-shell.js"
+      ],
+      "reference": "Owner supplied gemini_generated_video_0af5ee6c.mp4; its full 20-second visual timeline was reviewed. The shipped interface is native application code, not the reference video.",
+      "supersedes": "The earlier local three-second embedded-video entrance is no longer used. Its unused media is excluded from this publication.",
+      "data": "Diagnostic histogram is a display-only extraction of saved E02 Punjab annual drift WAPE, 2018–2025. M3/M4 remain scoped saved E03 sensitivity cases, not live models. Scientific Python, Parquet and experiments are unchanged.",
+      "branding": "Unmodified owner-supplied Space Apps event mark, not AI-generated. Standalone NASA insignia excluded in accordance with Space Apps brand guide page 6. Independent participant application; no NASA endorsement."
     }
   ]
 }
