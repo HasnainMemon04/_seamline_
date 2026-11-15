@@ -692,28 +692,12 @@
         }
       }
       if (pointsData && playDay > 0 && motion === "full") {
-        const minD = Math.max(1, playDay - 2), nightOnly = dnFilter === "N", allDn = dnFilter === "DN";
-        let matchCount = 0;
-        for (let i = 0; i < pointsData.lon.length; i++) {
-          const d = pointsData.day[i];
-          if (d < minD || d > playDay) continue;
-          if (!satFilter.includes(pointsData.p[i])) continue;
-          if (!allDn && nightOnly !== (pointsData.dn[i] === 1)) continue;
-          matchCount++;
-        }
+        const matching = opts.matchingRows({ sats: satFilter, dn: dnFilter, day: playDay }, Math.max(1, playDay - 2));
         const MAX_PULSES = 850;
-        const stride = matchCount > MAX_PULSES ? Math.ceil(matchCount / MAX_PULSES) : 1;
-        let seen = 0, emitted = 0;
-        for (let i = 0; i < pointsData.lon.length && emitted < MAX_PULSES; i++) {
-          const d = pointsData.day[i];
-          if (d < minD || d > playDay) continue;
-          if (!satFilter.includes(pointsData.p[i])) continue;
-          if (!allDn && nightOnly !== (pointsData.dn[i] === 1)) continue;
-          if (stride === 1 || (seen % stride === 0)) {
-            addQuad(pointsData.mx[i], pointsData.my[i], pointElev(i), d, 1.0, satColorRgb(pointsData.p[i]));
-            emitted++;
-          }
-          seen++;
+        const stride = Math.max(1, Math.ceil(matching.length / MAX_PULSES));
+        for (let j = 0; j < matching.length; j += stride) {
+          const i = matching[j];
+          addQuad(pointsData.mx[i], pointsData.my[i], pointElev(i), pointsData.day[i], 1.0, satColorRgb(pointsData.p[i]));
         }
       }
       return true;
@@ -915,7 +899,7 @@
     return {
       layer,
       setDate(month) { monthStr = month || null; lastOrbitKey = ""; satScreenBadges = []; if (opts.onTick) opts.onTick([]); if (map) map.triggerRepaint(); },
-      setActive(on) { activeView = !!on; lastFrameTime = performance.now(); if (!on) clearRepaintTimer(); else if (map) map.triggerRepaint(); },
+      setActive(on) { if (activeView === !!on) return; activeView = !!on; lastFrameTime = performance.now(); if (!on) clearRepaintTimer(); else if (map) map.triggerRepaint(); },
       setTheme(c, dark) { colors = c; isDark = !!dark; lastOrbitKey = ""; lastPulseKey = ""; if (map) map.triggerRepaint(); },
       setPoints(P) {
         monthStr = P?.month || null; lastOrbitKey = ""; satScreenBadges = [];
@@ -943,8 +927,10 @@
         lastPulseKey = "";
       },
       setFilter(f) {
+        const next = `${(f.sats || []).join(",")}|${f.dn || "DN"}`;
+        if (next === filterKey) return;
         satFilter = f.sats || []; dnFilter = f.dn || "DN";
-        filterKey = `${satFilter.join(",")}|${dnFilter}`;
+        filterKey = next;
         lastOrbitKey = ""; lastPulseKey = "";
         if (map) map.triggerRepaint();
       },
@@ -960,7 +946,9 @@
       },
       setPsf(on) { psfOn = !!on; },
       setPlayback(day, playing) {
-        playDay = day || 0; isPlaying = !!playing; lastPulseKey = ""; lastOrbitKey = "";
+        const nextDay = day || 0, nextPlaying = !!playing;
+        if (playDay === nextDay && isPlaying === nextPlaying) return;
+        playDay = nextDay; isPlaying = nextPlaying; lastPulseKey = ""; lastOrbitKey = "";
         if (!isPlaying && !orbitOn) clearRepaintTimer();
         if (map) map.triggerRepaint();
       },

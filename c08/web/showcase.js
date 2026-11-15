@@ -8,7 +8,6 @@
 (function () {
   "use strict";
 
-  const KEYS = ["headline", "seam", "clock", "season", "log"];
   const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const SAT = {
     SNPP: { label: "S-NPP", cls: "snpp" },
@@ -489,31 +488,45 @@
   // ---------- load and draw ----------
   const RENDER = { headline: renderHeadline, seam: renderSeam, clock: renderClock, season: renderSeason, log: renderLog };
 
-  function drawCharts(force) {
+  function drawCharts() {
     for (const [id, draw] of charts) {
       const host = byId(id);
-      if (!host) continue;
-      const w = Math.max(240, Math.min(760, Math.floor(host.clientWidth || 320)));
-      if (!force && host.dataset.w === String(w)) continue;
+      if (!host?.clientWidth) continue;
+      const w = Math.max(240, Math.min(760, Math.floor(host.clientWidth)));
+      if (host.dataset.w === String(w)) continue;
       host.dataset.w = String(w);
       try { host.innerHTML = draw(w); } catch (e) { host.innerHTML = `<p class="sc-error">This chart could not be drawn (${esc(e.message)}).</p>`; }
     }
   }
 
+  let cards = null, pending = false, loadError = "";
+  const rendered = new Set();
   async function load() {
-    let data;
+    pending = true;
     try {
       const r = await fetch("/api/showcase", { headers: { Accept: "application/json" } });
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      data = await r.json();
+      cards = (await r.json()).cards || {};
     } catch (e) {
-      for (const k of KEYS) put(k, `<p class="sc-error" role="alert">The saved results could not be loaded (${esc(e.message)}). Check your connection and reload the page.</p>`);
-      return;
+      loadError = e.message;
+    } finally {
+      pending = false;
+      redraw();
     }
-    charts.clear();
-    for (const k of KEYS) {
-      const c = data && data.cards ? data.cards[k] : null;
-      if (!c) { put(k, para("This card is missing from the reply.", "sc-error")); continue; }
+  }
+
+  function redraw() {
+    const { ws, story, ev } = window.Seam.UI;
+    const k = ws === "overview" && ["headline", "seam", "clock", "season"].includes(story) ? story
+      : ws === "evidence" && ev === "log" ? "log"
+      : ws === "evidence" && ev === "seasons" ? "season" : "";
+    if (!k) return;
+    if (loadError) { put(k, `<p class="sc-error" role="alert">The saved results could not be loaded (${esc(loadError)}). Check your connection and reload the page.</p>`); return; }
+    if (!cards) { if (!pending) load(); return; }
+    if (!rendered.has(k)) {
+      rendered.add(k);
+      const c = cards[k];
+      if (!c) { put(k, para("This card is missing from the reply.", "sc-error")); return; }
       const t = byId(`${k}-title`);
       if (t && c.title) t.textContent = c.title;
       try {
@@ -523,14 +536,13 @@
         put(k, `<p class="sc-error" role="alert">This card could not be drawn (${esc(e.message)}).</p>`);
       }
     }
-    drawCharts(true);
+    drawCharts();
   }
 
   // Charts in a panel that was hidden are drawn again at their real width when the panel is shown.
-  window.SeamShowcase = { redraw: () => drawCharts(false) };
+  window.SeamShowcase = { redraw, ready: () => !pending };
+  window.Seam.on("resize", drawCharts);
 
   let timer = null;
-  window.addEventListener("resize", () => { clearTimeout(timer); timer = setTimeout(() => drawCharts(false), 150); });
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", load);
-  else load();
+  window.addEventListener("resize", () => { clearTimeout(timer); timer = setTimeout(drawCharts, 150); });
 })();

@@ -7,7 +7,9 @@
 .is-native .intro-kicker { font-size:9px; letter-spacing:.19em; }
 .is-native .intro-content >p:not(#intro-status) { font-size:12px; margin:4px auto; }
 .is-native #intro-status { margin:10px auto; }
-.is-native #intro-model { position:fixed; width:min(540px,48vw); height:270px; left:-30%; bottom:40vh; transform:rotate(-14deg); }
+.is-native #intro-model { position:absolute; width:clamp(230px,38vw,540px); height:auto; aspect-ratio:900/440; left:clamp(-65px,4vw,80px); top:28%; transform:rotate(-14deg); pointer-events:none; }
+.intro-landing-frame { position:fixed; z-index:0; pointer-events:none; }
+.satellite-intro.is-native.is-leaving::before { opacity:0; transition:opacity 220ms ease-out; }
 .is-native .intro-orbit { display:none; }
 .native-hud { position:absolute; width:236px; height:236px; top:25%; left:50%; transform:translateX(-50%); display:grid; place-items:center; z-index:2; }
 .native-arc { position:absolute; inset:0; border-radius:50%; border:7px solid transparent; }
@@ -60,11 +62,12 @@
 .motion-model-table tr.is-selected { background:var(--accent-soft); }
 .motion-model-table button { border:0; padding:4px 0; background:transparent; color:var(--link); font-weight:600; }
 .motion-model-detail { font-size:11px; color:var(--muted); min-height:34px; line-height:1.6; }
-.motion-playhead { position:absolute; top:0; bottom:10px; width:2px; background:var(--accent); box-shadow:0 0 9px var(--accent); pointer-events:none; transform:translateX(-1px); }
+.motion-playhead { position:absolute; left:0; top:0; bottom:10px; width:100%; pointer-events:none; }
+.motion-playhead::before { content:''; display:block; height:100%; width:2px; background:var(--accent); box-shadow:0 0 9px var(--accent); transform:translateX(-1px); }
 .motion-lat-label { position:absolute; right:58px; top:50%; z-index:10; padding:3px 6px; background:var(--glass); color:var(--muted); border-radius:3px; font:10px var(--mono); pointer-events:none; }
 @media(max-width:760px){
  .native-hud{width:164px;height:164px;top:19%}.native-hud-centre{font-size:13px}.native-hud-centre small{font-size:6px}
- .is-native #intro-model{left:-15%;width:240px;height:130px;bottom:35vh}
+ .is-native #intro-model{left:-52px;width:230px;top:22%}
  .is-native .intro-content{bottom:6%;padding:14px}.is-native .intro-content h1{font-size:24px}
  .motion-layer-dock{left:16px;bottom:var(--motion-dock-bottom,225px);width:190px;padding:8px 10px}.motion-scan-note{bottom:var(--motion-dock-bottom,225px);font-size:9px;width:max-content}
  .motion-quick > button{margin-top:7px}.motion-quick-panel{top:78px;left:16px;right:auto;width:min(250px,calc(100vw - 32px))}.motion-quick > button span{display:none}

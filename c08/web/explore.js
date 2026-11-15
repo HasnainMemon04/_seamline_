@@ -252,6 +252,11 @@
   const UI = S.UI;
   let host = null, engine = null, POINTS = null, PKEY = "", PREQ = 0, PCTRL = null, PERR = "", picked = null, play = null, drawing = false, started = false;
   let lowPower = false, glProblem = "", listShown = 100, printBackup = null, COUNTS = null, pointsPending = false;
+  let rowBuckets = null, matchedKey = "", matchedRows = [], frpKey = "", frpValue = null;
+  let pointsRequestKey = "", pointsTask = null, preloadedPoints = null, scrubFrame = 0, scrubArtKey = "", scrubWidth = 0, fitKey = "";
+  let listTimer = 0, legendMarkup = "";
+  let mapLibraryPending = false, mapLibraryFailed = false, webglLost = false;
+  const mapWorkspace = () => UI.ws === "overview" || UI.ws === "explore";
   let vmode = "points", orbitOn = false, psfOn = false, satPicked = null;
   const satPinNodes = new Map();
   try { lowPower = localStorage.getItem("seamline-lowpower") === "1"; } catch (_) { /* storage blocked */ }
@@ -295,24 +300,26 @@
       <div class="map-msg" id="map-msg" role="status" aria-live="polite"></div>
       <div class="map-scrub" id="map-scrub">
         <button type="button" class="icon-btn" id="play-btn" aria-pressed="false" aria-label="Play this month day by day (historical playback of past observations)" title="Play this month day by day (past observations)">${ic("play")}</button>
-        <div class="scrub-track"><canvas id="scrub-canvas"></canvas><input type="range" id="scrub" min="0" max="30" step="1" value="0" aria-label="Day shown on the map; 0 shows the whole month"><span class="scrub-focus"></span></div>
+        <div class="scrub-track"><canvas id="scrub-canvas"></canvas><span id="scrub-selection" aria-hidden="true"></span><input type="range" id="scrub" min="0" max="30" step="1" value="0" aria-label="Day shown on the map; 0 shows the whole month"><span class="scrub-focus"></span></div>
         <div class="scrub-date" id="scrub-date"></div></div>`;
   }
   function mount() {
     const stage = $(UI.ws === "explore" ? "stage-explore" : "stage-overview");
-    if (engine?.setActive) engine.setActive((UI.ws === "explore" || UI.ws === "overview") && !document.hidden);
-    if (host.parentElement !== stage && (UI.ws === "explore" || UI.ws === "overview")) stage.appendChild(host);
+    if (engine?.setActive) engine.setActive(mapWorkspace() && !document.hidden);
+    if (!mapWorkspace()) return;
+    if (host.parentElement !== stage) stage.appendChild(host);
+    enableMapLibrary();
     requestAnimationFrame(() => {
       if (engine) engine.resize();
-      if (engine && !fittedVisible && $("map-view").clientWidth > 50) fitNow(false);
+      if (engine && !window.SeamIntro?.ownsCamera() && $("map-view").clientWidth > 50) fitSelection(false);
       drawScrub();
     });
   }
   const selection = () => { const r = S.result(); return r ? { region: r.region, bbox: r.request.bbox ? r.request.bbox.map(Number) : null } : null; };
   function selBounds() {
-    const s = selection(), A = S.areas();
+    const s = selection() || (S.meta() ? S.selectedRequest() : null), A = S.areas();
     if (!s || !A) return [60.8, 23.6, 77.9, 37.1];
-    return s.bbox || (A.areas[s.region] || A.areas.Pakistan).bounds;
+    return s.bbox?.map(Number) || (A.areas[s.region] || A.areas.Pakistan).bounds;
   }
 
   // A fit made while the map has no size (its workspace is hidden) is wrong, so it is made again the first time the
@@ -323,6 +330,22 @@
     const visible = $("map-view").clientWidth > 50;
     engine.fit(selBounds(), animate && visible);
     fittedVisible = visible;
+  }
+  function fitSelection(animate) {
+    const key = selBounds().join(",");
+    if (fittedVisible && key === fitKey) return;
+    fitNow(animate);
+    fitKey = key;
+  }
+  function fitAfterIntro(regional = false) {
+    if (regional) {
+      UI.mode = "3d";
+      setOrbit(true);
+      S.emit("map-mode", UI.mode);
+      S.syncUrl();
+    }
+    fitNow(false);
+    fitKey = selBounds().join(",");
   }
   function renderSatPins(badges) {
     const wrap = host && $("sat-pins");
@@ -440,23 +463,27 @@
 
   function makeEngine() {
     if (engine) { engine.destroy(); engine = null; }
+    fittedVisible = false;
     $("map-view").innerHTML = "";
     satPinNodes.clear();
     if ($("sat-pins")) $("sat-pins").innerHTML = "";
-    glProblem = lowPower ? "" : window.SeamGL ? window.SeamGL.available() : "The map library did not load.";
+    const tryGl = mapWorkspace() && !lowPower && !webglLost && !!window.maplibregl;
+    glProblem = webglLost ? "The 3D view lost its graphics context." : tryGl ? window.SeamGL.available() : "";
     const A = S.areas();
     const opts = {
       colors: colors(), geo: S.geo(), areas: A ? A.areas : {}, cities: CITIES, mode: UI.mode, vmode,
+      openingBounds: window.SeamIntro?.coldScene() ? selBounds() : null,
       motion: S.motionMode, drawing: () => drawing,
       onPick: pick, onArea: (name) => { const s = selection(); if (!drawing && s && (s.bbox || s.region !== name)) S.selectArea(name); },
       onHover: hover, onUser: () => stopPlay("You moved the map"), onBearing: (b) => { $("north-btn").firstElementChild.style.transform = `rotate(${-b}deg)`; },
       onSatTick: renderSatPins,
-      onPolyMeta: () => { updateRenderPill(); legend(); },
+      matchingRows,
+      onPolyMeta: () => { updateRenderPill(); legend(); S.emit("map-geometry"); },
       onLost: () => { glProblem = "The 3D view lost its graphics context."; lowPower = false; fallback(); },
-      onReady: () => { const s = selection(); if (s) fitNow(false); },
+      onReady: () => { if (mapWorkspace() && !window.SeamIntro?.ownsCamera()) fitSelection(false); },
     };
     let usingGl = false;
-    if (!lowPower && !glProblem) {
+    if (tryGl && !glProblem) {
       try { engine = window.SeamGL.create($("map-view"), opts); usingGl = true; } catch (e) { glProblem = `The 3D view could not start (${e.message}).`; $("map-view").innerHTML = ""; }
     }
     if (!usingGl) {
@@ -465,18 +492,32 @@
     }
     host.classList.toggle("is-canvas", !usingGl);
     $("map-banner").textContent = usingGl ? "" : lowPower ? "Low-power map: a flat top-down view. Areas, filters, dates, counts and inspection are the same as in 3D."
-      : `${glProblem} The map is drawn as a flat top-down view instead; areas, filters, dates, counts and inspection are the same.`;
+      : glProblem || mapLibraryFailed ? `${glProblem || "The map library did not load."} The map is drawn as a flat top-down view instead; areas, filters, dates, counts and inspection are the same.`
+      : "Preparing terrain and 3D view…";
     syncMode();
     const s = selection();
-    if (s) { engine.setSelection(s); fitNow(false); }
+    if (s) { engine.setSelection(s); if (mapWorkspace() && !window.SeamIntro?.ownsCamera()) fitSelection(false); }
     engine.setViewMode(vmode);
     engine.setPsf(psfOn);
     engine.setOrbit(orbitOn);
     engine.setSeam(UI.story === "seam");
     if (POINTS) { engine.setPoints(POINTS); applyFilter(); engine.select(picked); }
     if (window.SeamCoverage) window.SeamCoverage.redraw();
+    S.emit("map-engine");
   }
-  function fallback() { makeEngine(); }
+  function fallback() {
+    webglLost = true;
+    makeEngine();
+  }
+  function enableMapLibrary() {
+    if (engine?.kind === "gl" || lowPower || webglLost || mapLibraryPending || mapLibraryFailed || glProblem) return;
+    mapLibraryPending = true;
+    window.loadSeamMapLibrary().then(available => {
+      mapLibraryPending = false;
+      mapLibraryFailed = !available;
+      if (mapWorkspace() && !lowPower) makeEngine();
+    });
+  }
   function syncMode() {
     const gl = engine && engine.kind === "gl";
     for (const b of host.querySelectorAll("[data-mode]")) {
@@ -517,42 +558,75 @@
     const vmMeta = engine && engine.viewMeta ? engine.viewMeta() : { total: 0, shown: 0, limited: false };
     pill.hidden = false;
     pill.classList.toggle("is-sampled", !!vmMeta.limited);
-    pill.textContent = `Rendered ${fmt(vmMeta.shown)} of ${fmt(vmMeta.total)}`;
+    pill.textContent = vmMeta.pending ? "Updating 3D geometry…" : `Rendered ${fmt(vmMeta.shown)} of ${fmt(vmMeta.total)}`;
+    if (vmMeta.pending) { pill.title = "The previous geometry is visible while the selected view loads."; return; }
     pill.title = vmMeta.limited
       ? `3D geometry is capped at ${fmt(vmMeta.shown)} detections (top FRP + uniform spatial sample) out of ${fmt(vmMeta.total)} matching detections. Full counts and exports remain exact.`
       : `All ${fmt(vmMeta.total)} matching detections are rendered as 3D geometry.`;
   }
 
   // ---------- data ----------
-  function pointRequest() {
+  function pointRequest(request, month, identity) {
     const r = S.result();
-    if (!r) return null;
-    const [y, m] = S.dayMonth();
-    const body = { region: r.request.region, day_month: [y, m] };
-    if (r.request.bbox) body.bbox = r.request.bbox;
-    const identity = r.data_identity || (S.meta() || {}).data_identity;
+    const p = request || r?.request;
+    if (!p) return null;
+    const body = { region: p.region, day_month: month || S.dayMonth() };
+    if (p.bbox) body.bbox = p.bbox;
+    identity ||= r?.data_identity || S.meta()?.data_identity;
     if (identity) body.data_identity = identity;
     return body;
   }
-  async function loadPoints() {
+  function fetchPoints(body, signal) {
+    return S.post("/api/points", body, signal).then(r => r.json());
+  }
+  function preloadPoints(request) {
+    if (!mapWorkspace()) return;
+    const body = pointRequest(request, S.initialMapMonth(request));
+    const key = JSON.stringify(body);
+    if (preloadedPoints?.key === key) return;
+    preloadedPoints?.controller.abort();
+    const controller = new AbortController();
+    // Keep a failed preload retryable through the ordinary map request.
+    const response = fetchPoints(body, controller.signal).catch(() => null);
+    preloadedPoints = { key, controller, response };
+  }
+  S.on("initial-selection", preloadPoints);
+  S.on("analysis-error", () => { preloadedPoints?.controller.abort(); preloadedPoints = null; });
+  function loadPoints() {
+    if (!mapWorkspace() || !engine) return;
     const body = pointRequest();
     if (!body) return;
     const [y, m] = body.day_month;
-    if (engine.setDate) engine.setDate(`${y}-${String(m).padStart(2, "0")}`);
-    if ($("sat-card")) $("sat-card").hidden = true; satPicked = null;
     const key = JSON.stringify(body);
+    if (key === pointsRequestKey && pointsPending) return pointsTask;
     if (key === PKEY && POINTS && !PERR && !pointsPending) { applyFilter(); return; }
+    engine.setDate?.(`${y}-${String(m).padStart(2, "0")}`);
+    if ($("sat-card")) $("sat-card").hidden = true;
+    satPicked = null;
     const id = ++PREQ;       // only the newest reply is drawn
     if (PCTRL) PCTRL.abort();
     PCTRL = new AbortController();
+    const { signal } = PCTRL;
+    const preload = preloadedPoints;
+    preloadedPoints = null;
+    if (preload?.key === key) signal.addEventListener("abort", () => preload.controller.abort(), { once: true });
+    else preload?.controller.abort();
+    pointsRequestKey = key;
     pointsPending = true;
     stopPlay();
     host.classList.add("is-stale");
     PERR = "";
     $("map-msg").textContent = `Loading the detections for ${MONTH_FULL[m - 1]} ${y}…`;
     title(true);
+    S.emit("map-filter");
+    pointsTask = applyPointResponse(body, key, preload, id, signal);
+    return pointsTask;
+  }
+  async function applyPointResponse(body, key, preload, id, signal) {
     try {
-      const res = await (await S.post("/api/points", body, PCTRL.signal)).json();
+      const prefetched = preload?.key === key ? await preload.response : null;
+      if (id !== PREQ || signal.aborted) return;
+      const res = prefetched || await fetchPoints(body, signal);
       if (id !== PREQ) return;
       if (body.data_identity && res.data_identity && body.data_identity !== res.data_identity) {
         throw new Error("The cached inputs changed after this result loaded. Reload the selection before exporting its map.");
@@ -565,9 +639,9 @@
       $("map-msg").textContent = "";
       host.classList.remove("is-stale");
       $("scrub").max = String(res.days_in_month);
+      pointsPending = false;
       applyFilter();
       inspect(null);
-      pointsPending = false;
       S.emit("points-loaded");
     } catch (e) {
       if (id !== PREQ || e.name === "AbortError") return;
@@ -575,25 +649,63 @@
       pointsPending = false;
       host.classList.remove("is-stale");
       POINTS = null; PKEY = ""; COUNTS = null;
+      rowBuckets = null; matchedKey = ""; frpKey = ""; scrubArtKey = "";
       engine.setPoints(null);
       $("map-msg").innerHTML = `The detections could not be loaded. ${esc(e.message)} <button type="button" class="btn" id="map-retry">Try again</button>`;
-      title(); legend(); drawScrub(); platList();
+      title(); legend(); drawScrub(); platList(); pointList();
+      S.emit("map-filter");
     }
   }
   // Per-satellite, per-pass, per-day counts of the month, straight from the rows on the map.
   function count() {
     const n = POINTS.days_in_month;
     COUNTS = SATS.map(() => [new Int32Array(n + 1), new Int32Array(n + 1)]);
-    for (let i = 0; i < POINTS.lon.length; i++) COUNTS[POINTS.p[i]][POINTS.dn[i]][POINTS.day[i]]++;
+    rowBuckets = SATS.map(() => [0, 1].map(() => Array.from({ length: n + 1 }, () => [])));
+    matchedKey = ""; frpKey = ""; scrubArtKey = "";
+    for (let i = 0; i < POINTS.lon.length; i++) {
+      const p = POINTS.p[i], pass = POINTS.dn[i], day = POINTS.day[i];
+      COUNTS[p][pass][day]++;
+      COUNTS[p][pass][0]++;
+      rowBuckets[p][pass][day].push(i);
+      rowBuckets[p][pass][0].push(i);
+    }
     SATS.forEach((s, p) => {   // the server's own counts must agree with the rows it sent
-      const d = COUNTS[p][0].reduce((a, b) => a + b, 0), nn = COUNTS[p][1].reduce((a, b) => a + b, 0);
+      const d = COUNTS[p][0][0], nn = COUNTS[p][1][0];
       if (d !== POINTS.counts[s].D || nn !== POINTS.counts[s].N) console.error("Seamline: map counts differ from the server's", s, d, nn, POINTS.counts[s]);
     });
   }
   function shownCount(p, day) {
     if (!COUNTS) return null;
-    const one = (dn) => (day ? COUNTS[p][dn][day] : COUNTS[p][dn].reduce((a, b) => a + b, 0));
+    const one = (dn) => COUNTS[p][dn][day];
     return UI.dn === "DN" ? one(0) + one(1) : one(UI.dn === "N" ? 1 : 0);
+  }
+  const currentFilter = () => ({ sats: UI.sats.map(s => SATS.indexOf(s)), dn: UI.dn, day: UI.mapDay });
+  const filterKey = f => `${f.sats.join(",")}|${f.dn}|${f.day}`;
+  const exactCount = () => COUNTS && !pointsPending ? UI.sats.reduce((n, s) => n + shownCount(SATS.indexOf(s), UI.mapDay), 0) : null;
+  const pointStatus = () => PERR ? "error" : pointsPending || !POINTS ? "loading" : "ready";
+  function mergeIds(a, b) {
+    if (!a.length) return b;
+    if (!b.length) return a;
+    const out = new Array(a.length + b.length);
+    let i = 0, j = 0, next = 0;
+    while (i < a.length && j < b.length) out[next++] = a[i] < b[j] ? a[i++] : b[j++];
+    while (i < a.length) out[next++] = a[i++];
+    while (j < b.length) out[next++] = b[j++];
+    return out;
+  }
+  function matchingRows(f, firstDay = f.day) {
+    if (!rowBuckets) return [];
+    const key = `${filterKey(f)}|${firstDay}`;
+    if (key === matchedKey) return matchedRows;
+    const passes = f.dn === "DN" ? [0, 1] : [f.dn === "N" ? 1 : 0];
+    const groups = f.sats.flatMap(p => passes.flatMap(pass => rowBuckets[p][pass].slice(firstDay, f.day + 1)));
+    // Row IDs are the stable UTC order of the server response.
+    matchedRows = groups.reduce(mergeIds, []);
+    matchedKey = key;
+    return matchedRows;
+  }
+  function isInitialViewReady() {
+    return !pointsPending && !!(POINTS || PERR);
   }
   const inRecord = (sat) => !POINTS || !POINTS.record || !["outside_record", "unavailable"].includes(POINTS.record[sat].status);
   const recordNote = (sat) => {
@@ -602,12 +714,15 @@
   };
 
   // ---------- filters, legend, title ----------
-  function applyFilter() {
+  function applyFilter(scrubbing = false) {
     if (!engine) return;
-    engine.setFilter({ sats: UI.sats.map((s) => SATS.indexOf(s)), dn: UI.dn, day: UI.mapDay });
+    engine.setFilter(currentFilter());
     $("scrub").value = String(UI.mapDay);
     updateRenderPill();
-    title(); legend(); platList(); drawScrub(); pointList();
+    title(); legend(); platList(); drawScrub();
+    clearTimeout(listTimer);
+    if (scrubbing && $("point-list-wrap")?.open) listTimer = setTimeout(pointList, 120);
+    else pointList();
     for (const b of $("map-dn").querySelectorAll("button")) b.setAttribute("aria-pressed", String(b.dataset.dn === UI.dn));
     const empty = POINTS && UI.sats.every((s) => !shownCount(SATS.indexOf(s), UI.mapDay));
     if (POINTS && !PERR) {
@@ -617,6 +732,7 @@
           (inRecord("Aqua") ? ` <button type="button" class="btn" id="map-use-aqua">Show Aqua MODIS instead</button>` : "")
         : empty ? `No detections from ${UI.sats.map((s) => SAT_INFO[s].short).join(", ")} here ${UI.mapDay ? "on this day" : "in this month"}. No detection is not no burning.` : "";
     }
+    S.emit("map-filter");
   }
   const EOSDIS_SPEC = {
     Terra: "MCD14ML C6.1 (1 km · ~4–40 MW floor)",
@@ -627,27 +743,26 @@
   };
   function frpSummary() {
     if (!POINTS || !POINTS.frp || !UI.sats.length) return null;
-    const satIdxs = UI.sats.map((k) => SATS.indexOf(k));
+    const filter = currentFilter(), key = filterKey(filter);
+    if (key === frpKey) return frpValue;
     const vals = [];
     let sumMw = 0;
-    for (let i = 0; i < POINTS.lon.length; i++) {
-      if (!satIdxs.includes(POINTS.p[i])) continue;
-      if (UI.dn !== "DN" && (UI.dn === "N") !== (POINTS.dn[i] === 1)) continue;
-      if (UI.mapDay && POINTS.day[i] !== UI.mapDay) continue;
+    for (const i of matchingRows(filter)) {
       const v = POINTS.frp[i];
       if (v != null && v > 0) { vals.push(v); sumMw += v; }
     }
-    if (!vals.length) return { count: 0, sumMw: 0, medMw: 0, p90Mw: 0, label: `${UI.sats.map((k) => SAT_INFO[k].short).join("+")} · ${when()}` };
+    frpKey = key;
     vals.sort((a, b) => a - b);
-    const medMw = vals[Math.floor(vals.length * 0.5)];
-    const p90Mw = vals[Math.floor(vals.length * 0.9)];
-    return {
+    const medMw = vals[Math.floor(vals.length * 0.5)] ?? 0;
+    const p90Mw = vals[Math.floor(vals.length * 0.9)] ?? 0;
+    frpValue = {
       count: vals.length,
       sumMw,
       medMw,
       p90Mw,
       label: `${UI.sats.map((k) => SAT_INFO[k].short).join("+")} · ${when()}`,
     };
+    return frpValue;
   }
   function when() {
     const [y, m] = POINTS ? POINTS.month.split("-").map(Number) : S.dayMonth();
@@ -685,7 +800,9 @@
     const vmMeta = engine && engine.viewMeta ? engine.viewMeta() : { total: 0, shown: 0, limited: false };
     const c = colors();
     let extra = "";
-    if (vmode === "towers") {
+    if (vmMeta.pending && (vmode === "towers" || vmode === "footprints")) {
+      extra = "Updating 3D geometry for the selected detections…";
+    } else if (vmode === "towers") {
       extra = `<b>Rendered ${fmt(vmMeta.shown)} of ${fmt(vmMeta.total)}</b>${vmMeta.limited ? " (sampled: top FRP + uniform grid)" : ""}. Tower height ∝ √FRP (MW, capped ~54 km); shows radiative power per detection, never burned area.`;
     } else if (vmode === "footprints") {
       extra = `<b>Rendered ${fmt(vmMeta.shown)} of ${fmt(vmMeta.total)}</b>${vmMeta.limited ? " (sampled: top FRP + uniform grid)" : ""}. Oriented scan × track ground footprints (MODIS bowtie off-nadir vs 3:1→1:1 VIIRS).${psfOn ? " Faint outer box: MODIS 2×1 km PSF kernel (25/50/25%)." : ""}`;
@@ -699,7 +816,7 @@
         : "Illustrative orbits & swaths (launch-date filtered, 20× altitude scale, enlarged spacecraft). Not live tracking or measured coverage. Click a satellite for details.");
     }
     const open = $("lg-more") && $("lg-more").open;
-    $("map-legend").innerHTML = (rows || `<div class="lg-row">No satellite selected</div>`) +
+    const markup = (rows || `<div class="lg-row">No satellite selected</div>`) +
       telemHtml +
       `<div class="lg-note">Detections ${UI.mapDay ? "on this UTC day" : "this month"}, per satellite, never added together.</div>` +
       (extra ? `<div class="lg-extra">${extra}</div>` : "") +
@@ -709,15 +826,26 @@
       `<div class="lg-note">A point is one fire pixel on one pass at its reported centre, not a fire or a burned area. ${surface} City names are for orientation.</div>` +
       (POINTS ? UI.sats.map((s) => POINTS.record[s] && POINTS.record[s].support ? `<div class="lg-note">${esc(SAT_INFO[s].short)}: ${esc(recordNote(s))}</div>` : "").join("") : "") +
       `<label class="inline lg-low"><input type="checkbox" id="low-power"${lowPower ? " checked" : ""}> Low-power 2D map (no WebGL)</label></details>`;
+    if (markup !== legendMarkup) {
+      legendMarkup = markup;
+      $("map-legend").innerHTML = markup;
+    }
   }
   function platList() {
     const box = $("map-plats");
     if (!box) return;
-    box.innerHTML = SATS.map((k) => {
-      const info = SAT_INFO[k], n = shownCount(SATS.indexOf(k), UI.mapDay);
-      const val = !inRecord(k) ? `<small>${POINTS.record[k].status === "unavailable" ? "no usable data" : "no record this month"}</small>` : n == null ? "…" : fmt(n);
-      return `<label><input type="checkbox" data-sat="${k}"${UI.sats.includes(k) ? " checked" : ""}><span class="mk ${info.cls}${info.round ? " round" : " ring"}"></span>${esc(info.label)}${k === "SNPP" ? " <small>(reference)</small>" : ""}<b>${val}</b></label>`;
+    if (!box.firstElementChild) box.innerHTML = SATS.map((k) => {
+      const info = SAT_INFO[k];
+      return `<label><input type="checkbox" data-sat="${k}"><span class="mk ${info.cls}${info.round ? " round" : " ring"}"></span>${esc(info.label)}${k === "SNPP" ? " <small>(reference)</small>" : ""}<b></b></label>`;
     }).join("");
+    SATS.forEach((k, i) => {
+      const row = box.children[i];
+      row.firstElementChild.checked = UI.sats.includes(k);
+      const n = shownCount(i, UI.mapDay);
+      const val = !inRecord(k) ? `<small>${POINTS.record[k].status === "unavailable" ? "no usable data" : "no record this month"}</small>` : n == null ? "…" : fmt(n);
+      const value = row.lastElementChild;
+      if (value.dataset.value !== val) { value.dataset.value = val; value.innerHTML = val; }
+    });
   }
 
   // ---------- date scrubber and historical playback ----------
@@ -738,6 +866,10 @@
     const cv = $("scrub-canvas");
     if (!cv || !cv.clientWidth) return;
     const W = cv.clientWidth, H = cv.clientHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+    const artKey = `${W}:${H}:${dpr}|${UI.sats.join(",")}|${UI.dn}`;
+    if (scrubArtKey === artKey) { updateScrubDay(); return; }
+    scrubArtKey = artKey;
+    scrubWidth = W;
     cv.width = W * dpr; cv.height = H * dpr;
     const g = cv.getContext("2d"), c = colors();
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -750,13 +882,14 @@
     const sats = UI.sats.map((k) => SATS.indexOf(k));
     let max = 1;
     if (COUNTS) for (const p of sats) for (let d = 1; d <= n; d++) max = Math.max(max, shownCount(p, d));
+    const noDataInk = css("--nodata");
     for (let d = 1; d <= n; d++) {
       const x0 = col * d + 1, w = Math.max(1, (col - 2) / Math.max(1, sats.length));
       sats.forEach((p, j) => {
         const st = dayStatus(SATS[p], d);
         const missing = st && !["ok", "modelled"].includes(st);
         if (missing) {           // no usable data that day: a hatched block, never an empty (zero) bar
-          g.fillStyle = css("--nodata"); g.fillRect(x0 + j * w, base - 12, w - 0.5, 12);
+          g.fillStyle = noDataInk; g.fillRect(x0 + j * w, base - 12, w - 0.5, 12);
           g.strokeStyle = c.muted; g.lineWidth = 1; g.beginPath(); g.moveTo(x0 + j * w, base); g.lineTo(x0 + j * w + w - 0.5, base - 12); g.stroke();
         } else if (COUNTS) {
           const v = shownCount(p, d), h = v ? Math.max(2.6, Math.sqrt(v / max) * (base - 2)) : 0;
@@ -764,8 +897,15 @@
         }
       });
     }
-    const sx = col * UI.mapDay;
-    g.strokeStyle = c.ink; g.lineWidth = 2; g.strokeRect(sx + 1, 1, col - 2, H - 2);
+    updateScrubDay();
+  }
+  function updateScrubDay() {
+    const col = scrubWidth / ((POINTS?.days_in_month || 30) + 1);
+    const mark = $("scrub-selection");
+    if (mark && col > 0) {
+      mark.style.width = `${Math.max(0, col - 2)}px`;
+      mark.style.transform = `translateX(${col * UI.mapDay}px)`;
+    }
     const lab = $("scrub-date");
     if (!POINTS) { lab.innerHTML = ""; return; }
     let small = play ? "Historical playback · past observations" : "Past observations · √-scale daily bars (hatched = provider gap)";
@@ -775,12 +915,18 @@
     }
     lab.innerHTML = `${esc(UI.mapDay ? when() + " (UTC)" : "Whole month: " + when())}<small>${esc(small)}</small>`;
   }
-  function setDay(d, fromPlay) {
+  function setDay(d, fromPlay = false) {
     UI.mapDay = Math.max(0, Math.min(POINTS ? POINTS.days_in_month : 31, d));
-    if (!fromPlay) stopPlay();
-    applyFilter();
-    if (engine && engine.setPlayback) engine.setPlayback(UI.mapDay, !!play);
-    if (!fromPlay) S.syncUrl();
+    if (!fromPlay) stopPlay(false);
+    updateScrubDay();
+    if (!scrubFrame) scrubFrame = requestAnimationFrame(() => commitDay(true));
+  }
+  function commitDay(scrubbing) {
+    cancelAnimationFrame(scrubFrame);
+    scrubFrame = 0;
+    applyFilter(scrubbing);
+    engine?.setPlayback?.(UI.mapDay, !!play);
+    if (!scrubbing) S.syncUrl();
   }
   function startPlay() {
     if (!POINTS || play) return;
@@ -797,40 +943,25 @@
     if (engine && engine.setPlayback) engine.setPlayback(UI.mapDay || 1, true);
     tick();
   }
-  let transTimer = 0;
-  function stopTransition() {
-    if (transTimer) { clearTimeout(transTimer); transTimer = 0; }
-    const btn = $("play-transition-btn");
-    if (btn) btn.setAttribute("aria-pressed", "false");
-  }
   function playTransition() {
-    stopTransition();
     if (!engine) return;
-    const btn = $("play-transition-btn");
     if (engine.kind !== "gl" || S.motionMode() !== "full") {
       if (engine.kind === "gl") { setMapMode("3d", false); setOrbit(true); }
       fitNow(false);
       S.toast(engine.kind === "gl" ? "Motion is reduced: jumped straight to the regional view." : "2D map: fitted the selected region.");
       return;
     }
-    if (btn) btn.setAttribute("aria-pressed", "true");
-    flyPose({ mode: "globe", orbit: true, center: [69.5, 28.5], zoom: 2.35, pitch: 24, bearing: -10 });
-    transTimer = setTimeout(() => {
-      transTimer = 0;
-      setMapMode("3d", true);
-      fitNow(true);
-      if (btn) btn.setAttribute("aria-pressed", "false");
-    }, 1500);
+    window.SeamIntro.open(true, true);
   }
-  function stopPlay() {
-    stopTransition();
+  function stopPlay(sync = true) {
     if (!play) return;
     clearInterval(play); play = null;
     $("play-btn").setAttribute("aria-pressed", "false");
     $("play-btn").innerHTML = ic("play");
     $("play-btn").setAttribute("aria-label", "Play this month day by day (historical playback of past observations)");
     if (engine && engine.setPlayback) engine.setPlayback(UI.mapDay, false);
-    drawScrub(); S.syncUrl();
+    updateScrubDay();
+    if (sync) S.syncUrl();
   }
 
   // ---------- inspector (the same content wherever a detection is opened) ----------
@@ -892,15 +1023,9 @@
   }
   function pointList() {
     const box = $("point-list");
-    if (!box) return;
+    if (!box || UI.ws !== "explore" || !$("point-list-wrap").open) return;
     if (!POINTS) { box.innerHTML = `<p class="note">No detections loaded.</p>`; return; }
-    const sats = UI.sats.map((k) => SATS.indexOf(k)), rows = [];
-    let total = 0;
-    for (let i = 0; i < POINTS.lon.length; i++) {
-      if (!sats.includes(POINTS.p[i]) || (UI.dn !== "DN" && (UI.dn === "N") !== (POINTS.dn[i] === 1)) || (UI.mapDay && POINTS.day[i] !== UI.mapDay)) continue;
-      total++;
-      if (rows.length < listShown) rows.push(i);
-    }
+    const matching = matchingRows(currentFilter()), total = matching.length, rows = matching.slice(0, listShown);
     box.innerHTML = `<table><caption class="note" style="caption-side:top;text-align:left">${fmt(total)} detections match the filters${total > rows.length ? `; the first ${rows.length} by time are listed` : ""}. This is a list of rows per satellite, not a count of fires.</caption>
       <thead><tr><th scope="col">Time (UTC)</th><th scope="col">Satellite</th><th scope="col">Pass</th><th scope="col">Lat</th><th scope="col">Lon</th><th scope="col">FRP, MW</th></tr></thead><tbody>` +
       rows.map((i) => `<tr><th scope="row"><button type="button" data-pt="${i}">${timeOf(i).slice(5)}</button></th><td>${SAT_INFO[SATS[POINTS.p[i]]].short}</td><td>${POINTS.dn[i] ? "night" : "day"}</td><td>${fmt(POINTS.lat[i], 3)}</td><td>${fmt(POINTS.lon[i], 3)}</td><td>${POINTS.frp[i] == null ? "–" : fmt(POINTS.frp[i], 1)}</td></tr>`).join("") +
@@ -950,19 +1075,27 @@
   }
 
   // ---------- export: the real rendered view, with what it shows written on it ----------
-  function exportPng() {
+  async function exportPng() {
+    if (!mapWorkspace() && S.result() && !S.pending()) {
+      S.go("explore");
+      await loadPoints();
+      if (mapLibraryPending) await window.loadSeamMapLibrary();
+      if (!mapWorkspace()) return;
+      await new Promise(requestAnimationFrame);
+      if (engine?.kind === "gl" && !engine.map.loaded()) {
+        engine.whenIdle(() => {
+          if (mapWorkspace() && engine?.kind === "gl" && engine.map.loaded()) exportPng();
+          else S.toast("The map is still drawing. Export again when it has finished.", { error: true });
+        });
+        return;
+      }
+    }
     if (S.pending() || pointsPending || PERR || PKEY !== JSON.stringify(pointRequest())) {
       S.toast("The map selection is still loading or unavailable. Export again when its detections have finished loading.", { error: true }); return;
     }
     if (!engine || !POINTS) { S.toast("The map has no detections loaded to export.", { error: true }); return; }
-    if (UI.ws !== "explore" && UI.ws !== "overview") {      // the map must be on screen to be captured as shown
-      S.go("explore");
-      requestAnimationFrame(() => {
-        if (engine && engine.whenIdle) engine.whenIdle(capturePng); else setTimeout(capturePng, 350);
-      });
-      return;
-    }
-    if (engine.kind === "gl" && !engine.map.loaded()) {
+    if (engine.kind === "gl" && (!engine.map.loaded()
+      || (vmode === "towers" || vmode === "footprints") && engine.viewMeta().pending)) {
       S.toast("The map is still drawing. Export again when it has finished.", { error: true }); return;
     }
     capturePng();
@@ -1040,12 +1173,14 @@
     if (!gl && vmode === "towers") vmode = "points";
     if (engine && engine.setViewMode) engine.setViewMode(vmode);
     syncMode();
+    S.emit("map-filter");
   }
   function setOrbit(on) {
     orbitOn = !!on;
     if (!orbitOn && $("sat-card")) { $("sat-card").hidden = true; satPicked = null; }
     if (engine && engine.setOrbit) engine.setOrbit(orbitOn);
     syncMode();
+    S.emit("map-filter");
   }
   function setSeam(on) {
     if (engine && engine.setSeam) engine.setSeam(!!on);
@@ -1104,11 +1239,14 @@
     host.addEventListener("change", (e) => {
       if (e.target.id === "low-power") {
         lowPower = e.target.checked;
+        if (!lowPower) webglLost = false;
         try { localStorage.setItem("seamline-lowpower", lowPower ? "1" : "0"); } catch (_) { /* storage blocked */ }
-        stopPlay(); makeEngine();
+        stopPlay(); makeEngine(); enableMapLibrary();
       }
     });
     $("scrub").addEventListener("input", (e) => setDay(Number(e.target.value)));
+    $("scrub").addEventListener("change", () => commitDay(false));
+    $("point-list-wrap").addEventListener("toggle", pointList);
     document.addEventListener("click", (e) => {
       const insp = e.target.closest("[data-insp]");
       if (insp) { if (insp.dataset.insp === "clear") inspect(null); else if (picked != null && POINTS) engine.flyTo(POINTS.lon[picked], POINTS.lat[picked]); return; }
@@ -1139,42 +1277,40 @@
     });
     window.addEventListener("resize", () => { if (engine) engine.resize(); drawScrub(); });
 
-    S.on("selection", () => { const s = selection(); engine.setSelection(s); if(!window.SeamIntro?.isOpen?.())fitNow(true); inspect(null); loadPoints(); });
+    S.on("selection", () => {
+      engine.setSelection(selection());
+      if (mapWorkspace() && !window.SeamIntro?.ownsCamera()) fitSelection(true);
+      inspect(null);
+      loadPoints();
+    });
     S.on("daymonth", () => { inspect(null); loadPoints(); });
-    S.on("daily", drawScrub);
-    S.on("ws", () => { stopPlay(); if (drawing) endDraw(); mount(); if (picked != null) inspect(picked); if (UI.ws !== "overview" && UI.ws !== "explore" && $("sat-card")) $("sat-card").hidden = true; });
-    S.on("story", (key) => { setSeam(key === "seam"); if (key !== "seam" && !orbitOn && $("sat-card")) { $("sat-card").hidden = true; satPicked = null; } syncMode(); });
-    S.on("theme", () => { engine.setTheme(colors()); drawScrub(); legend(); });
+    S.on("daily", () => { scrubArtKey = ""; drawScrub(); });
+    S.on("ws", () => {
+      stopPlay();
+      if (drawing) endDraw();
+      mount();
+      if (mapWorkspace()) { loadPoints(); pointList(); }
+      if (picked != null) inspect(picked);
+      if (!mapWorkspace() && $("sat-card")) $("sat-card").hidden = true;
+    });
+    S.on("story", (key) => { setSeam(key === "seam"); if (key !== "seam" && !orbitOn && $("sat-card")) { $("sat-card").hidden = true; satPicked = null; } syncMode(); S.emit("map-filter"); });
+    S.on("theme", () => { engine.setTheme(colors()); scrubArtKey = ""; drawScrub(); legend(); });
     S.on("motion", () => {
       if (engine && engine.fx && S.motionMode() !== "full") engine.fx.stopIdle();
       if (engine && engine.kind === "gl" && engine.map) engine.map.triggerRepaint();
     });
     S.on("filters", applyFilter);
     S.on("reset", () => { stopPlay(); inspect(null); setOrbit(false); setViewMode("points"); setSeam(false); });
-    S.on("resize", () => { if (engine) engine.resize(); });
+    S.on("resize", () => { if (mapWorkspace()) { engine?.resize(); drawScrub(); } });
     S.on("export-map", exportPng);
     S.on("print", (on) => {        // print a readable top-down view, then put the camera back
       if (engine.kind !== "gl") return;
       if (on) { printBackup = UI.mode; engine.setMode("2d", false); fitNow(false); }
       else if (printBackup) { UI.mode = printBackup; engine.setMode(printBackup, false); syncMode(); fitNow(false); printBackup = null; }
     });
-    if (S.result()) { engine.setSelection(selection()); fitNow(false); loadPoints(); }
+    if (S.result()) { engine.setSelection(selection()); if (mapWorkspace() && !window.SeamIntro?.ownsCamera()) fitSelection(false); loadPoints(); }
     title(); legend(); platList();
   }
-  function entrance(options={}) {
-    if (!engine || engine.kind !== "gl" || S.motionMode() !== "full") return;
-    const map = engine.map;
-    const enter = () => {
-      if (UI.ws !== "overview") return;
-      // A single, restrained descent; manual movement immediately wins.
-      flyPose({ mode: "globe", orbit: false, center: [69.5, 28.5], zoom: options.cinematic?2.45:1.8, pitch: 0, bearing: 0 });
-      transTimer = setTimeout(() => { transTimer=0; setMapMode("3d",true); fitNow(true); S.syncUrl(); }, options.cinematic?700:1000);
-      const cancel = () => stopTransition();
-      document.addEventListener("pointerdown", cancel, {once:true,capture:true});
-      $("map-view").addEventListener("wheel", cancel, {once:true,passive:true});
-    };
-    if (map && !map.loaded()) map.once("load", enter); else enter();
-  }
-  window.SeamMap = { engine: () => engine, points: () => POINTS, bounds: selBounds, colors, start, setMode: setMapMode, setViewMode, setOrbit, setSeam, flyPose, playTransition, entrance, frpSummary };
+  window.SeamMap = { engine: () => engine, points: () => POINTS, bounds: selBounds, colors, start, setMode: setMapMode, setViewMode, setOrbit, setSeam, flyPose, playTransition, frpSummary, exactCount, pointStatus, isInitialViewReady, fitAfterIntro, mapLibraryPending: () => mapLibraryPending };
   if (S.meta() && S.geo()) start(); else S.on("ready", start);
 })();

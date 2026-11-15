@@ -159,7 +159,7 @@ function stateQuery(s) {
   if (s.scale && s.scale !== UI_DEFAULT.scale) q.set("scale", s.scale);
   if (s.season && s.season !== UI_DEFAULT.season) q.set("season", s.season);
   if (["simple", "advanced"].includes(s.experience)) q.set("experience", s.experience);
-  if (s.basemap === "satellite") q.set("basemap", "satellite");
+  if (s.basemap === "terrain" || s.basemap === "satellite") q.set("basemap", s.basemap);
   return q.toString().replace(/%2C/gi, ",");  // box=65,27,65.2,27.2 reads better, and parses the same
 }
 
@@ -264,7 +264,9 @@ async function run() {
   setBusy(true, RESULT ? `Loading ${wanted}, ${p.years[0]}–${p.years[1]}… The view below still shows ${RESULT.region}.` : "Calculating… The first view of an area can take up to about 15 seconds.");
   if (!RESULT) $("summary").innerHTML = "<p>Calculating the results… The first view of an area can take up to about 15 seconds.</p>";
   try {
-    const r = await post("/api/analyze", p, CTRL.signal);
+    const request = post("/api/analyze", p, CTRL.signal);
+    if (!RESULT) Seam.emit("initial-selection", p);
+    const r = await request;
     const res = await r.json();
     if (id !== REQ) return;
     RESULT = res;
@@ -273,12 +275,11 @@ async function run() {
     setBusy(false, `Showing ${RESULT.region}, ${RESULT.years[0]}–${RESULT.years[1]}.`);
     syncUrl();
     Seam.emit("selection", RESULT);
-    window.SeamIntro?.ready();
     if (window.SeamScience) window.SeamScience.sync(RESULT, { calSrc: $("cal-src").value, years: RESULT.years, go, setSub, setEv, toast, META, MONTH_FULL });
   } catch (e) {
     if (id !== REQ || e.name === "AbortError") return;
     setBusy(false);
-    window.SeamIntro?.dismiss();
+    window.SeamIntro?.dismiss(true);
     LAST_ERROR = e.message;
     showError(e.message);
     renderSummary();
@@ -391,9 +392,9 @@ function go(ws, opts = {}) {
   if (opts.sub) setSub(opts.sub, true);
   if (opts.ev) setEv(opts.ev, true);
   Seam.emit("ws", ws);
-  if (ws === "calendar" && RESULT) { renderSeries(); renderCalendar(); if (window.SeamScience) window.SeamScience.sync(RESULT, { calSrc: $("cal-src").value, years: RESULT.years, go, setSub, setEv, toast, META, MONTH_FULL }); }
+  renderWorkspaceResults();
+  if (ws === "calendar" && RESULT && window.SeamScience) window.SeamScience.sync(RESULT, { calSrc: $("cal-src").value, years: RESULT.years, go, setSub, setEv, toast, META, MONTH_FULL });
   if (ws === "evidence" && window.SeamScience) window.SeamScience.renderScience();
-  if (ws === "overview" && RESULT) renderInsight();
   if (window.SeamShowcase) window.SeamShowcase.redraw();
   if (!opts.quiet) syncUrl(changed);
   if (opts.focus) { const h = $(`ws-${ws}`); h.tabIndex = -1; h.focus({ preventScroll: true }); }
@@ -415,6 +416,7 @@ function setStory(key, quiet) {
   setTabs("story-tabs", "story", key);
   $("story-stack").scrollTop = 0;
   if (key === "record" && RESULT) renderInsight();
+  if (key === "days" && DAILY) renderDaysPreview();
   if (window.SeamShowcase) window.SeamShowcase.redraw();
   Seam.emit("story", key);
   if (!quiet) syncUrl();
@@ -423,7 +425,7 @@ function setSub(key, quiet) {
   if (!SUBS.includes(key)) return;
   UI.sub = key;
   setTabs("cal-subnav", "sub", key);
-  if (key === "months" && RESULT) { renderSeries(); renderCalendar(); }
+  if (UI.ws === "calendar") renderWorkspaceResults();
   Seam.emit("sub", key);
   if (!quiet) syncUrl();
 }
@@ -431,6 +433,7 @@ function setEv(key, quiet) {
   if (!EVS.includes(key)) return;
   UI.ev = key;
   setTabs("ev-nav", "ev", key);
+  if (UI.ws === "evidence") renderWorkspaceResults();
   if (window.SeamShowcase) window.SeamShowcase.redraw();
   Seam.emit("ev", key);
   if (!quiet) syncUrl();
@@ -498,25 +501,34 @@ function closeDialog() {
 }
 
 // ---------- render ----------
-// refetchDaily = false redraws the day-by-day view from the reply already held (theme change, printing).
-function render(refetchDaily = true) {
+function renderWorkspaceResults() {
+  if (!RESULT) return;
+  if (UI.ws === "overview") {
+    renderInsight();
+    if (UI.story === "days" && DAILY) renderDaysPreview();
+  } else if (UI.ws === "calendar") {
+    if (UI.sub === "months") { renderSeries(); renderCalendar(); }
+    if (UI.sub === "days" && DAILY) renderDailyBase();
+    if (UI.sub === "normal") { renderCompare(); renderLatest(); }
+  } else if (UI.ws === "evidence") {
+    if (UI.ev === "method") renderCalibration();
+    if (UI.ev === "experiments") renderEvidence();
+  }
+}
+
+function render() {
   const r = RESULT;
   closePop(false);
   renderChips();
   renderSummary();
-  renderInsight();
-  if (UI.ws === "calendar") { renderSeries(); renderCalendar(); }
   if (!DAILY_SET) {  // the first time, open the day-by-day view on the compare month; later the reader's choice stays
     $("daily-year").value = String(r.request.month[0]);
     $("daily-month").value = String(r.request.month[1]);
     DAILY_SET = true;
     syncMapMonth();
   }
-  if (refetchDaily || !DAILY) loadDaily(); else renderDaily();
-  renderCompare();
-  renderLatest();
-  renderCalibration();
-  renderEvidence();
+  loadDaily();
+  renderWorkspaceResults();
   renderExport();
   $("warnings").innerHTML = r.warnings.map((w) => `<li>${esc(w)}</li>`).join("");
 }
@@ -1101,7 +1113,7 @@ function setDayMonth(y, m) {
 }
 
 // ---------- day by day (S02) ----------
-let DAILY = null, DREQ = 0, DCTRL = null, DAILY_SET = false, DAILY_PASSES = false;
+let DAILY = null, DREQ = 0, DCTRL = null, DAILY_SET = false, DAILY_PASSES = false, DAILY_SETTLED = false;
 // A day with no number shows a mark and says why (Opus review of S02, 5 Nov): never a bare zero.
 const NOVAL = {
   outside_record: ["–", "no data: outside this satellite's record"],
@@ -1135,6 +1147,8 @@ async function loadDaily() {
   const id = ++DREQ;  // only the newest reply is drawn, as for /api/analyze
   if (DCTRL) DCTRL.abort();
   DCTRL = new AbortController();
+  DAILY = null;
+  DAILY_SETTLED = false;
   dailyNav();
   $("daily").setAttribute("aria-busy", "true");
   const m = $("daily-msg");
@@ -1157,7 +1171,11 @@ async function loadDaily() {
     m.textContent = `The days could not be loaded. ${e.message}`;
     m.classList.add("error");
   } finally {
-    if (id === DREQ) $("daily").setAttribute("aria-busy", "false");
+    if (id === DREQ) {
+      DAILY_SETTLED = true;
+      $("daily").setAttribute("aria-busy", "false");
+      Seam.emit("daily", DAILY);
+    }
   }
 }
 
@@ -1331,7 +1349,11 @@ function renderDaysPreview() {
   [1, 10, 20, n].forEach((d) => el("text", { x: L + cw * (d - 1) + (cw - 1) / 2, y: H - 3, "text-anchor": "middle", style: `fill:${css("--muted")};font:11px ${css("--font")}` }, svg).textContent = d);
 }
 const renderDailyBase = renderDaily;
-renderDaily = function () { renderDailyBase(); renderDaysPreview(); syncMapMonth(); Seam.emit("daily", DAILY); };  // eslint-disable-line no-func-assign
+renderDaily = function () {
+  if (UI.ws === "calendar" && UI.sub === "days") renderDailyBase();
+  if (UI.ws === "overview" && UI.story === "days") renderDaysPreview();
+  syncMapMonth();
+};  // eslint-disable-line no-func-assign
 
 // The month on screen as a CSV file: exactly the reply drawn above, with each number's status and source.
 function dailyCsv() {
@@ -1719,9 +1741,7 @@ function setMotion(m, announce) {
   if (announce) toast(`Motion: ${m === "auto" ? `automatic (${eff})` : m}.`, { second: true });
 }
 function redrawCharts() {
-  renderInsight();
-  if (UI.ws === "calendar") { renderSeries(); renderCalendar(); }
-  if (DAILY) renderDaily();
+  renderWorkspaceResults();
 }
 let PRINT_BACKUP = null;
 function beforePrint() {
@@ -1882,18 +1902,23 @@ async function init() {
   setTheme(THEMES.includes(saved) ? saved : "auto", false);
   setMotion(MOTIONS.includes(motion) ? motion : "auto", false);
   placeInk();
+  async function startupJson(url) {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.json();
+  }
+  const boundaries = startupJson("/api/boundaries").catch(() => null);
   try {
-    const [m, g, a] = await Promise.all(["/api/meta", "/api/boundaries", "/api/areas"].map((u) => fetch(u).then((r) => r.json())));
-    META = m; GEO = g; AREAS = a;
+    [META, AREAS] = await Promise.all(["/api/meta", "/api/areas"].map(startupJson));
   } catch (e) {
     LAST_ERROR = "Could not reach the analysis service. Check your connection and press Try again.";
-    showError(LAST_ERROR); renderSummary(); window.SeamIntro?.dismiss();
+    showError(LAST_ERROR); renderSummary(); window.SeamIntro?.dismiss(true);
     Seam.emit("analysis-error", LAST_ERROR);
     return;
   }
-  if (!META || !Array.isArray(META.regions) || !Array.isArray(META.years) || !GEO) {  // a reply, but not the data
+  if (!META || !Array.isArray(META.regions) || !Array.isArray(META.years) || !AREAS?.areas) {
     LAST_ERROR = "The analysis service responded without its startup tables. Press Try again to reload.";
-    showError(LAST_ERROR); renderSummary(); window.SeamIntro?.dismiss();
+    showError(LAST_ERROR); renderSummary(); window.SeamIntro?.dismiss(true);
     Seam.emit("analysis-error", LAST_ERROR);
     return;
   }
@@ -1914,7 +1939,7 @@ async function init() {
   const cleanStatus = String(META.status || "").replace(/Pre-event work with true dates\.?\s*/i, "").replace(/Local research prototype\.?\s*/i, "Cross-sensor active-fire harmonisation (MCD14ML C6.1 ↔ VNP14IMG C2). ").trim();
   $("status-chip").textContent = cleanStatus;
   $("foot-status").textContent = cleanStatus;
-  Seam.on("points-loaded", () => { if (RESULT) renderInsight(); });
+  Seam.on("points-loaded", () => { if (RESULT && UI.ws === "overview") renderInsight(); });
   $("foot-meta").textContent = `${fmt(META.rows)} detections from ${META.files} hash-checked files; processed table built ${META.built_utc} (SHA-256 ${META.detections_sha256.slice(0, 12)}…${META.data_identity ? `, data identity ${META.data_identity.slice(0, 12)}…` : ""}).`;
   // A shared link restores its view; anything in it that is not valid is left at the default and named.
   const { state, ignored } = parseState(location.search, META);
@@ -2104,8 +2129,16 @@ async function init() {
   window.addEventListener("afterprint", afterPrint);
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { if (RESULT) redrawCharts(); Seam.emit("theme", "auto"); });
   window.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", () => setMotion(document.documentElement.dataset.motion || "auto", false));
-  Seam.emit("ready");
   run();
+  GEO = await boundaries;
+  if (!GEO || !Array.isArray(GEO.features)) {
+    LAST_ERROR = "The province boundaries could not be loaded. Reload the workspace to restore maps and related views.";
+    showError(LAST_ERROR);
+    window.SeamIntro?.dismiss(true);
+    Seam.emit("map-error", LAST_ERROR);
+    return;
+  }
+  Seam.emit("ready");
 }
 
 Object.assign(Seam, {
@@ -2113,6 +2146,9 @@ Object.assign(Seam, {
   openDialog, closeDialog, openSheet, summaryDialog, retryAnalysis: run, exportData: doExport, setDayMonth, syncUrl, infoBtn, boxProblem, trapTab, drawIn,
   save: (blob, name) => save(blob, name),
   meta: () => META, geo: () => GEO, areas: () => AREAS, result: () => RESULT, daily: () => DAILY, pending: () => PENDING,
+  selectedRequest: payload,
+  initialMapMonth: (request) => DAILY_SET ? Seam.dayMonth() : request.month,
+  dailySettled: () => DAILY_SETTLED,
   dayMonth: () => [Number($("daily-year").value), Number($("daily-month").value)],
   selectArea(name) {
     if (!META || !META.regions.includes(name)) return;

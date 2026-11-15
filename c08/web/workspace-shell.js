@@ -3,11 +3,13 @@
   'use strict';
   const S = window.Seam, $ = id => document.getElementById(id), root = document.documentElement;
   if (!S) return;
-  let panelOpen = false, menuOpener = null, entrancePlayed = false, returnFocus = null;
+  let panelOpen = false, menuOpener = null, returnFocus = null;
   const mapWorkspace = () => ['overview', 'explore'].includes(S.UI.ws);
   const format = n => n == null || !Number.isFinite(n) ? '—' : S.fmt(n);
   const mode = () => root.dataset.experience === 'advanced' ? 'advanced' : 'simple';
-  const resize = () => { S.emit('resize'); requestAnimationFrame(() => S.emit('resize')); };
+  function resize() {
+    if (!resizeFrame) resizeFrame = requestAnimationFrame(() => { resizeFrame = 0; S.emit('resize'); });
+  }
   const isVisible = e => e && !e.hidden && e.getClientRects().length > 0;
   let mapShare=60,resizeFrame=0;
   try{const saved=Number(localStorage.getItem('seamline-map-share'));if(saved>=35&&saved<=80)mapShare=saved;}catch(_){}
@@ -21,7 +23,7 @@
     handle.setAttribute('aria-valuetext',`${Math.round(mapShare)}% map, ${Math.round(100-mapShare)}% results`);
     handle.setAttribute('aria-valuemin',String(Math.ceil(min)));handle.setAttribute('aria-valuemax',String(Math.floor(max)));
     if(persist)try{localStorage.setItem('seamline-map-share',String(mapShare));}catch(_){}
-    if(!resizeFrame)resizeFrame=requestAnimationFrame(()=>{resizeFrame=0;resize();});
+    resize();
   }
 
   // Keep the original navigation, research context and credits in a single accessible drawer.
@@ -103,9 +105,10 @@
     if(recordFlags.some(v=>/untyped/.test(v)))qualifications.push('NRT, untyped');
     else if(recordFlags.some(v=>/nrt/.test(v)))qualifications.push('NRT');
     if(qualifications.length)qualifications.push('exposure unknown');
-    const actualCount = points ? points.lon.reduce((n, _, i) => n + (S.UI.sats.includes(S.SATS[points.p[i]]) && (S.UI.dn === 'DN' || (S.UI.dn === 'N') === (points.dn[i] === 1)) && (!S.UI.mapDay || points.day[i] === S.UI.mapDay) ? 1 : 0), 0) : null;
-    const counts = points ? `${format(actualCount)} fire pixels` : 'Loading detections…';
-    const sampled = vm?.limited && !$('map-render-pill')?.hidden ? ` · rendered ${format(vm.shown)} of ${format(vm.total)}` : '';
+    const actualCount = window.SeamMap?.exactCount();
+    const counts = actualCount == null ? (window.SeamMap?.pointStatus() === 'error' ? 'Detections could not be loaded' : 'Loading detections…') : `${format(actualCount)} fire pixels`;
+    const sampled = vm?.pending && !$('map-render-pill')?.hidden ? ' · updating 3D geometry'
+      : vm?.limited && !$('map-render-pill')?.hidden ? ` · rendered ${format(vm.shown)} of ${format(vm.total)}` : '';
     const pass = S.UI.dn === 'DN' ? 'day + night' : S.UI.dn === 'D' ? 'day passes' : 'night passes';
     $('shell-observation-status').textContent = outside ? `${satNames} · no usable record for this selection` : `${satNames} · ${counts} · ${pass}${sampled}${qualifications.length ? ' · '+qualifications.join(' · ') : ''}`;
     const support = r.calibration.supported ? `Method & support · ${r.warnings.length} notes` : 'Unsupported before 2012 · read notes';
@@ -117,7 +120,7 @@
   }
 
   function syncComparison() {
-    const r=S.result();if(!r)return;
+    const r=S.result();if(!r||S.UI.ws!=='overview')return;
     const v=r.change?.[S.UI.season],f=(x,d=2)=>x==null?'—':S.fmt(x,d),esc=S.esc;
     $('simple-period').textContent=`${r.region} · ${S.UI.season==='AprMay'?'April–May':'October–November'} · average 2012–2021 ÷ average 2003–2011`;
     if(!v){$('simple-values').innerHTML='<p class="warnbox">This comparison needs both the 2003–2011 and 2012–2021 periods. Use Advanced selection to include those years.</p>';}
@@ -132,6 +135,7 @@
     const c=r.calibration,e=S.meta()?.evidence;
     $('simple-uncertainty').textContent=`${c.supported?'This area passed the calibration support check.':'This area has no supported harmonisation before 2012.'} The range is rough; ${e?.interval_coverage!=null?f(e.interval_coverage*100,0)+'% of held-out test months fell inside the nominal 80% ranges.':'read the saved evaluation before relying on it.'} S-NPP is a satellite reference, not independent ground truth.`;
     $('simple-evidence').innerHTML=`<dl><div><dt>Reference</dt><dd>S-NPP-equivalent seasonal detections</dd></div><div><dt>Selected model</dt><dd>${esc(r.model)} · ${c.supported?'area-specific calibration':'unsupported before 2012'}</dd></div><div><dt>Calibration</dt><dd>Overlap months, February 2012–December 2017</dd></div><div><dt>Data source</dt><dd>NASA FIRMS · cached observations</dd></div><div><dt>Selection notes</dt><dd>${r.warnings.length} qualifications to review</dd></div></dl><p class="simple-qualification">Detections are fire pixels on satellite passes. They are not individual fires, burned area or emissions. No independent ground-truth validation is claimed.</p>`;
+    S.emit('results-drawn');
   }
 
   function syncWorkspace(ws) {
@@ -143,6 +147,12 @@
     // Filter navigation opens its tools. Results stay optional on the overview.
     setPanel(ws === 'explore' ? true : ws === 'overview' ? panelOpen : false);
     syncObservation();
+    scheduleComparison();
+  }
+
+  let comparisonFrame=0;
+  function scheduleComparison() {
+    if (!comparisonFrame) comparisonFrame=requestAnimationFrame(()=>{comparisonFrame=0;syncComparison();});
   }
 
   $('navigation-open').addEventListener('click', () => navigation(true));
@@ -173,7 +183,7 @@
     syncObservation();
   }));
   document.querySelectorAll('[data-basemap]').forEach(b=>b.addEventListener('click',()=>window.SeamBasemap?.set(b.dataset.basemap)));
-  $('shell-imagery-toggle').addEventListener('click',()=>window.SeamBasemap?.set(window.SeamBasemap.mode()==='satellite'?'terrain':'satellite'));
+  $('shell-imagery-toggle').addEventListener('click',e=>window.SeamBasemap?.set(e.currentTarget.getAttribute('aria-pressed')==='true'?'terrain':'satellite'));
   const divider=$('shell-splitter');let dragging=false;
   divider.addEventListener('pointerdown',e=>{
     if(e.button!==0)return;e.preventDefault();dragging=true;divider.setPointerCapture(e.pointerId);root.classList.add('is-resizing');
@@ -232,7 +242,7 @@
 
   S.on('ws', syncWorkspace);
   S.on('map-mode',syncObservation);
-  S.on('points-loaded',()=>{syncObservation();syncComparison();});
+  S.on('points-loaded',scheduleComparison);
   S.on('print',on=>{
     const footer=document.querySelector('footer.foot');
     if(footer)(on?document.body:$('shell-footer-home')).appendChild(footer);
@@ -242,43 +252,20 @@
     $('shell-error-message').textContent=message+(S.result()?' The map and results still show the previous successful selection.':' Your selection is saved; try the analysis again.');
     $('shell-observation-status').textContent=S.result()?'Previous successful selection · analysis request failed':'Analysis could not be loaded';
   });
+  S.on('map-error',message=>{
+    $('shell-error').hidden=false;
+    $('shell-error-message').textContent=message;
+    $('shell-observation-status').textContent='Map boundaries unavailable';
+  });
   S.on('loading', on=>{
     if(on){root.dataset.analysis='loading';$('shell-error').hidden=true;$('shell-retry-analysis').disabled=true;}
     else{$('shell-retry-analysis').disabled=false;}
   });
   S.on('selection',()=>{root.dataset.analysis='ready';$('shell-error').hidden=true;});
-  for (const evt of ['selection','daily','daymonth','filters','story','theme']) S.on(evt, syncObservation);
-  for (const evt of ['selection','story','theme','resize']) S.on(evt, syncComparison);
+  for (const evt of ['selection','daily','daymonth','map-filter','map-geometry','story','theme']) S.on(evt, syncObservation);
+  for (const evt of ['selection','story','theme']) S.on(evt, scheduleComparison);
   S.on('ready', () => syncWorkspace(S.UI.ws));
   if(S.result())root.dataset.analysis='ready';
-  S.on('selection', () => {
-    if (!entrancePlayed) {
-      entrancePlayed = true;
-      // Brief initial orientation on first visit only. Never replace a shared camera selection.
-      if (!window.SeamIntro?.native && !(window.SeamIncomingView?.map ?? new URLSearchParams(location.search).has('map')) && mode() === 'simple' && S.UI.ws === 'overview' && S.motionMode() === 'full' && !window.SeamIntro?.wasSkipped()) {
-        const enter=()=>{
-          if(window.SeamIntro?.wasSkipped())return;
-          const cinematic=window.SeamIntro?.usedCinematic();
-          if(cinematic)window.SeamBasemap?.set('satellite');
-          // The mobile default stays flat; show the same imagery without imposing a camera flight.
-          if(cinematic&&S.UI.mode==='2d'){syncObservation();return;}
-          window.SeamMap?.entrance?.({cinematic});
-        };
-        if(!$('satellite-intro').hidden){
-          // Warm the real reference map underneath the film; reveal it when the shot ends.
-          if(window.SeamIntro?.usedCinematic())window.SeamBasemap?.set('satellite');
-          window.addEventListener('seam-intro-dismissed',enter,{once:true});
-        }else enter();
-      }
-    }
-  });
-  // Point requests resolve after the monthly analysis. Observe the real legend instead of polling.
-  const attachLegend = () => {
-    const legend = $('map-legend');
-    if (!legend) return;
-    new MutationObserver(syncObservation).observe(legend, {childList:true,subtree:true,characterData:true});
-  };
-  if ($('map-legend')) attachLegend(); else S.on('ready', attachLegend);
   window.addEventListener('popstate', () => {
     const exp = new URLSearchParams(location.search).get('experience');
     setExperience(exp === 'advanced' ? 'advanced' : 'simple', false);

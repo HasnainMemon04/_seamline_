@@ -193,17 +193,24 @@
 
   function create(container, opts) {
     let c = opts.colors;
-    let mode = ["globe", "3d", "2d"].includes(opts.mode) ? opts.mode : "3d";
+    let openingGlobe = !!opts.openingBounds;
+    let mode = openingGlobe ? "globe" : ["globe", "3d", "2d"].includes(opts.mode) ? opts.mode : "3d";
     let vmode = ["points", "towers", "footprints", "density"].includes(opts.vmode) ? opts.vmode : "points";
     let selName = "", lost = false, labels = [];
     let rawPoints = null, activeFilter = { sats: [2], dn: "DN", day: 0 };
     let polyCacheKey = "", psfOn = false, shownPtsMeta = { total: 0, shown: 0, limited: false };
+    let filterKey = "", polyTimer = 0;
+    const polygonCache = new Map();
+    const pointLayerFilters = new Map();
+    let appliedPolygons = null, awaitingGeometry = false;
 
-    const initPitch = mode === "globe" ? PITCH_GLOBE : mode === "3d" ? PITCH_3D : 0;
-    const initZoom = mode === "globe" ? 2.4 : 4.4;
+    const initPitch = openingGlobe ? 0 : mode === "globe" ? PITCH_GLOBE : mode === "3d" ? PITCH_3D : 0;
+    const initZoom = openingGlobe ? 1.8 : mode === "globe" ? 2.4 : 4.4;
+    const [west, south, east, north] = opts.openingBounds || [];
+    const center = openingGlobe ? [(west + east) / 2, (south + north) / 2] : [69.6, 30.3];
     const map = new maplibregl.Map({
       container, style: style(c, opts.geo, mode, activeFilter.dn),
-      center: [69.6, 30.3], zoom: initZoom, pitch: initPitch, bearing: 0,
+      center, zoom: initZoom, pitch: initPitch, bearing: openingGlobe ? -8 : 0,
       minZoom: mode === "globe" ? 1.35 : 3.4, maxZoom: 12.2, maxPitch: 75,
       maxBounds: mode === "globe" ? null : PAK_BOUNDS,
       attributionControl: false, renderWorldCopies: false,
@@ -220,6 +227,7 @@
       colors: c,
       isDark: !!c.dark,
       motion: opts.motion,
+      matchingRows: opts.matchingRows,
       mode: () => mode,
       onTick: (badges) => { if (opts.onSatTick) opts.onSatTick(badges); },
     }) : null;
@@ -295,7 +303,7 @@
       } catch (e) { /* older build: no sky */ }
     }
 
-    function applyMode(animate) {
+    function applyMode(animate, pose, moveCamera = true) {
       const globe = mode === "globe";
       const three = mode === "3d";
       const rotatable = globe || three;
@@ -321,12 +329,14 @@
       rotatable ? map.touchZoomRotate.enableRotation() : map.touchZoomRotate.disableRotation();
       rotatable ? map.keyboard.enableRotation() : map.keyboard.disableRotation();
 
+      if (!moveCamera) return;
       const o = globe
         ? { center: [69.5, 29.0], zoom: Math.min(Math.max(map.getZoom(), 2.0), 3.1), pitch: PITCH_GLOBE, bearing: -8 }
         : three
           ? { pitch: PITCH_3D, bearing: map.getBearing(), zoom: Math.max(map.getZoom(), 4.2) }
           : { pitch: 0, bearing: 0 };
-      if (animate) ease(o); else map.jumpTo(o);
+      const camera = pose ? { ...o, ...pose } : o;
+      if (animate) ease(camera); else map.jumpTo(camera);
     }
 
     function paintSelection() {
@@ -367,38 +377,50 @@
       }
     }
 
-    function rebuildPolySources(force) {
+    const geometryKey = () => `${vmode}|${vmode === "footprints" && psfOn}|${filterKey}`;
+    function schedulePolygons() {
+      clearTimeout(polyTimer);
+      if (vmode !== "towers" && vmode !== "footprints") return;
+      const key = geometryKey();
+      if (key === polyCacheKey) {
+        if (!awaitingGeometry && shownPtsMeta.pending) publishPolygons();
+        return;
+      }
+      const cached = polygonCache.get(key);
+      if (cached) { applyPolygons(key, cached); return; }
+      shownPtsMeta = { ...shownPtsMeta, pending: true };
+      opts.onPolyMeta?.(shownPtsMeta);
+      polyTimer = setTimeout(() => rebuildPolySources(key), 70);
+    }
+
+    function applyPolygons(key, entry) {
+      polyCacheKey = key;
+      appliedPolygons = entry;
+      awaitingGeometry = true;
+      map.getSource("pts-poly").setData(entry.polygons);
+      if (entry.halos.features.length || hasHalos) map.getSource("pts-psf").setData(entry.halos);
+      hasHalos = entry.halos.features.length > 0;
+      shownPtsMeta = { ...entry.meta, pending: true };
+      opts.onPolyMeta?.(shownPtsMeta);
+    }
+
+    function publishPolygons() {
+      awaitingGeometry = false;
+      shownPtsMeta = appliedPolygons.meta;
+      opts.onPolyMeta?.(shownPtsMeta);
+    }
+
+    map.on("render", () => {
+      if (awaitingGeometry && polyCacheKey === geometryKey() && map.isSourceLoaded("pts-poly")
+        && (!hasHalos || map.isSourceLoaded("pts-psf"))) publishPolygons();
+    });
+
+    let hasHalos = false;
+    function rebuildPolySources(key) {
       if (!styleReady) return;
       const wantTowers = vmode === "towers";
-      const wantFp = vmode === "footprints";
-      if (!wantTowers && !wantFp) {
-        shownPtsMeta = { total: rawPoints ? rawPoints.lon.length : 0, shown: 0, limited: false };
-        if (opts.onPolyMeta) opts.onPolyMeta(shownPtsMeta);
-        return;
-      }
-      const key = `${vmode}|${psfOn ? 1 : 0}|${activeFilter.sats.join(",")}|${activeFilter.dn}|${activeFilter.day}|${rawPoints ? rawPoints.lon.length : 0}`;
-      if (!force && key === polyCacheKey) {
-        if (opts.onPolyMeta) opts.onPolyMeta(shownPtsMeta);
-        return;
-      }
-      polyCacheKey = key;
-
-      if (!rawPoints || !rawPoints.lon.length) {
-        map.getSource("pts-poly").setData(EMPTY_FC);
-        map.getSource("pts-psf").setData(EMPTY_FC);
-        shownPtsMeta = { total: 0, shown: 0, limited: false };
-        if (opts.onPolyMeta) opts.onPolyMeta(shownPtsMeta);
-        return;
-      }
-
       const P = rawPoints;
-      const matches = [];
-      for (let i = 0; i < P.lon.length; i++) {
-        if (!activeFilter.sats.includes(P.p[i])) continue;
-        if (activeFilter.dn !== "DN" && (activeFilter.dn === "N") !== (P.dn[i] === 1)) continue;
-        if (activeFilter.day && P.day[i] !== activeFilter.day) continue;
-        matches.push(i);
-      }
+      const matches = P ? opts.matchingRows(activeFilter) : [];
 
       const total = matches.length;
       let sample = matches;
@@ -414,9 +436,6 @@
         for (let k = 0; k < rem; k++) chosen.add(matches[Math.min(total - 1, Math.floor(k * step))]);
         sample = [...chosen];
       }
-      shownPtsMeta = { total, shown: sample.length, limited };
-      if (opts.onPolyMeta) opts.onPolyMeta(shownPtsMeta);
-
       const feats = [];
       const psfFeats = [];
       for (const i of sample) {
@@ -447,10 +466,34 @@
           }
         }
       }
-      map.getSource("pts-poly").setData({ type: "FeatureCollection", features: feats });
-      map.getSource("pts-psf").setData({ type: "FeatureCollection", features: psfFeats });
+      const entry = {
+        polygons: { type: "FeatureCollection", features: feats },
+        halos: { type: "FeatureCollection", features: psfFeats },
+        meta: { total, shown: sample.length, limited },
+      };
+      if (polygonCache.size === 4) polygonCache.delete(polygonCache.keys().next().value);
+      polygonCache.set(key, entry);
+      applyPolygons(key, entry);
     }
 
+    function syncPointFilters() {
+      if (vmode !== "points" && vmode !== "density") return;
+      const { sats, dn, day } = activeFilter;
+      const layers = [
+        ["pts-modis", sats.filter(p => p < 2)],
+        ["pts-viirs", sats.filter(p => p >= 2)],
+      ];
+      if (vmode === "density") layers.push(["pts-heat", sats]);
+      for (const [id, ids] of layers) {
+        const key = `${ids.join(",")}|${dn}|${day}`;
+        if (pointLayerFilters.get(id) === key) continue;
+        const filter = ["all", ["in", ["get", "p"], ["literal", ids.length ? ids : [-1]]]];
+        if (dn !== "DN") filter.push(["==", ["get", "n"], dn === "N" ? 1 : 0]);
+        if (day) filter.push(["==", ["get", "d"], day]);
+        map.setFilter(id, filter);
+        pointLayerFilters.set(id, key);
+      }
+    }
     function syncLayerVisibility() {
       if (!styleReady || !map.getLayer("pts-viirs")) return;
       const vis = (id, on) => { if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", on ? "visible" : "none"); };
@@ -461,6 +504,7 @@
       vis("pts-fp-line", vmode === "footprints");
       vis("pts-fp-psf", vmode === "footprints" && psfOn);
       vis("pts-heat", vmode === "density");
+      syncPointFilters();
 
       if (vmode === "density") {
         const zFade = ["interpolate", ["linear"], ["zoom"], 7.5, 0.08, 9.5, 0.92];
@@ -470,7 +514,7 @@
         map.setPaintProperty("pts-viirs", "circle-opacity", viirsOpacity);
         map.setPaintProperty("pts-modis", "circle-opacity", 0.55);
       }
-      if (vmode === "towers" || vmode === "footprints") rebuildPolySources(false);
+      schedulePolygons();
     }
 
     // Picking: active detection representation first; otherwise province polygon under pointer.
@@ -480,6 +524,7 @@
       return ["pts-viirs", "pts-modis"];
     }
     function nearest(pt) {
+      if (shownPtsMeta.pending && (vmode === "towers" || vmode === "footprints")) return null;
       const fs = map.queryRenderedFeatures([[pt.x - 7, pt.y - 7], [pt.x + 7, pt.y + 7]], { layers: activePickLayers() });
       let best = null, bd = 1e9;
       for (const f of fs) {
@@ -495,6 +540,7 @@
 
     map.on("click", (e) => {
       if (opts.drawing && opts.drawing()) return;
+      if (shownPtsMeta.pending && (vmode === "towers" || vmode === "footprints")) return;
       const i = nearest(e.point);
       if (i != null) { opts.onPick(i); return; }
       const f = map.queryRenderedFeatures(e.point, { layers: ["prov-fill"] })[0];
@@ -538,6 +584,7 @@
       if (fx && !map.getLayer("seamline-fx")) {
         try { map.addLayer(fx.layer); } catch (e) { /* custom layer unsupported */ }
       }
+      applyMode(false, null, false);
       ensureRiversLoaded();
       if (mode === "globe") ensureLandLoaded();
       syncLayerVisibility();
@@ -546,7 +593,6 @@
     map.on("style.load", flush);
     map.on("load", () => {
       flush();
-      applyMode(false);
       makeLabels();
       paintSelection();
       opts.onReady && opts.onReady();
@@ -555,6 +601,14 @@
 
     return {
       kind: "gl", exaggeration: TERRAIN_EXAGGERATION, map, fx,
+      ready: () => styleReady,
+      openingGlobe: () => openingGlobe,
+      setIntroMode(m, pose) {
+        map.stop();
+        openingGlobe = false;
+        mode = m;
+        whenLoaded(() => applyMode(false, pose));
+      },
       setTheme(colors) {
         c = colors;
         if (fx) fx.setTheme(colors, !!colors.dark);
@@ -598,8 +652,11 @@
       setDate(month) { if (fx) fx.setDate(month); },
       setActive(on) { if (fx) fx.setActive(on); },
       setPoints(P) {
+        if (P === rawPoints) return;
         rawPoints = P;
         polyCacheKey = "";
+        polygonCache.clear();
+        awaitingGeometry = false;
         const feats = [];
         if (P) {
           for (let i = 0; i < P.lon.length; i++) {
@@ -614,38 +671,35 @@
         whenLoaded(() => {
           if (pendingPts) { map.getSource("pts").setData(pendingPts); pendingPts = null; }
           if (fx) fx.setPoints(P, map);
-          rebuildPolySources(true);
+          schedulePolygons();
         });
       },
       setFilter(f) {
+        const key = `${f.sats.join(",")}|${f.dn}|${f.day}`;
+        if (key === filterKey) return;
+        filterKey = key;
+        const lightChanged = f.dn !== activeFilter.dn;
         activeFilter = f;
-        polyCacheKey = "";
-        const base = (ids) => {
-          const a = ["all", ["in", ["get", "p"], ["literal", ids.length ? ids : [-1]]]];
-          if (f.dn !== "DN") a.push(["==", ["get", "n"], f.dn === "N" ? 1 : 0]);
-          if (f.day) a.push(["==", ["get", "d"], f.day]);
-          return a;
-        };
         whenLoaded(() => {
-          map.setFilter("pts-modis", base(f.sats.filter((p) => p < 2)));
-          map.setFilter("pts-viirs", base(f.sats.filter((p) => p >= 2)));
-          map.setFilter("pts-heat", base(f.sats));
-          applyLight();
+          syncPointFilters();
+          if (lightChanged) applyLight();
           if (fx) fx.setFilter(f);
-          rebuildPolySources(true);
+          schedulePolygons();
         });
       },
       setViewMode(vm) {
-        vmode = ["points", "towers", "footprints", "density"].includes(vm) ? vm : "points";
+        const next = ["points", "towers", "footprints", "density"].includes(vm) ? vm : "points";
+        if (next === vmode) return;
+        vmode = next;
         whenLoaded(() => syncLayerVisibility());
       },
       viewMode: () => vmode,
       viewMeta: () => shownPtsMeta,
       setPsf(on) {
+        if (psfOn === !!on) return;
         psfOn = !!on;
-        polyCacheKey = "";
         if (fx) fx.setPsf(psfOn);
-        whenLoaded(() => { syncLayerVisibility(); rebuildPolySources(true); });
+        whenLoaded(syncLayerVisibility);
       },
       setOrbit(on) { if (fx) fx.setOrbit(on); },
       setSeam(on) { if (fx) fx.setSeam(on); },
@@ -656,11 +710,14 @@
         whenLoaded(() => map.setFilter("pts-sel", ["==", ["get", "i"], i == null ? -1 : i]));
       },
       fit(b, animate) {
-        const pad = { top: 58, bottom: 32, left: 36, right: 56 };
-        const p = mode === "globe" ? PITCH_GLOBE : mode === "3d" ? PITCH_3D : 0;
-        const br = mode === "2d" ? 0 : map.getBearing();
-        const o = { padding: pad, pitch: p, bearing: br, maxZoom: 9.5, duration: animate ? dur() : 0, essential: true };
-        try { map.fitBounds([[b[0], b[1]], [b[2], b[3]]], o); } catch (e) { map.jumpTo({ center: [(b[0] + b[2]) / 2, (b[1] + b[3]) / 2], zoom: 5 }); }
+        whenLoaded(() => {
+          const padding = { top: 58, bottom: 32, left: 36, right: 56 };
+          const pitch = mode === "globe" ? PITCH_GLOBE : mode === "3d" ? PITCH_3D : 0;
+          const bearing = mode === "2d" ? 0 : map.getBearing();
+          const duration = typeof animate === "number" ? animate : animate ? dur() : 0;
+          try { map.fitBounds([[b[0], b[1]], [b[2], b[3]]], { padding, pitch, bearing, maxZoom: 9.5, duration, essential: true }); }
+          catch (e) { map.jumpTo({ center: [(b[0] + b[2]) / 2, (b[1] + b[3]) / 2], zoom: 5 }); }
+        });
       },
       flyTo(lon, lat) { ease({ center: [lon, lat], zoom: Math.max(map.getZoom(), 8.2) }); },
       flyPose(pose) {
@@ -723,7 +780,7 @@
       png() { return canvas; },
       bearing: () => map.getBearing(),
       focus() { canvas.focus(); },
-      destroy() { try { if (fx && fx.stopIdle) fx.stopIdle(); map.remove(); } catch (e) { /* already gone */ } },
+      destroy() { clearTimeout(polyTimer); try { if (fx && fx.stopIdle) fx.stopIdle(); map.remove(); } catch (e) { /* already gone */ } },
     };
   }
 

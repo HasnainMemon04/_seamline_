@@ -38,6 +38,25 @@
         "c08/web/satellite-intro.css"
       ],
       "source_review": "Akbar supplied a frontend review archive. Its frontend contents matched the existing public deployment snapshot."
+    },
+    {
+      "date_asia_karachi": "2026-11-15",
+      "tool": "OpenAI Codex",
+      "scope": "Assisted with the orbital intro handoff, satellite imagery default, map filtering, animation performance and local browser verification.",
+      "files": [
+        "c08/web/app.js",
+        "c08/web/basemap.js",
+        "c08/web/explore.js",
+        "c08/web/fx3d.js",
+        "c08/web/index.html",
+        "c08/web/intro.js",
+        "c08/web/map3d.js",
+        "c08/web/motion-lab.css",
+        "c08/web/motion-lab.js",
+        "c08/web/showcase.js",
+        "c08/web/style.css",
+        "c08/web/workspace-shell.js"
+      ]
     }
   ],
   "files": [
