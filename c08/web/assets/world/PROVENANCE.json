@@ -1,0 +1,23 @@
+{
+  "source": "Natural Earth 1:50m physical vectors (ne_50m_land, ne_50m_rivers_lake_centerlines), github.com/nvkelso/natural-earth-vector master/geojson",
+  "source_licence": "Natural Earth: all data are in the public domain (LICENSE.md, naturalearthdata.com terms of use). No permission needed; credit optional.",
+  "retrieved_pkt": "2026-11-13 19:09 PKT",
+  "processing": "land: shapely simplify 0.03 deg, polygons < 0.02 sq deg dropped, coordinates rounded to 0.01 deg; rivers: clipped to 55-92E 18-42N, simplify 0.005 deg, rounded to 0.001 deg, names kept. Physical layers only: no national borders are drawn from this source.",
+  "use": "Orientation context for the globe and 3D views only. Never used in any count, harmonisation or statistic.",
+  "raw_sha256": {
+    "ne_50m_land.geojson": "e874b27a51d146452be360cafb3cc50c86001074a67d534113e6534682f9826b",
+    "ne_50m_rivers_lake_centerlines.geojson": "f286e0ce978fde999ca2d7a78c764be08542e19b63cded52b05c12d5173ccc51"
+  },
+  "files": {
+    "land.geojson": {
+      "bytes": 444688,
+      "sha256": "b135e6b2e66f46f9bf8ab42834430b9d0a379a835032150a8d2e69a539d9bb8b",
+      "features": 804
+    },
+    "rivers.geojson": {
+      "bytes": 29056,
+      "sha256": "dec2d7ca03c7e7b3fe3f68906165732626cbd5243fb0241c9f12be9eced744aa",
+      "features": 28
+    }
+  }
+}

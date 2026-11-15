@@ -1,0 +1,10 @@
+{
+  "name": "Seamline",
+  "short_name": "Seamline",
+  "description": "Compare burning activity across changing satellites. A local research prototype for Pakistan (NASA FIRMS MODIS and VIIRS detections).",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f3f2ee",
+  "theme_color": "#0e6b6f",
+  "icons": [{"src": "/static/assets/seamline-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}]
+}

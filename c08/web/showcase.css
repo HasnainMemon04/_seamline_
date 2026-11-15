@@ -1,0 +1,79 @@
+/* Seamline story cards (showcase.js). Colours come only from the theme tokens in style.css, so a theme switch
+   needs no redraw. Template: question, verdict badge, key numbers, one chart, then "more" for notes and sources. */
+
+.sc-body { font-size: var(--fs-m); }
+.sc-body h3 { font-size: var(--fs-m); margin: var(--s4) 0 var(--s2); }
+.sc-body h4 { font-size: var(--fs-s); margin: var(--s3) 0 var(--s1); }
+.sc-lede { color: var(--ink2); margin-bottom: var(--s3); }
+.sc-note { color: var(--muted); font-size: var(--fs-s); line-height: 1.45; }
+.sc-src { color: var(--muted); font-size: var(--fs-xs); overflow-wrap: anywhere; margin-top: var(--s2); }
+.sc-error { color: var(--error); font-weight: 600; }
+.sc-caution, .sc-wait { background: var(--warn-bg); border-left: 3px solid var(--warn-line); padding: 8px 12px; border-radius: 0 var(--r2) var(--r2) 0; margin: var(--s2) 0; font-size: var(--fs-s); }
+.sc-cause { display: block; color: var(--muted); font-size: var(--fs-s); }
+.sc-verdict { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-weight: 550; margin: var(--s2) 0 var(--s3); }
+
+/* badges: word and shape carry the outcome; a failure is as heavy as a pass */
+.sc-badge { display: inline-flex; align-items: center; gap: 5px; padding: 2px 10px; border-radius: var(--r-pill); font: 650 var(--fs-s)/1.45 var(--font); border: 1.5px solid var(--ink); white-space: nowrap; }
+.sc-badge::before { font-size: 12px; line-height: 1; }
+.sc-badge-pass { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.sc-badge-fail { background: var(--ink); border-color: var(--ink); color: var(--page); }
+.sc-badge-fail::before { content: "✕"; }
+.sc-badge-wait { background: transparent; border-style: dashed; color: var(--ink); }
+.sc-badge-dev { background: var(--sunken); border-style: dotted; color: var(--ink); }
+.sc-badge-mixed { background: var(--raised); color: var(--ink); }
+.sc-outcome { display: inline-block; padding: 0 8px; border-radius: var(--r-pill); border: 1.5px solid var(--ink); font-size: var(--fs-s); }
+.sc-out-holds { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.sc-out-fails { background: var(--ink); color: var(--page); }
+.sc-out-not_testable { border-style: dashed; }
+
+/* key numbers */
+.sc-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--s3); margin: var(--s2) 0; }
+.sc-stack { grid-template-columns: 1fr; align-content: start; }
+.sc-stat { border: 1px solid var(--line); border-radius: var(--r3); padding: var(--s3); background: var(--raised); min-width: 0; }
+.sc-stat p { margin: 0; font-size: var(--fs-s); color: var(--ink2); line-height: 1.4; }
+.sc-stat-h { font: 600 var(--fs-xs)/1.3 var(--font) !important; font-stretch: 88%; letter-spacing: .04em; text-transform: uppercase; color: var(--muted) !important; }
+.sc-big { font: 700 34px/1.1 var(--display); letter-spacing: -.03em; margin: 2px 0; }
+.sc-stat.sc-key { border: 1.5px solid var(--ink); box-shadow: var(--e2); }
+.sc-stat.sc-key .sc-big { font-size: 44px; }
+.sc-stat.sc-naive { border: 1.5px dashed var(--naive); background: transparent; }
+.sc-stat.sc-naive .sc-big { color: var(--naive); font-weight: 550; font-size: 28px; }
+.sc-earlier { margin: var(--s2) 0; }
+.sc-grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--s3); align-items: start; }
+.sc-points, .sc-facts, .sc-log { padding-left: 1.15em; margin: var(--s2) 0; }
+.sc-points li, .sc-facts li, .sc-log li { margin-bottom: 4px; font-size: var(--fs-s); line-height: 1.45; }
+.sc-points li b { margin-right: 4px; }
+.sc-more { margin: var(--s2) 0; border-top: 1px solid var(--line); }
+.sc-urdu { font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Urdu Typesetting", "Segoe UI", serif; font-size: 18px; line-height: 2.1; }
+
+/* charts */
+.sc-fig { margin: var(--s2) 0; min-width: 0; }
+.sc-fig figcaption { color: var(--muted); font-size: var(--fs-xs); margin-top: 4px; line-height: 1.4; }
+.sc-chart { min-height: 120px; overflow-x: auto; }
+.sc-svg { display: block; max-width: 100%; height: auto; }
+.sc-svg text { fill: var(--ink2); font: 12px var(--font); }
+.sc-svg text.sc-strong { fill: var(--ink); font-weight: 650; }
+.sc-svg text.sc-val { fill: var(--ink); font-weight: 650; font-size: 12.5px; }
+.sc-svg text.sc-dimtext { fill: var(--muted); }
+.sc-gridline { stroke: var(--grid); stroke-width: 1; }
+.sc-axisline { stroke: var(--axis); stroke-width: 1; }
+.sc-rowbg { fill: var(--band); opacity: .35; }
+.sc-period { fill: var(--era); }
+.sc-missing { fill: none; stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 3 3; }
+.sc-line { fill: none; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+.sc-dash { stroke-dasharray: 6 4; }
+.sc-band { stroke-width: 4; stroke-linecap: round; }
+.sc-dot { stroke: var(--surface); stroke-width: 1.4; }
+.sc-dot-partial { fill: var(--surface); stroke-width: 1.8; }
+.sc-dim { opacity: .38; }
+.sc-bar { transition: opacity var(--t-hover); }
+.sc-fill-snpp { fill: var(--snpp); } .sc-fill-n20 { fill: var(--n20); } .sc-fill-n21 { fill: var(--n21); } .sc-fill-aqua { fill: var(--aqua); } .sc-fill-terra { fill: var(--terra); }
+.sc-stroke-snpp { stroke: var(--snpp); } .sc-stroke-n20 { stroke: var(--n20); } .sc-stroke-n21 { stroke: var(--n21); } .sc-stroke-aqua { stroke: var(--aqua); } .sc-stroke-terra { stroke: var(--terra); }
+.sc-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: var(--fs-s); color: var(--ink2); margin-bottom: 4px; }
+.sc-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sc-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 2px; }
+.sc-sw-snpp { background: var(--snpp); border-radius: 50% !important; } .sc-sw-n20 { background: var(--n20); border-radius: 50% !important; } .sc-sw-n21 { background: var(--n21); border-radius: 50% !important; }
+.sc-sw-aqua { background: var(--aqua); } .sc-sw-terra { background: var(--terra); }
+.sc-sw-missing { border: 1.2px dashed var(--muted); } .sc-sw-period { background: var(--era); border: 1px solid var(--line2); } .sc-sw-partial { border: 2px solid var(--ink2); border-radius: 50% !important; }
+.sc-table { font-size: var(--fs-s); }
+.sc-verdict .sc-note { flex-basis: 100%; }
+.mx-detail { border-top: 1px solid var(--line); margin-top: var(--s3); padding-top: var(--s2); }

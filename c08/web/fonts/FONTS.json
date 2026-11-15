@@ -1,0 +1,24 @@
+{
+  "what": "Bundled interface fonts (SIL Open Font License 1.1), subset for offline use",
+  "prepared_utc": "2026-11-11T18:28:46+00:00",
+  "files": [
+    {
+      "file": "InstrumentSans-var.woff2",
+      "sha256": "c9e28bb824b7e0c29d5e1ba8397cedb4237c891a5f74c1eb7823fd7b62f275ef",
+      "bytes": 72588,
+      "source_file": "instrumentsans/InstrumentSans[wdth,wght].ttf",
+      "source_sha256": "b24f1812584816958afcf22e22d08e44318c5e51651e25d2438efdde389b33b1",
+      "licence": "InstrumentSans-OFL.txt",
+      "subset": "Basic Latin, Latin-1 and interface punctuation; all layout features kept"
+    },
+    {
+      "file": "SchibstedGrotesk-var.woff2",
+      "sha256": "a06af3e252c52f61da7f956c5fd1ce12ad93c108e2f98097c80e185e59203819",
+      "bytes": 45836,
+      "source_file": "schibstedgrotesk/SchibstedGrotesk[wght].ttf",
+      "source_sha256": "6ceeadf6be8e1fd7687011c7fa38ed0edd1abe967a0b73d97caec183552e823d",
+      "licence": "SchibstedGrotesk-OFL.txt",
+      "subset": "Basic Latin, Latin-1 and interface punctuation; all layout features kept"
+    }
+  ]
+}
