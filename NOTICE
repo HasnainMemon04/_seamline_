@@ -1,0 +1,27 @@
+Seamline (called Seamline until 12 Nov 2026): harmonised MODIS/VIIRS burning-activity calendar
+Copyright 2026 Muhammad Hasnain Memon
+
+The Apache License, Version 2.0 (see LICENSE) applies to the original source
+code in this repository: c08/ (including c08/web/), src/, tests/, scripts/
+and research/tools/. It does not cover the third-party materials listed
+below, which keep their own terms, and it does not by itself license the
+project's documents, research notes or reports.
+
+Third-party data and materials used or stored here:
+
+- NASA FIRMS active-fire data (MODIS Collection 6.1 MCD14ML; VIIRS 375 m
+  Collection 2 VNP14IMG, VJ114IMG; NRT files). "We acknowledge the use of
+  data and imagery from NASA's Fire Information for Resource Management
+  System (FIRMS) (https://earthdata.nasa.gov/firms), part of NASA's Earth
+  Science Data and Information System (ESDIS)." Product DOIs are listed in
+  data/manifest.json. Raw files are not redistributed in git.
+- geoBoundaries gbOpen PAK ADM1 (2019). Licence reported by the
+  geoBoundaries API on 2 Nov 2026: Public Domain. Cite: Runfola, D. et al.
+  (2020) geoBoundaries: A global database of political administrative
+  boundaries. PLoS ONE 15(4): e0231866.
+- NASA Space Apps Challenge statements, saved pages and PDFs, papers and
+  manuals under research/, and the external resource guide in
+  research/external/: copyright of their respective owners.
+- Python packages listed in requirements.lock.txt: their own licences.
+
+Deployment snapshot: includes required cached NASA inputs and scientific evidence. The original notice above describes the source repository. This derivative uses schematic satellites; supplied GLBs and Three/Draco are excluded pending redistribution review. Third-party font and MapLibre license files remain with their assets.

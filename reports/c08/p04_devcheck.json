@@ -1,0 +1,1170 @@
+{
+  "purpose": "CHECK REPORT P04 items B2, B3, B5 and B6, before any P04 test data is opened. Punjab only (P04's development area, already seen); every other place, the spring window and 2026 come from the FIRMS missing-days lists and each platform's archive span (dates, no counts).",
+  "area_counted": "Punjab",
+  "filters": "standard stream, quality rule (MODIS confidence >= 30; VIIRS n/h), type-0 screen, day pass",
+  "inputs": {
+    "detections_sha256": "561e555a28dc7bbb1dae4a9cad4965d687b4eafd21c9837baf4d85925cefcfef",
+    "detections_sha256_matches_ingest_report": true,
+    "missing_days_list": "research/metadata/provider_missing_dates.json",
+    "missing_days_sha256": "ad1438b57d5206c2aac9b2ee8a4becb676c82a7a3f4044386ef81ecd81515cd3"
+  },
+  "spans": {
+    "Aqua": [
+      "2002-07-06",
+      "2025-12-31"
+    ],
+    "NOAA20": [
+      "2018-04-01",
+      "2025-12-31"
+    ],
+    "SNPP": [
+      "2012-01-20",
+      "2025-12-31"
+    ],
+    "Terra": [
+      "2000-11-01",
+      "2025-12-31"
+    ]
+  },
+  "code_state": {
+    "revision": "8792499",
+    "c08_uncommitted_changes": true,
+    "c08_sources_sha256": "d6ff5cde4ad0e45ca73d505500d3fb7d051586f764efc827a2a638a9a821ded6"
+  },
+  "protocol": "experiments/PROTOCOL_P04.md",
+  "protocol_sha256": "6c299830440e697aa39f5d53b3dfcd0cb44348f7a84ebe7fa5a231c727203f07",
+  "availability": {
+    "G01_Terra_SNPP_OctNov": {
+      "2018": {
+        "OctNov": 61,
+        "Nov": 30
+      },
+      "2019": {
+        "OctNov": 61,
+        "Nov": 30
+      },
+      "2020": {
+        "OctNov": 61,
+        "Nov": 30
+      },
+      "2021": {
+        "OctNov": 61,
+        "Nov": 30
+      },
+      "2022": {
+        "OctNov": 49,
+        "Nov": 30
+      },
+      "2023": {
+        "OctNov": 61,
+        "Nov": 30
+      },
+      "2024": {
+        "OctNov": 58,
+        "Nov": 27
+      },
+      "2025": {
+        "OctNov": 61,
+        "Nov": 30
+      }
+    },
+    "G02": {
+      "Aqua-SNPP_rice": {
+        "2012": 108,
+        "2013": 108,
+        "2014": 108,
+        "2015": 108,
+        "2016": 108,
+        "2017": 108,
+        "2018": 108,
+        "2019": 108,
+        "2020": 108,
+        "2021": 108,
+        "2022": 108,
+        "2023": 108,
+        "2024": 104,
+        "2025": 108
+      },
+      "Aqua-SNPP_spring": {
+        "2012": 107,
+        "2013": 108,
+        "2014": 108,
+        "2015": 108,
+        "2016": 108,
+        "2017": 108,
+        "2018": 108,
+        "2019": 108,
+        "2020": 108,
+        "2021": 108,
+        "2022": 92,
+        "2023": 108,
+        "2024": 103,
+        "2025": 108
+      },
+      "NOAA20-SNPP_rice": {
+        "2018": 108,
+        "2019": 108,
+        "2020": 108,
+        "2021": 108,
+        "2022": 108,
+        "2023": 107,
+        "2024": 104,
+        "2025": 108
+      },
+      "NOAA20-SNPP_spring": {
+        "2018": 91,
+        "2019": 108,
+        "2020": 108,
+        "2021": 108,
+        "2022": 108,
+        "2023": 108,
+        "2024": 103,
+        "2025": 108
+      }
+    },
+    "G03_2026": {
+      "2026-01": {
+        "days_matched": 31,
+        "of": 31
+      },
+      "2026-02": {
+        "days_matched": 28,
+        "of": 28
+      },
+      "2026-03": {
+        "days_matched": 28,
+        "of": 31
+      },
+      "2026-04": {
+        "days_matched": 27,
+        "of": 30
+      },
+      "2026-05": {
+        "days_matched": 0,
+        "of": 31
+      },
+      "2026-06": {
+        "days_matched": 28,
+        "of": 30
+      },
+      "2026-07": {
+        "days_matched": 26,
+        "of": 31
+      },
+      "2026-08": {
+        "days_matched": 31,
+        "of": 31
+      },
+      "2026-09": {
+        "days_matched": 30,
+        "of": 30
+      },
+      "2026-10": {
+        "days_matched": 31,
+        "of": 31
+      }
+    }
+  },
+  "G01_punjab": {
+    "months": {
+      "OctNov": {
+        "years": {
+          "2018": {
+            "days": 61,
+            "of": 61,
+            "terra": 309,
+            "snpp": 11083,
+            "R": 0.02788053776053415,
+            "expected_terra": 244.118207389328,
+            "eligible": true
+          },
+          "2019": {
+            "days": 61,
+            "of": 61,
+            "terra": 141,
+            "snpp": 8946,
+            "R": 0.015761234071093227,
+            "expected_terra": 197.04786459486857,
+            "eligible": true
+          },
+          "2020": {
+            "days": 61,
+            "of": 61,
+            "terra": 265,
+            "snpp": 11316,
+            "R": 0.02341816896429834,
+            "expected_terra": 249.25035052040383,
+            "eligible": true
+          },
+          "2021": {
+            "days": 61,
+            "of": 61,
+            "terra": 405,
+            "snpp": 19244,
+            "R": 0.02104552068177094,
+            "expected_terra": 423.8753751691986,
+            "eligible": true
+          },
+          "2022": {
+            "days": 30,
+            "of": 61,
+            "terra": 40,
+            "snpp": 5474,
+            "R": 0.007307270734380708,
+            "expected_terra": 120.57232403222787,
+            "eligible": true
+          },
+          "2023": {
+            "days": 61,
+            "of": 61,
+            "terra": 68,
+            "snpp": 10081,
+            "R": 0.006745362563237774,
+            "expected_terra": 222.047789289165,
+            "eligible": true
+          },
+          "2024": {
+            "days": 31,
+            "of": 61,
+            "terra": 36,
+            "snpp": 5827,
+            "R": 0.006178136262227562,
+            "expected_terra": 128.3476310076346,
+            "eligible": true
+          },
+          "2025": {
+            "days": 61,
+            "of": 61,
+            "terra": 21,
+            "snpp": 11956,
+            "R": 0.001756440281030445,
+            "expected_terra": 263.3472243568353,
+            "eligible": true
+          }
+        },
+        "mean_R_2018_21_eligible": 0.022026365369424164,
+        "fall": {
+          "delta": -0.7778429190005522,
+          "years_before": [
+            2018,
+            2019,
+            2020,
+            2021
+          ],
+          "years_after": [
+            2023,
+            2024,
+            2025
+          ],
+          "p_one_sided_as_low": 0.02857142857142857,
+          "splits": 35
+        }
+      },
+      "Nov": {
+        "years": {
+          "2018": {
+            "days": 30,
+            "of": 30,
+            "terra": 173,
+            "snpp": 6703,
+            "R": 0.025809339101894674,
+            "expected_terra": 128.69845171890302,
+            "eligible": true
+          },
+          "2019": {
+            "days": 30,
+            "of": 30,
+            "terra": 77,
+            "snpp": 5753,
+            "R": 0.01338432122370937,
+            "expected_terra": 110.45833100684007,
+            "eligible": true
+          },
+          "2020": {
+            "days": 30,
+            "of": 30,
+            "terra": 130,
+            "snpp": 6731,
+            "R": 0.019313623532907442,
+            "expected_terra": 129.23605527673223,
+            "eligible": true
+          },
+          "2021": {
+            "days": 30,
+            "of": 30,
+            "terra": 206,
+            "snpp": 11261,
+            "R": 0.018293224402806146,
+            "expected_terra": 216.21263088267443,
+            "eligible": true
+          },
+          "2022": {
+            "days": 30,
+            "of": 30,
+            "terra": 40,
+            "snpp": 5474,
+            "R": 0.007307270734380708,
+            "expected_terra": 105.10149555561317,
+            "eligible": true
+          },
+          "2023": {
+            "days": 30,
+            "of": 30,
+            "terra": 28,
+            "snpp": 6141,
+            "R": 0.004559517993812083,
+            "expected_terra": 117.90798030818789,
+            "eligible": true
+          },
+          "2024": {
+            "days": 0,
+            "of": 30,
+            "terra": 0,
+            "snpp": 0,
+            "R": null,
+            "expected_terra": 0.0,
+            "eligible": false
+          },
+          "2025": {
+            "days": 30,
+            "of": 30,
+            "terra": 12,
+            "snpp": 5471,
+            "R": 0.0021933832937305795,
+            "expected_terra": 105.04389517441717,
+            "eligible": true
+          }
+        },
+        "mean_R_2018_21_eligible": 0.019200127065329406,
+        "step": {
+          "R_2022": 0.007307270734380708,
+          "mean_2018_21": 0.019200127065329406,
+          "ratio_to_mean": 0.38058449871281314,
+          "below_every": true,
+          "years_in_baseline": [
+            2018,
+            2019,
+            2020,
+            2021
+          ]
+        }
+      }
+    },
+    "matched": {
+      "OctNov": {
+        "years": {
+          "2018": {
+            "days": 61,
+            "of": 61,
+            "terra": 309,
+            "snpp": 11083,
+            "R": 0.02788053776053415,
+            "expected_terra": 244.118207389328,
+            "eligible": true
+          },
+          "2019": {
+            "days": 61,
+            "of": 61,
+            "terra": 141,
+            "snpp": 8946,
+            "R": 0.015761234071093227,
+            "expected_terra": 197.04786459486857,
+            "eligible": true
+          },
+          "2020": {
+            "days": 61,
+            "of": 61,
+            "terra": 265,
+            "snpp": 11316,
+            "R": 0.02341816896429834,
+            "expected_terra": 249.25035052040383,
+            "eligible": true
+          },
+          "2021": {
+            "days": 61,
+            "of": 61,
+            "terra": 405,
+            "snpp": 19244,
+            "R": 0.02104552068177094,
+            "expected_terra": 423.8753751691986,
+            "eligible": true
+          },
+          "2022": {
+            "days": 49,
+            "of": 61,
+            "terra": 90,
+            "snpp": 8966,
+            "R": 0.01003792103502119,
+            "expected_terra": 197.48839190225706,
+            "eligible": true
+          },
+          "2023": {
+            "days": 61,
+            "of": 61,
+            "terra": 68,
+            "snpp": 10081,
+            "R": 0.006745362563237774,
+            "expected_terra": 222.047789289165,
+            "eligible": true
+          },
+          "2024": {
+            "days": 58,
+            "of": 61,
+            "terra": 40,
+            "snpp": 10290,
+            "R": 0.003887269193391642,
+            "expected_terra": 226.65129965137464,
+            "eligible": true
+          },
+          "2025": {
+            "days": 61,
+            "of": 61,
+            "terra": 21,
+            "snpp": 11956,
+            "R": 0.001756440281030445,
+            "expected_terra": 263.3472243568353,
+            "eligible": true
+          }
+        },
+        "mean_R_2018_21_eligible": 0.022026365369424164,
+        "fall": {
+          "delta": -0.8125114784052129,
+          "years_before": [
+            2018,
+            2019,
+            2020,
+            2021
+          ],
+          "years_after": [
+            2023,
+            2024,
+            2025
+          ],
+          "p_one_sided_as_low": 0.02857142857142857,
+          "splits": 35
+        }
+      },
+      "Nov": {
+        "years": {
+          "2018": {
+            "days": 30,
+            "of": 30,
+            "terra": 173,
+            "snpp": 6703,
+            "R": 0.025809339101894674,
+            "expected_terra": 128.69845171890302,
+            "eligible": true
+          },
+          "2019": {
+            "days": 30,
+            "of": 30,
+            "terra": 77,
+            "snpp": 5753,
+            "R": 0.01338432122370937,
+            "expected_terra": 110.45833100684007,
+            "eligible": true
+          },
+          "2020": {
+            "days": 30,
+            "of": 30,
+            "terra": 130,
+            "snpp": 6731,
+            "R": 0.019313623532907442,
+            "expected_terra": 129.23605527673223,
+            "eligible": true
+          },
+          "2021": {
+            "days": 30,
+            "of": 30,
+            "terra": 206,
+            "snpp": 11261,
+            "R": 0.018293224402806146,
+            "expected_terra": 216.21263088267443,
+            "eligible": true
+          },
+          "2022": {
+            "days": 30,
+            "of": 30,
+            "terra": 40,
+            "snpp": 5474,
+            "R": 0.007307270734380708,
+            "expected_terra": 105.10149555561317,
+            "eligible": true
+          },
+          "2023": {
+            "days": 30,
+            "of": 30,
+            "terra": 28,
+            "snpp": 6141,
+            "R": 0.004559517993812083,
+            "expected_terra": 117.90798030818789,
+            "eligible": true
+          },
+          "2024": {
+            "days": 27,
+            "of": 30,
+            "terra": 4,
+            "snpp": 4463,
+            "R": 0.0008962581223392337,
+            "expected_terra": 85.69016709256513,
+            "eligible": true
+          },
+          "2025": {
+            "days": 30,
+            "of": 30,
+            "terra": 12,
+            "snpp": 5471,
+            "R": 0.0021933832937305795,
+            "expected_terra": 105.04389517441717,
+            "eligible": true
+          }
+        },
+        "mean_R_2018_21_eligible": 0.019200127065329406,
+        "step": {
+          "R_2022": 0.007307270734380708,
+          "mean_2018_21": 0.019200127065329406,
+          "ratio_to_mean": 0.38058449871281314,
+          "below_every": true,
+          "years_in_baseline": [
+            2018,
+            2019,
+            2020,
+            2021
+          ]
+        }
+      }
+    }
+  },
+  "G02_punjab_rice": {
+    "Aqua-SNPP": {
+      "years": {
+        "2012": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 1178,
+          "n_ref": 9311,
+          "mid_src": "2012-11-14",
+          "mid_ref": "2012-11-12",
+          "end_src": "2012-12-18",
+          "end_ref": "2012-12-18",
+          "d_mid": 2,
+          "d_end": 0,
+          "d_mid_calendar": 2,
+          "d_end_calendar": 0
+        },
+        "2013": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 1501,
+          "n_ref": 10742,
+          "mid_src": "2013-11-17",
+          "mid_ref": "2013-11-17",
+          "end_src": "2013-12-19",
+          "end_ref": "2013-12-16",
+          "d_mid": 0,
+          "d_end": 3,
+          "d_mid_calendar": 0,
+          "d_end_calendar": 3
+        },
+        "2014": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 1582,
+          "n_ref": 11855,
+          "mid_src": "2014-11-18",
+          "mid_ref": "2014-11-16",
+          "end_src": "2014-12-13",
+          "end_ref": "2014-12-10",
+          "d_mid": 2,
+          "d_end": 3,
+          "d_mid_calendar": 2,
+          "d_end_calendar": 3
+        },
+        "2015": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 1455,
+          "n_ref": 10381,
+          "mid_src": "2015-11-16",
+          "mid_ref": "2015-11-15",
+          "end_src": "2015-12-21",
+          "end_ref": "2015-12-17",
+          "d_mid": 1,
+          "d_end": 4,
+          "d_mid_calendar": 1,
+          "d_end_calendar": 4
+        },
+        "2016": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 1807,
+          "n_ref": 12890,
+          "mid_src": "2016-11-16",
+          "mid_ref": "2016-11-13",
+          "end_src": "2016-12-18",
+          "end_ref": "2016-12-17",
+          "d_mid": 3,
+          "d_end": 1,
+          "d_mid_calendar": 3,
+          "d_end_calendar": 1
+        },
+        "2017": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 2127,
+          "n_ref": 14310,
+          "mid_src": "2017-11-21",
+          "mid_ref": "2017-11-20",
+          "end_src": "2017-12-16",
+          "end_ref": "2017-12-17",
+          "d_mid": 1,
+          "d_end": -1,
+          "d_mid_calendar": 1,
+          "d_end_calendar": -1
+        },
+        "2018": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 2048,
+          "n_ref": 13821,
+          "mid_src": "2018-11-08",
+          "mid_ref": "2018-11-07",
+          "end_src": "2018-12-20",
+          "end_ref": "2018-12-20",
+          "d_mid": 1,
+          "d_end": 0,
+          "d_mid_calendar": 1,
+          "d_end_calendar": 0
+        },
+        "2019": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 1638,
+          "n_ref": 11297,
+          "mid_src": "2019-11-09",
+          "mid_ref": "2019-11-09",
+          "end_src": "2019-12-06",
+          "end_ref": "2019-12-06",
+          "d_mid": 0,
+          "d_end": 0,
+          "d_mid_calendar": 0,
+          "d_end_calendar": 0
+        },
+        "2020": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 2606,
+          "n_ref": 14530,
+          "mid_src": "2020-11-09",
+          "mid_ref": "2020-11-07",
+          "end_src": "2020-12-13",
+          "end_ref": "2020-12-10",
+          "d_mid": 2,
+          "d_end": 3,
+          "d_mid_calendar": 2,
+          "d_end_calendar": 3
+        },
+        "2021": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 3930,
+          "n_ref": 22312,
+          "mid_src": "2021-11-07",
+          "mid_ref": "2021-11-05",
+          "end_src": "2021-12-02",
+          "end_ref": "2021-12-03",
+          "d_mid": 2,
+          "d_end": -1,
+          "d_mid_calendar": 2,
+          "d_end_calendar": -1
+        },
+        "2022": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 2304,
+          "n_ref": 13136,
+          "mid_src": "2022-11-04",
+          "mid_ref": "2022-11-07",
+          "end_src": "2022-12-14",
+          "end_ref": "2022-12-15",
+          "d_mid": -3,
+          "d_end": -1,
+          "d_mid_calendar": -3,
+          "d_end_calendar": -1
+        },
+        "2023": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 2758,
+          "n_ref": 13050,
+          "mid_src": "2023-11-10",
+          "mid_ref": "2023-11-12",
+          "end_src": "2023-12-11",
+          "end_ref": "2023-12-14",
+          "d_mid": -2,
+          "d_end": -3,
+          "d_mid_calendar": -2,
+          "d_end_calendar": -3
+        },
+        "2024": {
+          "days_matched": 104,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": true,
+          "n_src": 2096,
+          "n_ref": 13652,
+          "mid_src": "2024-11-06",
+          "mid_ref": "2024-10-31",
+          "end_src": "2024-12-13",
+          "end_ref": "2024-12-12",
+          "d_mid": 3,
+          "d_end": 1,
+          "d_mid_calendar": 6,
+          "d_end_calendar": 1
+        },
+        "2025": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 2433,
+          "n_ref": 13530,
+          "mid_src": "2025-11-01",
+          "mid_ref": "2025-10-31",
+          "end_src": "2025-11-25",
+          "end_ref": "2025-11-27",
+          "d_mid": 1,
+          "d_end": -2,
+          "d_mid_calendar": 1,
+          "d_end_calendar": -2
+        }
+      },
+      "summary": {
+        "floor100_as_written": {
+          "eligible_years": 13,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 2
+          },
+          "max_abs_d_mid": 3,
+          "max_abs_d_end": 4
+        },
+        "floor100_matched": {
+          "eligible_years": 14,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 2
+          },
+          "max_abs_d_mid": 3,
+          "max_abs_d_end": 4
+        },
+        "floor100_matched_but_calendar_gap": {
+          "eligible_years": 14,
+          "middle_misses": 1,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 2
+          },
+          "max_abs_d_mid": 6,
+          "max_abs_d_end": 4
+        },
+        "floor200_as_written": {
+          "eligible_years": 13,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 2
+          },
+          "max_abs_d_mid": 3,
+          "max_abs_d_end": 4
+        },
+        "floor200_matched": {
+          "eligible_years": 14,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 2
+          },
+          "max_abs_d_mid": 3,
+          "max_abs_d_end": 4
+        },
+        "floor200_matched_but_calendar_gap": {
+          "eligible_years": 14,
+          "middle_misses": 1,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 2
+          },
+          "max_abs_d_mid": 6,
+          "max_abs_d_end": 4
+        },
+        "floor300_as_written": {
+          "eligible_years": 13,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 2
+          },
+          "max_abs_d_mid": 3,
+          "max_abs_d_end": 4
+        },
+        "floor300_matched": {
+          "eligible_years": 14,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 2
+          },
+          "max_abs_d_mid": 3,
+          "max_abs_d_end": 4
+        },
+        "floor300_matched_but_calendar_gap": {
+          "eligible_years": 14,
+          "middle_misses": 1,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 2
+          },
+          "max_abs_d_mid": 6,
+          "max_abs_d_end": 4
+        }
+      }
+    },
+    "NOAA20-SNPP": {
+      "years": {
+        "2018": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 14470,
+          "n_ref": 13821,
+          "mid_src": "2018-11-07",
+          "mid_ref": "2018-11-07",
+          "end_src": "2018-12-19",
+          "end_ref": "2018-12-20",
+          "d_mid": 0,
+          "d_end": -1,
+          "d_mid_calendar": 0,
+          "d_end_calendar": -1
+        },
+        "2019": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 11544,
+          "n_ref": 11297,
+          "mid_src": "2019-11-10",
+          "mid_ref": "2019-11-09",
+          "end_src": "2019-12-05",
+          "end_ref": "2019-12-06",
+          "d_mid": 1,
+          "d_end": -1,
+          "d_mid_calendar": 1,
+          "d_end_calendar": -1
+        },
+        "2020": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 15211,
+          "n_ref": 14530,
+          "mid_src": "2020-11-08",
+          "mid_ref": "2020-11-07",
+          "end_src": "2020-12-10",
+          "end_ref": "2020-12-10",
+          "d_mid": 1,
+          "d_end": 0,
+          "d_mid_calendar": 1,
+          "d_end_calendar": 0
+        },
+        "2021": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 23377,
+          "n_ref": 22312,
+          "mid_src": "2021-11-05",
+          "mid_ref": "2021-11-05",
+          "end_src": "2021-12-03",
+          "end_ref": "2021-12-03",
+          "d_mid": 0,
+          "d_end": 0,
+          "d_mid_calendar": 0,
+          "d_end_calendar": 0
+        },
+        "2022": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 13548,
+          "n_ref": 13136,
+          "mid_src": "2022-11-06",
+          "mid_ref": "2022-11-07",
+          "end_src": "2022-12-15",
+          "end_ref": "2022-12-15",
+          "d_mid": -1,
+          "d_end": 0,
+          "d_mid_calendar": -1,
+          "d_end_calendar": 0
+        },
+        "2023": {
+          "days_matched": 107,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": true,
+          "n_src": 13291,
+          "n_ref": 13018,
+          "mid_src": "2023-11-12",
+          "mid_ref": "2023-11-12",
+          "end_src": "2023-12-15",
+          "end_ref": "2023-12-14",
+          "d_mid": 0,
+          "d_end": 1,
+          "d_mid_calendar": 0,
+          "d_end_calendar": 1
+        },
+        "2024": {
+          "days_matched": 104,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": true,
+          "n_src": 14050,
+          "n_ref": 13652,
+          "mid_src": "2024-10-31",
+          "mid_ref": "2024-10-31",
+          "end_src": "2024-12-13",
+          "end_ref": "2024-12-12",
+          "d_mid": 0,
+          "d_end": 1,
+          "d_mid_calendar": 0,
+          "d_end_calendar": 1
+        },
+        "2025": {
+          "days_matched": 108,
+          "of": 108,
+          "window_has_listed_or_uncovered_day": false,
+          "n_src": 13886,
+          "n_ref": 13530,
+          "mid_src": "2025-11-01",
+          "mid_ref": "2025-10-31",
+          "end_src": "2025-11-30",
+          "end_ref": "2025-11-27",
+          "d_mid": 1,
+          "d_end": 3,
+          "d_mid_calendar": 1,
+          "d_end_calendar": 3
+        }
+      },
+      "summary": {
+        "floor100_as_written": {
+          "eligible_years": 6,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 1
+          },
+          "max_abs_d_mid": 1,
+          "max_abs_d_end": 3
+        },
+        "floor100_matched": {
+          "eligible_years": 8,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 1
+          },
+          "max_abs_d_mid": 1,
+          "max_abs_d_end": 3
+        },
+        "floor100_matched_but_calendar_gap": {
+          "eligible_years": 8,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 1
+          },
+          "max_abs_d_mid": 1,
+          "max_abs_d_end": 3
+        },
+        "floor200_as_written": {
+          "eligible_years": 6,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 1
+          },
+          "max_abs_d_mid": 1,
+          "max_abs_d_end": 3
+        },
+        "floor200_matched": {
+          "eligible_years": 8,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 1
+          },
+          "max_abs_d_mid": 1,
+          "max_abs_d_end": 3
+        },
+        "floor200_matched_but_calendar_gap": {
+          "eligible_years": 8,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 1
+          },
+          "max_abs_d_mid": 1,
+          "max_abs_d_end": 3
+        },
+        "floor300_as_written": {
+          "eligible_years": 6,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 1
+          },
+          "max_abs_d_mid": 1,
+          "max_abs_d_end": 3
+        },
+        "floor300_matched": {
+          "eligible_years": 8,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 1
+          },
+          "max_abs_d_mid": 1,
+          "max_abs_d_end": 3
+        },
+        "floor300_matched_but_calendar_gap": {
+          "eligible_years": 8,
+          "middle_misses": 0,
+          "end_misses": 0,
+          "holds_all_but_2": {
+            "middle": true,
+            "end": true
+          },
+          "holds_80pct": {
+            "middle": true,
+            "end": true,
+            "misses_allowed": 1
+          },
+          "max_abs_d_mid": 1,
+          "max_abs_d_end": 3
+        }
+      }
+    }
+  }
+}

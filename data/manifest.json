@@ -1,0 +1,4980 @@
+{
+  "absent": {},
+  "files": {
+    "boundaries/pak_adm1.geojson": {
+      "bytes": 185943,
+      "citation": "Runfola, D. et al. (2020) geoBoundaries: A global database of political administrative boundaries. PLoS ONE 15(4): e0231866.",
+      "id": "boundaries/pak_adm1.geojson",
+      "kind": "boundary_geojson",
+      "license": "Public Domain",
+      "path": "data/raw/boundaries/pak_adm1.geojson",
+      "product": "geoBoundaries gbOpen PAK ADM1",
+      "retrieved_utc": "2026-11-02T12:47:36+00:00",
+      "sha256": "34c973399b464f8b43a6cfbc9255ff6d19d911477f1549d0ff0f1dcaaf63c37b",
+      "source": "geoBoundaries, Wikipedia",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PAK/ADM1/geoBoundaries-PAK-ADM1.geojson",
+      "year_represented": "2019"
+    },
+    "boundaries/pak_adm1_simplified.geojson": {
+      "bytes": 159152,
+      "citation": "Runfola, D. et al. (2020) geoBoundaries: A global database of political administrative boundaries. PLoS ONE 15(4): e0231866.",
+      "id": "boundaries/pak_adm1_simplified.geojson",
+      "kind": "boundary_geojson",
+      "license": "Public Domain",
+      "path": "data/raw/boundaries/pak_adm1_simplified.geojson",
+      "product": "geoBoundaries gbOpen PAK ADM1",
+      "retrieved_utc": "2026-11-02T12:47:37+00:00",
+      "sha256": "c7ff4e70bcf740cfba47b871a7c2b2b2b243b59e4c0656e6e1bc2a64e295d93a",
+      "source": "geoBoundaries, Wikipedia",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PAK/ADM1/geoBoundaries-PAK-ADM1_simplified.geojson",
+      "year_represented": "2019"
+    },
+    "country/modis/2000": {
+      "bytes": 32257,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.68,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2000",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2000-12-30",
+      "min_acq_date": "2000-11-01",
+      "path": "data/raw/firms_country/modis/modis_2000_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:47+00:00",
+      "rows": 419,
+      "satellites": [
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:10:18 GMT",
+      "sha256": "5acad6a67cfb72aec4d12c753c69811cfb66ca615b0b5473adb62824989c7a7b",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2000/modis_2000_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2000
+    },
+    "country/modis/2001": {
+      "bytes": 238673,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.96,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2001",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2001-12-31",
+      "min_acq_date": "2001-01-01",
+      "path": "data/raw/firms_country/modis/modis_2001_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:48+00:00",
+      "rows": 3089,
+      "satellites": [
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:10:29 GMT",
+      "sha256": "1537d51c30ff3b8a0b3f65b0de4903c312830a3f78dfa598af19341c8d4522e1",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2001/modis_2001_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2001
+    },
+    "country/modis/2002": {
+      "bytes": 341394,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.77,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2002",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2002-12-31",
+      "min_acq_date": "2002-01-02",
+      "path": "data/raw/firms_country/modis/modis_2002_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:49+00:00",
+      "rows": 4440,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:10:44 GMT",
+      "sha256": "09a6ae4550e32d8f56bbcc4267085e094dc23ba72578988e12cfef7f1f359eff",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2002/modis_2002_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2002
+    },
+    "country/modis/2003": {
+      "bytes": 543707,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.81,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2003",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2003-12-31",
+      "min_acq_date": "2003-01-01",
+      "path": "data/raw/firms_country/modis/modis_2003_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:50+00:00",
+      "rows": 7094,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:11:19 GMT",
+      "sha256": "07fd98cfdef66f5b4fca6c7bb9404a147bbdccbf663205e1d2fe55b1f690db16",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2003/modis_2003_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2003
+    },
+    "country/modis/2004": {
+      "bytes": 630463,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.8,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2004",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2004-12-31",
+      "min_acq_date": "2004-01-01",
+      "path": "data/raw/firms_country/modis/modis_2004_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:51+00:00",
+      "rows": 8207,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:11:38 GMT",
+      "sha256": "63dedecbb39d0ad57709814139e422538f5d512cc0ca87750f6970fb2d36c29c",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2004/modis_2004_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2004
+    },
+    "country/modis/2005": {
+      "bytes": 598401,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.82,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2005",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2005-12-30",
+      "min_acq_date": "2005-01-01",
+      "path": "data/raw/firms_country/modis/modis_2005_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:52+00:00",
+      "rows": 7792,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:12:25 GMT",
+      "sha256": "f78980dc65a32d9eee9949d8221548f7862391011d704eef676568c97f6c0a0f",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2005/modis_2005_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2005
+    },
+    "country/modis/2006": {
+      "bytes": 448330,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.76,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2006",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2006-12-31",
+      "min_acq_date": "2006-01-01",
+      "path": "data/raw/firms_country/modis/modis_2006_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:52+00:00",
+      "rows": 5846,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:12:45 GMT",
+      "sha256": "406c66c616881a8eb5b9d0b34ceef2bbb69b35343aa631e2b0c21ba910abef45",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2006/modis_2006_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2006
+    },
+    "country/modis/2007": {
+      "bytes": 543453,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.82,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2007",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2007-12-31",
+      "min_acq_date": "2007-01-01",
+      "path": "data/raw/firms_country/modis/modis_2007_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:53+00:00",
+      "rows": 7074,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:13:45 GMT",
+      "sha256": "6c5353b6c343affc961b6e1dbdc896fbf6ee49f57d1f9f0b88dd886d38e1d9bd",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2007/modis_2007_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2007
+    },
+    "country/modis/2008": {
+      "bytes": 800092,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.81,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2008",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2008-12-31",
+      "min_acq_date": "2008-01-01",
+      "path": "data/raw/firms_country/modis/modis_2008_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:54+00:00",
+      "rows": 10447,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:14:04 GMT",
+      "sha256": "754c75858f4dd7904f5f0d95550e698cc7c5f2d42c38bdcd58ba4c1a8ca67311",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2008/modis_2008_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2008
+    },
+    "country/modis/2009": {
+      "bytes": 677358,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.79,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2009",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2009-12-31",
+      "min_acq_date": "2009-01-01",
+      "path": "data/raw/firms_country/modis/modis_2009_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:55+00:00",
+      "rows": 8835,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:14:57 GMT",
+      "sha256": "1e4c98f8a850c393a5d47f85b4ce98bd96ec9c6ec76e2da796edee0b9006c630",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2009/modis_2009_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2009
+    },
+    "country/modis/2010": {
+      "bytes": 612471,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.81,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2010",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2010-12-31",
+      "min_acq_date": "2010-01-01",
+      "path": "data/raw/firms_country/modis/modis_2010_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:56+00:00",
+      "rows": 8002,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:15:54 GMT",
+      "sha256": "23922b4996fe97c86482a148dc839e1cc4597b721deb35e84c79efe454c8a336",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2010/modis_2010_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2010
+    },
+    "country/modis/2011": {
+      "bytes": 643508,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.82,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2011",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2011-12-31",
+      "min_acq_date": "2011-01-01",
+      "path": "data/raw/firms_country/modis/modis_2011_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:57+00:00",
+      "rows": 8380,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:16:59 GMT",
+      "sha256": "d5bf61de4d7767369d3487b46bcf4bcf2c00d8202fd28328e55f1980a7889bfb",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2011/modis_2011_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2011
+    },
+    "country/modis/2012": {
+      "bytes": 930483,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.89,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2012",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2012-12-31",
+      "min_acq_date": "2012-01-01",
+      "path": "data/raw/firms_country/modis/modis_2012_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:57+00:00",
+      "rows": 12133,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:17:14 GMT",
+      "sha256": "5875ed55dcc142581df814dc549c410818a1cda33fe4ad70fbdeb5f2840291b0",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2012/modis_2012_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2012
+    },
+    "country/modis/2013": {
+      "bytes": 693327,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.88,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2013",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2013-12-31",
+      "min_acq_date": "2013-01-01",
+      "path": "data/raw/firms_country/modis/modis_2013_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:58+00:00",
+      "rows": 9054,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:17:45 GMT",
+      "sha256": "e592922baf946a84359a359f3ccc4ab74b88ce44858e6db5b661c8d6098c1aed",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2013/modis_2013_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2013
+    },
+    "country/modis/2014": {
+      "bytes": 786127,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.93,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2014",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2014-12-31",
+      "min_acq_date": "2014-01-01",
+      "path": "data/raw/firms_country/modis/modis_2014_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:00:59+00:00",
+      "rows": 10255,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:18:01 GMT",
+      "sha256": "979c99c8a73efe9b0cecacd0c429de3ff8c9f580c3e744d66be982273e6b1c20",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2014/modis_2014_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2014
+    },
+    "country/modis/2015": {
+      "bytes": 660243,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.85,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2015",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2015-12-31",
+      "min_acq_date": "2015-01-01",
+      "path": "data/raw/firms_country/modis/modis_2015_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:00+00:00",
+      "rows": 8610,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:18:21 GMT",
+      "sha256": "6be32ec526e907efabc5b919133e852462ad9dd8b8170c21fa060a304ca0a711",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2015/modis_2015_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2015
+    },
+    "country/modis/2016": {
+      "bytes": 831361,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.84,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2016",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2016-12-31",
+      "min_acq_date": "2016-01-01",
+      "path": "data/raw/firms_country/modis/modis_2016_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:01+00:00",
+      "rows": 10853,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:18:58 GMT",
+      "sha256": "e74b0186b7904058dcfa6a412a7cbb61d2d452142003e65d4ff96fa0a2c84864",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2016/modis_2016_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2016
+    },
+    "country/modis/2017": {
+      "bytes": 937656,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.83,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2017",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2017-12-31",
+      "min_acq_date": "2017-01-01",
+      "path": "data/raw/firms_country/modis/modis_2017_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:02+00:00",
+      "rows": 12234,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:21:48 GMT",
+      "sha256": "c3bfbc7d90ab9de214a8e7b0a347a3ea76f7d82936eb8e7c607c422318736a9e",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2017/modis_2017_Pakistan.csv",
+      "versions": [
+        "6.2"
+      ],
+      "year": 2017
+    },
+    "country/modis/2018": {
+      "bytes": 1007175,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.86,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2018",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2018-12-31",
+      "min_acq_date": "2018-01-01",
+      "path": "data/raw/firms_country/modis/modis_2018_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:03+00:00",
+      "rows": 12961,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:21:59 GMT",
+      "sha256": "ecd6985c17ca07df395c74970c370463a3f88477fa3fc3ab1a07151f97d99a5d",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2018/modis_2018_Pakistan.csv",
+      "versions": [
+        "6.03"
+      ],
+      "year": 2018
+    },
+    "country/modis/2019": {
+      "bytes": 741779,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 0.89,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2019",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2019-12-31",
+      "min_acq_date": "2019-01-01",
+      "path": "data/raw/firms_country/modis/modis_2019_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:04+00:00",
+      "rows": 9578,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:25:18 GMT",
+      "sha256": "15dadf9b6355c41272565a0e376efbdfada01947f8c72dd2bae271bc2ae47630",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2019/modis_2019_Pakistan.csv",
+      "versions": [
+        "6.03"
+      ],
+      "year": 2019
+    },
+    "country/modis/2020": {
+      "bytes": 767903,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 1.07,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2020",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2020-12-31",
+      "min_acq_date": "2020-01-01",
+      "path": "data/raw/firms_country/modis/modis_2020_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:05+00:00",
+      "rows": 9904,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:27:13 GMT",
+      "sha256": "871429e9ac9b3d52a15a6e844f0133043ba3da0874c1788aefcbbbd3939f4f60",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2020/modis_2020_Pakistan.csv",
+      "versions": [
+        "6.03"
+      ],
+      "year": 2020
+    },
+    "country/modis/2021": {
+      "bytes": 1006447,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 1.06,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2021",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2021-12-31",
+      "min_acq_date": "2021-01-01",
+      "path": "data/raw/firms_country/modis/modis_2021_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:06+00:00",
+      "rows": 12988,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:28:02 GMT",
+      "sha256": "323099e19feb47b22b8db8fc25a70aadeb6d9c4782b6d1c2455d7a27b898831b",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2021/modis_2021_Pakistan.csv",
+      "versions": [
+        "6.03"
+      ],
+      "year": 2021
+    },
+    "country/modis/2022": {
+      "bytes": 894885,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 1.24,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2022",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2022-12-31",
+      "min_acq_date": "2022-01-01",
+      "path": "data/raw/firms_country/modis/modis_2022_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:07+00:00",
+      "rows": 11517,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Wed, 04 Dec 2024 21:29:00 GMT",
+      "sha256": "d4a14ccca8367ca968c5a060f4ba7fd8ee0ff1fe418c305c87d40c6c8a61a13f",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2022/modis_2022_Pakistan.csv",
+      "versions": [
+        "6.03"
+      ],
+      "year": 2022
+    },
+    "country/modis/2023": {
+      "bytes": 818663,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 1.11,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2023",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2023-12-31",
+      "min_acq_date": "2023-01-01",
+      "path": "data/raw/firms_country/modis/modis_2023_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:08+00:00",
+      "rows": 10449,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Mon, 03 Jun 2024 18:12:11 GMT",
+      "sha256": "16575fc9619bc396071c84458f0c96a0b9091a97126ab16466bba359d1250f95",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2023/modis_2023_Pakistan.csv",
+      "versions": [
+        "61.03"
+      ],
+      "year": 2023
+    },
+    "country/modis/2024": {
+      "bytes": 972881,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 1.25,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2024",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2024-12-31",
+      "min_acq_date": "2024-01-01",
+      "path": "data/raw/firms_country/modis/modis_2024_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:09+00:00",
+      "rows": 12399,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 16:51:04 GMT",
+      "sha256": "7f02fa12a1f0dd548eca2f01281a6302d6d37fe7f659623cf016d32b2415c62b",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2024/modis_2024_Pakistan.csv",
+      "versions": [
+        "61.03"
+      ],
+      "year": 2024
+    },
+    "country/modis/2025": {
+      "bytes": 996332,
+      "doi": "10.5067/FIRMS/MODIS/MCD14ML",
+      "elapsed_s": 1.69,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/modis/2025",
+      "instruments": [
+        "MODIS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2025-12-31",
+      "min_acq_date": "2025-01-01",
+      "path": "data/raw/firms_country/modis/modis_2025_Pakistan.csv",
+      "product": "MODIS Collection 6.1 active fire (MCD14ML via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:11+00:00",
+      "rows": 12691,
+      "satellites": [
+        "Aqua",
+        "Terra"
+      ],
+      "server_last_modified": "Sat, 10 Oct 2026 13:18:12 GMT",
+      "sha256": "8f0b8766c34e42feae2c9e64574e052eddff6182e06b4659ce1995da2d98fe6c",
+      "source": "modis",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/modis/2025/modis_2025_Pakistan.csv",
+      "versions": [
+        "61.03"
+      ],
+      "year": 2025
+    },
+    "country/viirs-jpss1/2018": {
+      "bytes": 3746049,
+      "doi": "10.5067/FIRMS/VIIRS/VJ114IMGT_NRT.002",
+      "elapsed_s": 2.13,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-jpss1/2018",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2018-12-31",
+      "min_acq_date": "2018-04-01",
+      "path": "data/raw/firms_country/viirs-jpss1/viirs-jpss1_2018_Pakistan.csv",
+      "product": "VIIRS 375 m NOAA-20 active fire, Collection 2 (VJ114IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:56+00:00",
+      "rows": 46698,
+      "satellites": [
+        "N20"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 19:33:10 GMT",
+      "sha256": "a8f759009cd82c70705d2d3f194e2977bdfa25c27fc4e85cd630053a1e7b2dbe",
+      "source": "viirs-jpss1",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-jpss1/2018/viirs-jpss1_2018_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2018
+    },
+    "country/viirs-jpss1/2019": {
+      "bytes": 4387380,
+      "doi": "10.5067/FIRMS/VIIRS/VJ114IMGT_NRT.002",
+      "elapsed_s": 2.07,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-jpss1/2019",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2019-12-31",
+      "min_acq_date": "2019-01-01",
+      "path": "data/raw/firms_country/viirs-jpss1/viirs-jpss1_2019_Pakistan.csv",
+      "product": "VIIRS 375 m NOAA-20 active fire, Collection 2 (VJ114IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:58+00:00",
+      "rows": 54688,
+      "satellites": [
+        "N20"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 19:42:27 GMT",
+      "sha256": "9f280975c7df91dee4dbafbb5a6def870b801ad20f979564ba288a205f4aaf3e",
+      "source": "viirs-jpss1",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-jpss1/2019/viirs-jpss1_2019_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2019
+    },
+    "country/viirs-jpss1/2020": {
+      "bytes": 4387483,
+      "doi": "10.5067/FIRMS/VIIRS/VJ114IMGT_NRT.002",
+      "elapsed_s": 2.42,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-jpss1/2020",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2020-12-31",
+      "min_acq_date": "2020-01-01",
+      "path": "data/raw/firms_country/viirs-jpss1/viirs-jpss1_2020_Pakistan.csv",
+      "product": "VIIRS 375 m NOAA-20 active fire, Collection 2 (VJ114IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:02:00+00:00",
+      "rows": 54695,
+      "satellites": [
+        "N20"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 19:52:23 GMT",
+      "sha256": "699a32586dbbc1429fae470c8692f08ee5ba10245f25509127a650d808680b2e",
+      "source": "viirs-jpss1",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-jpss1/2020/viirs-jpss1_2020_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2020
+    },
+    "country/viirs-jpss1/2021": {
+      "bytes": 5822664,
+      "doi": "10.5067/FIRMS/VIIRS/VJ114IMGT_NRT.002",
+      "elapsed_s": 2.79,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-jpss1/2021",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2021-12-31",
+      "min_acq_date": "2021-01-01",
+      "path": "data/raw/firms_country/viirs-jpss1/viirs-jpss1_2021_Pakistan.csv",
+      "product": "VIIRS 375 m NOAA-20 active fire, Collection 2 (VJ114IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:02:03+00:00",
+      "rows": 72577,
+      "satellites": [
+        "N20"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 20:01:08 GMT",
+      "sha256": "e2d99a74a094757fa71f038f94f008f63530c7b38d98b2285c55f590385a1209",
+      "source": "viirs-jpss1",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-jpss1/2021/viirs-jpss1_2021_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2021
+    },
+    "country/viirs-jpss1/2022": {
+      "bytes": 5003637,
+      "doi": "10.5067/FIRMS/VIIRS/VJ114IMGT_NRT.002",
+      "elapsed_s": 2.24,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-jpss1/2022",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2022-12-31",
+      "min_acq_date": "2022-01-01",
+      "path": "data/raw/firms_country/viirs-jpss1/viirs-jpss1_2022_Pakistan.csv",
+      "product": "VIIRS 375 m NOAA-20 active fire, Collection 2 (VJ114IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:02:05+00:00",
+      "rows": 62372,
+      "satellites": [
+        "N20"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 20:10:57 GMT",
+      "sha256": "000c3cfa5a58c33bc0f818346ca721e992fecc50525b0e4f9969f106f78f3b3e",
+      "source": "viirs-jpss1",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-jpss1/2022/viirs-jpss1_2022_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2022
+    },
+    "country/viirs-jpss1/2023": {
+      "bytes": 4365980,
+      "doi": "10.5067/FIRMS/VIIRS/VJ114IMGT_NRT.002",
+      "elapsed_s": 2.05,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-jpss1/2023",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2023-12-31",
+      "min_acq_date": "2023-01-01",
+      "path": "data/raw/firms_country/viirs-jpss1/viirs-jpss1_2023_Pakistan.csv",
+      "product": "VIIRS 375 m NOAA-20 active fire, Collection 2 (VJ114IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:02:07+00:00",
+      "rows": 54421,
+      "satellites": [
+        "N20"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 20:19:26 GMT",
+      "sha256": "bc02c33f59dae1724b53ef4f0fe56244dcdb5c0cd07c087ab0b33ffaf1c6c70f",
+      "source": "viirs-jpss1",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-jpss1/2023/viirs-jpss1_2023_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2023
+    },
+    "country/viirs-jpss1/2024": {
+      "bytes": 5759831,
+      "doi": "10.5067/FIRMS/VIIRS/VJ114IMGT_NRT.002",
+      "elapsed_s": 2.58,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-jpss1/2024",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2024-12-31",
+      "min_acq_date": "2024-01-01",
+      "path": "data/raw/firms_country/viirs-jpss1/viirs-jpss1_2024_Pakistan.csv",
+      "product": "VIIRS 375 m NOAA-20 active fire, Collection 2 (VJ114IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:02:10+00:00",
+      "rows": 71798,
+      "satellites": [
+        "N20"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 20:25:55 GMT",
+      "sha256": "f5733a198ce5485f8a256a37197eb2b3e8e069687c74b36e6466fd69036fd0f2",
+      "source": "viirs-jpss1",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-jpss1/2024/viirs-jpss1_2024_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2024
+    },
+    "country/viirs-jpss1/2025": {
+      "bytes": 5780490,
+      "doi": "10.5067/FIRMS/VIIRS/VJ114IMGT_NRT.002",
+      "elapsed_s": 2.59,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-jpss1/2025",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2025-12-31",
+      "min_acq_date": "2025-01-01",
+      "path": "data/raw/firms_country/viirs-jpss1/viirs-jpss1_2025_Pakistan.csv",
+      "product": "VIIRS 375 m NOAA-20 active fire, Collection 2 (VJ114IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:02:12+00:00",
+      "rows": 72058,
+      "satellites": [
+        "N20"
+      ],
+      "server_last_modified": "Sat, 10 Oct 2026 13:27:31 GMT",
+      "sha256": "79fbcbeee455e0e98ba9c4a62b7f4acc14e504553b2f61ad93544df37229405d",
+      "source": "viirs-jpss1",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-jpss1/2025/viirs-jpss1_2025_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2025
+    },
+    "country/viirs-snpp/2012": {
+      "bytes": 4383533,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 5.04,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2012",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2012-12-31",
+      "min_acq_date": "2012-01-20",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2012_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:16+00:00",
+      "rows": 56047,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 19:12:38 GMT",
+      "sha256": "c524f92496b506bec44c8cac2d0127f685e5959bd1342a3d9a165930cc9c2ee9",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2012/viirs-snpp_2012_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2012
+    },
+    "country/viirs-snpp/2013": {
+      "bytes": 3880385,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 4.52,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2013",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2013-12-31",
+      "min_acq_date": "2013-01-01",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2013_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:21+00:00",
+      "rows": 49625,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 19:01:21 GMT",
+      "sha256": "f1e7fa86ce33e47ee1104cb985059adc90ba9c66b592ff054478d65c65b07583",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2013/viirs-snpp_2013_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2013
+    },
+    "country/viirs-snpp/2014": {
+      "bytes": 4484953,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 4.79,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2014",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2014-12-31",
+      "min_acq_date": "2014-01-01",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2014_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:25+00:00",
+      "rows": 57328,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 18:52:43 GMT",
+      "sha256": "f02d656d1074686f60afb80e1c0aa336497cf547015b193e259b034da37e0363",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2014/viirs-snpp_2014_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2014
+    },
+    "country/viirs-snpp/2015": {
+      "bytes": 3804454,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 3.32,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2015",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2015-12-31",
+      "min_acq_date": "2015-01-01",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2015_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:29+00:00",
+      "rows": 48630,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 18:44:39 GMT",
+      "sha256": "cff1197dc69a0de2bc1c5b7ac37794bf740473ddfd6920fef01ea8c19b5e0999",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2015/viirs-snpp_2015_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2015
+    },
+    "country/viirs-snpp/2016": {
+      "bytes": 4903657,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 2.79,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2016",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2016-12-31",
+      "min_acq_date": "2016-01-01",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2016_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:32+00:00",
+      "rows": 62692,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 18:33:02 GMT",
+      "sha256": "36d590f3ee9497f8d2f6001a4953883fc420cb292082367d377700ffa60ad945",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2016/viirs-snpp_2016_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2016
+    },
+    "country/viirs-snpp/2017": {
+      "bytes": 5073505,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 2.74,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2017",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2017-12-31",
+      "min_acq_date": "2017-01-01",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2017_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:34+00:00",
+      "rows": 64856,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 18:21:37 GMT",
+      "sha256": "cecc92c01c4128f1a1eceebbbb4d0d6480e08daf0f27cae4a9c53a231b52ab7c",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2017/viirs-snpp_2017_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2017
+    },
+    "country/viirs-snpp/2018": {
+      "bytes": 5028792,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 2.45,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2018",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2018-12-31",
+      "min_acq_date": "2018-01-01",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2018_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:37+00:00",
+      "rows": 64304,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 18:09:50 GMT",
+      "sha256": "42244332ce099625be3ff1a3ea62854915eeba32b4508553457b15abb364cf64",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2018/viirs-snpp_2018_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2018
+    },
+    "country/viirs-snpp/2019": {
+      "bytes": 4169286,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 2.26,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2019",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2019-12-31",
+      "min_acq_date": "2019-01-01",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2019_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:39+00:00",
+      "rows": 53302,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 17:55:20 GMT",
+      "sha256": "5d9a1a0aa937febf8ac50c981079cc5036f43f201880cab5228eb98148ba5606",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2019/viirs-snpp_2019_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2019
+    },
+    "country/viirs-snpp/2020": {
+      "bytes": 4132942,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 1.84,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2020",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2020-12-31",
+      "min_acq_date": "2020-01-01",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2020_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:41+00:00",
+      "rows": 52838,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 17:42:45 GMT",
+      "sha256": "29f87be2b2dfcf4a53ed8bc9d264581377bb6b1a821b238abf3d3fdbb11e568c",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2020/viirs-snpp_2020_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2020
+    },
+    "country/viirs-snpp/2021": {
+      "bytes": 5448688,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 2.58,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2021",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2021-12-31",
+      "min_acq_date": "2021-01-01",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2021_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:44+00:00",
+      "rows": 69652,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 17:32:16 GMT",
+      "sha256": "992ac0d43ab1cf9f308d9deb2e43fc7baae4018539433dea790e0b18cc1ce499",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2021/viirs-snpp_2021_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2021
+    },
+    "country/viirs-snpp/2022": {
+      "bytes": 4769019,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 2.37,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2022",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2022-12-31",
+      "min_acq_date": "2022-01-01",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2022_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:46+00:00",
+      "rows": 60973,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 17:18:41 GMT",
+      "sha256": "4bbdef783afdc56ec9f4c9c76cea61c8a11a6515877b888a169e092b9b987533",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2022/viirs-snpp_2022_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2022
+    },
+    "country/viirs-snpp/2023": {
+      "bytes": 4104596,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 2.4,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2023",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2023-12-31",
+      "min_acq_date": "2023-01-01",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2023_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:48+00:00",
+      "rows": 52473,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 17:09:25 GMT",
+      "sha256": "e1cc95cff4692a1555228d63ee0e35a7fcd9826b81c9bb40189ca5e17b3c9655",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2023/viirs-snpp_2023_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2023
+    },
+    "country/viirs-snpp/2024": {
+      "bytes": 5205198,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 2.63,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2024",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2024-12-31",
+      "min_acq_date": "2024-01-01",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2024_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:51+00:00",
+      "rows": 66543,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Tue, 24 Jun 2025 17:00:29 GMT",
+      "sha256": "598d2dcf9181fcd034a634ddf50945a238c352aac1f7473f36af29616b1a73f3",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2024/viirs-snpp_2024_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2024
+    },
+    "country/viirs-snpp/2025": {
+      "bytes": 5448650,
+      "doi": "10.5067/FIRMS/VIIRS/VNP14IMGT_NRT.002",
+      "elapsed_s": 2.54,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "instrument",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight",
+        "type"
+      ],
+      "id": "country/viirs-snpp/2025",
+      "instruments": [
+        "VIIRS"
+      ],
+      "kind": "firms_country_annual",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2025-12-31",
+      "min_acq_date": "2025-01-01",
+      "path": "data/raw/firms_country/viirs-snpp/viirs-snpp_2025_Pakistan.csv",
+      "product": "VIIRS 375 m S-NPP active fire, Collection 2 (VNP14IMG via FIRMS country archive)",
+      "retrieved_utc": "2026-11-02T12:01:54+00:00",
+      "rows": 69650,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Sat, 10 Oct 2026 13:23:22 GMT",
+      "sha256": "8b2ec9cef4ebb29fc7c1860fa7ea6e0a6375a13b59e6e4c89e566b32e963af06",
+      "source": "viirs-snpp",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/country/viirs-snpp/2025/viirs-snpp_2025_Pakistan.csv",
+      "versions": [
+        "2"
+      ],
+      "year": 2025
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-08-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-08-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-08-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:17+00:00",
+      "sha256": "06648fe67fb5ea76f58c2b203088cee21295b907a1eac1c5f83f9f9a2f03e1b7",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-08-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-08-01"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-08-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-08-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-08-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:22+00:00",
+      "sha256": "8fe5b09366e1df04ea097c4d7f5ce7fac49f3bf644c1bef6a11542f4426ebe88",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-08-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-08-06"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-08-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-08-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-08-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:27+00:00",
+      "sha256": "1e95ea231e370a3287aee2eff0c0e8ee17a1cc2b3231050b1a21204ecdaf17f8",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-08-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-08-11"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-08-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-08-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-08-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:31+00:00",
+      "sha256": "71524f4f214862a3eb7da8da11d684c190224b143346aad1521f8d650e8f5dd8",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-08-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-08-16"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-08-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-08-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-08-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:36+00:00",
+      "sha256": "d51998b9cd0ba92e7218c9ea3baf14e8be8bd3d8c424d5d2065a38d72a173f8c",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-08-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-08-21"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-08-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-08-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-08-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:41+00:00",
+      "sha256": "80b1b7b0c7f9f4d19d0b79564b0a89911be5b5d8e91c7646b7ef17dc18007b46",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-08-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-08-26"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-08-31_1d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 1,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-08-31_1d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-08-31_1d.csv",
+      "retrieved_utc": "2026-11-08T17:10:45+00:00",
+      "sha256": "1f86b17b54830592043f72cb10aef0f65d2b8426fc4faea551d049a65808bc6d",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-08-31",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/1/2026-08-31"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-09-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-09-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-09-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:49+00:00",
+      "sha256": "b0aac9c3f32470675fafed89dcc0fb73c9d0c44ac2af0eb5b3921c06da244250",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-09-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-09-01"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-09-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-09-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-09-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:54+00:00",
+      "sha256": "519621d704c1fa89721b0790b49bc4928fef773153553d7f194338756f902c82",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-09-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-09-06"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-09-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-09-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-09-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:59+00:00",
+      "sha256": "9446a5d8604e66fc251aa478b9b1cceca985efb078c4f4361028c34c8b81eff9",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-09-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-09-11"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-09-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-09-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-09-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:04+00:00",
+      "sha256": "85b29360192568b31ac7f8fd8f7e4367c821a7f671a0c790021c94e0520b8e67",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-09-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-09-16"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-09-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-09-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-09-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:08+00:00",
+      "sha256": "c6e1c711a0e837ce90ba80c41d00018703e8a2ae7d0469a186bdfe2df66962c5",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-09-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-09-21"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-09-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-09-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-09-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:14+00:00",
+      "sha256": "caf977d4aab2720e1e8a0b5884d48daeef1580dbe133b60139e9285ed287b7b0",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-09-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-09-26"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-10-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-10-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-10-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:19+00:00",
+      "sha256": "642e30a2368be0e5bea901267fb6a60b5de271501603f804ef5a97202dc5d9a5",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-10-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-10-01"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-10-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-10-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-10-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:25+00:00",
+      "sha256": "0a654446e0d49b356417af7bf1e7728633927552bc1217beb081aeaf44dddafd",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-10-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-10-06"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-10-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-10-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-10-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:31+00:00",
+      "sha256": "505553fe401a60dfce2ccaff16f9b735ee2ad89f43788ceb33dd087c3990a53c",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-10-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-10-11"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-10-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-10-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-10-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:38+00:00",
+      "sha256": "8449e56800dd9635b3eb2f0d3b3087191e9b00023a3d888c3c048dcb09b16ecb",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-10-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-10-16"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-10-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-10-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-10-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:44+00:00",
+      "sha256": "ec3497714d3be335a12a739a67a821a3de907d002449bec3af8d0bdb363837a0",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-10-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-10-21"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-10-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-10-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-10-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:51+00:00",
+      "sha256": "65acb8fb6289f79b619862fd685a4cf48a274a6d92c0ef7600d907882b358fa9",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-10-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/5/2026-10-26"
+    },
+    "firms_api/VIIRS_NOAA20_NRT/2026-10-31_1d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 1,
+      "id": "firms_api/VIIRS_NOAA20_NRT/2026-10-31_1d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_NRT/2026-10-31_1d.csv",
+      "retrieved_utc": "2026-11-08T17:11:56+00:00",
+      "sha256": "d6ad3f365cde240ec872715b775a923f53ccba09ef3103b1737a3edfb3b116bf",
+      "source": "VIIRS_NOAA20_NRT",
+      "start": "2026-10-31",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_NRT/60.5,23.5,77.9,37.2/1/2026-10-31"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-01-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-01-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-01-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:05:50+00:00",
+      "sha256": "b0577ba79b9b118d94577d5908ea3ef8abfc218bd2988dff3e269362985ff412",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-01-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-01-01"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-01-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-01-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-01-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:05:55+00:00",
+      "sha256": "f0267854e0fb647550f9369245022eece995f95c7caac100bc4a33fd749a3142",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-01-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-01-06"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-01-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-01-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-01-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:01+00:00",
+      "sha256": "b3a88cfc9e04fc4cbdcb4c7e623794ad7bd69ff623475d2fcef5a5cfc903304b",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-01-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-01-11"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-01-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-01-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-01-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:07+00:00",
+      "sha256": "c5d0b142fc7fcb49a8232d04778503056080282603a67500c5d5a3448eb42002",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-01-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-01-16"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-01-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-01-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-01-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:12+00:00",
+      "sha256": "f5c058a2f672c6ca232e9a352508a1335fd60048486bc19bca6fa2c189f4fe40",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-01-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-01-21"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-01-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-01-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-01-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:17+00:00",
+      "sha256": "37034684bba7ee2380f042d8b762bd379cde23fa3f2a67fe611c3c0ce71d1678",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-01-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-01-26"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-01-31_1d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 1,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-01-31_1d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-01-31_1d.csv",
+      "retrieved_utc": "2026-11-08T17:06:21+00:00",
+      "sha256": "befce3ba212f8dc6b652b48abb44d35c27a3025a73a84ff364a918d7c3e4fdd3",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-01-31",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/1/2026-01-31"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-02-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-02-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-02-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:29+00:00",
+      "sha256": "88fb05107f9b243b320f136b9e31e4214e9a1813ce468b7def998f69f00d0e23",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-02-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-02-01"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-02-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-02-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-02-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:36+00:00",
+      "sha256": "e8aec16b97915c432abd92002f7619e2f2f381c832e02a0b8c0156a89ebc086f",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-02-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-02-06"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-02-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-02-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-02-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:42+00:00",
+      "sha256": "6f16eab02a95179f16d6fa8ada4ce7b27dac25be03e350ba942ea07be7d4f438",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-02-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-02-11"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-02-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-02-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-02-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:48+00:00",
+      "sha256": "393abea1091ed8c63b608178afdf207f3406fa3ea3283344b34c254059ae4a9d",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-02-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-02-16"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-02-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-02-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-02-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:54+00:00",
+      "sha256": "db49d85177e79a51dcf2bfc8ed468a1696012dc244e244eeac16ed7e555ab66c",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-02-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-02-21"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-02-26_3d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 3,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-02-26_3d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-02-26_3d.csv",
+      "retrieved_utc": "2026-11-08T17:06:59+00:00",
+      "sha256": "b8ff27b5b2c8bdcf3dda5f86e6ffbedc5a2157d97f43bc6e23fc2ff101ef09b3",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-02-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/3/2026-02-26"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-03-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-03-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-03-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:06+00:00",
+      "sha256": "35bc74ab69ad7e9806f9bd68a1e8174a99dccff0853251578907b22661f86c84",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-03-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-03-01"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-03-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-03-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-03-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:11+00:00",
+      "sha256": "31824cb52293b86386e1df12503b406909854bd166110080d2779649daf52f76",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-03-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-03-06"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-03-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-03-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-03-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:16+00:00",
+      "sha256": "8d6ab0669d06b112cd279b265d4524695a5a8415189e5b2884ec0e74f6fbb26d",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-03-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-03-11"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-03-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-03-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-03-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:21+00:00",
+      "sha256": "e86b6314c24a96c8d8717952d7bc1aaba5126d87502f1394daf69eda651113eb",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-03-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-03-16"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-03-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-03-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-03-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:26+00:00",
+      "sha256": "9f40ca154e81927142e4143563cde617bc984335213d031d681c9fb9e3d63323",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-03-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-03-21"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-03-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-03-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-03-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:31+00:00",
+      "sha256": "4e7ee7b75196d8847111378a381d8834e234bc9512be4a6bbba1f635fd97e122",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-03-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-03-26"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-03-31_1d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 1,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-03-31_1d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-03-31_1d.csv",
+      "retrieved_utc": "2026-11-08T17:07:38+00:00",
+      "sha256": "92f2e5b0d66c0e9efee43a5756624634afae929c591cdedff335b95371796cf4",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-03-31",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/1/2026-03-31"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-04-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-04-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-04-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:43+00:00",
+      "sha256": "93985388247f2cf5fa892d87713e9b4b390f0274033193bbaf28773242fd511d",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-04-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-04-01"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-04-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-04-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-04-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:49+00:00",
+      "sha256": "9ea1ff695d16a52821cd12a2045f0b2002b36d1934b9841b8f773b1298f1fce6",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-04-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-04-06"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-04-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-04-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-04-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:56+00:00",
+      "sha256": "a353a7bb79b4170c8795dc8e0f52bd771380f5dee6d99d0db9002464f65b3404",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-04-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-04-11"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-04-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-04-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-04-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:03+00:00",
+      "sha256": "2f4e199773f0e6a37f5a09038ef714008be456730c03ed575e327bf93b5c5b04",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-04-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-04-16"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-04-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-04-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-04-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:14+00:00",
+      "sha256": "e39a837394278661f97250d802cf915f7433fd6198effcd967b00e1cb9dbca54",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-04-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-04-21"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-04-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-04-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-04-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:22+00:00",
+      "sha256": "2a40fff3685ad264fbf1cf3db476735055850ea8874859e4f6b49bab1c5aecc8",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-04-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-04-26"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-05-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-05-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-05-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:30+00:00",
+      "sha256": "92b4ed7c0b0da0b973bd663385d5feb06e81bd7f8a7040adf848e5187b9aa759",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-05-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-05-01"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-05-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-05-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-05-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:37+00:00",
+      "sha256": "95955189748fdd152442ddf1a1de848b7e02bc86e8d274a0d59cffd127901318",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-05-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-05-06"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-05-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-05-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-05-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:42+00:00",
+      "sha256": "5608c4e0aecbdd88ac6c6177f817c95682e91357d7cb88629a74978d219996ee",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-05-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-05-11"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-05-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-05-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-05-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:48+00:00",
+      "sha256": "b7a850c4eb354ae97ad8e14e19669a4af6537188f985d1b906b6c465d6aa4646",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-05-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-05-16"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-05-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-05-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-05-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:54+00:00",
+      "sha256": "9ae2f60506d37e6e9c59ec70a4b9a59e1e42a9b21eacbe784f090be4be39f859",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-05-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-05-21"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-05-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-05-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-05-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:00+00:00",
+      "sha256": "fba9d8d1d251cbc856438fb3f92a78302107c9160499f3ec042b94f28b56b092",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-05-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-05-26"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-05-31_1d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 1,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-05-31_1d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-05-31_1d.csv",
+      "retrieved_utc": "2026-11-08T17:09:04+00:00",
+      "sha256": "7c531f4fc922d560e05fce43f4723d44cbc6966b740985684f9ea42ac5730fa0",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-05-31",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/1/2026-05-31"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-06-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-06-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-06-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:09+00:00",
+      "sha256": "5ea493d776635d9c9297d415306e6268faad8b97fdcd86caed737310ec3086ec",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-06-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-06-01"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-06-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-06-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-06-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:16+00:00",
+      "sha256": "c4801efb10a7b501c4cf40d3d3fdfbf418594a178ace6d3c9cdf55f228119e66",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-06-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-06-06"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-06-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-06-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-06-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:22+00:00",
+      "sha256": "f49d84a1352bbf41db3afffe4ca6a1792b20964ff6626874fe27d39022396f8f",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-06-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-06-11"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-06-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-06-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-06-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:29+00:00",
+      "sha256": "9453ad08d5ea796576741ef381eb13487e86763a001828ff812729d3de460f11",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-06-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-06-16"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-06-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-06-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-06-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:36+00:00",
+      "sha256": "1a183542ccf8ecc961fff07758e9724b806ade9f793b9b03e8bb648feb67261b",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-06-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-06-21"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-06-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-06-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-06-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:41+00:00",
+      "sha256": "98e4ea803e8e9acd01b989bd4bc8b1404dccd71149d62237de301718ce92f798",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-06-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-06-26"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-07-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-07-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-07-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:47+00:00",
+      "sha256": "00cecdc066db90887d965bf08f38317f52c9e8089dbeac9d95ea31edd32f29b7",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-07-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-07-01"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-07-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-07-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-07-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:52+00:00",
+      "sha256": "730cebb8a73ddad42951065b8b3f78ad4d226527730ee1f4dec13722507c60b9",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-07-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-07-06"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-07-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-07-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-07-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:56+00:00",
+      "sha256": "53bf7183495f0f8d2c7f9d0b4369f82997424e5b10e3caefd03033d07a64e187",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-07-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-07-11"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-07-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-07-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-07-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:00+00:00",
+      "sha256": "e8385ff50cce2030f49775f111202133b3d7a3c888091786c78c2c4c1d63fa89",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-07-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-07-16"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-07-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-07-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-07-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:04+00:00",
+      "sha256": "16b0759f1924cc7640fa513f016b1345a0c6b73b0e3ca496c50960ead8c82f01",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-07-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-07-21"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-07-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-07-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-07-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:09+00:00",
+      "sha256": "1f54a8912db59ec728ba0a4d43878c3a6a5e5a02dfc57e12616ca3d5cce6d150",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-07-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/5/2026-07-26"
+    },
+    "firms_api/VIIRS_NOAA20_SP/2026-07-31_1d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 1,
+      "id": "firms_api/VIIRS_NOAA20_SP/2026-07-31_1d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA20_SP/2026-07-31_1d.csv",
+      "retrieved_utc": "2026-11-08T17:10:13+00:00",
+      "sha256": "b438bfd05142f31ea038f18240e4bc3fd2b58cce5b76ceb1d41c7b1df2dd85ca",
+      "source": "VIIRS_NOAA20_SP",
+      "start": "2026-07-31",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA20_SP/60.5,23.5,77.9,37.2/1/2026-07-31"
+    },
+    "firms_api/VIIRS_NOAA21_NRT/2026-10-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA21_NRT/2026-10-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA21_NRT/2026-10-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:58+00:00",
+      "sha256": "54a92e5c7bff0e426203ceaeb69bf9b9a287ba17c5a59db682bfe01e316ba2fa",
+      "source": "VIIRS_NOAA21_NRT",
+      "start": "2026-10-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA21_NRT/60.5,23.5,77.9,37.2/5/2026-10-01"
+    },
+    "firms_api/VIIRS_NOAA21_NRT/2026-10-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA21_NRT/2026-10-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA21_NRT/2026-10-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:12:01+00:00",
+      "sha256": "b7873dc5d2ed01161c164b4d68aa656a7199b897c26d297da38b2daa817e8c52",
+      "source": "VIIRS_NOAA21_NRT",
+      "start": "2026-10-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA21_NRT/60.5,23.5,77.9,37.2/5/2026-10-06"
+    },
+    "firms_api/VIIRS_NOAA21_NRT/2026-10-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA21_NRT/2026-10-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA21_NRT/2026-10-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:12:03+00:00",
+      "sha256": "598884b802a20ffbf41314e7a2336e27fb1fbf40e462a5a6489d89c5859779d1",
+      "source": "VIIRS_NOAA21_NRT",
+      "start": "2026-10-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA21_NRT/60.5,23.5,77.9,37.2/5/2026-10-11"
+    },
+    "firms_api/VIIRS_NOAA21_NRT/2026-10-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA21_NRT/2026-10-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA21_NRT/2026-10-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:12:06+00:00",
+      "sha256": "d5deaef02d537f9500c59b89089d585d1c8f00d14094bdef7f99c0f86ed90e0d",
+      "source": "VIIRS_NOAA21_NRT",
+      "start": "2026-10-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA21_NRT/60.5,23.5,77.9,37.2/5/2026-10-16"
+    },
+    "firms_api/VIIRS_NOAA21_NRT/2026-10-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_NOAA21_NRT/2026-10-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA21_NRT/2026-10-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:12:09+00:00",
+      "sha256": "97bc37f32fdef61236f50ce56fe59b6bf45073617548daa6bafa8c284f4979e8",
+      "source": "VIIRS_NOAA21_NRT",
+      "start": "2026-10-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA21_NRT/60.5,23.5,77.9,37.2/5/2026-10-21"
+    },
+    "firms_api/VIIRS_NOAA21_NRT/2026-10-26_4d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 4,
+      "id": "firms_api/VIIRS_NOAA21_NRT/2026-10-26_4d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_NOAA21_NRT/2026-10-26_4d.csv",
+      "retrieved_utc": "2026-11-08T17:12:12+00:00",
+      "sha256": "6345e6061a699e59b9c9c89730fd6977c09847fe9677e2354dd30ede870acfad",
+      "source": "VIIRS_NOAA21_NRT",
+      "start": "2026-10-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_NOAA21_NRT/60.5,23.5,77.9,37.2/4/2026-10-26"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-08-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-08-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-08-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:15+00:00",
+      "sha256": "c9a5462860b90cc74e864cf634b58a0d0ffcdbf06e2132fccd69642216f652c5",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-08-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-08-01"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-08-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-08-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-08-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:20+00:00",
+      "sha256": "b0f2fba47a00594d92b00f0e7e4c78959ee8186413fa3396b58e7f53fd3ddb43",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-08-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-08-06"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-08-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-08-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-08-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:24+00:00",
+      "sha256": "7900808e73506b874044575644ffa59cb39f1cdeab822562015672959041b1cd",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-08-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-08-11"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-08-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-08-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-08-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:29+00:00",
+      "sha256": "4ae8616b2ac0a9084ac2dbc9ef6d0aa05a3eeeeef993d0f7d84113ff09ee1620",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-08-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-08-16"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-08-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-08-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-08-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:34+00:00",
+      "sha256": "89d6ce89a240c48fb52801a22610e631890efa84090f65313c0362283b0dab76",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-08-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-08-21"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-08-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-08-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-08-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:39+00:00",
+      "sha256": "d2ea3beca07bce909b6c8170969559b78404940b84cbd067bb42cc49e2bee12b",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-08-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-08-26"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-08-31_1d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 1,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-08-31_1d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-08-31_1d.csv",
+      "retrieved_utc": "2026-11-08T17:10:43+00:00",
+      "sha256": "933176393280ce94b234df2be656e8804b507820a114046f959215c36fa545e0",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-08-31",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/1/2026-08-31"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-09-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-09-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-09-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:47+00:00",
+      "sha256": "804dac20311efe232eed288f89cd175f2e66bce5ed90c7c23d815de705fd75af",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-09-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-09-01"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-09-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-09-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-09-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:52+00:00",
+      "sha256": "f27ec9446ead5caf009885a1faeebb78c8ffc60b5ab7eb25655cd451151294ea",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-09-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-09-06"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-09-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-09-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-09-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:56+00:00",
+      "sha256": "14f83137757c3587b93bab2cfc7e12acd094558a762ea4ee385e6973ecb118e3",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-09-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-09-11"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-09-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-09-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-09-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:01+00:00",
+      "sha256": "3a089f0232ed4893ac0b3629895cb1c442b3bfa02d2be15df64ee03a0c097b1d",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-09-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-09-16"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-09-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-09-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-09-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:06+00:00",
+      "sha256": "848c7822d13c717d7cd6bc109b8ccaf09b13cf660a4889c153dc13e9b182e61d",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-09-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-09-21"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-09-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-09-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-09-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:11+00:00",
+      "sha256": "eca58e97c8fd55a95843b3970a25cd1874845280df7af0633af79cc24f87bf1e",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-09-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-09-26"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-10-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-10-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-10-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:16+00:00",
+      "sha256": "aa83434f56f3ba0edd2216ec5e3cd0ba77526ab5df6dec80816d32b57a8cbf70",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-10-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-10-01"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-10-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-10-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-10-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:22+00:00",
+      "sha256": "c4c2acf4e076fe014e4e724988283e524444365f418048f8e404ac5be73f8fe0",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-10-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-10-06"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-10-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-10-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-10-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:28+00:00",
+      "sha256": "86c7ca76f0697c3139aad34f79efa47c9be8e4c472b5b14bbd3caadce5b34dad",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-10-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-10-11"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-10-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-10-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-10-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:34+00:00",
+      "sha256": "fb1e935cab3095a69d3dc29a1a436047a342577b50c7563d7aad3ba4b6ed3218",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-10-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-10-16"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-10-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-10-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-10-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:41+00:00",
+      "sha256": "d6e5ca24a60b13c8aacf34dd4769874972a0d2745840e2334e568a20733b6d47",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-10-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-10-21"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-10-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-10-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-10-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:11:47+00:00",
+      "sha256": "a5d7bf4c9f53a5bbed5c4147d627a4e7f4639f78a862e8d53721812db95cdfa5",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-10-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/5/2026-10-26"
+    },
+    "firms_api/VIIRS_SNPP_NRT/2026-10-31_1d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 1,
+      "id": "firms_api/VIIRS_SNPP_NRT/2026-10-31_1d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_NRT/2026-10-31_1d.csv",
+      "retrieved_utc": "2026-11-08T17:11:53+00:00",
+      "sha256": "b59e38c8dbc954ede6110c2b0e1e676441517d7b6c4c079eabbc276e275af1c8",
+      "source": "VIIRS_SNPP_NRT",
+      "start": "2026-10-31",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_NRT/60.5,23.5,77.9,37.2/1/2026-10-31"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-01-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-01-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-01-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:05:48+00:00",
+      "sha256": "66613e294543a46aa5ad4767ec7be6d55ccfd1885c9a458b9475a2ed69cf5f0c",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-01-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-01-01"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-01-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-01-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-01-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:05:53+00:00",
+      "sha256": "df0f49f8085e14315090ee004faa2b5d38c12ebd57992bb6848511c5f938c347",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-01-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-01-06"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-01-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-01-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-01-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:05:58+00:00",
+      "sha256": "07fd1816668c6c39af77809638c57de07cc5e8c019c1dab6d25adf9d4a6109af",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-01-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-01-11"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-01-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-01-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-01-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:04+00:00",
+      "sha256": "1b51ea32dcd7e373b66941fe66d16f17f930a8eb9b0a428724a3c118fce7a254",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-01-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-01-16"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-01-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-01-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-01-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:09+00:00",
+      "sha256": "d21e992d2d43cd3fc1ad77fc09bf054a69c00baeca9ccedcff88481828a18cda",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-01-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-01-21"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-01-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-01-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-01-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:14+00:00",
+      "sha256": "89a64f295c53fac824ecad281ec24bf7debe6a622b552928513230552410a105",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-01-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-01-26"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-01-31_1d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 1,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-01-31_1d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-01-31_1d.csv",
+      "retrieved_utc": "2026-11-08T17:06:19+00:00",
+      "sha256": "1d3b5a9936eb6c9124ab9061dad5ec26470557e2ba24c359a177d8a4c0b220d0",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-01-31",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/1/2026-01-31"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-02-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-02-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-02-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:24+00:00",
+      "sha256": "015699c67401d2367e717a262b315e543532767659e9b5d5bbf8f5d1becf83a0",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-02-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-02-01"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-02-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-02-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-02-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:33+00:00",
+      "sha256": "42a96bd0d65bd0fb9078c64901ca83f7f4bf41e60e855a64ae38075b37fa1fd6",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-02-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-02-06"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-02-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-02-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-02-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:39+00:00",
+      "sha256": "28b36c699bccb09c3b213f9ce44074eed8005d700929dc5b810034329723296b",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-02-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-02-11"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-02-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-02-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-02-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:45+00:00",
+      "sha256": "5a4e23d3fd008ef05d9ac71db3a679965c2a6c1eacc9c083c21ae47e6f4dc1d2",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-02-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-02-16"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-02-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-02-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-02-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:06:51+00:00",
+      "sha256": "efed52e994946c2e0d50424c05b3181c552f8cbe606d03329a494883dcd6fccc",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-02-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-02-21"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-02-26_3d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 3,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-02-26_3d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-02-26_3d.csv",
+      "retrieved_utc": "2026-11-08T17:06:57+00:00",
+      "sha256": "41b8ae8f18b054faa2cf3fdd3cb4d12e06a795630180af74feab3c8cebe24e66",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-02-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/3/2026-02-26"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-03-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-03-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-03-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:02+00:00",
+      "sha256": "f1e47b613dd60b63739f25ebac8ca4717d1bc3a95d43c8a4ac69001878924fff",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-03-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-03-01"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-03-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-03-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-03-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:08+00:00",
+      "sha256": "c61e183c5f8e64d04d08f7cf2d961d20be5cdbaada22239310f09a7f83a790bf",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-03-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-03-06"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-03-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-03-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-03-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:13+00:00",
+      "sha256": "c62ece0b70a0b62b52383b21db6013bbb00cb05a04b05b2a501d23bcc57c5016",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-03-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-03-11"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-03-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-03-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-03-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:19+00:00",
+      "sha256": "d97ce08dd7085c31a891060ae2bf0517b60cd8da8d6847867716208c6ef1078a",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-03-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-03-16"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-03-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-03-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-03-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:24+00:00",
+      "sha256": "85c4147ac996928ca780c7a5dce875601e784d8b13abe1ed11da54d7efb1a03b",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-03-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-03-21"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-03-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-03-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-03-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:29+00:00",
+      "sha256": "0f1573046955a6abc3450b1d73c685476729fa5935b7c2683479c8fd9040abb2",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-03-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-03-26"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-03-31_1d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 1,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-03-31_1d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-03-31_1d.csv",
+      "retrieved_utc": "2026-11-08T17:07:33+00:00",
+      "sha256": "c8a06c77d120e01986cfde3e892082805cb1ed139979a986f2431b59f319c97a",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-03-31",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/1/2026-03-31"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-04-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-04-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-04-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:41+00:00",
+      "sha256": "c28ca9be4aa81e375d69c9b64c0c3405ff1da21dc5c144a8cca925caff3b047c",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-04-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-04-01"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-04-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-04-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-04-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:46+00:00",
+      "sha256": "8c4d76b74d0ea57b85b2e121b98cbfa60efdbf1ffafdc57822c5add6f0df0d5c",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-04-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-04-06"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-04-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-04-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-04-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:52+00:00",
+      "sha256": "ac7db49ae334c433acaed033d714d793db42c6c7367c7ce199deaddd98d0945b",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-04-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-04-11"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-04-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-04-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-04-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:07:59+00:00",
+      "sha256": "05f0e40e53d80ee233a141601c00156070b193b5b8fc2ff85d60ee4c671d8bc2",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-04-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-04-16"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-04-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-04-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-04-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:08+00:00",
+      "sha256": "7c4b8fbe4ae7bd2d449d866bac4c39184f69bcd5319c24c920bb47d792ac94a1",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-04-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-04-21"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-04-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-04-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-04-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:17+00:00",
+      "sha256": "691bc5b293bb18dcda306afa0e9ba12e5d3018cd17d9c000d8e756c5b42249ed",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-04-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-04-26"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-05-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-05-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-05-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:26+00:00",
+      "sha256": "8b6618530020e94e8dc4fdad722a20048c0129c404dbb4557e0ecc7172972ea5",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-05-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-05-01"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-05-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-05-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-05-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:33+00:00",
+      "sha256": "71636d1e1a8c8396aaddda25e430308e0f4a09baed918a950dd5e0c169300197",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-05-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-05-06"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-05-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-05-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-05-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:40+00:00",
+      "sha256": "a61789f4c9a9740dea2fba4032c7e6dcc8310f7e251587bddea0c48350c44fdc",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-05-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-05-11"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-05-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-05-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-05-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:45+00:00",
+      "sha256": "c4a68688908240199f861a628ca1fecd06346d600ffaa04ef0a9a02283f0be69",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-05-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-05-16"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-05-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-05-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-05-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:51+00:00",
+      "sha256": "c894416aeaeda0f1e1b5022dbebb778d3b25c348e06fb7780dcef58229873ab3",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-05-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-05-21"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-05-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-05-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-05-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:08:57+00:00",
+      "sha256": "90755f7f62b74aef1162bba73a8b42062688bf52c1fe77ce28fc45f925921bb4",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-05-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-05-26"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-05-31_1d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 1,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-05-31_1d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-05-31_1d.csv",
+      "retrieved_utc": "2026-11-08T17:09:02+00:00",
+      "sha256": "c51fbb50e0f78e597e2e5468e906bccb3f6ac0c1eebddbb415062f9126ebf413",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-05-31",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/1/2026-05-31"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-06-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-06-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-06-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:07+00:00",
+      "sha256": "031bacd72f781ec6c8edbd99272c882906aec11f1b9e06c1c4ee7ad31978983f",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-06-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-06-01"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-06-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-06-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-06-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:13+00:00",
+      "sha256": "7cdc23dd8742b9900427f080678e259bbec9552fe3a5d4096435b7cf2dd94fca",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-06-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-06-06"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-06-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-06-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-06-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:19+00:00",
+      "sha256": "cf2e52b54223061c38cbfc72173b55e631e645a369074b8365dd225f82341d46",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-06-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-06-11"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-06-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-06-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-06-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:25+00:00",
+      "sha256": "af423108bcd149245265e449589a41bb076cb2e90050cecf2155a855c563a2e5",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-06-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-06-16"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-06-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-06-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-06-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:32+00:00",
+      "sha256": "12f018aa18d38ef948c44125a7a711ae6ba9d9dc3917a154348ccb451cc516c5",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-06-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-06-21"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-06-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-06-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-06-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:38+00:00",
+      "sha256": "88ce149201498c26b6f3b14529fa1bcaf1fb15e9f1fb9c2ebf77106c48aa1599",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-06-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-06-26"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-07-01_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-07-01_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-07-01_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:44+00:00",
+      "sha256": "831c78e948320b5a36924fbcb1a681a8d8b926a5756af7150834275b13298749",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-07-01",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-07-01"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-07-06_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-07-06_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-07-06_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:49+00:00",
+      "sha256": "d2dc8ad117ddfb80849bb5a8bc66dee5fa1fa22bbd928646797b162b452c8c06",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-07-06",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-07-06"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-07-11_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-07-11_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-07-11_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:54+00:00",
+      "sha256": "3505bc30679b4672e35048d886860827f74a34968ca654b30a18b6ab231990fd",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-07-11",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-07-11"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-07-16_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-07-16_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-07-16_5d.csv",
+      "retrieved_utc": "2026-11-08T17:09:58+00:00",
+      "sha256": "0ebd39a6da58f465c16fa05bc6a0bacb9b749a55cd04c23826ac48d8f6f32e6c",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-07-16",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-07-16"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-07-21_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-07-21_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-07-21_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:02+00:00",
+      "sha256": "323a7a0426eeca79bcd038fe262a3cb09844abed6412b66087a5c7f7649be1d4",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-07-21",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-07-21"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-07-26_5d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 5,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-07-26_5d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-07-26_5d.csv",
+      "retrieved_utc": "2026-11-08T17:10:07+00:00",
+      "sha256": "5205485a974cb9740b27042c07dd4555900b7c4e69b2c63f13e0685e9849d89a",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-07-26",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/5/2026-07-26"
+    },
+    "firms_api/VIIRS_SNPP_SP/2026-07-31_1d": {
+      "bbox": [
+        60.5,
+        23.5,
+        77.9,
+        37.2
+      ],
+      "days": 1,
+      "id": "firms_api/VIIRS_SNPP_SP/2026-07-31_1d",
+      "kind": "firms_api_csv",
+      "path": "data/raw/firms_api/VIIRS_SNPP_SP/2026-07-31_1d.csv",
+      "retrieved_utc": "2026-11-08T17:10:11+00:00",
+      "sha256": "e3713d429523a37d77580b8cc2f9178f78cdd6390478ae524dd628e89e5de6fd",
+      "source": "VIIRS_SNPP_SP",
+      "start": "2026-07-31",
+      "url_redacted": "https://firms.modaps.eosdis.nasa.gov/api/area/csv/<MAP_KEY>/VIIRS_SNPP_SP/60.5,23.5,77.9,37.2/1/2026-07-31"
+    },
+    "nrt/MODIS_NRT/20261102T1200Z": {
+      "bytes": 180622,
+      "doi": null,
+      "elapsed_s": 0.39,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight"
+      ],
+      "id": "nrt/MODIS_NRT/20261102T1200Z",
+      "instruments": [
+        ""
+      ],
+      "kind": "firms_nrt_7d_region",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2026-11-02",
+      "min_acq_date": "2026-10-26",
+      "path": "data/raw/firms_nrt/20261102T1200Z/MODIS_C6_1_South_Asia_7d.csv",
+      "product": "FIRMS NRT 7-day South Asia file (MODIS_NRT)",
+      "retrieved_utc": "2026-11-02T12:02:13+00:00",
+      "rows": 2367,
+      "satellites": [
+        "A",
+        "T"
+      ],
+      "server_last_modified": "Mon, 02 Nov 2026 11:46:25 GMT",
+      "sha256": "abd4853c7046fe96e164334e198987699a8587c812250caa36e623a9ff7c67a8",
+      "source": "MODIS_NRT",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/modis-c6.1/csv/MODIS_C6_1_South_Asia_7d.csv",
+      "versions": [
+        "6.1NRT"
+      ],
+      "year": null
+    },
+    "nrt/MODIS_NRT/20261113T0615Z": {
+      "bytes": 400877,
+      "doi": null,
+      "elapsed_s": 1.44,
+      "fields": [
+        "latitude",
+        "longitude",
+        "brightness",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "confidence",
+        "version",
+        "bright_t31",
+        "frp",
+        "daynight"
+      ],
+      "id": "nrt/MODIS_NRT/20261113T0615Z",
+      "instruments": [
+        ""
+      ],
+      "kind": "firms_nrt_7d_region",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2026-11-13",
+      "min_acq_date": "2026-11-06",
+      "path": "data/raw/firms_nrt/20261113T0615Z/MODIS_C6_1_South_Asia_7d.csv",
+      "product": "FIRMS NRT 7-day South Asia file (MODIS_NRT)",
+      "retrieved_utc": "2026-11-13T06:15:13+00:00",
+      "rows": 5284,
+      "satellites": [
+        "A",
+        "T"
+      ],
+      "server_last_modified": "Fri, 13 Nov 2026 05:46:44 GMT",
+      "sha256": "899607755a5782cf2cda75caba80009bc9c175c19619c2cb7afcfd9b24dd8872",
+      "source": "MODIS_NRT",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/modis-c6.1/csv/MODIS_C6_1_South_Asia_7d.csv",
+      "versions": [
+        "6.1NRT"
+      ],
+      "year": null
+    },
+    "nrt/NOAA20_NRT/20261102T1200Z": {
+      "bytes": 1020886,
+      "doi": null,
+      "elapsed_s": 1.0,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight"
+      ],
+      "id": "nrt/NOAA20_NRT/20261102T1200Z",
+      "instruments": [
+        ""
+      ],
+      "kind": "firms_nrt_7d_region",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2026-11-02",
+      "min_acq_date": "2026-10-26",
+      "path": "data/raw/firms_nrt/20261102T1200Z/J1_VIIRS_C2_South_Asia_7d.csv",
+      "product": "FIRMS NRT 7-day South Asia file (NOAA20_NRT)",
+      "retrieved_utc": "2026-11-02T12:02:15+00:00",
+      "rows": 12314,
+      "satellites": [
+        "N20"
+      ],
+      "server_last_modified": "Mon, 02 Nov 2026 11:42:03 GMT",
+      "sha256": "18e2c4d93a028534c731c71ba93b2be152091029145b63974fab31b4755e9971",
+      "source": "NOAA20_NRT",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/csv/J1_VIIRS_C2_South_Asia_7d.csv",
+      "versions": [
+        "2.0NRT"
+      ],
+      "year": null
+    },
+    "nrt/NOAA20_NRT/20261113T0615Z": {
+      "bytes": 1435815,
+      "doi": null,
+      "elapsed_s": 0.98,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight"
+      ],
+      "id": "nrt/NOAA20_NRT/20261113T0615Z",
+      "instruments": [
+        ""
+      ],
+      "kind": "firms_nrt_7d_region",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2026-11-12",
+      "min_acq_date": "2026-11-06",
+      "path": "data/raw/firms_nrt/20261113T0615Z/J1_VIIRS_C2_South_Asia_7d.csv",
+      "product": "FIRMS NRT 7-day South Asia file (NOAA20_NRT)",
+      "retrieved_utc": "2026-11-13T06:15:15+00:00",
+      "rows": 17329,
+      "satellites": [
+        "N20"
+      ],
+      "server_last_modified": "Fri, 13 Nov 2026 05:42:18 GMT",
+      "sha256": "0af369e1a1377a20d724b3c93d1c999710ad2b740b099c0fa396b39fa9d2f29c",
+      "source": "NOAA20_NRT",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/csv/J1_VIIRS_C2_South_Asia_7d.csv",
+      "versions": [
+        "2.0NRT"
+      ],
+      "year": null
+    },
+    "nrt/NOAA21_NRT/20261102T1200Z": {
+      "bytes": 1045357,
+      "doi": null,
+      "elapsed_s": 0.75,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight"
+      ],
+      "id": "nrt/NOAA21_NRT/20261102T1200Z",
+      "instruments": [
+        ""
+      ],
+      "kind": "firms_nrt_7d_region",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2026-11-02",
+      "min_acq_date": "2026-10-26",
+      "path": "data/raw/firms_nrt/20261102T1200Z/J2_VIIRS_C2_South_Asia_7d.csv",
+      "product": "FIRMS NRT 7-day South Asia file (NOAA21_NRT)",
+      "retrieved_utc": "2026-11-02T12:02:15+00:00",
+      "rows": 12609,
+      "satellites": [
+        "N21"
+      ],
+      "server_last_modified": "Mon, 02 Nov 2026 11:44:38 GMT",
+      "sha256": "597a8eb04320c21e75adadf9bcf5f65f61874d0fe8bde0d3411bb04a8cebbef5",
+      "source": "NOAA21_NRT",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-21-viirs-c2/csv/J2_VIIRS_C2_South_Asia_7d.csv",
+      "versions": [
+        "2.0NRT"
+      ],
+      "year": null
+    },
+    "nrt/NOAA21_NRT/20261113T0615Z": {
+      "bytes": 1514307,
+      "doi": null,
+      "elapsed_s": 0.7,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight"
+      ],
+      "id": "nrt/NOAA21_NRT/20261113T0615Z",
+      "instruments": [
+        ""
+      ],
+      "kind": "firms_nrt_7d_region",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2026-11-12",
+      "min_acq_date": "2026-11-06",
+      "path": "data/raw/firms_nrt/20261113T0615Z/J2_VIIRS_C2_South_Asia_7d.csv",
+      "product": "FIRMS NRT 7-day South Asia file (NOAA21_NRT)",
+      "retrieved_utc": "2026-11-13T06:15:15+00:00",
+      "rows": 18299,
+      "satellites": [
+        "N21"
+      ],
+      "server_last_modified": "Fri, 13 Nov 2026 05:44:44 GMT",
+      "sha256": "09e3cb7e8b196d8f266d9ff978726787a6e1360158fec2101fb85595e26645b0",
+      "source": "NOAA21_NRT",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-21-viirs-c2/csv/J2_VIIRS_C2_South_Asia_7d.csv",
+      "versions": [
+        "2.0NRT"
+      ],
+      "year": null
+    },
+    "nrt/SNPP_NRT/20261102T1200Z": {
+      "bytes": 917995,
+      "doi": null,
+      "elapsed_s": 0.87,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight"
+      ],
+      "id": "nrt/SNPP_NRT/20261102T1200Z",
+      "instruments": [
+        ""
+      ],
+      "kind": "firms_nrt_7d_region",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": "2026-11-02",
+      "min_acq_date": "2026-10-26",
+      "path": "data/raw/firms_nrt/20261102T1200Z/SUOMI_VIIRS_C2_South_Asia_7d.csv",
+      "product": "FIRMS NRT 7-day South Asia file (SNPP_NRT)",
+      "retrieved_utc": "2026-11-02T12:02:14+00:00",
+      "rows": 11341,
+      "satellites": [
+        "N"
+      ],
+      "server_last_modified": "Mon, 02 Nov 2026 11:48:34 GMT",
+      "sha256": "569775f0d74d54fe62b20c4c4846be882175d5db5fa314ab7f720604d7c937d9",
+      "source": "SNPP_NRT",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_South_Asia_7d.csv",
+      "versions": [
+        "2.0NRT"
+      ],
+      "year": null
+    },
+    "nrt/SNPP_NRT/20261113T0615Z": {
+      "bytes": 112,
+      "doi": null,
+      "elapsed_s": 0.36,
+      "fields": [
+        "latitude",
+        "longitude",
+        "bright_ti4",
+        "scan",
+        "track",
+        "acq_date",
+        "acq_time",
+        "satellite",
+        "confidence",
+        "version",
+        "bright_ti5",
+        "frp",
+        "daynight"
+      ],
+      "id": "nrt/SNPP_NRT/20261113T0615Z",
+      "instruments": [],
+      "kind": "firms_nrt_7d_region",
+      "license": "NASA FIRMS data: open, no restriction on use; cite FIRMS and product DOI",
+      "max_acq_date": null,
+      "min_acq_date": null,
+      "path": "data/raw/firms_nrt/20261113T0615Z/SUOMI_VIIRS_C2_South_Asia_7d.csv",
+      "product": "FIRMS NRT 7-day South Asia file (SNPP_NRT)",
+      "retrieved_utc": "2026-11-13T06:15:14+00:00",
+      "rows": 0,
+      "satellites": [],
+      "server_last_modified": "Thu, 12 Nov 2026 15:50:26 GMT",
+      "sha256": "fe0401e40606fd90dd4cf24dff508a93539089a4aecf701e2a3c85851fe9bf40",
+      "source": "SNPP_NRT",
+      "url": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_South_Asia_7d.csv",
+      "versions": [],
+      "year": null
+    }
+  },
+  "runs": [
+    {
+      "absent": [],
+      "downloaded": [
+        "country/modis/2000",
+        "country/modis/2001",
+        "country/modis/2002",
+        "country/modis/2003",
+        "country/modis/2004",
+        "country/modis/2005",
+        "country/modis/2006",
+        "country/modis/2007",
+        "country/modis/2008",
+        "country/modis/2009",
+        "country/modis/2010",
+        "country/modis/2011",
+        "country/modis/2012",
+        "country/modis/2013",
+        "country/modis/2014",
+        "country/modis/2015",
+        "country/modis/2016",
+        "country/modis/2017",
+        "country/modis/2018",
+        "country/modis/2019",
+        "country/modis/2020",
+        "country/modis/2021",
+        "country/modis/2022",
+        "country/modis/2023",
+        "country/modis/2024",
+        "country/modis/2025",
+        "country/viirs-snpp/2012",
+        "country/viirs-snpp/2013",
+        "country/viirs-snpp/2014",
+        "country/viirs-snpp/2015",
+        "country/viirs-snpp/2016",
+        "country/viirs-snpp/2017",
+        "country/viirs-snpp/2018",
+        "country/viirs-snpp/2019",
+        "country/viirs-snpp/2020",
+        "country/viirs-snpp/2021",
+        "country/viirs-snpp/2022",
+        "country/viirs-snpp/2023",
+        "country/viirs-snpp/2024",
+        "country/viirs-snpp/2025",
+        "country/viirs-jpss1/2018",
+        "country/viirs-jpss1/2019",
+        "country/viirs-jpss1/2020",
+        "country/viirs-jpss1/2021",
+        "country/viirs-jpss1/2022",
+        "country/viirs-jpss1/2023",
+        "country/viirs-jpss1/2024",
+        "country/viirs-jpss1/2025",
+        "nrt/MODIS_NRT/20261102T1200Z",
+        "nrt/SNPP_NRT/20261102T1200Z",
+        "nrt/NOAA20_NRT/20261102T1200Z",
+        "nrt/NOAA21_NRT/20261102T1200Z"
+      ],
+      "errors": [],
+      "finished_utc": "2026-11-02T12:02:15+00:00",
+      "started_utc": "2026-11-02T12:00:28+00:00",
+      "unchanged": []
+    },
+    {
+      "absent": [],
+      "downloaded": [
+        "nrt/MODIS_NRT/20261113T0615Z",
+        "nrt/SNPP_NRT/20261113T0615Z",
+        "nrt/NOAA20_NRT/20261113T0615Z",
+        "nrt/NOAA21_NRT/20261113T0615Z"
+      ],
+      "errors": [],
+      "finished_utc": "2026-11-13T06:15:15+00:00",
+      "started_utc": "2026-11-13T06:15:08+00:00",
+      "unchanged": []
+    }
+  ],
+  "schema": "c08-manifest-1"
+}

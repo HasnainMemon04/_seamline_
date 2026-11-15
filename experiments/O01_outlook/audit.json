@@ -1,0 +1,108 @@
+{
+ "what": "Audit of the daily series behind Protocol O01 (no fitting)",
+ "area": "Punjab",
+ "satellite": "NOAA-20 VIIRS",
+ "series": [
+  "2018-04-01",
+  "2025-12-31"
+ ],
+ "days": 2832,
+ "complete_days": 2746,
+ "days_without_a_value": 86,
+ "last_complete_day": "2025-12-31",
+ "origins": 400,
+ "eligible_origins": 308,
+ "ineligible_why": {
+  "target week not complete": 54,
+  "comparison week not complete": 35,
+  "too few complete days in the earlier windows": 3
+ },
+ "by_year": {
+  "2018": {
+   "days": 275,
+   "complete_days": 268,
+   "zero_days": 12,
+   "detections": 27970,
+   "origins": 36,
+   "eligible_origins": 26
+  },
+  "2019": {
+   "days": 365,
+   "complete_days": 359,
+   "zero_days": 13,
+   "detections": 31379,
+   "origins": 52,
+   "eligible_origins": 43
+  },
+  "2020": {
+   "days": 366,
+   "complete_days": 359,
+   "zero_days": 10,
+   "detections": 30590,
+   "origins": 52,
+   "eligible_origins": 42
+  },
+  "2021": {
+   "days": 365,
+   "complete_days": 357,
+   "zero_days": 2,
+   "detections": 43917,
+   "origins": 52,
+   "eligible_origins": 43
+  },
+  "2022": {
+   "days": 365,
+   "complete_days": 347,
+   "zero_days": 4,
+   "detections": 34254,
+   "origins": 52,
+   "eligible_origins": 39
+  },
+  "2023": {
+   "days": 365,
+   "complete_days": 350,
+   "zero_days": 2,
+   "detections": 31708,
+   "origins": 53,
+   "eligible_origins": 38
+  },
+  "2024": {
+   "days": 366,
+   "complete_days": 352,
+   "zero_days": 1,
+   "detections": 36457,
+   "origins": 52,
+   "eligible_origins": 38
+  },
+  "2025": {
+   "days": 365,
+   "complete_days": 354,
+   "zero_days": 6,
+   "detections": 37281,
+   "origins": 51,
+   "eligible_origins": 39
+  }
+ },
+ "vintage": "FIRMS country archive, standard (reprocessed) stream. No as-issued near-real-time vintages are held for these years.",
+ "protocol": "experiments/PROTOCOL_O01.md",
+ "protocol_sha256": "03ddfc43aa21ef756b8ceeaf9480748c26e829b5552118cfd9f4b6afc00c34e3",
+ "code_state": {
+  "revision": "0ac2f79",
+  "c08_uncommitted_changes": true,
+  "c08_sources_sha256": "766ee093854667c55a829e97079260cec66fc4aefd1afc51a1f959ca17563e29"
+ },
+ "run_utc": "2026-11-11T19:29:17+00:00",
+ "approved": "Hasnain, Seamline redesign brief Revision 1.3, section 4D: 'run the baseline, bounded candidate fits and actual evaluation' (prompts/Seamline_3D_UI_UX_Redesign_Master_Prompt_r1.3.md)",
+ "inputs": {
+  "detections": "data/processed/pak_detections.parquet",
+  "detections_sha256": "561e555a28dc7bbb1dae4a9cad4965d687b4eafd21c9837baf4d85925cefcfef",
+  "ingest_built_utc": "2026-11-02T12:55:43+00:00",
+  "missing_days_list": "research/metadata/provider_missing_dates.json"
+ },
+ "environment": {
+  "python": "3.13.15",
+  "pandas": "2.3.3",
+  "numpy": "2.2.6"
+ },
+ "runner": "python -m c08.outlook"
+}

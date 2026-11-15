@@ -1,0 +1,3322 @@
+{
+ "what": "Historical sensor-withholding replay of the saved NOAA-20 bridge test (Protocol P04, test G03)",
+ "not": "Not a simulation of future burning and not independent ground-truth validation. S-NPP is the reference satellite, another instrument, not the truth on the ground.",
+ "area": "Punjab",
+ "area_scope": "The frozen test covers Punjab only. Pakistan, Sindh and Khyber Pakhtunkhwa are reported, not tested; other areas have no result.",
+ "test_window": [
+  "2026-01-01",
+  "2026-10-31"
+ ],
+ "calibration_window": "April 2018 to December 2025 (the bridge's training months; nothing fitted on 2026)",
+ "simulation": "S-NPP is hidden from the replay's available inputs; the record continues on NOAA-20 times the saved bridge factors; the withheld S-NPP counts are then shown for comparison.",
+ "platform_status": "S-NPP ended 2 Nov 2026, 15:40 UTC (NOAA NESDIS Update #4)",
+ "units": "detections per UTC day in Punjab (day and night passes): fire pixels on satellite passes",
+ "saved": {
+  "file": "experiments/P04_G03_bridge_2026/result.json",
+  "status": "pass",
+  "wape": 0.050710525965950985,
+  "m0_wape": 0.07142056284336809,
+  "scored_months": 9,
+  "worst_held_month_error": 0.16968313674768887,
+  "run_utc": "2026-11-08T18:07:10+00:00",
+  "protocol": "experiments/PROTOCOL_P04.md",
+  "protocol_sha256": "7123c246ad230c10ab45bdc5cabfa61ce77775004fc27d8c4c7d269eec31b71a",
+  "pass_mark": "primary bridge only: WAPE <= 0.1 and every scored month with at least 300 S-NPP detections within 20% of observed",
+  "matched_days_rule": "neither satellite on either refreshed list, and each satellite has at least one row anywhere in Pakistan on its day pass and on its night pass that UTC day (every row, before the quality rule). 'Anywhere in Pakistan' means rows of the month's chosen stream (SP or NRT) that passed c08.ingest.parse_frame's data contract and fall inside a province polygon (any of the seven), counted before the quality rule and before the type screen",
+  "bridge_rule": "M1 (hz.fit(..., 'M1', src='NOAA20')) on Punjab's complete months of 2018-04 to 2025-12 (p01.DEPLOY_BRIDGE), refitted without the type screen for months with no type field; nothing refitted on 2026",
+  "months_not_scored": [
+   {
+    "month": "2026-05",
+    "stream": "SP",
+    "matched_days": 0,
+    "reason": "fewer than 20 matched days"
+   }
+  ],
+  "reported": {
+   "Pakistan": {
+    "label": "reported, not tested",
+    "wape": 0.040787114888383734,
+    "m0_wape": 0.06653903117436694
+   },
+   "Sindh": {
+    "label": "reported, not tested",
+    "wape": 0.048336247413041156,
+    "m0_wape": 0.05362583790371724
+   },
+   "Khyber Pakhtunkhwa": {
+    "label": "reported, not tested",
+    "wape": 0.10952863521559511,
+    "m0_wape": 0.11333333333333333
+   }
+  }
+ },
+ "replay": {
+  "wape": 0.05071052596595096,
+  "m0_wape": 0.07142056284336809,
+  "scored_months": 9
+ },
+ "reproduction": {
+  "reproduced": true,
+  "same_raw_files_as_the_saved_run": true,
+  "tolerance": {
+   "converted_monthly_detections": 1e-06,
+   "wape": 1e-09
+  },
+  "wape_diff": 2.7755575615628914e-17,
+  "m0_wape_diff": 0.0,
+  "largest_converted_diff": 9.094947017729282e-13,
+  "months": [
+   {
+    "month": "2026-01",
+    "observed_same": true,
+    "converted_diff": 2.2737367544323206e-13,
+    "raw_same": true
+   },
+   {
+    "month": "2026-02",
+    "observed_same": true,
+    "converted_diff": 0.0,
+    "raw_same": true
+   },
+   {
+    "month": "2026-03",
+    "observed_same": true,
+    "converted_diff": 2.2737367544323206e-13,
+    "raw_same": true
+   },
+   {
+    "month": "2026-04",
+    "observed_same": true,
+    "converted_diff": 2.2737367544323206e-13,
+    "raw_same": true
+   },
+   {
+    "month": "2026-06",
+    "observed_same": true,
+    "converted_diff": 9.094947017729282e-13,
+    "raw_same": true
+   },
+   {
+    "month": "2026-07",
+    "observed_same": true,
+    "converted_diff": 2.2737367544323206e-13,
+    "raw_same": true
+   },
+   {
+    "month": "2026-08",
+    "observed_same": true,
+    "converted_diff": 0.0,
+    "raw_same": true
+   },
+   {
+    "month": "2026-09",
+    "observed_same": true,
+    "converted_diff": 0.0,
+    "raw_same": true
+   },
+   {
+    "month": "2026-10",
+    "observed_same": true,
+    "converted_diff": 0.0,
+    "raw_same": true
+   }
+  ]
+ },
+ "months": [
+  {
+   "month": "2026-01",
+   "stream": "SP",
+   "type0_screen": true,
+   "days_in_month": 31,
+   "matched_days": 31,
+   "scored": true,
+   "k_day": 0.9665820660901399,
+   "k_night": 0.9904086088583905,
+   "observed_snpp": 1472,
+   "noaa20_raw": 1568,
+   "converted": 1517.0302721954347,
+   "error": 0.03059121752407248,
+   "raw_error": 0.06521739130434782
+  },
+  {
+   "month": "2026-02",
+   "stream": "SP",
+   "type0_screen": true,
+   "days_in_month": 28,
+   "matched_days": 28,
+   "scored": true,
+   "k_day": 0.9665820660901399,
+   "k_night": 0.9904086088583905,
+   "observed_snpp": 3366,
+   "noaa20_raw": 3419,
+   "converted": 3311.010464710238,
+   "error": -0.01633676033563933,
+   "raw_error": 0.01574569221628045
+  },
+  {
+   "month": "2026-03",
+   "stream": "SP",
+   "type0_screen": true,
+   "days_in_month": 31,
+   "matched_days": 25,
+   "scored": true,
+   "k_day": 0.9665820660901399,
+   "k_night": 0.9904086088583905,
+   "observed_snpp": 1263,
+   "noaa20_raw": 1396,
+   "converted": 1354.8048425557643,
+   "error": 0.07268791967994002,
+   "raw_error": 0.10530482977038796
+  },
+  {
+   "month": "2026-04",
+   "stream": "SP",
+   "type0_screen": true,
+   "days_in_month": 30,
+   "matched_days": 26,
+   "scored": true,
+   "k_day": 0.9665820660901399,
+   "k_night": 0.9904086088583905,
+   "observed_snpp": 1502,
+   "noaa20_raw": 1469,
+   "converted": 1421.7198723368024,
+   "error": -0.05344882001544449,
+   "raw_error": -0.021970705725699067
+  },
+  {
+   "month": "2026-05",
+   "stream": "SP",
+   "type0_screen": true,
+   "days_in_month": 31,
+   "matched_days": 0,
+   "scored": false,
+   "k_day": 0.9665820660901399,
+   "k_night": 0.9904086088583905,
+   "observed_snpp": 0,
+   "noaa20_raw": 0,
+   "converted": 0.0,
+   "error": null,
+   "raw_error": null
+  },
+  {
+   "month": "2026-06",
+   "stream": "SP",
+   "type0_screen": true,
+   "days_in_month": 30,
+   "matched_days": 28,
+   "scored": true,
+   "k_day": 0.9665820660901399,
+   "k_night": 0.9904086088583905,
+   "observed_snpp": 2955,
+   "noaa20_raw": 3204,
+   "converted": 3099.7881248849976,
+   "error": 0.04899767339593828,
+   "raw_error": 0.08426395939086294
+  },
+  {
+   "month": "2026-07",
+   "stream": "SP",
+   "type0_screen": true,
+   "days_in_month": 31,
+   "matched_days": 21,
+   "scored": true,
+   "k_day": 0.9665820660901399,
+   "k_night": 0.9904086088583905,
+   "observed_snpp": 1237,
+   "noaa20_raw": 1470,
+   "converted": 1421.1853822084931,
+   "error": 0.14889683282820787,
+   "raw_error": 0.1883589329021827
+  },
+  {
+   "month": "2026-08",
+   "stream": "NRT",
+   "type0_screen": false,
+   "days_in_month": 31,
+   "matched_days": 29,
+   "scored": true,
+   "k_day": 0.9665881934505915,
+   "k_night": 0.933375314861461,
+   "observed_snpp": 347,
+   "noaa20_raw": 301,
+   "converted": 288.11995154855197,
+   "error": -0.16968313674768887,
+   "raw_error": -0.13256484149855907
+  },
+  {
+   "month": "2026-09",
+   "stream": "NRT",
+   "type0_screen": false,
+   "days_in_month": 30,
+   "matched_days": 30,
+   "scored": true,
+   "k_day": 0.9665881934505915,
+   "k_night": 0.933375314861461,
+   "observed_snpp": 409,
+   "noaa20_raw": 389,
+   "converted": 370.72195955660834,
+   "error": -0.09358934093738792,
+   "raw_error": -0.0488997555012225
+  },
+  {
+   "month": "2026-10",
+   "stream": "NRT",
+   "type0_screen": false,
+   "days_in_month": 31,
+   "matched_days": 29,
+   "scored": true,
+   "k_day": 0.9665881934505915,
+   "k_night": 0.933375314861461,
+   "observed_snpp": 5287,
+   "noaa20_raw": 5698,
+   "converted": 5493.337988488144,
+   "error": 0.03902742358391228,
+   "raw_error": 0.0777378475505958
+  }
+ ],
+ "days": [
+  {
+   "date": "2026-01-01",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 11,
+   "noaa20": 35,
+   "converted": 33.83
+  },
+  {
+   "date": "2026-01-02",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 42,
+   "noaa20": 45,
+   "converted": 43.496
+  },
+  {
+   "date": "2026-01-03",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 34,
+   "noaa20": 29,
+   "converted": 28.102
+  },
+  {
+   "date": "2026-01-04",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 20,
+   "noaa20": 38,
+   "converted": 36.73
+  },
+  {
+   "date": "2026-01-05",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 17,
+   "noaa20": 7,
+   "converted": 6.79
+  },
+  {
+   "date": "2026-01-06",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 14,
+   "noaa20": 10,
+   "converted": 9.666
+  },
+  {
+   "date": "2026-01-07",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 45,
+   "noaa20": 46,
+   "converted": 44.463
+  },
+  {
+   "date": "2026-01-08",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 32,
+   "noaa20": 35,
+   "converted": 33.83
+  },
+  {
+   "date": "2026-01-09",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 9,
+   "noaa20": 11,
+   "converted": 10.656
+  },
+  {
+   "date": "2026-01-10",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 43,
+   "noaa20": 38,
+   "converted": 36.778
+  },
+  {
+   "date": "2026-01-11",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 48,
+   "noaa20": 25,
+   "converted": 24.212
+  },
+  {
+   "date": "2026-01-12",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 74,
+   "noaa20": 65,
+   "converted": 62.852
+  },
+  {
+   "date": "2026-01-13",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 76,
+   "noaa20": 59,
+   "converted": 57.124
+  },
+  {
+   "date": "2026-01-14",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 64,
+   "noaa20": 110,
+   "converted": 106.372
+  },
+  {
+   "date": "2026-01-15",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 44,
+   "noaa20": 63,
+   "converted": 60.895
+  },
+  {
+   "date": "2026-01-16",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 12,
+   "noaa20": 8,
+   "converted": 7.78
+  },
+  {
+   "date": "2026-01-17",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 61,
+   "noaa20": 36,
+   "converted": 34.868
+  },
+  {
+   "date": "2026-01-18",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 124,
+   "noaa20": 102,
+   "converted": 98.711
+  },
+  {
+   "date": "2026-01-19",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 115,
+   "noaa20": 111,
+   "converted": 107.434
+  },
+  {
+   "date": "2026-01-20",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 85,
+   "noaa20": 115,
+   "converted": 111.276
+  },
+  {
+   "date": "2026-01-21",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 71,
+   "noaa20": 89,
+   "converted": 86.097
+  },
+  {
+   "date": "2026-01-22",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 6,
+   "noaa20": 5,
+   "converted": 4.833
+  },
+  {
+   "date": "2026-01-23",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 8,
+   "noaa20": 6,
+   "converted": 5.823
+  },
+  {
+   "date": "2026-01-24",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 27,
+   "noaa20": 33,
+   "converted": 31.945
+  },
+  {
+   "date": "2026-01-25",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 47,
+   "noaa20": 87,
+   "converted": 84.093
+  },
+  {
+   "date": "2026-01-26",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 0,
+   "noaa20": 0,
+   "converted": 0.0
+  },
+  {
+   "date": "2026-01-27",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 18,
+   "noaa20": 36,
+   "converted": 34.845
+  },
+  {
+   "date": "2026-01-28",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 65,
+   "noaa20": 76,
+   "converted": 73.508
+  },
+  {
+   "date": "2026-01-29",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 100,
+   "noaa20": 69,
+   "converted": 66.718
+  },
+  {
+   "date": "2026-01-30",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 85,
+   "noaa20": 95,
+   "converted": 91.897
+  },
+  {
+   "date": "2026-01-31",
+   "month": "2026-01",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 75,
+   "noaa20": 84,
+   "converted": 81.407
+  },
+  {
+   "date": "2026-02-01",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 49,
+   "noaa20": 56,
+   "converted": 54.176
+  },
+  {
+   "date": "2026-02-02",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 30,
+   "noaa20": 40,
+   "converted": 38.806
+  },
+  {
+   "date": "2026-02-03",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 124,
+   "noaa20": 81,
+   "converted": 78.436
+  },
+  {
+   "date": "2026-02-04",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 164,
+   "noaa20": 156,
+   "converted": 150.93
+  },
+  {
+   "date": "2026-02-05",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 208,
+   "noaa20": 227,
+   "converted": 219.509
+  },
+  {
+   "date": "2026-02-06",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 110,
+   "noaa20": 110,
+   "converted": 106.443
+  },
+  {
+   "date": "2026-02-07",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 173,
+   "noaa20": 219,
+   "converted": 212.039
+  },
+  {
+   "date": "2026-02-08",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 136,
+   "noaa20": 81,
+   "converted": 78.317
+  },
+  {
+   "date": "2026-02-09",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 82,
+   "noaa20": 46,
+   "converted": 44.487
+  },
+  {
+   "date": "2026-02-10",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 41,
+   "noaa20": 48,
+   "converted": 46.515
+  },
+  {
+   "date": "2026-02-11",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 116,
+   "noaa20": 128,
+   "converted": 123.818
+  },
+  {
+   "date": "2026-02-12",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 52,
+   "noaa20": 29,
+   "converted": 28.079
+  },
+  {
+   "date": "2026-02-13",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 149,
+   "noaa20": 202,
+   "converted": 195.631
+  },
+  {
+   "date": "2026-02-14",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 186,
+   "noaa20": 139,
+   "converted": 135.07
+  },
+  {
+   "date": "2026-02-15",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 163,
+   "noaa20": 218,
+   "converted": 211.048
+  },
+  {
+   "date": "2026-02-16",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 125,
+   "noaa20": 161,
+   "converted": 155.763
+  },
+  {
+   "date": "2026-02-17",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 45,
+   "noaa20": 31,
+   "converted": 30.107
+  },
+  {
+   "date": "2026-02-18",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 107,
+   "noaa20": 139,
+   "converted": 134.546
+  },
+  {
+   "date": "2026-02-19",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 173,
+   "noaa20": 118,
+   "converted": 114.271
+  },
+  {
+   "date": "2026-02-20",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 149,
+   "noaa20": 123,
+   "converted": 119.247
+  },
+  {
+   "date": "2026-02-21",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 165,
+   "noaa20": 190,
+   "converted": 183.937
+  },
+  {
+   "date": "2026-02-22",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 145,
+   "noaa20": 166,
+   "converted": 160.929
+  },
+  {
+   "date": "2026-02-23",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 117,
+   "noaa20": 121,
+   "converted": 117.171
+  },
+  {
+   "date": "2026-02-24",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 131,
+   "noaa20": 144,
+   "converted": 139.283
+  },
+  {
+   "date": "2026-02-25",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 156,
+   "noaa20": 127,
+   "converted": 123.232
+  },
+  {
+   "date": "2026-02-26",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 85,
+   "noaa20": 133,
+   "converted": 128.818
+  },
+  {
+   "date": "2026-02-27",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 102,
+   "noaa20": 84,
+   "converted": 81.622
+  },
+  {
+   "date": "2026-02-28",
+   "month": "2026-02",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 83,
+   "noaa20": 102,
+   "converted": 98.782
+  },
+  {
+   "date": "2026-03-01",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 137,
+   "noaa20": 124,
+   "converted": 120.357
+  },
+  {
+   "date": "2026-03-02",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 109,
+   "noaa20": 104,
+   "converted": 100.882
+  },
+  {
+   "date": "2026-03-03",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 121,
+   "noaa20": 149,
+   "converted": 145.021
+  },
+  {
+   "date": "2026-03-04",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 120,
+   "noaa20": 135,
+   "converted": 131.608
+  },
+  {
+   "date": "2026-03-05",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 113,
+   "noaa20": 107,
+   "converted": 104.211
+  },
+  {
+   "date": "2026-03-06",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 62,
+   "noaa20": 87,
+   "converted": 84.188
+  },
+  {
+   "date": "2026-03-07",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 67,
+   "noaa20": 33,
+   "converted": 32.016
+  },
+  {
+   "date": "2026-03-08",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 64,
+   "noaa20": 64,
+   "converted": 62.219
+  },
+  {
+   "date": "2026-03-09",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-03-10",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-03-11",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-03-12",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-03-13",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-03-14",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 48,
+   "noaa20": 83,
+   "converted": 80.298
+  },
+  {
+   "date": "2026-03-15",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 66,
+   "noaa20": 71,
+   "converted": 68.794
+  },
+  {
+   "date": "2026-03-16",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 52,
+   "noaa20": 68,
+   "converted": 65.751
+  },
+  {
+   "date": "2026-03-17",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 42,
+   "noaa20": 49,
+   "converted": 47.363
+  },
+  {
+   "date": "2026-03-18",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-03-19",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 27,
+   "noaa20": 40,
+   "converted": 38.663
+  },
+  {
+   "date": "2026-03-20",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 45,
+   "noaa20": 80,
+   "converted": 77.35
+  },
+  {
+   "date": "2026-03-21",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 1,
+   "noaa20": 1,
+   "converted": 0.99
+  },
+  {
+   "date": "2026-03-22",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 17,
+   "noaa20": 25,
+   "converted": 24.188
+  },
+  {
+   "date": "2026-03-23",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 63,
+   "noaa20": 38,
+   "converted": 36.968
+  },
+  {
+   "date": "2026-03-24",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 26,
+   "noaa20": 30,
+   "converted": 29.14
+  },
+  {
+   "date": "2026-03-25",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 1,
+   "noaa20": 3,
+   "converted": 2.9
+  },
+  {
+   "date": "2026-03-26",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 2,
+   "noaa20": 4,
+   "converted": 3.938
+  },
+  {
+   "date": "2026-03-27",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 28,
+   "noaa20": 48,
+   "converted": 46.467
+  },
+  {
+   "date": "2026-03-28",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 19,
+   "noaa20": 6,
+   "converted": 5.823
+  },
+  {
+   "date": "2026-03-29",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 5,
+   "noaa20": 11,
+   "converted": 10.728
+  },
+  {
+   "date": "2026-03-30",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 13,
+   "noaa20": 20,
+   "converted": 19.427
+  },
+  {
+   "date": "2026-03-31",
+   "month": "2026-03",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 15,
+   "noaa20": 16,
+   "converted": 15.513
+  },
+  {
+   "date": "2026-04-01",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 3,
+   "noaa20": 1,
+   "converted": 0.967
+  },
+  {
+   "date": "2026-04-02",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP has no row in Pakistan on its day pass or its night pass, NOAA-20 has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-04-03",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 2,
+   "noaa20": 0,
+   "converted": 0.0
+  },
+  {
+   "date": "2026-04-04",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 26,
+   "noaa20": 41,
+   "converted": 39.725
+  },
+  {
+   "date": "2026-04-05",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 54,
+   "noaa20": 54,
+   "converted": 52.267
+  },
+  {
+   "date": "2026-04-06",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 10,
+   "noaa20": 33,
+   "converted": 31.897
+  },
+  {
+   "date": "2026-04-07",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 6,
+   "noaa20": 8,
+   "converted": 7.733
+  },
+  {
+   "date": "2026-04-08",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 74,
+   "noaa20": 47,
+   "converted": 45.477
+  },
+  {
+   "date": "2026-04-09",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 65,
+   "noaa20": 75,
+   "converted": 72.756
+  },
+  {
+   "date": "2026-04-10",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 60,
+   "noaa20": 32,
+   "converted": 30.931
+  },
+  {
+   "date": "2026-04-11",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 94,
+   "noaa20": 59,
+   "converted": 57.124
+  },
+  {
+   "date": "2026-04-12",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 48,
+   "noaa20": 108,
+   "converted": 104.486
+  },
+  {
+   "date": "2026-04-13",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 47,
+   "noaa20": 41,
+   "converted": 39.654
+  },
+  {
+   "date": "2026-04-14",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 48,
+   "noaa20": 46,
+   "converted": 44.582
+  },
+  {
+   "date": "2026-04-15",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 66,
+   "noaa20": 34,
+   "converted": 33.078
+  },
+  {
+   "date": "2026-04-16",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 42,
+   "noaa20": 40,
+   "converted": 38.687
+  },
+  {
+   "date": "2026-04-17",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 46,
+   "noaa20": 68,
+   "converted": 65.751
+  },
+  {
+   "date": "2026-04-18",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 28,
+   "noaa20": 36,
+   "converted": 34.797
+  },
+  {
+   "date": "2026-04-19",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 49,
+   "noaa20": 92,
+   "converted": 88.973
+  },
+  {
+   "date": "2026-04-20",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 43,
+   "noaa20": 75,
+   "converted": 72.684
+  },
+  {
+   "date": "2026-04-21",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 133,
+   "noaa20": 39,
+   "converted": 37.744
+  },
+  {
+   "date": "2026-04-22",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 111,
+   "noaa20": 106,
+   "converted": 102.577
+  },
+  {
+   "date": "2026-04-23",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 63,
+   "noaa20": 175,
+   "converted": 169.152
+  },
+  {
+   "date": "2026-04-24",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 67,
+   "noaa20": 68,
+   "converted": 65.823
+  },
+  {
+   "date": "2026-04-25",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 21,
+   "noaa20": 76,
+   "converted": 73.579
+  },
+  {
+   "date": "2026-04-26",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 194,
+   "noaa20": 53,
+   "converted": 51.348
+  },
+  {
+   "date": "2026-04-27",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 102,
+   "noaa20": 62,
+   "converted": 59.928
+  },
+  {
+   "date": "2026-04-28",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-04-29",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-04-30",
+   "month": "2026-04",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-01",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-02",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-03",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-04",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-05",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-06",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-07",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-08",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-09",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-10",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-11",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-12",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-13",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-14",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-15",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-16",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-17",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-18",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-19",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-20",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-21",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-22",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-23",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-24",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-25",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-26",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-27",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-28",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-29",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-30",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-05-31",
+   "month": "2026-05",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-06-01",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-06-02",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-06-03",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 77,
+   "noaa20": 16,
+   "converted": 15.513
+  },
+  {
+   "date": "2026-06-04",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 46,
+   "noaa20": 68,
+   "converted": 65.775
+  },
+  {
+   "date": "2026-06-05",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 60,
+   "noaa20": 63,
+   "converted": 60.99
+  },
+  {
+   "date": "2026-06-06",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 43,
+   "noaa20": 56,
+   "converted": 54.176
+  },
+  {
+   "date": "2026-06-07",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 4,
+   "noaa20": 48,
+   "converted": 46.444
+  },
+  {
+   "date": "2026-06-08",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 61,
+   "noaa20": 9,
+   "converted": 8.89
+  },
+  {
+   "date": "2026-06-09",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 77,
+   "noaa20": 87,
+   "converted": 84.283
+  },
+  {
+   "date": "2026-06-10",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 90,
+   "noaa20": 110,
+   "converted": 106.777
+  },
+  {
+   "date": "2026-06-11",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 197,
+   "noaa20": 125,
+   "converted": 121.18
+  },
+  {
+   "date": "2026-06-12",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 7,
+   "noaa20": 135,
+   "converted": 130.608
+  },
+  {
+   "date": "2026-06-13",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 65,
+   "noaa20": 5,
+   "converted": 4.881
+  },
+  {
+   "date": "2026-06-14",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 121,
+   "noaa20": 114,
+   "converted": 110.357
+  },
+  {
+   "date": "2026-06-15",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 68,
+   "noaa20": 61,
+   "converted": 58.985
+  },
+  {
+   "date": "2026-06-16",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 137,
+   "noaa20": 66,
+   "converted": 63.818
+  },
+  {
+   "date": "2026-06-17",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 14,
+   "noaa20": 274,
+   "converted": 264.891
+  },
+  {
+   "date": "2026-06-18",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 132,
+   "noaa20": 258,
+   "converted": 249.378
+  },
+  {
+   "date": "2026-06-19",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 113,
+   "noaa20": 14,
+   "converted": 13.532
+  },
+  {
+   "date": "2026-06-20",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 137,
+   "noaa20": 101,
+   "converted": 97.625
+  },
+  {
+   "date": "2026-06-21",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 259,
+   "noaa20": 223,
+   "converted": 215.572
+  },
+  {
+   "date": "2026-06-22",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 136,
+   "noaa20": 112,
+   "converted": 108.4
+  },
+  {
+   "date": "2026-06-23",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 19,
+   "noaa20": 302,
+   "converted": 292.098
+  },
+  {
+   "date": "2026-06-24",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 256,
+   "noaa20": 10,
+   "converted": 9.761
+  },
+  {
+   "date": "2026-06-25",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 88,
+   "noaa20": 226,
+   "converted": 218.495
+  },
+  {
+   "date": "2026-06-26",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 62,
+   "noaa20": 60,
+   "converted": 58.09
+  },
+  {
+   "date": "2026-06-27",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 317,
+   "noaa20": 237,
+   "converted": 229.151
+  },
+  {
+   "date": "2026-06-28",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 6,
+   "noaa20": 265,
+   "converted": 256.287
+  },
+  {
+   "date": "2026-06-29",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 198,
+   "noaa20": 13,
+   "converted": 12.613
+  },
+  {
+   "date": "2026-06-30",
+   "month": "2026-06",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 165,
+   "noaa20": 146,
+   "converted": 141.216
+  },
+  {
+   "date": "2026-07-01",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 164,
+   "noaa20": 228,
+   "converted": 220.428
+  },
+  {
+   "date": "2026-07-02",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 345,
+   "noaa20": 175,
+   "converted": 169.152
+  },
+  {
+   "date": "2026-07-03",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 19,
+   "noaa20": 237,
+   "converted": 229.104
+  },
+  {
+   "date": "2026-07-04",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 65,
+   "noaa20": 80,
+   "converted": 77.35
+  },
+  {
+   "date": "2026-07-05",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 76,
+   "noaa20": 17,
+   "converted": 16.432
+  },
+  {
+   "date": "2026-07-06",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 74,
+   "noaa20": 139,
+   "converted": 134.379
+  },
+  {
+   "date": "2026-07-07",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 161,
+   "noaa20": 150,
+   "converted": 144.987
+  },
+  {
+   "date": "2026-07-08",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 98,
+   "noaa20": 124,
+   "converted": 119.904
+  },
+  {
+   "date": "2026-07-09",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 4,
+   "noaa20": 139,
+   "converted": 134.355
+  },
+  {
+   "date": "2026-07-10",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-07-11",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-07-12",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-07-13",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-07-14",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-07-15",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-07-16",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP is on a FIRMS missing-days list, S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-07-17",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 51,
+   "noaa20": 43,
+   "converted": 41.563
+  },
+  {
+   "date": "2026-07-18",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 72,
+   "noaa20": 43,
+   "converted": 41.563
+  },
+  {
+   "date": "2026-07-19",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 4,
+   "noaa20": 8,
+   "converted": 7.78
+  },
+  {
+   "date": "2026-07-20",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 27,
+   "noaa20": 8,
+   "converted": 7.733
+  },
+  {
+   "date": "2026-07-21",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-07-22",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "NOAA-20 has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-07-23",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 12,
+   "noaa20": 2,
+   "converted": 1.933
+  },
+  {
+   "date": "2026-07-24",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 6,
+   "noaa20": 7,
+   "converted": 6.766
+  },
+  {
+   "date": "2026-07-25",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 6,
+   "noaa20": 16,
+   "converted": 15.489
+  },
+  {
+   "date": "2026-07-26",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 4,
+   "noaa20": 1,
+   "converted": 0.99
+  },
+  {
+   "date": "2026-07-27",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 10,
+   "noaa20": 16,
+   "converted": 15.465
+  },
+  {
+   "date": "2026-07-28",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 6,
+   "noaa20": 9,
+   "converted": 8.699
+  },
+  {
+   "date": "2026-07-29",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 33,
+   "noaa20": 19,
+   "converted": 18.389
+  },
+  {
+   "date": "2026-07-30",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": true,
+   "why_not": null,
+   "snpp": 0,
+   "noaa20": 9,
+   "converted": 8.723
+  },
+  {
+   "date": "2026-07-31",
+   "month": "2026-07",
+   "stream": "SP",
+   "matched": false,
+   "why_not": "S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-08-01",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 5,
+   "noaa20": 12,
+   "converted": 11.533
+  },
+  {
+   "date": "2026-08-02",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 13,
+   "noaa20": 8,
+   "converted": 7.733
+  },
+  {
+   "date": "2026-08-03",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": false,
+   "why_not": "S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-08-04",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": false,
+   "why_not": "S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-08-05",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 14,
+   "noaa20": 6,
+   "converted": 5.733
+  },
+  {
+   "date": "2026-08-06",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 10,
+   "noaa20": 6,
+   "converted": 5.766
+  },
+  {
+   "date": "2026-08-07",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 20,
+   "noaa20": 16,
+   "converted": 15.299
+  },
+  {
+   "date": "2026-08-08",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 25,
+   "noaa20": 7,
+   "converted": 6.633
+  },
+  {
+   "date": "2026-08-09",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 4,
+   "noaa20": 31,
+   "converted": 29.865
+  },
+  {
+   "date": "2026-08-10",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 15,
+   "noaa20": 41,
+   "converted": 39.497
+  },
+  {
+   "date": "2026-08-11",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 5,
+   "noaa20": 3,
+   "converted": 2.833
+  },
+  {
+   "date": "2026-08-12",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 10,
+   "noaa20": 12,
+   "converted": 11.533
+  },
+  {
+   "date": "2026-08-13",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 10,
+   "noaa20": 2,
+   "converted": 1.933
+  },
+  {
+   "date": "2026-08-14",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 32,
+   "noaa20": 10,
+   "converted": 9.633
+  },
+  {
+   "date": "2026-08-15",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 5,
+   "noaa20": 19,
+   "converted": 18.266
+  },
+  {
+   "date": "2026-08-16",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 11,
+   "noaa20": 6,
+   "converted": 5.7
+  },
+  {
+   "date": "2026-08-17",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 6,
+   "noaa20": 14,
+   "converted": 13.466
+  },
+  {
+   "date": "2026-08-18",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 9,
+   "noaa20": 5,
+   "converted": 4.767
+  },
+  {
+   "date": "2026-08-19",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 22,
+   "noaa20": 6,
+   "converted": 5.766
+  },
+  {
+   "date": "2026-08-20",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 2,
+   "noaa20": 9,
+   "converted": 8.533
+  },
+  {
+   "date": "2026-08-21",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 17,
+   "noaa20": 13,
+   "converted": 12.466
+  },
+  {
+   "date": "2026-08-22",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 11,
+   "noaa20": 2,
+   "converted": 1.9
+  },
+  {
+   "date": "2026-08-23",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 7,
+   "noaa20": 9,
+   "converted": 8.5
+  },
+  {
+   "date": "2026-08-24",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 14,
+   "noaa20": 7,
+   "converted": 6.7
+  },
+  {
+   "date": "2026-08-25",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 13,
+   "noaa20": 9,
+   "converted": 8.467
+  },
+  {
+   "date": "2026-08-26",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 6,
+   "noaa20": 20,
+   "converted": 19.132
+  },
+  {
+   "date": "2026-08-27",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 12,
+   "noaa20": 6,
+   "converted": 5.633
+  },
+  {
+   "date": "2026-08-28",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 7,
+   "noaa20": 3,
+   "converted": 2.8
+  },
+  {
+   "date": "2026-08-29",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 8,
+   "noaa20": 2,
+   "converted": 1.9
+  },
+  {
+   "date": "2026-08-30",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 27,
+   "noaa20": 5,
+   "converted": 4.7
+  },
+  {
+   "date": "2026-08-31",
+   "month": "2026-08",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 7,
+   "noaa20": 12,
+   "converted": 11.433
+  },
+  {
+   "date": "2026-09-01",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 4,
+   "noaa20": 9,
+   "converted": 8.533
+  },
+  {
+   "date": "2026-09-02",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 3,
+   "noaa20": 8,
+   "converted": 7.6
+  },
+  {
+   "date": "2026-09-03",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 5,
+   "noaa20": 9,
+   "converted": 8.566
+  },
+  {
+   "date": "2026-09-04",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 11,
+   "noaa20": 3,
+   "converted": 2.867
+  },
+  {
+   "date": "2026-09-05",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 4,
+   "noaa20": 5,
+   "converted": 4.733
+  },
+  {
+   "date": "2026-09-06",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 3,
+   "noaa20": 13,
+   "converted": 12.234
+  },
+  {
+   "date": "2026-09-07",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 7,
+   "noaa20": 8,
+   "converted": 7.5
+  },
+  {
+   "date": "2026-09-08",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 7,
+   "noaa20": 9,
+   "converted": 8.533
+  },
+  {
+   "date": "2026-09-09",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 12,
+   "noaa20": 7,
+   "converted": 6.633
+  },
+  {
+   "date": "2026-09-10",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 15,
+   "noaa20": 18,
+   "converted": 17.1
+  },
+  {
+   "date": "2026-09-11",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 9,
+   "noaa20": 25,
+   "converted": 23.833
+  },
+  {
+   "date": "2026-09-12",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 16,
+   "noaa20": 16,
+   "converted": 15.333
+  },
+  {
+   "date": "2026-09-13",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 10,
+   "noaa20": 11,
+   "converted": 10.533
+  },
+  {
+   "date": "2026-09-14",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 13,
+   "noaa20": 10,
+   "converted": 9.5
+  },
+  {
+   "date": "2026-09-15",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 11,
+   "noaa20": 6,
+   "converted": 5.6
+  },
+  {
+   "date": "2026-09-16",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 6,
+   "noaa20": 5,
+   "converted": 4.767
+  },
+  {
+   "date": "2026-09-17",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 8,
+   "noaa20": 7,
+   "converted": 6.6
+  },
+  {
+   "date": "2026-09-18",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 3,
+   "noaa20": 6,
+   "converted": 5.633
+  },
+  {
+   "date": "2026-09-19",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 7,
+   "noaa20": 5,
+   "converted": 4.733
+  },
+  {
+   "date": "2026-09-20",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 17,
+   "noaa20": 14,
+   "converted": 13.333
+  },
+  {
+   "date": "2026-09-21",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 25,
+   "noaa20": 13,
+   "converted": 12.333
+  },
+  {
+   "date": "2026-09-22",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 21,
+   "noaa20": 18,
+   "converted": 17.233
+  },
+  {
+   "date": "2026-09-23",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 7,
+   "noaa20": 23,
+   "converted": 21.999
+  },
+  {
+   "date": "2026-09-24",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 21,
+   "noaa20": 15,
+   "converted": 14.3
+  },
+  {
+   "date": "2026-09-25",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 18,
+   "noaa20": 10,
+   "converted": 9.433
+  },
+  {
+   "date": "2026-09-26",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 36,
+   "noaa20": 14,
+   "converted": 13.333
+  },
+  {
+   "date": "2026-09-27",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 53,
+   "noaa20": 37,
+   "converted": 35.531
+  },
+  {
+   "date": "2026-09-28",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 6,
+   "noaa20": 14,
+   "converted": 13.267
+  },
+  {
+   "date": "2026-09-29",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 31,
+   "noaa20": 27,
+   "converted": 26.031
+  },
+  {
+   "date": "2026-09-30",
+   "month": "2026-09",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 20,
+   "noaa20": 24,
+   "converted": 23.098
+  },
+  {
+   "date": "2026-10-01",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 55,
+   "noaa20": 38,
+   "converted": 36.498
+  },
+  {
+   "date": "2026-10-02",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 106,
+   "noaa20": 72,
+   "converted": 69.329
+  },
+  {
+   "date": "2026-10-03",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 49,
+   "noaa20": 93,
+   "converted": 89.727
+  },
+  {
+   "date": "2026-10-04",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 79,
+   "noaa20": 76,
+   "converted": 73.328
+  },
+  {
+   "date": "2026-10-05",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 81,
+   "noaa20": 42,
+   "converted": 40.431
+  },
+  {
+   "date": "2026-10-06",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 107,
+   "noaa20": 78,
+   "converted": 75.195
+  },
+  {
+   "date": "2026-10-07",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 136,
+   "noaa20": 96,
+   "converted": 92.062
+  },
+  {
+   "date": "2026-10-08",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 71,
+   "noaa20": 86,
+   "converted": 82.894
+  },
+  {
+   "date": "2026-10-09",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 62,
+   "noaa20": 137,
+   "converted": 132.323
+  },
+  {
+   "date": "2026-10-10",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 105,
+   "noaa20": 115,
+   "converted": 111.025
+  },
+  {
+   "date": "2026-10-11",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 28,
+   "noaa20": 8,
+   "converted": 7.699
+  },
+  {
+   "date": "2026-10-12",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": false,
+   "why_not": "S-NPP has no row in Pakistan on its day pass or its night pass, NOAA-20 has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-10-13",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": false,
+   "why_not": "S-NPP has no row in Pakistan on its day pass or its night pass",
+   "snpp": null,
+   "noaa20": null,
+   "converted": null
+  },
+  {
+   "date": "2026-10-14",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 41,
+   "noaa20": 112,
+   "converted": 108.158
+  },
+  {
+   "date": "2026-10-15",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 24,
+   "noaa20": 52,
+   "converted": 49.831
+  },
+  {
+   "date": "2026-10-16",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 52,
+   "noaa20": 40,
+   "converted": 38.431
+  },
+  {
+   "date": "2026-10-17",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 179,
+   "noaa20": 123,
+   "converted": 118.392
+  },
+  {
+   "date": "2026-10-18",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 298,
+   "noaa20": 269,
+   "converted": 259.082
+  },
+  {
+   "date": "2026-10-19",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 177,
+   "noaa20": 303,
+   "converted": 292.411
+  },
+  {
+   "date": "2026-10-20",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 56,
+   "noaa20": 223,
+   "converted": 215.018
+  },
+  {
+   "date": "2026-10-21",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 153,
+   "noaa20": 129,
+   "converted": 124.325
+  },
+  {
+   "date": "2026-10-22",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 279,
+   "noaa20": 177,
+   "converted": 170.588
+  },
+  {
+   "date": "2026-10-23",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 505,
+   "noaa20": 332,
+   "converted": 320.243
+  },
+  {
+   "date": "2026-10-24",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 177,
+   "noaa20": 321,
+   "converted": 309.212
+  },
+  {
+   "date": "2026-10-25",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 221,
+   "noaa20": 359,
+   "converted": 346.142
+  },
+  {
+   "date": "2026-10-26",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 210,
+   "noaa20": 212,
+   "converted": 204.12
+  },
+  {
+   "date": "2026-10-27",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 375,
+   "noaa20": 249,
+   "converted": 240.149
+  },
+  {
+   "date": "2026-10-28",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 579,
+   "noaa20": 344,
+   "converted": 331.211
+  },
+  {
+   "date": "2026-10-29",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 468,
+   "noaa20": 583,
+   "converted": 562.292
+  },
+  {
+   "date": "2026-10-30",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 290,
+   "noaa20": 633,
+   "converted": 611.419
+  },
+  {
+   "date": "2026-10-31",
+   "month": "2026-10",
+   "stream": "NRT",
+   "matched": true,
+   "why_not": null,
+   "snpp": 324,
+   "noaa20": 396,
+   "converted": 381.806
+  }
+ ],
+ "built_utc": "2026-11-11T18:31:51+00:00",
+ "built_by": "python -m c08.handover build",
+ "raw_files": 138
+}

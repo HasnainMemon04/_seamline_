@@ -1,0 +1,118 @@
+{
+  "experiment": "P02 F03 burned-area cross-check",
+  "protocol": "experiments/PROTOCOL_P02.md",
+  "run_utc": "2026-11-03T09:06:35+00:00",
+  "code_state": {
+    "revision": "3653d2d",
+    "c08_uncommitted_changes": true,
+    "c08_sources_sha256": "86f8cba55161029e756752c3cccc5a80583fddfea618a313e49d4faf7e449dbc"
+  },
+  "yearly": {
+    "2003": {
+      "burned_km2": 107.5,
+      "unmapped_km2": 161.9
+    },
+    "2004": {
+      "burned_km2": 228.4,
+      "unmapped_km2": 242.1
+    },
+    "2005": {
+      "burned_km2": 430.2,
+      "unmapped_km2": 100.2
+    },
+    "2006": {
+      "burned_km2": 67.0,
+      "unmapped_km2": 155.8
+    },
+    "2007": {
+      "burned_km2": 185.3,
+      "unmapped_km2": 245.1
+    },
+    "2008": {
+      "burned_km2": 265.1,
+      "unmapped_km2": 106.3
+    },
+    "2009": {
+      "burned_km2": 181.2,
+      "unmapped_km2": 290.9
+    },
+    "2010": {
+      "burned_km2": 320.5,
+      "unmapped_km2": 313.4
+    },
+    "2011": {
+      "burned_km2": 249.2,
+      "unmapped_km2": 111.2
+    },
+    "2012": {
+      "burned_km2": 346.5,
+      "unmapped_km2": 133.7
+    },
+    "2013": {
+      "burned_km2": 624.7,
+      "unmapped_km2": 137.0
+    },
+    "2014": {
+      "burned_km2": 268.1,
+      "unmapped_km2": 164.2
+    },
+    "2015": {
+      "burned_km2": 457.7,
+      "unmapped_km2": 104.8
+    },
+    "2016": {
+      "burned_km2": 512.0,
+      "unmapped_km2": 192.8
+    },
+    "2017": {
+      "burned_km2": 455.7,
+      "unmapped_km2": 252.2
+    },
+    "2018": {
+      "burned_km2": 1136.6,
+      "unmapped_km2": 250.3
+    },
+    "2019": {
+      "burned_km2": 890.8,
+      "unmapped_km2": 66.8
+    },
+    "2020": {
+      "burned_km2": 880.7,
+      "unmapped_km2": 64.4
+    },
+    "2021": {
+      "burned_km2": 1902.9,
+      "unmapped_km2": 230.5
+    },
+    "2022": {
+      "burned_km2": 766.5,
+      "unmapped_km2": 64.6
+    },
+    "2023": {
+      "burned_km2": 917.2,
+      "unmapped_km2": 156.1
+    },
+    "2024": {
+      "burned_km2": 1540.8,
+      "unmapped_km2": 118.5
+    },
+    "2025": {
+      "burned_km2": 1861.1,
+      "unmapped_km2": 633.0
+    }
+  },
+  "burned_area": {
+    "ratio_late_early": 3.3073124406457737,
+    "theil_sen_log_slope_per_year": 0.11553600976116954
+  },
+  "frozen_comparison": {
+    "naive_ratio": 16.793637327677626,
+    "aqua_only_ratio": 1.9933071968636236,
+    "harmonised_ratio_M2": 1.872963864310341,
+    "harmonised_range_M1_M4": [
+      1.501120297190054,
+      2.0684107620167977
+    ]
+  },
+  "reading": "matches neither range; reported as it is"
+}

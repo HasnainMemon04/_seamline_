@@ -1,0 +1,32 @@
+{
+  "updated": "2026-11-08",
+  "mistakes": [
+    {"date": "2026-11-03", "what": "The naive 16.8 times jump in Punjab was shown without saying that part of it comes from adding NOAA-20 from April 2018. Joining MODIS to S-NPP alone gives 11.1 times, so the chart now marks 2018 and the line is called a demonstration.", "found_by": "reviewer", "fixed_in": "7618661", "source": "docs/REVIEW_B05_2026-11-02.md"},
+    {"date": "2026-11-03", "what": "The latest-days panel could count overlapping near-real-time downloads twice (2.3 times too high in a test). It now counts only the newest download, and a day with no rows shows as no data, not zero.", "found_by": "reviewer", "fixed_in": "7618661", "source": "docs/REVIEW_B05_2026-11-02.md"},
+    {"date": "2026-11-03", "what": "The rough range was called an 80% range, but it covered only 59% of the months in the held-out test. It is now labelled a rough range, and the 59% is shown beside it.", "found_by": "reviewer", "fixed_in": "7618661", "source": "docs/VALIDATION.md"},
+    {"date": "2026-11-02", "what": "On the held-out 2012-13 test the simpler model M1 (error 0.175) beat the model chosen in cross-validation, M2 (0.231). M2 stayed the default because the test years may not be used to choose, and the negative result is reported.", "found_by": "builder", "fixed_in": "docs/VALIDATION.md", "source": "DECISIONS.md"},
+    {"date": "2026-11-03", "what": "Wording that said the pass time controls the count, and that our own record is safe, was removed. Only Terra supports the clock link; Aqua showed no clear change, so no cause is claimed.", "found_by": "checker", "fixed_in": "2b42c55", "source": "docs/REVIEW_P02_2026-11-03.md"},
+    {"date": "2026-11-03", "what": "In the latest-days panel, a past year before a satellite started was counted as zero burning (NOAA-20 before 1 April 2018, S-NPP before 20 January 2012). Such years are now left out, because no data is not zero.", "found_by": "checker", "fixed_in": "71d2523", "source": "docs/REVIEW_B05-BUILDER_2026-11-03.md"},
+    {"date": "2026-11-03", "what": "The end of S-NPP was first written as 13:00 UTC on 2 Nov, then as a NASA catalogue time. It was corrected to NOAA's final cut-off of 15:40 UTC (NESDIS Update #4), with dated catalogue checks.", "found_by": "checker", "fixed_in": "6bdca2e", "source": "docs/REVIEW_B05-FIX_2026-11-03.md"},
+    {"date": "2026-11-03", "what": "Terra's 2022 drop was nearly explained by the clock alone. Checking showed Terra's orbit was lowered in October 2022, so October 2022 is not scored and the step is reported as unexplained.", "found_by": "checker", "fixed_in": "docs/P02_RESULTS.md", "source": "docs/REVIEW_P02_2026-11-03.md"},
+    {"date": "2026-11-05", "what": "The plan for test P04 would have written the FIRMS MAP_KEY into a file that git tracks. Stored and printed addresses now show a placeholder instead, and a test checks the manifest.", "found_by": "checker", "fixed_in": "e65cef8", "source": "docs/REVIEW_P04_2026-11-05.md"},
+    {"date": "2026-11-05", "what": "Gaps between satellites in test G02 were counted in calendar days. They are now counted in matched days, so removed days never count as disagreement.", "found_by": "checker", "fixed_in": "e65cef8", "source": "experiments/PROTOCOL_P04.md"},
+    {"date": "2026-11-05", "what": "The app's analysis reply and row export carried detections from the frozen P04 test windows. A lock now withholds them until the test result files exist.", "found_by": "reviewer", "fixed_in": "7212fe4", "source": "DECISIONS.md"},
+    {"date": "2026-11-05", "what": "A held-row count shown by the lock let anyone work out hidden Terra totals by subtraction. The count is no longer shown.", "found_by": "reviewer", "fixed_in": "7212fe4", "source": "reports/c08/s02_review_2026-11-05.json"},
+    {"date": "2026-11-05", "what": "Test G05 mixed two different kinds of number, so it was withdrawn before any data for it was opened.", "found_by": "checker", "fixed_in": "e65cef8", "source": "docs/REVIEW_P04_2026-11-05.md"}
+  ],
+  "satellite_status": [
+    {"fact": "NOAA stopped delivering S-NPP data at 15:40 UTC on 2 Nov 2026 (NESDIS Update #4); NOAA-20 and NOAA-21 continue.", "date_read": "2026-11-05", "source": "docs/DIFFERENTIATION_PLAN.md"},
+    {"fact": "In NASA's catalogue the newest standard S-NPP granule starts at 13:54 UTC and the newest near-real-time one at 15:24 UTC on 2 Nov.", "date_read": "2026-11-05", "source": "DECISIONS.md"},
+    {"fact": "The NOAA-20 archive in hand starts on 1 Apr 2018, and the S-NPP archive on 20 Jan 2012.", "date_read": "2026-10-27", "source": "docs/DATA_PRODUCTS.md"},
+    {"fact": "The NOAA-21 archive starts on 1 Mar 2023. It has no archive years in the app and is not pooled with S-NPP.", "date_read": "2026-10-27", "source": "docs/DATA_PRODUCTS.md"},
+    {"fact": "NASA lowered Terra's orbit to about 694 km in October 2022, and FIRMS lists Terra data as missing on 11-22 Oct 2022.", "date_read": "2026-11-03", "source": "docs/P02_RESULTS.md"},
+    {"fact": "Terra's October-November pass moved earlier, from about 10:49-10:58 local solar time in 2018-21 to 9:40 in 2025.", "date_read": "2026-11-03", "source": "docs/P02_RESULTS.md"},
+    {"fact": "Aqua's October-November pass moved later, from about 13:16 in 2018-21 to 14:38 in 2025, while S-NPP stayed near 13:08.", "date_read": "2026-11-03", "source": "docs/P02_RESULTS.md"},
+    {"fact": "The FIRMS missing-days list used by the app is a snapshot, so days it does not list may still hold gaps.", "date_read": "2026-10-27", "source": "docs/SOURCE_REGISTER.md"}
+  ],
+  "urdu_summary_draft": {
+    "text": "یہ کارڈ ہماری پکڑی گئی غلطیاں اور ان کی درستی دکھاتا ہے، اور ہر سیٹلائٹ کی حقیقت کے ساتھ وہ تاریخ بھی جب ہم نے اسے پڑھا۔ ہر تعداد کسی ایک سیٹلائٹ کی دیکھی گئی جلنے کی سرگرمی ہے، اور ڈیٹا نہ ہونے کا مطلب آگ نہ ہونا نہیں۔",
+    "note": "Draft by Claude; Hasnain checks the wording before it is used"
+  }
+}

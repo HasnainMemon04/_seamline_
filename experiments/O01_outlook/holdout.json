@@ -1,0 +1,733 @@
+{
+ "test": "O01",
+ "title": "Next seven days of NOAA-20 detections in Punjab: held-out year 2025 (retrospective)",
+ "area": "Punjab",
+ "satellite": "NOAA-20 VIIRS 375 m",
+ "units": "retained detections summed over seven complete UTC days",
+ "held_out_year": 2025,
+ "train_origins": 268,
+ "test_origins": 39,
+ "ineligible_test_origins": 12,
+ "normal_years": [
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024
+ ],
+ "carried_forward": "M1",
+ "names": {
+  "B0": "Persistence",
+  "B1": "Seasonal normal",
+  "B2": "Seasonal-scaled persistence (declared baseline)",
+  "M1": "Ridge regression (penalty 0.1)",
+  "M2": "Boosted regression stumps (50 rounds)"
+ },
+ "scores": {
+  "B0": {
+   "n": 39,
+   "mae_z": 0.5286952121934723,
+   "typical_factor": 1.6967170080210434,
+   "wape": 0.4768167306171464,
+   "by_season": {
+    "OctNov": {
+     "n": 9,
+     "mae_z": 0.48054569807554987,
+     "wape": 0.41170930780097315
+    },
+    "AprMay": {
+     "n": 8,
+     "mae_z": 0.5566249106064218,
+     "wape": 0.5790272019415509
+    },
+    "other": {
+     "n": 22,
+     "mae_z": 0.5382364867279134,
+     "wape": 0.4610773240660295
+    }
+   },
+   "three_way_agreement_point": 0.358974358974359
+  },
+  "B1": {
+   "n": 39,
+   "mae_z": 0.46308224597371545,
+   "typical_factor": 1.5889640229352984,
+   "wape": 0.3770617648658714,
+   "by_season": {
+    "OctNov": {
+     "n": 9,
+     "mae_z": 0.5409156165354632,
+     "wape": 0.4345775625166615
+    },
+    "AprMay": {
+     "n": 8,
+     "mae_z": 0.21983161520926553,
+     "wape": 0.225677592707626
+    },
+    "other": {
+     "n": 22,
+     "mae_z": 0.5196960964764366,
+     "wape": 0.44345375312013036
+    }
+   },
+   "three_way_agreement_point": 0.46153846153846156
+  },
+  "B2": {
+   "n": 39,
+   "mae_z": 0.42554584662247164,
+   "typical_factor": 1.5304255693387958,
+   "wape": 0.3564883382720898,
+   "by_season": {
+    "OctNov": {
+     "n": 9,
+     "mae_z": 0.44688663066993567,
+     "wape": 0.3362379806253038
+    },
+    "AprMay": {
+     "n": 8,
+     "mae_z": 0.32766689905539026,
+     "wape": 0.3493307959093578
+    },
+    "other": {
+     "n": 22,
+     "mae_z": 0.4524078704456295,
+     "wape": 0.3850557573477115
+    }
+   },
+   "three_way_agreement_point": 0.5384615384615384
+  },
+  "M1": {
+   "n": 39,
+   "mae_z": 0.3815653543927475,
+   "typical_factor": 1.464575375518006,
+   "wape": 0.3115731151395292,
+   "by_season": {
+    "OctNov": {
+     "n": 9,
+     "mae_z": 0.4355559305276343,
+     "wape": 0.3424701949374512
+    },
+    "AprMay": {
+     "n": 8,
+     "mae_z": 0.2563913762092075,
+     "wape": 0.24858720700481357
+    },
+    "other": {
+     "n": 22,
+     "mae_z": 0.40499611076794456,
+     "wape": 0.33148424066160403
+    }
+   },
+   "three_way_agreement_point": 0.5641025641025641,
+   "direction": {
+    "issued": 7,
+    "abstained": 32,
+    "right_when_issued": 7,
+    "share_right_when_issued": 1.0,
+    "issued_increase": 3,
+    "issued_decrease": 4
+   },
+   "interval": {
+    "q": 0.6400847703207477,
+    "coverage": 0.7948717948717948,
+    "width_ratio": 3.5972495538694624
+   }
+  },
+  "M2": {
+   "n": 39,
+   "mae_z": 0.44956279711269004,
+   "typical_factor": 1.567626664741214,
+   "wape": 0.39490587414380685,
+   "by_season": {
+    "OctNov": {
+     "n": 9,
+     "mae_z": 0.5542684647504043,
+     "wape": 0.46011999522448194
+    },
+    "AprMay": {
+     "n": 8,
+     "mae_z": 0.29369125492012116,
+     "wape": 0.2763288285267427
+    },
+    "other": {
+     "n": 22,
+     "mae_z": 0.4634092211491047,
+     "wape": 0.4245887649602433
+    }
+   },
+   "three_way_agreement_point": 0.48717948717948717
+  }
+ },
+ "bootstrap_gain_over_B2": {
+  "gain": 0.04398049222972411,
+  "lo90": 0.013737031865448324,
+  "hi90": 0.07281082495431866,
+  "blocks": 10,
+  "block": 4,
+  "resamples": 2000,
+  "seed": 20261112
+ },
+ "interval_q": 0.6400847703207477,
+ "release_rules_1_to_3": [
+  {
+   "rule": "1a. At least 10% lower error than the declared baseline (B2)",
+   "value": "0.3816 against 0.4255 (+10.3%)",
+   "passed": true
+  },
+  {
+   "rule": "1b. Lower error than persistence (B0) and the seasonal normal (B1)",
+   "value": "B0 0.5287, B1 0.4631",
+   "passed": true
+  },
+  {
+   "rule": "1c. The 90% bootstrap interval of the gain over B2 lies above zero",
+   "value": "+0.0137 to +0.0728",
+   "passed": true
+  },
+  {
+   "rule": "2. Coverage of the 80% interval between 70% and 90%",
+   "value": "79%",
+   "passed": true
+  },
+  {
+   "rule": "3. A direction issued on at least 10 origins, at least 70% of them right",
+   "value": "issued 7, right 7 (100%)",
+   "passed": false
+  }
+ ],
+ "skill_gate_passed": false,
+ "rows": [
+  {
+   "origin": "2025-01-04",
+   "target_start": "2025-01-05",
+   "target_end": "2025-01-11",
+   "y_prev": 275.0,
+   "y_next": 751.0,
+   "predicted": 328.4844145926217,
+   "lo80": 169.88339510150828,
+   "hi80": 629.2937141158163,
+   "b2": 243.41844981243005,
+   "issued": "no clear direction",
+   "observed": "increase"
+  },
+  {
+   "origin": "2025-01-11",
+   "target_start": "2025-01-12",
+   "target_end": "2025-01-18",
+   "y_prev": 751.0,
+   "y_next": 649.0,
+   "predicted": 451.24987922494626,
+   "lo80": 234.61120730628213,
+   "hi80": 862.1358076923852,
+   "b2": 879.1189843607191,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-01-18",
+   "target_start": "2025-01-19",
+   "target_end": "2025-01-25",
+   "y_prev": 649.0,
+   "y_next": 1068.0,
+   "predicted": 642.1618180333833,
+   "lo80": 335.2690931363991,
+   "hi80": 1224.2273425882165,
+   "b2": 929.1043968165064,
+   "issued": "no clear direction",
+   "observed": "increase"
+  },
+  {
+   "origin": "2025-01-25",
+   "target_start": "2025-01-26",
+   "target_end": "2025-02-01",
+   "y_prev": 1068.0,
+   "y_next": 1072.0,
+   "predicted": 1130.2484870322796,
+   "lo80": 592.6116800376316,
+   "hi80": 2149.9528485102883,
+   "b2": 1470.6631863100692,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-02-01",
+   "target_start": "2025-02-02",
+   "target_end": "2025-02-08",
+   "y_prev": 1072.0,
+   "y_next": 1238.0,
+   "predicted": 1226.5618848742401,
+   "lo80": 643.3927001477173,
+   "hi80": 2332.62485044633,
+   "b2": 1432.3201025472438,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-02-08",
+   "target_start": "2025-02-09",
+   "target_end": "2025-02-15",
+   "y_prev": 1238.0,
+   "y_next": 1456.0,
+   "predicted": 1248.9807479400822,
+   "lo80": 655.2129947453584,
+   "hi80": 2375.1453999143005,
+   "b2": 1442.0082172057603,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-02-15",
+   "target_start": "2025-02-16",
+   "target_end": "2025-02-22",
+   "y_prev": 1456.0,
+   "y_next": 580.0,
+   "predicted": 1126.030943088271,
+   "lo80": 590.3879895788306,
+   "hi80": 2141.953678999422,
+   "b2": 1318.8424761731421,
+   "issued": "no clear direction",
+   "observed": "decrease"
+  },
+  {
+   "origin": "2025-03-08",
+   "target_start": "2025-03-09",
+   "target_end": "2025-03-15",
+   "y_prev": 983.0,
+   "y_next": 260.0,
+   "predicted": 459.05798320261704,
+   "lo80": 238.72801238216948,
+   "hi80": 876.9449829149885,
+   "b2": 715.8692354202168,
+   "issued": "decrease",
+   "observed": "decrease"
+  },
+  {
+   "origin": "2025-03-15",
+   "target_start": "2025-03-16",
+   "target_end": "2025-03-22",
+   "y_prev": 260.0,
+   "y_next": 248.0,
+   "predicted": 166.772503326,
+   "lo80": 84.62115742668847,
+   "hi80": 322.58416767815874,
+   "b2": 154.75167118337848,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-03-22",
+   "target_start": "2025-03-23",
+   "target_end": "2025-03-29",
+   "y_prev": 248.0,
+   "y_next": 217.0,
+   "predicted": 132.73183491307068,
+   "lo80": 66.67329237395518,
+   "hi80": 258.0212181243046,
+   "b2": 166.71003244978107,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-03-29",
+   "target_start": "2025-03-30",
+   "target_end": "2025-04-05",
+   "y_prev": 217.0,
+   "y_next": 160.0,
+   "predicted": 156.6861585707321,
+   "lo80": 79.30315507882229,
+   "hi80": 303.4539861048204,
+   "b2": 214.96829191176178,
+   "issued": "no clear direction",
+   "observed": "decrease"
+  },
+  {
+   "origin": "2025-04-05",
+   "target_start": "2025-04-06",
+   "target_end": "2025-04-12",
+   "y_prev": 160.0,
+   "y_next": 180.0,
+   "predicted": 186.86684353337853,
+   "lo80": 95.2158526304043,
+   "hi80": 360.69593027310844,
+   "b2": 208.0943487522028,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-04-12",
+   "target_start": "2025-04-13",
+   "target_end": "2025-04-19",
+   "y_prev": 180.0,
+   "y_next": 485.0,
+   "predicted": 320.0320673542164,
+   "lo80": 165.42691423064142,
+   "hi80": 613.2626402912626,
+   "b2": 321.3500958245538,
+   "issued": "no clear direction",
+   "observed": "increase"
+  },
+  {
+   "origin": "2025-04-19",
+   "target_start": "2025-04-20",
+   "target_end": "2025-04-26",
+   "y_prev": 485.0,
+   "y_next": 979.0,
+   "predicted": 720.431354130631,
+   "lo80": 376.53652815186075,
+   "hi80": 1372.676604786923,
+   "b2": 848.0392905453848,
+   "issued": "no clear direction",
+   "observed": "increase"
+  },
+  {
+   "origin": "2025-04-26",
+   "target_start": "2025-04-27",
+   "target_end": "2025-05-03",
+   "y_prev": 979.0,
+   "y_next": 1052.0,
+   "predicted": 1144.279740448408,
+   "lo80": 600.0096265109072,
+   "hi80": 2176.565108160829,
+   "b2": 1565.191223437472,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-05-03",
+   "target_start": "2025-05-04",
+   "target_end": "2025-05-10",
+   "y_prev": 1052.0,
+   "y_next": 1855.0,
+   "predicted": 1664.3833736805673,
+   "lo80": 874.2330850356399,
+   "hi80": 3163.015321999464,
+   "b2": 1598.7371786802278,
+   "issued": "no clear direction",
+   "observed": "increase"
+  },
+  {
+   "origin": "2025-05-10",
+   "target_start": "2025-05-11",
+   "target_end": "2025-05-17",
+   "y_prev": 1855.0,
+   "y_next": 3327.0,
+   "predicted": 2197.863245889962,
+   "lo80": 1155.5091351594651,
+   "hi80": 4174.835467821559,
+   "b2": 2225.039972326,
+   "issued": "no clear direction",
+   "observed": "increase"
+  },
+  {
+   "origin": "2025-05-17",
+   "target_start": "2025-05-18",
+   "target_end": "2025-05-24",
+   "y_prev": 3327.0,
+   "y_next": 1243.0,
+   "predicted": 1570.8836936439516,
+   "lo80": 824.9355912433753,
+   "hi80": 2985.679934448358,
+   "b2": 2247.8961081535317,
+   "issued": "decrease",
+   "observed": "decrease"
+  },
+  {
+   "origin": "2025-05-24",
+   "target_start": "2025-05-25",
+   "target_end": "2025-05-31",
+   "y_prev": 1243.0,
+   "y_next": 768.0,
+   "predicted": 480.04134649976015,
+   "lo80": 249.7914429893828,
+   "hi80": 916.7429037310523,
+   "b2": 512.4829022194007,
+   "issued": "decrease",
+   "observed": "decrease"
+  },
+  {
+   "origin": "2025-05-31",
+   "target_start": "2025-06-01",
+   "target_end": "2025-06-07",
+   "y_prev": 768.0,
+   "y_next": 363.0,
+   "predicted": 289.543966412873,
+   "lo80": 149.35213230298962,
+   "hi80": 555.4376381734683,
+   "b2": 451.0833011638513,
+   "issued": "decrease",
+   "observed": "decrease"
+  },
+  {
+   "origin": "2025-06-07",
+   "target_start": "2025-06-08",
+   "target_end": "2025-06-14",
+   "y_prev": 363.0,
+   "y_next": 767.0,
+   "predicted": 332.17990957264533,
+   "lo80": 171.83183643056648,
+   "hi80": 636.3027438175117,
+   "b2": 372.46028569840456,
+   "issued": "no clear direction",
+   "observed": "increase"
+  },
+  {
+   "origin": "2025-06-14",
+   "target_start": "2025-06-15",
+   "target_end": "2025-06-21",
+   "y_prev": 767.0,
+   "y_next": 868.0,
+   "predicted": 602.4413608121886,
+   "lo80": 314.3265723435906,
+   "hi80": 1148.8918690093844,
+   "b2": 881.1640561487194,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-07-05",
+   "target_start": "2025-07-06",
+   "target_end": "2025-07-12",
+   "y_prev": 620.0,
+   "y_next": 109.0,
+   "predicted": 395.82479401177625,
+   "lo80": 205.38845709834584,
+   "hi80": 757.0142825440477,
+   "b2": 484.8669393958998,
+   "issued": "no clear direction",
+   "observed": "decrease"
+  },
+  {
+   "origin": "2025-07-12",
+   "target_start": "2025-07-13",
+   "target_end": "2025-07-19",
+   "y_prev": 109.0,
+   "y_next": 90.0,
+   "predicted": 117.84391941496062,
+   "lo80": 58.82367276498515,
+   "hi80": 229.7841774878922,
+   "b2": 73.59716265011704,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-07-19",
+   "target_start": "2025-07-20",
+   "target_end": "2025-07-26",
+   "y_prev": 90.0,
+   "y_next": 45.0,
+   "predicted": 92.50487918871214,
+   "lo80": 45.46372139652866,
+   "hi80": 181.7250983879944,
+   "b2": 52.34781421465047,
+   "issued": "no clear direction",
+   "observed": "decrease"
+  },
+  {
+   "origin": "2025-09-20",
+   "target_start": "2025-09-21",
+   "target_end": "2025-09-27",
+   "y_prev": 54.0,
+   "y_next": 136.0,
+   "predicted": 135.34762313088152,
+   "lo80": 68.05246076660538,
+   "hi80": 262.9824310094764,
+   "b2": 77.73695243379875,
+   "issued": "increase",
+   "observed": "increase"
+  },
+  {
+   "origin": "2025-09-27",
+   "target_start": "2025-09-28",
+   "target_end": "2025-10-04",
+   "y_prev": 136.0,
+   "y_next": 441.0,
+   "predicted": 309.58777455628535,
+   "lo80": 159.9201845908291,
+   "hi80": 593.453559551168,
+   "b2": 240.28762593759728,
+   "issued": "increase",
+   "observed": "increase"
+  },
+  {
+   "origin": "2025-10-04",
+   "target_start": "2025-10-05",
+   "target_end": "2025-10-11",
+   "y_prev": 441.0,
+   "y_next": 385.0,
+   "predicted": 814.3093788736602,
+   "lo80": 426.0335033306762,
+   "hi80": 1550.7295766668046,
+   "b2": 801.4409367982029,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-10-11",
+   "target_start": "2025-10-12",
+   "target_end": "2025-10-18",
+   "y_prev": 385.0,
+   "y_next": 1456.0,
+   "predicted": 856.1839160882795,
+   "lo80": 448.1117579042024,
+   "hi80": 1630.1505680816383,
+   "b2": 514.9074953776128,
+   "issued": "increase",
+   "observed": "increase"
+  },
+  {
+   "origin": "2025-10-18",
+   "target_start": "2025-10-19",
+   "target_end": "2025-10-25",
+   "y_prev": 1456.0,
+   "y_next": 2013.0,
+   "predicted": 1366.2869032558854,
+   "lo80": 717.0623985209711,
+   "hi80": 2597.633140053215,
+   "b2": 1712.992604996232,
+   "issued": "no clear direction",
+   "observed": "increase"
+  },
+  {
+   "origin": "2025-10-25",
+   "target_start": "2025-10-26",
+   "target_end": "2025-11-01",
+   "y_prev": 2013.0,
+   "y_next": 2873.0,
+   "predicted": 2044.707288534114,
+   "lo80": 1074.7580047380404,
+   "hi80": 3884.353499938634,
+   "b2": 2646.315751095485,
+   "issued": "no clear direction",
+   "observed": "increase"
+  },
+  {
+   "origin": "2025-11-01",
+   "target_start": "2025-11-02",
+   "target_end": "2025-11-08",
+   "y_prev": 2873.0,
+   "y_next": 2950.0,
+   "predicted": 2710.4978981875574,
+   "lo80": 1425.7945904620265,
+   "hi80": 5147.119701326105,
+   "b2": 3360.2742743002423,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-11-08",
+   "target_start": "2025-11-09",
+   "target_end": "2025-11-15",
+   "y_prev": 2950.0,
+   "y_next": 1659.0,
+   "predicted": 2092.4140679246716,
+   "lo80": 1099.9112957432496,
+   "hi80": 3974.836164785475,
+   "b2": 2733.5877411739643,
+   "issued": "no clear direction",
+   "observed": "decrease"
+  },
+  {
+   "origin": "2025-11-15",
+   "target_start": "2025-11-16",
+   "target_end": "2025-11-22",
+   "y_prev": 1659.0,
+   "y_next": 612.0,
+   "predicted": 1370.013565385761,
+   "lo80": 719.0272726589518,
+   "hi80": 2604.701282669476,
+   "b2": 1301.0961842611339,
+   "issued": "no clear direction",
+   "observed": "decrease"
+  },
+  {
+   "origin": "2025-11-22",
+   "target_start": "2025-11-23",
+   "target_end": "2025-11-29",
+   "y_prev": 612.0,
+   "y_next": 373.0,
+   "predicted": 737.2310569833545,
+   "lo80": 385.3941332984207,
+   "hi80": 1404.5396209487376,
+   "b2": 426.2068945892106,
+   "issued": "no clear direction",
+   "observed": "decrease"
+  },
+  {
+   "origin": "2025-11-29",
+   "target_start": "2025-11-30",
+   "target_end": "2025-12-06",
+   "y_prev": 373.0,
+   "y_next": 421.0,
+   "predicted": 485.4631607913916,
+   "lo80": 252.65008225188978,
+   "hi80": 927.0261425427793,
+   "b2": 248.04583052580227,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-12-06",
+   "target_start": "2025-12-07",
+   "target_end": "2025-12-13",
+   "y_prev": 421.0,
+   "y_next": 437.0,
+   "predicted": 464.95852430976333,
+   "lo80": 241.83905927010144,
+   "hi80": 888.1361949446687,
+   "b2": 373.1833028261349,
+   "issued": "no clear direction",
+   "observed": "no clear change"
+  },
+  {
+   "origin": "2025-12-13",
+   "target_start": "2025-12-14",
+   "target_end": "2025-12-20",
+   "y_prev": 437.0,
+   "y_next": 219.0,
+   "predicted": 388.4251870628878,
+   "lo80": 201.4870311524477,
+   "hi80": 742.9798798007109,
+   "b2": 414.0164705882357,
+   "issued": "no clear direction",
+   "observed": "decrease"
+  },
+  {
+   "origin": "2025-12-20",
+   "target_start": "2025-12-21",
+   "target_end": "2025-12-27",
+   "y_prev": 219.0,
+   "y_next": 336.0,
+   "predicted": 222.78123133625513,
+   "lo80": 114.1516319728785,
+   "hi80": 428.81265406499426,
+   "b2": 194.01099414844163,
+   "issued": "no clear direction",
+   "observed": "increase"
+  }
+ ],
+ "last_input_day": "2025-12-31",
+ "note": "A retrospective test on reprocessed archive data. It is not a real-time backtest and not a current forecast.",
+ "protocol": "experiments/PROTOCOL_O01.md",
+ "protocol_sha256": "03ddfc43aa21ef756b8ceeaf9480748c26e829b5552118cfd9f4b6afc00c34e3",
+ "code_state": {
+  "revision": "3eed405",
+  "c08_uncommitted_changes": false,
+  "c08_sources_sha256": "766ee093854667c55a829e97079260cec66fc4aefd1afc51a1f959ca17563e29"
+ },
+ "run_utc": "2026-11-11T19:29:42+00:00",
+ "approved": "Hasnain, Seamline redesign brief Revision 1.3, section 4D: 'run the baseline, bounded candidate fits and actual evaluation' (prompts/Seamline_3D_UI_UX_Redesign_Master_Prompt_r1.3.md)",
+ "inputs": {
+  "detections": "data/processed/pak_detections.parquet",
+  "detections_sha256": "561e555a28dc7bbb1dae4a9cad4965d687b4eafd21c9837baf4d85925cefcfef",
+  "ingest_built_utc": "2026-11-02T12:55:43+00:00",
+  "missing_days_list": "research/metadata/provider_missing_dates.json"
+ },
+ "environment": {
+  "python": "3.13.15",
+  "pandas": "2.3.3",
+  "numpy": "2.2.6"
+ },
+ "runner": "python -m c08.outlook"
+}

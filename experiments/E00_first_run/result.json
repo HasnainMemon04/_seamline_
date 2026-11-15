@@ -1,0 +1,207 @@
+{
+  "experiment": "E00 first-run proof",
+  "protocol": "experiments/PROTOCOL_P01.md",
+  "run_utc": "2026-11-02T12:55:50+00:00",
+  "code_revision": "edee712",
+  "environment": {
+    "python": "3.13.15",
+    "pandas": "2.3.3",
+    "numpy": "2.2.6",
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu_count": 8,
+    "ram_total_gb": 16.7
+  },
+  "inputs": {
+    "detections_parquet_sha256": "561e555a28dc7bbb1dae4a9cad4965d687b4eafd21c9837baf4d85925cefcfef",
+    "ingest_schema": "c08-detections-1",
+    "raw_files": {
+      "country/modis/2000": "5acad6a67cfb72aec4d12c753c69811cfb66ca615b0b5473adb62824989c7a7b",
+      "country/modis/2001": "1537d51c30ff3b8a0b3f65b0de4903c312830a3f78dfa598af19341c8d4522e1",
+      "country/modis/2002": "09a6ae4550e32d8f56bbcc4267085e094dc23ba72578988e12cfef7f1f359eff",
+      "country/modis/2003": "07fd98cfdef66f5b4fca6c7bb9404a147bbdccbf663205e1d2fe55b1f690db16",
+      "country/modis/2004": "63dedecbb39d0ad57709814139e422538f5d512cc0ca87750f6970fb2d36c29c",
+      "country/modis/2005": "f78980dc65a32d9eee9949d8221548f7862391011d704eef676568c97f6c0a0f",
+      "country/modis/2006": "406c66c616881a8eb5b9d0b34ceef2bbb69b35343aa631e2b0c21ba910abef45",
+      "country/modis/2007": "6c5353b6c343affc961b6e1dbdc896fbf6ee49f57d1f9f0b88dd886d38e1d9bd",
+      "country/modis/2008": "754c75858f4dd7904f5f0d95550e698cc7c5f2d42c38bdcd58ba4c1a8ca67311",
+      "country/modis/2009": "1e4c98f8a850c393a5d47f85b4ce98bd96ec9c6ec76e2da796edee0b9006c630",
+      "country/modis/2010": "23922b4996fe97c86482a148dc839e1cc4597b721deb35e84c79efe454c8a336",
+      "country/modis/2011": "d5bf61de4d7767369d3487b46bcf4bcf2c00d8202fd28328e55f1980a7889bfb",
+      "country/modis/2012": "5875ed55dcc142581df814dc549c410818a1cda33fe4ad70fbdeb5f2840291b0",
+      "country/modis/2013": "e592922baf946a84359a359f3ccc4ab74b88ce44858e6db5b661c8d6098c1aed",
+      "country/modis/2014": "979c99c8a73efe9b0cecacd0c429de3ff8c9f580c3e744d66be982273e6b1c20",
+      "country/modis/2015": "6be32ec526e907efabc5b919133e852462ad9dd8b8170c21fa060a304ca0a711",
+      "country/modis/2016": "e74b0186b7904058dcfa6a412a7cbb61d2d452142003e65d4ff96fa0a2c84864",
+      "country/modis/2017": "c3bfbc7d90ab9de214a8e7b0a347a3ea76f7d82936eb8e7c607c422318736a9e",
+      "country/modis/2018": "ecd6985c17ca07df395c74970c370463a3f88477fa3fc3ab1a07151f97d99a5d",
+      "country/modis/2019": "15dadf9b6355c41272565a0e376efbdfada01947f8c72dd2bae271bc2ae47630",
+      "country/modis/2020": "871429e9ac9b3d52a15a6e844f0133043ba3da0874c1788aefcbbbd3939f4f60",
+      "country/modis/2021": "323099e19feb47b22b8db8fc25a70aadeb6d9c4782b6d1c2455d7a27b898831b",
+      "country/modis/2022": "d4a14ccca8367ca968c5a060f4ba7fd8ee0ff1fe418c305c87d40c6c8a61a13f",
+      "country/modis/2023": "16575fc9619bc396071c84458f0c96a0b9091a97126ab16466bba359d1250f95",
+      "country/modis/2024": "7f02fa12a1f0dd548eca2f01281a6302d6d37fe7f659623cf016d32b2415c62b",
+      "country/modis/2025": "8f0b8766c34e42feae2c9e64574e052eddff6182e06b4659ce1995da2d98fe6c",
+      "country/viirs-jpss1/2018": "a8f759009cd82c70705d2d3f194e2977bdfa25c27fc4e85cd630053a1e7b2dbe",
+      "country/viirs-jpss1/2019": "9f280975c7df91dee4dbafbb5a6def870b801ad20f979564ba288a205f4aaf3e",
+      "country/viirs-jpss1/2020": "699a32586dbbc1429fae470c8692f08ee5ba10245f25509127a650d808680b2e",
+      "country/viirs-jpss1/2021": "e2d99a74a094757fa71f038f94f008f63530c7b38d98b2285c55f590385a1209",
+      "country/viirs-jpss1/2022": "000c3cfa5a58c33bc0f818346ca721e992fecc50525b0e4f9969f106f78f3b3e",
+      "country/viirs-jpss1/2023": "bc02c33f59dae1724b53ef4f0fe56244dcdb5c0cd07c087ab0b33ffaf1c6c70f",
+      "country/viirs-jpss1/2024": "f5733a198ce5485f8a256a37197eb2b3e8e069687c74b36e6466fd69036fd0f2",
+      "country/viirs-jpss1/2025": "79fbcbeee455e0e98ba9c4a62b7f4acc14e504553b2f61ad93544df37229405d",
+      "country/viirs-snpp/2012": "c524f92496b506bec44c8cac2d0127f685e5959bd1342a3d9a165930cc9c2ee9",
+      "country/viirs-snpp/2013": "f1e7fa86ce33e47ee1104cb985059adc90ba9c66b592ff054478d65c65b07583",
+      "country/viirs-snpp/2014": "f02d656d1074686f60afb80e1c0aa336497cf547015b193e259b034da37e0363",
+      "country/viirs-snpp/2015": "cff1197dc69a0de2bc1c5b7ac37794bf740473ddfd6920fef01ea8c19b5e0999",
+      "country/viirs-snpp/2016": "36d590f3ee9497f8d2f6001a4953883fc420cb292082367d377700ffa60ad945",
+      "country/viirs-snpp/2017": "cecc92c01c4128f1a1eceebbbb4d0d6480e08daf0f27cae4a9c53a231b52ab7c",
+      "country/viirs-snpp/2018": "42244332ce099625be3ff1a3ea62854915eeba32b4508553457b15abb364cf64",
+      "country/viirs-snpp/2019": "5d9a1a0aa937febf8ac50c981079cc5036f43f201880cab5228eb98148ba5606",
+      "country/viirs-snpp/2020": "29f87be2b2dfcf4a53ed8bc9d264581377bb6b1a821b238abf3d3fdbb11e568c",
+      "country/viirs-snpp/2021": "992ac0d43ab1cf9f308d9deb2e43fc7baae4018539433dea790e0b18cc1ce499",
+      "country/viirs-snpp/2022": "4bbdef783afdc56ec9f4c9c76cea61c8a11a6515877b888a169e092b9b987533",
+      "country/viirs-snpp/2023": "e1cc95cff4692a1555228d63ee0e35a7fcd9826b81c9bb40189ca5e17b3c9655",
+      "country/viirs-snpp/2024": "598d2dcf9181fcd034a634ddf50945a238c352aac1f7473f36af29616b1a73f3",
+      "country/viirs-snpp/2025": "8b2ec9cef4ebb29fc7c1860fa7ea6e0a6375a13b59e6e4c89e566b32e963af06",
+      "nrt/MODIS_NRT/20261102T1200Z": "abd4853c7046fe96e164334e198987699a8587c812250caa36e623a9ff7c67a8",
+      "nrt/NOAA20_NRT/20261102T1200Z": "18e2c4d93a028534c731c71ba93b2be152091029145b63974fab31b4755e9971",
+      "nrt/NOAA21_NRT/20261102T1200Z": "597a8eb04320c21e75adadf9bcf5f65f61874d0fe8bde0d3411bb04a8cebbef5",
+      "nrt/SNPP_NRT/20261102T1200Z": "569775f0d74d54fe62b20c4c4846be882175d5db5fa314ab7f720604d7c937d9"
+    },
+    "boundaries": {
+      "boundaries/pak_adm1.geojson": "34c973399b464f8b43a6cfbc9255ff6d19d911477f1549d0ff0f1dcaaf63c37b",
+      "boundaries/pak_adm1_simplified.geojson": "c7ff4e70bcf740cfba47b871a7c2b2b2b243b59e4c0656e6e1bc2a64e295d93a"
+    },
+    "provider_missing_dates": "research/metadata/provider_missing_dates.json"
+  },
+  "ingest_summary": {
+    "rows": 1565651,
+    "rows_by_platform_stream": {
+      "Aqua/nrt": 592,
+      "Aqua/standard": 123946,
+      "NOAA20/nrt": 3667,
+      "NOAA20/standard": 489307,
+      "NOAA21/nrt": 4064,
+      "SNPP/nrt": 3843,
+      "SNPP/standard": 828913,
+      "Terra/nrt": 14,
+      "Terra/standard": 111305
+    },
+    "standard_rows_outside_all_provinces": 13184,
+    "nrt_rows_outside_pakistan_dropped": 9630
+  },
+  "archive_rows_rejected": 0,
+  "archive_exact_duplicates": 0,
+  "punjab_pass_times_utc": {
+    "Aqua_D": {
+      "n": 86340,
+      "utc_hour_p01": 7.77,
+      "utc_hour_median": 8.45,
+      "utc_hour_p99": 9.9
+    },
+    "Aqua_N": {
+      "n": 687,
+      "utc_hour_p01": 20.48,
+      "utc_hour_median": 21.12,
+      "utc_hour_p99": 22.28
+    },
+    "NOAA20_D": {
+      "n": 259782,
+      "utc_hour_p01": 7.12,
+      "utc_hour_median": 8.23,
+      "utc_hour_p99": 9.2
+    },
+    "NOAA20_N": {
+      "n": 14486,
+      "utc_hour_p01": 19.9,
+      "utc_hour_median": 20.92,
+      "utc_hour_p99": 21.98
+    },
+    "SNPP_D": {
+      "n": 426924,
+      "utc_hour_p01": 7.2,
+      "utc_hour_median": 8.25,
+      "utc_hour_p99": 9.27
+    },
+    "SNPP_N": {
+      "n": 26520,
+      "utc_hour_p01": 19.9,
+      "utc_hour_median": 20.87,
+      "utc_hour_p99": 22.0
+    },
+    "Terra_D": {
+      "n": 60734,
+      "utc_hour_p01": 4.88,
+      "utc_hour_median": 6.0,
+      "utc_hour_p99": 6.7
+    },
+    "Terra_N": {
+      "n": 3164,
+      "utc_hour_p01": 15.98,
+      "utc_hour_median": 17.23,
+      "utc_hour_p99": 17.93
+    }
+  },
+  "punjab_confidence_shares_unfiltered": {
+    "Aqua": {
+      "below_30": 0.0319,
+      "30_79": 0.8835,
+      "80_up": 0.0846
+    },
+    "NOAA20": {
+      "n": 0.8214,
+      "l": 0.1541,
+      "h": 0.0245
+    },
+    "SNPP": {
+      "n": 0.823,
+      "l": 0.1517,
+      "h": 0.0252
+    },
+    "Terra": {
+      "below_30": 0.0329,
+      "30_79": 0.8566,
+      "80_up": 0.1105
+    }
+  },
+  "selection_years": [
+    2014,
+    2015,
+    2016,
+    2017
+  ],
+  "scored_months": 47,
+  "excluded_months": [
+    "2016-02-01"
+  ],
+  "m1_ratio_all_selection_years": {
+    "D": 7.639017419706042,
+    "N": 63.75675675675676
+  },
+  "loyo_metrics": {
+    "M0": {
+      "n_months": 47,
+      "obs_total": 119340.0,
+      "pred_total": 14807.0,
+      "wape": 0.8759259259259259,
+      "log_mae": 2.177813556813868,
+      "bias": -0.8759259259259259,
+      "peak_month_agreement": 0.25,
+      "peak_years": 4,
+      "anomaly_agreement": 0.723404255319149
+    },
+    "M1": {
+      "n_months": 47,
+      "obs_total": 119340.0,
+      "pred_total": 119863.07037702258,
+      "wape": 0.20810288975087415,
+      "log_mae": 0.29749767716831,
+      "bias": 0.004383026454018557,
+      "peak_month_agreement": 0.25,
+      "peak_years": 4,
+      "anomaly_agreement": 0.7021276595744681
+    }
+  },
+  "scope_note": "Selection-year baseline only (E00). Not a model selection or final evaluation.",
+  "runtime_s": 75.3
+}

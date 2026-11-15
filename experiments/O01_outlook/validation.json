@@ -1,0 +1,145 @@
+{
+ "what": "Protocol O01 validation on 2021-2024 (every choice is made here; 2025 is not read)",
+ "years": [
+  2021,
+  2022,
+  2023,
+  2024
+ ],
+ "per_year": {
+  "2021": {
+   "train_origins": 110,
+   "test_origins": 42,
+   "normal_years": [
+    2018,
+    2019,
+    2020
+   ],
+   "mae_z": {
+    "B0": 0.4923442488197483,
+    "B1": 0.43934822161711456,
+    "B2": 0.3688133758842803,
+    "M1_ridge_0.1": 0.37159242681632343,
+    "M1_ridge_1": 0.38461674021167597,
+    "M1_ridge_10": 0.4241590385287869,
+    "M1_ridge_100": 0.47142229422632553,
+    "M2_stumps_50": 0.46406049419773787,
+    "M2_stumps_100": 0.4664385910899413,
+    "M2_stumps_200": 0.4635550890723836
+   }
+  },
+  "2022": {
+   "train_origins": 153,
+   "test_origins": 39,
+   "normal_years": [
+    2018,
+    2019,
+    2020,
+    2021
+   ],
+   "mae_z": {
+    "B0": 0.5279778909770468,
+    "B1": 0.47835872859105766,
+    "B2": 0.4821225532509346,
+    "M1_ridge_0.1": 0.4697704341867986,
+    "M1_ridge_1": 0.47043204490595925,
+    "M1_ridge_10": 0.4681537949476899,
+    "M1_ridge_100": 0.4543372235871385,
+    "M2_stumps_50": 0.4271990153469702,
+    "M2_stumps_100": 0.4397618305456518,
+    "M2_stumps_200": 0.4510326807527383
+   }
+  },
+  "2023": {
+   "train_origins": 193,
+   "test_origins": 37,
+   "normal_years": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022
+   ],
+   "mae_z": {
+    "B0": 0.5199351348607347,
+    "B1": 0.4662569842810369,
+    "B2": 0.5097537038981814,
+    "M1_ridge_0.1": 0.39581777959870024,
+    "M1_ridge_1": 0.3944792377351144,
+    "M1_ridge_10": 0.38960033395102706,
+    "M1_ridge_100": 0.4149124028874899,
+    "M2_stumps_50": 0.4348597346097453,
+    "M2_stumps_100": 0.4342545185194433,
+    "M2_stumps_200": 0.4401431626978583
+   }
+  },
+  "2024": {
+   "train_origins": 230,
+   "test_origins": 37,
+   "normal_years": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+   ],
+   "mae_z": {
+    "B0": 0.49833896597241983,
+    "B1": 0.38432028643717836,
+    "B2": 0.4184021367775116,
+    "M1_ridge_0.1": 0.3341238253972913,
+    "M1_ridge_1": 0.3336175503263236,
+    "M1_ridge_10": 0.33747910654937374,
+    "M1_ridge_100": 0.37524277771459724,
+    "M2_stumps_50": 0.3272014289932862,
+    "M2_stumps_100": 0.3274101995870848,
+    "M2_stumps_200": 0.33611385297261953
+   }
+  }
+ },
+ "mean_mae_z": {
+  "B0": 0.5096490601574875,
+  "B1": 0.4420710552315969,
+  "B2": 0.444772942452727,
+  "M1_ridge_0.1": 0.3928261164997784,
+  "M1_ridge_1": 0.39578639329476833,
+  "M1_ridge_10": 0.4048480684942194,
+  "M1_ridge_100": 0.42897867460388783,
+  "M2_stumps_50": 0.4133301682869349,
+  "M2_stumps_100": 0.4169662849355303,
+  "M2_stumps_200": 0.4227111963738999
+ },
+ "chosen": {
+  "ridge": "M1_ridge_0.1",
+  "ridge_lambda": 0.1,
+  "stumps": "M2_stumps_50",
+  "stumps_rounds": 50,
+  "carried_forward": "M1_ridge_0.1",
+  "rule": "lowest mean absolute error of z, averaged over the four validation years"
+ },
+ "interval_q": 0.6400847703207477,
+ "interval_rule": "80th percentile of the carried-forward model's absolute validation errors",
+ "pooled_validation_origins": 155,
+ "protocol": "experiments/PROTOCOL_O01.md",
+ "protocol_sha256": "03ddfc43aa21ef756b8ceeaf9480748c26e829b5552118cfd9f4b6afc00c34e3",
+ "code_state": {
+  "revision": "ecc2b62",
+  "c08_uncommitted_changes": false,
+  "c08_sources_sha256": "766ee093854667c55a829e97079260cec66fc4aefd1afc51a1f959ca17563e29"
+ },
+ "run_utc": "2026-11-11T19:29:32+00:00",
+ "approved": "Hasnain, Seamline redesign brief Revision 1.3, section 4D: 'run the baseline, bounded candidate fits and actual evaluation' (prompts/Seamline_3D_UI_UX_Redesign_Master_Prompt_r1.3.md)",
+ "inputs": {
+  "detections": "data/processed/pak_detections.parquet",
+  "detections_sha256": "561e555a28dc7bbb1dae4a9cad4965d687b4eafd21c9837baf4d85925cefcfef",
+  "ingest_built_utc": "2026-11-02T12:55:43+00:00",
+  "missing_days_list": "research/metadata/provider_missing_dates.json"
+ },
+ "environment": {
+  "python": "3.13.15",
+  "pandas": "2.3.3",
+  "numpy": "2.2.6"
+ },
+ "runner": "python -m c08.outlook"
+}

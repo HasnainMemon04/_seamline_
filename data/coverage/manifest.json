@@ -1,0 +1,739 @@
+{
+ "schema": "seamline-coverage-1",
+ "product": {
+  "short_name": "MYD14A1",
+  "version": "061",
+  "platform": "Aqua",
+  "instrument": "MODIS",
+  "long_name": "MODIS/Aqua Thermal Anomalies/Fire Daily L3 Global 1km SIN Grid, Collection 6.1",
+  "doi": "10.5067/MODIS/MYD14A1.061",
+  "provider": "NASA LP DAAC",
+  "processing": "standard (science-quality archive)"
+ },
+ "tile": "h24v05",
+ "bbox_wsen": [
+  72.6,
+  30.05,
+  75.4,
+  32.6
+ ],
+ "area": "Central and eastern Punjab north of 30\u00b0N (the part of Pakistani Punjab inside MODIS tile h24v05)",
+ "files": {
+  "2025-11-01": {
+   "period_start": "2025-11-01",
+   "dates": [
+    "2025-11-01",
+    "2025-11-02",
+    "2025-11-03",
+    "2025-11-04",
+    "2025-11-05",
+    "2025-11-06",
+    "2025-11-07",
+    "2025-11-08"
+   ],
+   "granule": "MYD14A1.A2025305.h24v05.061.2025317045554.hdf",
+   "url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MYD14A1.061/MYD14A1.A2025305.h24v05.061.2025317045554/MYD14A1.A2025305.h24v05.061.2025317045554.hdf",
+   "bytes": 925484,
+   "sha256": "3e008b6a944167c7f49b9d27cd30e6d2e7b3925fcdeabe03422f7a7cc8dd12b1",
+   "retrieved_utc": "2026-11-11T19:24:13+00:00",
+   "crop": "MYD14A1_2025-11-01_h24v05_aoi.npz",
+   "crop_sha256": "e5d8c4dd79a1431012fabfdcb30c165433a4377606c610f9d1b1154314937f91",
+   "window": {
+    "r0": 887,
+    "r1": 1195,
+    "c0": 139,
+    "c1": 633
+   },
+   "legend": {
+    "FireMask": {
+     "valid_range": "[0, 9]",
+     "_FillValue": 0,
+     "legend": "Classes:\n0 missing input data\n1 not processed (obsolete)\n2 not processed (obsolete)\n3 non-fire water\n4 cloud\n5 non-fire land\n6 unknown\n7 fire (low confidence)\n8 fire (nominal confidence)\n9 fire (high confidence)"
+    },
+    "QA": {
+     "valid_range": "[0, 6]",
+     "units": "bit field",
+     "bits": "QA bits 0-1 are the land/water state (0 water, 1 coast, 2 land) and bit 2 is day (1) or night (0), as given in the MODIS Collection 6 and 6.1 Active Fire Product User's Guide for the Level-3 daily product. The file itself only declares a bit field with valid range 0-6, which fits; `check` also confirms that water-class cells carry state 0 and land-class cells state 1 or 2."
+    }
+   },
+   "global_attributes": {
+    "FirePix": "[767, 371, 407, 623, 125, 525, 215, 298]",
+    "CloudPix": "[193343, 68269, 156291, 508761, 652449, 547748, 145298, 450843]",
+    "MissingPix": "[0, 0, 0, 0, 0, 0, 0, 0]",
+    "Dates": "2025-11-01 2025-11-02 2025-11-03 2025-11-04 2025-11-05 2025-11-06 2025-11-07 2025-11-08",
+    "MaxT21": "366.36370849609375",
+    "ProcessVersionNumber": "6.1.2"
+   },
+   "original": "deleted after cropping (disk space); the SHA-256 above is of the original file",
+   "licence": "NASA EOSDIS data: open use; cite the product DOI"
+  },
+  "2025-08-05": {
+   "period_start": "2025-08-05",
+   "dates": [
+    "2025-08-05",
+    "2025-08-06",
+    "2025-08-07",
+    "2025-08-08",
+    "2025-08-09",
+    "2025-08-10",
+    "2025-08-11",
+    "2025-08-12"
+   ],
+   "granule": "MYD14A1.A2025217.h24v05.061.2025227011723.hdf",
+   "url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/MYD14A1.061/MYD14A1.A2025217.h24v05.061.2025227011723/MYD14A1.A2025217.h24v05.061.2025227011723.hdf",
+   "bytes": 1064781,
+   "sha256": "ea2181b4858c24f96a908aec569cd8f2437a5353ec55bc15a602f21c8fd92c4f",
+   "retrieved_utc": "2026-11-11T19:24:16+00:00",
+   "crop": "MYD14A1_2025-08-05_h24v05_aoi.npz",
+   "crop_sha256": "0fb1aa303c771301841ed24508b16744754befdd6c724e99d62bbed63042ab8e",
+   "window": {
+    "r0": 887,
+    "r1": 1195,
+    "c0": 139,
+    "c1": 633
+   },
+   "legend": {
+    "FireMask": {
+     "valid_range": "[0, 9]",
+     "_FillValue": 0,
+     "legend": "Classes:\n0 missing input data\n1 not processed (obsolete)\n2 not processed (obsolete)\n3 non-fire water\n4 cloud\n5 non-fire land\n6 unknown\n7 fire (low confidence)\n8 fire (nominal confidence)\n9 fire (high confidence)"
+    },
+    "QA": {
+     "valid_range": "[0, 6]",
+     "units": "bit field",
+     "bits": "QA bits 0-1 are the land/water state (0 water, 1 coast, 2 land) and bit 2 is day (1) or night (0), as given in the MODIS Collection 6 and 6.1 Active Fire Product User's Guide for the Level-3 daily product. The file itself only declares a bit field with valid range 0-6, which fits; `check` also confirms that water-class cells carry state 0 and land-class cells state 1 or 2."
+    }
+   },
+   "global_attributes": {
+    "FirePix": "[0, 0, 0, 0, 8, 2, 0, 0]",
+    "CloudPix": "[409754, 367307, 117185, 193657, 161791, 208727, 380693, 283982]",
+    "MissingPix": "[0, 0, 0, 0, 0, 0, 0, 0]",
+    "Dates": "2025-08-05 2025-08-06 2025-08-07 2025-08-08 2025-08-09 2025-08-10 2025-08-11 2025-08-12",
+    "MaxT21": "332.61669921875",
+    "ProcessVersionNumber": "6.1.2"
+   },
+   "original": "deleted after cropping (disk space); the SHA-256 above is of the original file",
+   "licence": "NASA EOSDIS data: open use; cite the product DOI"
+  }
+ },
+ "attempts": [
+  {
+   "at_utc": "2026-11-11T19:21:03+00:00",
+   "token_present": true,
+   "routes": [
+    {
+     "route": "Level-3 daily grid (used)",
+     "product": "MYD14A1 v061",
+     "why": "fire mask and QA on the sinusoidal grid; position known from the grid",
+     "cmr_granules_found": 2,
+     "host": "data.lpdaac.earthdatacloud.nasa.gov",
+     "first_status": 303,
+     "redirects_to_host": "d1nklfio7vscoe.cloudfront.net",
+     "final_status": 200,
+     "content_type": "binary/octet-stream",
+     "is_hdf": true
+    },
+    {
+     "route": "Level-2 swath fire mask",
+     "product": "MYD14 v061",
+     "why": "per-pass fire mask; has no latitude or longitude arrays of its own",
+     "cmr_granules_found": 2,
+     "host": "data.lpdaac.earthdatacloud.nasa.gov",
+     "first_status": 303,
+     "redirects_to_host": "d1nklfio7vscoe.cloudfront.net",
+     "final_status": 200,
+     "content_type": "binary/octet-stream",
+     "is_hdf": true
+    },
+    {
+     "route": "Level-2 swath geolocation",
+     "product": "MYD03 v061",
+     "why": "the latitude and longitude of every swath pixel; needed to place a Level-2 mask",
+     "cmr_granules_found": 0,
+     "host": null
+    }
+   ]
+  },
+  {
+   "at_utc": "2026-11-11T19:22:23+00:00",
+   "token_present": true,
+   "routes": [
+    {
+     "route": "Level-3 daily grid (used)",
+     "product": "MYD14A1 v061",
+     "why": "fire mask and QA on the sinusoidal grid; position known from the grid",
+     "cmr_granules_found": 2,
+     "host": "data.lpdaac.earthdatacloud.nasa.gov",
+     "first_status": 303,
+     "redirects_to_host": "d1nklfio7vscoe.cloudfront.net",
+     "final_status": 200,
+     "content_type": "binary/octet-stream",
+     "is_hdf": true
+    },
+    {
+     "route": "Level-2 swath fire mask",
+     "product": "MYD14 v061",
+     "why": "per-pass fire mask; has no latitude or longitude arrays of its own",
+     "cmr_granules_found": 2,
+     "host": "data.lpdaac.earthdatacloud.nasa.gov",
+     "first_status": 303,
+     "redirects_to_host": "d1nklfio7vscoe.cloudfront.net",
+     "final_status": 200,
+     "content_type": "binary/octet-stream",
+     "is_hdf": true
+    },
+    {
+     "route": "Level-2 swath geolocation",
+     "product": "MYD03 v6.1",
+     "why": "the latitude and longitude of every swath pixel; needed to place a Level-2 mask",
+     "cmr_granules_found": 2,
+     "host": "data.laadsdaac.earthdatacloud.nasa.gov",
+     "first_status": 303,
+     "redirects_to_host": "d13j1jds5ybppo.cloudfront.net",
+     "final_status": 200,
+     "content_type": "binary/octet-stream",
+     "is_hdf": true
+    }
+   ]
+  }
+ ],
+ "days": [
+  {
+   "date": "2025-08-05",
+   "period_start": "2025-08-05",
+   "layer": 0,
+   "cells_in_area": 59734,
+   "land_cells": 59399,
+   "counts": {
+    "fire": 0,
+    "clear": 59355,
+    "cloud": 44,
+    "unknown": 0,
+    "water": 335
+   },
+   "codes_seen": [
+    3,
+    4,
+    5
+   ],
+   "observed_share": 0.9993,
+   "cloud_share": 0.0007,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-08-06",
+   "period_start": "2025-08-05",
+   "layer": 1,
+   "cells_in_area": 59734,
+   "land_cells": 59470,
+   "counts": {
+    "fire": 0,
+    "clear": 59467,
+    "cloud": 3,
+    "unknown": 0,
+    "water": 264
+   },
+   "codes_seen": [
+    3,
+    4,
+    5
+   ],
+   "observed_share": 0.9999,
+   "cloud_share": 0.0001,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-08-07",
+   "period_start": "2025-08-05",
+   "layer": 2,
+   "cells_in_area": 59734,
+   "land_cells": 59277,
+   "counts": {
+    "fire": 0,
+    "clear": 59274,
+    "cloud": 3,
+    "unknown": 0,
+    "water": 457
+   },
+   "codes_seen": [
+    3,
+    4,
+    5
+   ],
+   "observed_share": 0.9999,
+   "cloud_share": 0.0001,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-08-08",
+   "period_start": "2025-08-05",
+   "layer": 3,
+   "cells_in_area": 59734,
+   "land_cells": 59257,
+   "counts": {
+    "fire": 0,
+    "clear": 56663,
+    "cloud": 2594,
+    "unknown": 0,
+    "water": 477
+   },
+   "codes_seen": [
+    3,
+    4,
+    5
+   ],
+   "observed_share": 0.9562,
+   "cloud_share": 0.0438,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-08-09",
+   "period_start": "2025-08-05",
+   "layer": 4,
+   "cells_in_area": 59734,
+   "land_cells": 59366,
+   "counts": {
+    "fire": 0,
+    "clear": 59293,
+    "cloud": 73,
+    "unknown": 0,
+    "water": 368
+   },
+   "codes_seen": [
+    3,
+    4,
+    5
+   ],
+   "observed_share": 0.9988,
+   "cloud_share": 0.0012,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-08-10",
+   "period_start": "2025-08-05",
+   "layer": 5,
+   "cells_in_area": 59734,
+   "land_cells": 59414,
+   "counts": {
+    "fire": 0,
+    "clear": 59228,
+    "cloud": 186,
+    "unknown": 0,
+    "water": 320
+   },
+   "codes_seen": [
+    3,
+    4,
+    5
+   ],
+   "observed_share": 0.9969,
+   "cloud_share": 0.0031,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-08-11",
+   "period_start": "2025-08-05",
+   "layer": 6,
+   "cells_in_area": 59734,
+   "land_cells": 59209,
+   "counts": {
+    "fire": 0,
+    "clear": 47873,
+    "cloud": 11336,
+    "unknown": 0,
+    "water": 525
+   },
+   "codes_seen": [
+    3,
+    4,
+    5
+   ],
+   "observed_share": 0.8085,
+   "cloud_share": 0.1915,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-08-12",
+   "period_start": "2025-08-05",
+   "layer": 7,
+   "cells_in_area": 59734,
+   "land_cells": 59178,
+   "counts": {
+    "fire": 0,
+    "clear": 50079,
+    "cloud": 9099,
+    "unknown": 0,
+    "water": 556
+   },
+   "codes_seen": [
+    3,
+    4,
+    5
+   ],
+   "observed_share": 0.8462,
+   "cloud_share": 0.1538,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-11-01",
+   "period_start": "2025-11-01",
+   "layer": 0,
+   "cells_in_area": 59734,
+   "land_cells": 59374,
+   "counts": {
+    "fire": 175,
+    "clear": 59199,
+    "cloud": 0,
+    "unknown": 0,
+    "water": 360
+   },
+   "codes_seen": [
+    3,
+    5,
+    7,
+    8,
+    9
+   ],
+   "observed_share": 1.0,
+   "cloud_share": 0.0,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-11-02",
+   "period_start": "2025-11-01",
+   "layer": 1,
+   "cells_in_area": 59734,
+   "land_cells": 59400,
+   "counts": {
+    "fire": 76,
+    "clear": 59324,
+    "cloud": 0,
+    "unknown": 0,
+    "water": 334
+   },
+   "codes_seen": [
+    3,
+    5,
+    7,
+    8
+   ],
+   "observed_share": 1.0,
+   "cloud_share": 0.0,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-11-03",
+   "period_start": "2025-11-01",
+   "layer": 2,
+   "cells_in_area": 59734,
+   "land_cells": 59389,
+   "counts": {
+    "fire": 96,
+    "clear": 59293,
+    "cloud": 0,
+    "unknown": 0,
+    "water": 345
+   },
+   "codes_seen": [
+    3,
+    5,
+    7,
+    8,
+    9
+   ],
+   "observed_share": 1.0,
+   "cloud_share": 0.0,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-11-04",
+   "period_start": "2025-11-01",
+   "layer": 3,
+   "cells_in_area": 59734,
+   "land_cells": 59278,
+   "counts": {
+    "fire": 111,
+    "clear": 59149,
+    "cloud": 18,
+    "unknown": 0,
+    "water": 456
+   },
+   "codes_seen": [
+    3,
+    4,
+    5,
+    7,
+    8,
+    9
+   ],
+   "observed_share": 0.9997,
+   "cloud_share": 0.0003,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-11-05",
+   "period_start": "2025-11-01",
+   "layer": 4,
+   "cells_in_area": 59734,
+   "land_cells": 59364,
+   "counts": {
+    "fire": 85,
+    "clear": 59279,
+    "cloud": 0,
+    "unknown": 0,
+    "water": 370
+   },
+   "codes_seen": [
+    3,
+    5,
+    8
+   ],
+   "observed_share": 1.0,
+   "cloud_share": 0.0,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-11-06",
+   "period_start": "2025-11-01",
+   "layer": 5,
+   "cells_in_area": 59734,
+   "land_cells": 59415,
+   "counts": {
+    "fire": 118,
+    "clear": 59297,
+    "cloud": 0,
+    "unknown": 0,
+    "water": 319
+   },
+   "codes_seen": [
+    3,
+    5,
+    8,
+    9
+   ],
+   "observed_share": 1.0,
+   "cloud_share": 0.0,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-11-07",
+   "period_start": "2025-11-01",
+   "layer": 6,
+   "cells_in_area": 59734,
+   "land_cells": 59336,
+   "counts": {
+    "fire": 16,
+    "clear": 59320,
+    "cloud": 0,
+    "unknown": 0,
+    "water": 398
+   },
+   "codes_seen": [
+    3,
+    5,
+    8
+   ],
+   "observed_share": 1.0,
+   "cloud_share": 0.0,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  },
+  {
+   "date": "2025-11-08",
+   "period_start": "2025-11-01",
+   "layer": 7,
+   "cells_in_area": 59734,
+   "land_cells": 59375,
+   "counts": {
+    "fire": 61,
+    "clear": 59314,
+    "cloud": 0,
+    "unknown": 0,
+    "water": 359
+   },
+   "codes_seen": [
+    3,
+    5,
+    8,
+    9
+   ],
+   "observed_share": 1.0,
+   "cloud_share": 0.0,
+   "unknown_share": 0.0,
+   "sums_to_land": true
+  }
+ ],
+ "built_utc": "2026-11-11T19:24:16+00:00",
+ "verification": {
+  "checked_utc": "2026-11-11T19:25:10+00:00",
+  "rows": [
+   {
+    "date": "2025-08-05",
+    "firms_aqua_detections_in_area": 0,
+    "on_a_hotspot_cell": 0,
+    "on_or_next_to_a_hotspot_cell": 0,
+    "hotspot_cells": 0,
+    "share_on_or_next": null,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-08-06",
+    "firms_aqua_detections_in_area": 0,
+    "on_a_hotspot_cell": 0,
+    "on_or_next_to_a_hotspot_cell": 0,
+    "hotspot_cells": 0,
+    "share_on_or_next": null,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-08-07",
+    "firms_aqua_detections_in_area": 0,
+    "on_a_hotspot_cell": 0,
+    "on_or_next_to_a_hotspot_cell": 0,
+    "hotspot_cells": 0,
+    "share_on_or_next": null,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-08-08",
+    "firms_aqua_detections_in_area": 0,
+    "on_a_hotspot_cell": 0,
+    "on_or_next_to_a_hotspot_cell": 0,
+    "hotspot_cells": 0,
+    "share_on_or_next": null,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-08-09",
+    "firms_aqua_detections_in_area": 0,
+    "on_a_hotspot_cell": 0,
+    "on_or_next_to_a_hotspot_cell": 0,
+    "hotspot_cells": 0,
+    "share_on_or_next": null,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-08-10",
+    "firms_aqua_detections_in_area": 0,
+    "on_a_hotspot_cell": 0,
+    "on_or_next_to_a_hotspot_cell": 0,
+    "hotspot_cells": 0,
+    "share_on_or_next": null,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-08-11",
+    "firms_aqua_detections_in_area": 0,
+    "on_a_hotspot_cell": 0,
+    "on_or_next_to_a_hotspot_cell": 0,
+    "hotspot_cells": 0,
+    "share_on_or_next": null,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-08-12",
+    "firms_aqua_detections_in_area": 0,
+    "on_a_hotspot_cell": 0,
+    "on_or_next_to_a_hotspot_cell": 0,
+    "hotspot_cells": 0,
+    "share_on_or_next": null,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-11-01",
+    "firms_aqua_detections_in_area": 134,
+    "on_a_hotspot_cell": 126,
+    "on_or_next_to_a_hotspot_cell": 134,
+    "hotspot_cells": 175,
+    "share_on_or_next": 1.0,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-11-02",
+    "firms_aqua_detections_in_area": 12,
+    "on_a_hotspot_cell": 12,
+    "on_or_next_to_a_hotspot_cell": 12,
+    "hotspot_cells": 76,
+    "share_on_or_next": 1.0,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-11-03",
+    "firms_aqua_detections_in_area": 45,
+    "on_a_hotspot_cell": 44,
+    "on_or_next_to_a_hotspot_cell": 45,
+    "hotspot_cells": 96,
+    "share_on_or_next": 1.0,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-11-04",
+    "firms_aqua_detections_in_area": 49,
+    "on_a_hotspot_cell": 49,
+    "on_or_next_to_a_hotspot_cell": 49,
+    "hotspot_cells": 111,
+    "share_on_or_next": 1.0,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-11-05",
+    "firms_aqua_detections_in_area": 15,
+    "on_a_hotspot_cell": 15,
+    "on_or_next_to_a_hotspot_cell": 15,
+    "hotspot_cells": 85,
+    "share_on_or_next": 1.0,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-11-06",
+    "firms_aqua_detections_in_area": 92,
+    "on_a_hotspot_cell": 81,
+    "on_or_next_to_a_hotspot_cell": 92,
+    "hotspot_cells": 118,
+    "share_on_or_next": 1.0,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-11-07",
+    "firms_aqua_detections_in_area": 5,
+    "on_a_hotspot_cell": 5,
+    "on_or_next_to_a_hotspot_cell": 5,
+    "hotspot_cells": 16,
+    "share_on_or_next": 1.0,
+    "sums_to_land": true
+   },
+   {
+    "date": "2025-11-08",
+    "firms_aqua_detections_in_area": 25,
+    "on_a_hotspot_cell": 25,
+    "on_or_next_to_a_hotspot_cell": 25,
+    "hotspot_cells": 61,
+    "share_on_or_next": 1.0,
+    "sums_to_land": true
+   }
+  ],
+  "detections": 377,
+  "on_or_next_to_a_hotspot_cell": 377,
+  "share": 1.0,
+  "all_days_sum_to_land": true,
+  "qa_state_matches_classes": true,
+  "qa_bits": "QA bits 0-1 are the land/water state (0 water, 1 coast, 2 land) and bit 2 is day (1) or night (0), as given in the MODIS Collection 6 and 6.1 Active Fire Product User's Guide for the Level-3 daily product. The file itself only declares a bit field with valid range 0-6, which fits; `check` also confirms on the cached files that every land-class cell (5, 7, 8, 9) carries state 2 and every 'non-fire water' cell carries state 0 or 1 (water or coast).",
+  "what": "FIRMS MCD14ML Aqua detections (standard archive, every confidence and type) of the same UTC day, placed on the MYD14A1 grid: the share that falls on a cell classed hotspot, or on one of its 8 neighbours (the swath pixel centre and the grid cell centre differ by up to about a cell)",
+  "pass_rule": "at least 90% on or next to a hotspot cell, and every day's classes sum to the land cells",
+  "passed": true
+ }
+}

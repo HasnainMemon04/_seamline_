@@ -1,0 +1,10 @@
+Seamline deployment snapshot
+This imports an existing pre-event prototype; packaging today is not the start of development.
+Local: install requirements.lock.txt in a virtual environment, then python -m c08.app (localhost:8766).
+Linux container: docker build -t seamline . ; docker run --rm -p 8080:8080 seamline
+The container recipe is supplied, but a Linux container build/hosted deployment is not yet verified.
+Start with one worker; measure cold start and RAM on the chosen host. /healthz becomes ready after analysis.
+Data are cached Parquet/CSV inputs, not a SQL database. Do not rerun scientific experiments.
+No credentials, AI memory, private notes or old .git history are bundled.
+Source licenses, actual data dates, scientific protocols and provenance are intentionally retained.
+Confirm prior-work eligibility with organizers before submitting this existing prototype.

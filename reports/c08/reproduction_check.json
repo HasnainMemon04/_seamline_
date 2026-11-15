@@ -1,0 +1,31 @@
+{
+  "checked_utc": "2026-11-13T11:33:16+00:00",
+  "code_state": {
+    "revision": "e66f2a0",
+    "c08_uncommitted_changes": true,
+    "c08_sources_sha256": "92afd0370f7b7799ec9799ed908d8f420c80a4d2d6bead1421158560e25dae4f"
+  },
+  "compared": [
+    "E01_selection",
+    "E02_evaluation",
+    "E03_sensitivity",
+    "E01 selection.json"
+  ],
+  "ignored_fields": [
+    "code_revision",
+    "code_state",
+    "environment",
+    "run_utc",
+    "runtime_s",
+    "selection_file",
+    "selection_written_utc",
+    "written_utc"
+  ],
+  "identical": true,
+  "differences": {
+    "e01": [],
+    "e02": [],
+    "e03": [],
+    "selection": []
+  }
+}

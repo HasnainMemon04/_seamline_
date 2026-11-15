@@ -1,0 +1,1111 @@
+{
+  "test": "G01",
+  "title": "Terra's autumn fall outside Punjab (Sindh and Khyber Pakhtunkhwa)",
+  "provinces": {
+    "Sindh": {
+      "fall": {
+        "status": "not_seen",
+        "delta": -0.16795734928941397,
+        "p": 0.2,
+        "years_before": [
+          2018,
+          2019,
+          2020,
+          2021
+        ],
+        "years_after": [
+          2023,
+          2024,
+          2025
+        ],
+        "reason": null,
+        "baseline_mean_R": 0.06747898796782285,
+        "mean_R_before": 0.06747898796782285,
+        "mean_R_after": 0.05614539601601507,
+        "splits": 35,
+        "difference_of_means": -0.011333591951807782,
+        "rule": "present if delta <= -0.40 and one-sided p <= 0.10 (both inclusive)"
+      },
+      "step": {
+        "status": "not_testable",
+        "ratio_to_mean": null,
+        "reason": "November 2022 is not eligible (S-NPP has 247 day-pass detections on the matched days, below 300)",
+        "R_2022": 0.06882591093117409,
+        "mean_R_2018_21": null,
+        "below_every": null,
+        "years_in_baseline": [
+          2019,
+          2020,
+          2021
+        ],
+        "baseline_mean_R": 0.08239498589422518,
+        "rule": "present if R(Nov 2022) is below every eligible R(Nov 2018–21) and at most 0.6 x their mean"
+      },
+      "reading": "Sindh: Terra's fall is not seen; this does not rule out the clock, because burning hours may differ between provinces; the 2022 step is not testable (November 2022 is not eligible (S-NPP has 247 day-pass detections on the matched days, below 300)).",
+      "years": {
+        "2018": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 33,
+            "snpp": 528,
+            "R": 0.0625,
+            "snpp_floor_met": true,
+            "expected_terra": 35.62890564701047,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2018–21 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 14,
+            "snpp": 299,
+            "R": 0.046822742474916385,
+            "snpp_floor_met": false,
+            "expected_terra": 24.63610078237333,
+            "terra_floor_met": true,
+            "eligible": false,
+            "exclusion": "S-NPP has 299 day-pass detections on the matched days, below 300",
+            "used_in": "step test, 2018–21 Novembers"
+          }
+        },
+        "2019": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 29,
+            "snpp": 489,
+            "R": 0.05930470347648262,
+            "snpp_floor_met": true,
+            "expected_terra": 32.997225116265376,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2018–21 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 22,
+            "snpp": 321,
+            "R": 0.06853582554517133,
+            "snpp_floor_met": true,
+            "expected_terra": 26.448790472046284,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "step test, 2018–21 Novembers"
+          }
+        },
+        "2020": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 64,
+            "snpp": 761,
+            "R": 0.08409986859395532,
+            "snpp_floor_met": true,
+            "expected_terra": 51.35150984351319,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2018–21 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 55,
+            "snpp": 473,
+            "R": 0.11627906976744186,
+            "snpp_floor_met": true,
+            "expected_terra": 38.972828327968514,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "step test, 2018–21 Novembers"
+          }
+        },
+        "2021": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 45,
+            "snpp": 703,
+            "R": 0.06401137980085349,
+            "snpp_floor_met": true,
+            "expected_terra": 47.437728541379464,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2018–21 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 30,
+            "snpp": 481,
+            "R": 0.062370062370062374,
+            "snpp_floor_met": true,
+            "expected_terra": 39.63198821512231,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "step test, 2018–21 Novembers"
+          }
+        },
+        "2022": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 49,
+            "days_needed": 55,
+            "days_removed": [
+              "2022-10-11",
+              "2022-10-12",
+              "2022-10-13",
+              "2022-10-14",
+              "2022-10-15",
+              "2022-10-16",
+              "2022-10-17",
+              "2022-10-18",
+              "2022-10-19",
+              "2022-10-20",
+              "2022-10-21",
+              "2022-10-22"
+            ],
+            "days_rule_met": false,
+            "terra": 22,
+            "snpp": 326,
+            "R": 0.06748466257668712,
+            "snpp_floor_met": true,
+            "expected_terra": 21.99815007751025,
+            "terra_floor_met": true,
+            "eligible": false,
+            "exclusion": "only 49 of 61 days matched, below the 55 needed",
+            "used_in": null
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 17,
+            "snpp": 247,
+            "R": 0.06882591093117409,
+            "snpp_floor_met": false,
+            "expected_terra": 20.35156151587362,
+            "terra_floor_met": true,
+            "eligible": false,
+            "exclusion": "S-NPP has 247 day-pass detections on the matched days, below 300",
+            "used_in": "step test, November 2022"
+          }
+        },
+        "2023": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 61,
+            "snpp": 777,
+            "R": 0.07850707850707851,
+            "snpp_floor_met": true,
+            "expected_terra": 52.43117365099836,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2023–25 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 52,
+            "snpp": 494,
+            "R": 0.10526315789473684,
+            "snpp_floor_met": true,
+            "expected_terra": 40.70312303174724,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": null
+          }
+        },
+        "2024": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 58,
+            "days_needed": 55,
+            "days_removed": [
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05"
+            ],
+            "days_rule_met": true,
+            "terra": 34,
+            "snpp": 602,
+            "R": 0.05647840531561462,
+            "snpp_floor_met": true,
+            "expected_terra": 40.62235075662936,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2023–25 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 27,
+            "days_needed": 27,
+            "days_removed": [
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05"
+            ],
+            "days_rule_met": true,
+            "terra": 28,
+            "snpp": 351,
+            "R": 0.07977207977207977,
+            "snpp_floor_met": true,
+            "expected_terra": 28.92064004887304,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": null
+          }
+        },
+        "2025": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 19,
+            "snpp": 568,
+            "R": 0.03345070422535211,
+            "snpp_floor_met": true,
+            "expected_terra": 38.32806516572338,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2023–25 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 14,
+            "snpp": 335,
+            "R": 0.041791044776119404,
+            "snpp_floor_met": true,
+            "expected_terra": 27.602320274565436,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": null
+          }
+        }
+      }
+    },
+    "Khyber Pakhtunkhwa": {
+      "fall": {
+        "status": "not_testable",
+        "delta": null,
+        "p": null,
+        "years_before": [
+          2020,
+          2021
+        ],
+        "years_after": [
+          2024,
+          2025
+        ],
+        "reason": "only 2 eligible years in 2018–21, below 3",
+        "baseline_mean_R": 0.07547706530757378,
+        "mean_R_before": null,
+        "mean_R_after": null,
+        "splits": null,
+        "difference_of_means": null,
+        "rule": "present if delta <= -0.40 and one-sided p <= 0.10 (both inclusive)"
+      },
+      "step": {
+        "status": "not_testable",
+        "ratio_to_mean": null,
+        "reason": "November 2022 is not eligible (S-NPP has 97 day-pass detections on the matched days, below 300, the expected Terra count is 11.14, below 20), only 1 eligible November in 2018–21, below 3",
+        "R_2022": 0.10309278350515463,
+        "mean_R_2018_21": null,
+        "below_every": null,
+        "years_in_baseline": [
+          2020
+        ],
+        "baseline_mean_R": 0.11484593837535013,
+        "rule": "present if R(Nov 2022) is below every eligible R(Nov 2018–21) and at most 0.6 x their mean"
+      },
+      "reading": "Khyber Pakhtunkhwa: the fall is not testable (only 2 eligible years in 2018–21, below 3); the 2022 step is not testable (November 2022 is not eligible (S-NPP has 97 day-pass detections on the matched days, below 300, the expected Terra count is 11.14, below 20), only 1 eligible November in 2018–21, below 3).",
+      "years": {
+        "2018": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 3,
+            "snpp": 128,
+            "R": 0.0234375,
+            "snpp_floor_met": false,
+            "expected_terra": 9.661064359369444,
+            "terra_floor_met": false,
+            "eligible": false,
+            "exclusion": "S-NPP has 128 day-pass detections on the matched days, below 300, the expected Terra count is 9.66, below 20",
+            "used_in": "fall test, 2018–21 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 1,
+            "snpp": 63,
+            "R": 0.015873015873015872,
+            "snpp_floor_met": false,
+            "expected_terra": 7.235294117647059,
+            "terra_floor_met": false,
+            "eligible": false,
+            "exclusion": "S-NPP has 63 day-pass detections on the matched days, below 300, the expected Terra count is 7.24, below 20",
+            "used_in": "step test, 2018–21 Novembers"
+          }
+        },
+        "2019": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 9,
+            "snpp": 126,
+            "R": 0.07142857142857142,
+            "snpp_floor_met": false,
+            "expected_terra": 9.510110228754296,
+            "terra_floor_met": false,
+            "eligible": false,
+            "exclusion": "S-NPP has 126 day-pass detections on the matched days, below 300, the expected Terra count is 9.51, below 20",
+            "used_in": "fall test, 2018–21 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 8,
+            "snpp": 54,
+            "R": 0.14814814814814814,
+            "snpp_floor_met": false,
+            "expected_terra": 6.201680672268907,
+            "terra_floor_met": false,
+            "eligible": false,
+            "exclusion": "S-NPP has 54 day-pass detections on the matched days, below 300, the expected Terra count is 6.20, below 20",
+            "used_in": "step test, 2018–21 Novembers"
+          }
+        },
+        "2020": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 60,
+            "snpp": 767,
+            "R": 0.07822685788787484,
+            "snpp_floor_met": true,
+            "expected_terra": 57.89090909090909,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2018–21 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 41,
+            "snpp": 357,
+            "R": 0.11484593837535013,
+            "snpp_floor_met": true,
+            "expected_terra": 41.0,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "step test, 2018–21 Novembers"
+          }
+        },
+        "2021": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 32,
+            "snpp": 440,
+            "R": 0.07272727272727272,
+            "snpp_floor_met": true,
+            "expected_terra": 33.20990873533246,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2018–21 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 21,
+            "snpp": 211,
+            "R": 0.0995260663507109,
+            "snpp_floor_met": false,
+            "expected_terra": 24.23249299719888,
+            "terra_floor_met": true,
+            "eligible": false,
+            "exclusion": "S-NPP has 211 day-pass detections on the matched days, below 300",
+            "used_in": "step test, 2018–21 Novembers"
+          }
+        },
+        "2022": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 49,
+            "days_needed": 55,
+            "days_removed": [
+              "2022-10-11",
+              "2022-10-12",
+              "2022-10-13",
+              "2022-10-14",
+              "2022-10-15",
+              "2022-10-16",
+              "2022-10-17",
+              "2022-10-18",
+              "2022-10-19",
+              "2022-10-20",
+              "2022-10-21",
+              "2022-10-22"
+            ],
+            "days_rule_met": false,
+            "terra": 14,
+            "snpp": 164,
+            "R": 0.08536585365853659,
+            "snpp_floor_met": false,
+            "expected_terra": 12.3782387104421,
+            "terra_floor_met": false,
+            "eligible": false,
+            "exclusion": "only 49 of 61 days matched, below the 55 needed, S-NPP has 164 day-pass detections on the matched days, below 300, the expected Terra count is 12.38, below 20",
+            "used_in": null
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 10,
+            "snpp": 97,
+            "R": 0.10309278350515463,
+            "snpp_floor_met": false,
+            "expected_terra": 11.140056022408963,
+            "terra_floor_met": false,
+            "eligible": false,
+            "exclusion": "S-NPP has 97 day-pass detections on the matched days, below 300, the expected Terra count is 11.14, below 20",
+            "used_in": "step test, November 2022"
+          }
+        },
+        "2023": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 18,
+            "snpp": 251,
+            "R": 0.07171314741035857,
+            "snpp_floor_met": false,
+            "expected_terra": 18.94474339220102,
+            "terra_floor_met": false,
+            "eligible": false,
+            "exclusion": "S-NPP has 251 day-pass detections on the matched days, below 300, the expected Terra count is 18.94, below 20",
+            "used_in": "fall test, 2023–25 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 3,
+            "snpp": 105,
+            "R": 0.02857142857142857,
+            "snpp_floor_met": false,
+            "expected_terra": 12.058823529411764,
+            "terra_floor_met": false,
+            "eligible": false,
+            "exclusion": "S-NPP has 105 day-pass detections on the matched days, below 300, the expected Terra count is 12.06, below 20",
+            "used_in": null
+          }
+        },
+        "2024": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 58,
+            "days_needed": 55,
+            "days_removed": [
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05"
+            ],
+            "days_rule_met": true,
+            "terra": 20,
+            "snpp": 416,
+            "R": 0.04807692307692308,
+            "snpp_floor_met": true,
+            "expected_terra": 31.398459167950694,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2023–25 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 27,
+            "days_needed": 27,
+            "days_removed": [
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05"
+            ],
+            "days_rule_met": true,
+            "terra": 8,
+            "snpp": 137,
+            "R": 0.058394160583941604,
+            "snpp_floor_met": false,
+            "expected_terra": 15.733893557422968,
+            "terra_floor_met": false,
+            "eligible": false,
+            "exclusion": "S-NPP has 137 day-pass detections on the matched days, below 300, the expected Terra count is 15.73, below 20",
+            "used_in": null
+          }
+        },
+        "2025": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 38,
+            "snpp": 850,
+            "R": 0.04470588235294118,
+            "snpp_floor_met": true,
+            "expected_terra": 64.15550551143771,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2023–25 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 34,
+            "snpp": 491,
+            "R": 0.06924643584521385,
+            "snpp_floor_met": true,
+            "expected_terra": 56.389355742296914,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": null
+          }
+        }
+      }
+    }
+  },
+  "seen_outside_punjab": false,
+  "seen_in": [],
+  "step_without_fall_in": [],
+  "seen_outside_punjab_reading": "Seen outside Punjab: no (Sindh: Terra's fall is not seen; Khyber Pakhtunkhwa: the fall is not testable).",
+  "development_area": {
+    "Punjab": {
+      "fall": {
+        "status": "present",
+        "delta": -0.8125114784052129,
+        "p": 0.02857142857142857,
+        "years_before": [
+          2018,
+          2019,
+          2020,
+          2021
+        ],
+        "years_after": [
+          2023,
+          2024,
+          2025
+        ],
+        "reason": null,
+        "baseline_mean_R": 0.022026365369424164,
+        "mean_R_before": 0.022026365369424164,
+        "mean_R_after": 0.004129690679219954,
+        "splits": 35,
+        "difference_of_means": -0.01789667469020421,
+        "rule": "present if delta <= -0.40 and one-sided p <= 0.10 (both inclusive)"
+      },
+      "step": {
+        "status": "present",
+        "ratio_to_mean": 0.38058449871281314,
+        "reason": null,
+        "R_2022": 0.007307270734380708,
+        "mean_R_2018_21": 0.019200127065329406,
+        "below_every": true,
+        "years_in_baseline": [
+          2018,
+          2019,
+          2020,
+          2021
+        ],
+        "baseline_mean_R": 0.019200127065329406,
+        "rule": "present if R(Nov 2022) is below every eligible R(Nov 2018–21) and at most 0.6 x their mean"
+      },
+      "reading": "Punjab (development area, seen before the test): Terra's fall is also seen; a 2022 step is seen. This is consistent with a satellite-side cause (the pass time, the October 2022 orbit change, or both); a Pakistan-wide change in burning hours would give the same result; untested.",
+      "years": {
+        "2018": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 309,
+            "snpp": 11083,
+            "R": 0.02788053776053415,
+            "snpp_floor_met": true,
+            "expected_terra": 244.118207389328,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2018–21 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 173,
+            "snpp": 6703,
+            "R": 0.025809339101894674,
+            "snpp_floor_met": true,
+            "expected_terra": 128.69845171890302,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "step test, 2018–21 Novembers"
+          }
+        },
+        "2019": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 141,
+            "snpp": 8946,
+            "R": 0.015761234071093227,
+            "snpp_floor_met": true,
+            "expected_terra": 197.04786459486857,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2018–21 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 77,
+            "snpp": 5753,
+            "R": 0.01338432122370937,
+            "snpp_floor_met": true,
+            "expected_terra": 110.45833100684007,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "step test, 2018–21 Novembers"
+          }
+        },
+        "2020": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 265,
+            "snpp": 11316,
+            "R": 0.02341816896429834,
+            "snpp_floor_met": true,
+            "expected_terra": 249.25035052040383,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2018–21 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 130,
+            "snpp": 6731,
+            "R": 0.019313623532907442,
+            "snpp_floor_met": true,
+            "expected_terra": 129.23605527673223,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "step test, 2018–21 Novembers"
+          }
+        },
+        "2021": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 405,
+            "snpp": 19244,
+            "R": 0.02104552068177094,
+            "snpp_floor_met": true,
+            "expected_terra": 423.8753751691986,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2018–21 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 206,
+            "snpp": 11261,
+            "R": 0.018293224402806146,
+            "snpp_floor_met": true,
+            "expected_terra": 216.21263088267443,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "step test, 2018–21 Novembers"
+          }
+        },
+        "2022": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 49,
+            "days_needed": 55,
+            "days_removed": [
+              "2022-10-11",
+              "2022-10-12",
+              "2022-10-13",
+              "2022-10-14",
+              "2022-10-15",
+              "2022-10-16",
+              "2022-10-17",
+              "2022-10-18",
+              "2022-10-19",
+              "2022-10-20",
+              "2022-10-21",
+              "2022-10-22"
+            ],
+            "days_rule_met": false,
+            "terra": 90,
+            "snpp": 8966,
+            "R": 0.01003792103502119,
+            "snpp_floor_met": true,
+            "expected_terra": 197.48839190225706,
+            "terra_floor_met": true,
+            "eligible": false,
+            "exclusion": "only 49 of 61 days matched, below the 55 needed",
+            "used_in": null
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 40,
+            "snpp": 5474,
+            "R": 0.007307270734380708,
+            "snpp_floor_met": true,
+            "expected_terra": 105.10149555561317,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "step test, November 2022"
+          }
+        },
+        "2023": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 68,
+            "snpp": 10081,
+            "R": 0.006745362563237774,
+            "snpp_floor_met": true,
+            "expected_terra": 222.047789289165,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2023–25 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 28,
+            "snpp": 6141,
+            "R": 0.004559517993812083,
+            "snpp_floor_met": true,
+            "expected_terra": 117.90798030818789,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": null
+          }
+        },
+        "2024": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 58,
+            "days_needed": 55,
+            "days_removed": [
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05"
+            ],
+            "days_rule_met": true,
+            "terra": 40,
+            "snpp": 10290,
+            "R": 0.003887269193391642,
+            "snpp_floor_met": true,
+            "expected_terra": 226.65129965137464,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2023–25 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 27,
+            "days_needed": 27,
+            "days_removed": [
+              "2024-11-03",
+              "2024-11-04",
+              "2024-11-05"
+            ],
+            "days_rule_met": true,
+            "terra": 4,
+            "snpp": 4463,
+            "R": 0.0008962581223392337,
+            "snpp_floor_met": true,
+            "expected_terra": 85.69016709256513,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": null
+          }
+        },
+        "2025": {
+          "OctNov": {
+            "days_in_window": 61,
+            "days_matched": 61,
+            "days_needed": 55,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 21,
+            "snpp": 11956,
+            "R": 0.001756440281030445,
+            "snpp_floor_met": true,
+            "expected_terra": 263.3472243568353,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": "fall test, 2023–25 group"
+          },
+          "Nov": {
+            "days_in_window": 30,
+            "days_matched": 30,
+            "days_needed": 27,
+            "days_removed": [],
+            "days_rule_met": true,
+            "terra": 12,
+            "snpp": 5471,
+            "R": 0.0021933832937305795,
+            "snpp_floor_met": true,
+            "expected_terra": 105.04389517441717,
+            "terra_floor_met": true,
+            "eligible": true,
+            "exclusion": null,
+            "used_in": null
+          }
+        }
+      },
+      "label": "development area (seen before the test); not part of the test"
+    }
+  },
+  "strip_title": "Morning and afternoon passes see different shares",
+  "approved": "Hasnain, 8 Nov 2026: 'Run without it' - his answer to 'Run P04's tests before the checker's P04-CL report arrives?' (DECISIONS.md, commit 9833fdd; change log entry 2, commit 5a9a241)",
+  "protocol": "experiments/PROTOCOL_P04.md",
+  "protocol_sha256": "7123c246ad230c10ab45bdc5cabfa61ce77775004fc27d8c4c7d269eec31b71a",
+  "code_state": {
+    "revision": "070dfe5",
+    "c08_uncommitted_changes": false,
+    "c08_sources_sha256": "0dd86bec29587c525a5c8988607da8a1f9dcc40c5f3d89f3c4d8b6966d57c530"
+  },
+  "run_utc": "2026-11-08T18:06:34+00:00",
+  "environment": {
+    "python": "3.13.15",
+    "pandas": "2.3.3",
+    "numpy": "2.2.6",
+    "os": "Windows-11-10.0.26200-SP0"
+  },
+  "runner": "python -m c08.p04",
+  "platforms": [
+    "Terra",
+    "SNPP"
+  ],
+  "streams": [
+    "standard"
+  ],
+  "filters": "standard stream; quality rule (MODIS confidence >= 30; VIIRS confidence nominal or high (n/h)); type-0 screen; day passes only (daynight D)",
+  "quantity": "R = Terra day-pass detections / S-NPP day-pass detections, summed over the window's matched days (UTC days inside both archive records and on neither satellite's FIRMS missing-days list)",
+  "windows": {
+    "OctNov": "1 Oct–30 Nov (fall test)",
+    "Nov": "1–30 Nov (step test)"
+  },
+  "rules": {
+    "days": "a window-year counts only with at least 90% of its days matched (55 of 61, 27 of 30)",
+    "floors": "S-NPP >= 300; expected Terra = S-NPP x the mean R of the 2018–21 window-years that count and pass the S-NPP floor, >= 20 (November counts alone for the step test)",
+    "fall": "delta = mean R(2023–25) / mean R(2018–21) - 1 over eligible years; exact one-sided permutation p with whole years (c08.p02_posthoc.permutation, p_as_low); present if delta <= -0.40 and p <= 0.10; not testable with fewer than 3 and 2 eligible years",
+    "step": "present if R(Nov 2022) is below every eligible R(Nov 2018–21) and at most 0.6 x their mean; not testable unless November 2022 and at least 3 Novembers of 2018–21 pass",
+    "zero_mean": "a zero mean R of the 2018–21 years makes the test not testable",
+    "comparisons": "unrounded values"
+  },
+  "inputs": {
+    "detections": {
+      "path": "data/processed/pak_detections.parquet",
+      "sha256": "561e555a28dc7bbb1dae4a9cad4965d687b4eafd21c9837baf4d85925cefcfef",
+      "matches_ingest_report": true,
+      "ingest_report": "reports/c08/ingest_report.json",
+      "ingest_schema": "c08-detections-1",
+      "ingest_built_utc": "2026-11-02T12:55:43+00:00"
+    },
+    "boundaries_at_ingest": [
+      {
+        "id": "boundaries/pak_adm1.geojson",
+        "sha256": "34c973399b464f8b43a6cfbc9255ff6d19d911477f1549d0ff0f1dcaaf63c37b",
+        "license": "Public Domain",
+        "source": "geoBoundaries, Wikipedia",
+        "year_represented": "2019"
+      },
+      {
+        "id": "boundaries/pak_adm1_simplified.geojson",
+        "sha256": "c7ff4e70bcf740cfba47b871a7c2b2b2b243b59e4c0656e6e1bc2a64e295d93a",
+        "license": "Public Domain",
+        "source": "geoBoundaries, Wikipedia",
+        "year_represented": "2019"
+      }
+    ],
+    "archive_spans": {
+      "Aqua": [
+        "2002-07-06",
+        "2025-12-31"
+      ],
+      "NOAA20": [
+        "2018-04-01",
+        "2025-12-31"
+      ],
+      "SNPP": [
+        "2012-01-20",
+        "2025-12-31"
+      ],
+      "Terra": [
+        "2000-11-01",
+        "2025-12-31"
+      ]
+    },
+    "missing_days_list": {
+      "path": "research/metadata/provider_missing_dates.json",
+      "sha256": "ad1438b57d5206c2aac9b2ee8a4becb676c82a7a3f4044386ef81ecd81515cd3",
+      "entries": 177,
+      "satellites_not_used": [],
+      "stream_labels": [
+        "NRT",
+        "standard"
+      ],
+      "viirs_names_not_mapped": [],
+      "stream_used": "standard"
+    }
+  }
+}

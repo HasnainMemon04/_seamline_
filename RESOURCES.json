@@ -1,0 +1,9 @@
+{
+  "NASA_FIRMS": "https://www.earthdata.nasa.gov/data/tools/firms",
+  "data_identity_and_acquisition_dates": "data/manifest.json",
+  "boundaries": "data/raw/boundaries/pak_adm1_source.json",
+  "saved_scientific_methods_and_results": "experiments/",
+  "acknowledgments_and_licenses": "NOTICE",
+  "reference_detail": "Product DOIs and sources remain in the original manifest and app Evidence view.",
+  "event_timing_guidance": "https://github.com/nasa/spaceapps/discussions/1813"
+}

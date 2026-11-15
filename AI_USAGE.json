@@ -1,0 +1,240 @@
+{
+  "packaged_at": "2026-11-14T14:54:44.617980+05:00",
+  "project": {
+    "tools": [
+      "OpenAI Codex",
+      "other AI assistance reported by project owner; identities and per-line provenance not verified"
+    ],
+    "known_new_ai_assisted_files": [
+      "wsgi.py",
+      "Dockerfile",
+      "requirements.deploy.txt",
+      "RUN.txt",
+      "PROVENANCE.json",
+      "AI_USAGE.json",
+      "RESOURCES.json"
+    ],
+    "authorship_rule": "Assigned teammate ownership describes future responsibility, not historical authorship. Do not invent per-file or per-line AI certainty."
+  },
+  "public_repository_updates": [
+    {
+      "date_asia_karachi": "2026-11-14",
+      "tool": "OpenAI Codex",
+      "scope": "Implemented and checked workspace entry behavior for reduced motion, deep links, keyboard dismissal and short screens.",
+      "frontend_snapshot_import": {
+        "action": "Restored the packaged frontend at the owner's request",
+        "tool": "OpenAI Codex",
+        "source": "Akbar-supplied frontend snapshot, preserved byte for byte on codex/akbar-frontend-snapshot at 9e8f79c",
+        "scope": [
+          "c08/web/index.html",
+          "c08/web/intro.js",
+          "c08/web/satellite-intro.css"
+        ],
+        "note": "This restores three files from the package over the workspace-entry accessibility changes merged in PR #1. It is an import of existing source."
+      },
+      "files": [
+        "c08/web/index.html",
+        "c08/web/intro.js",
+        "c08/web/satellite-intro.css"
+      ],
+      "source_review": "Akbar supplied a frontend review archive. Its frontend contents matched the existing public deployment snapshot."
+    }
+  ],
+  "files": [
+    {
+      "path": "wsgi.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/acquire.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/analysis.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/app.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/boundaries.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/burned_area.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/config.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/continuity.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/coverage.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/figures.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/handover.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/harmonize.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/ingest.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/observe.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/outlook.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/p01.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/p02_posthoc.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/p04.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/p04_devcheck.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/points.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/report.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/reproduce.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/series.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/showcase.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/slides.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/studio.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/__init__.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/__main__.py",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "reports/c08/methods_report.html",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "reports/c08/slides.html",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/app.js",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/explore.js",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/features.js",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/fx3d.js",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/index.html",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/intro.js",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/layers.js",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/map3d.js",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/satellite-era.js",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/satellite-intro.css",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/science.js",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/showcase.css",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/showcase.js",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/style.css",
+      "attribution": "AI-assisted project; exact historical authorship not verified"
+    },
+    {
+      "path": "c08/web/vendor/maplibre/maplibre-gl.css",
+      "attribution": "upstream third-party"
+    },
+    {
+      "path": "c08/web/vendor/maplibre/maplibre-gl.js",
+      "attribution": "upstream third-party"
+    }
+  ],
+  "documentation_updates": [
+    {
+      "review_date": "2026-11-15",
+      "files": [
+        "README.md",
+        "FILE_MAP.md"
+      ],
+      "assistance": "OpenAI Codex drafted the deployment guide and file catalog from repository code, module docstrings and file paths; verified complete catalog coverage and local file links.",
+      "scope": "Documentation only; no application, data or scientific-baseline changes."
+    }
+  ]
+}
